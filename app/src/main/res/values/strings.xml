@@ -19,6 +19,9 @@
     <string name="login_Register"> Register</string>
     <string name="login_Welcome_Back">Welcome Back</string>
     <string name="login_forgot_your_password"><u>Forgot your password?</u></string>
+<!--    After_signup-->
     <string name="after_signup_let_s_complete_your_profile">Let’s complete your profile</string>
     <string name="after_signup_title">It will help us to know more about you!</string>
+    <string name="after_signup_choose_gender">Choose Gender</string>
+    <string name="after_signup_Date_of_Birth">Date of Birth</string>
 </resources>
