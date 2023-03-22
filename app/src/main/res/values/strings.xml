@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">FitnessApplication</string>
+    <!--    Splash -->
+    <string name="splash_tv_button_start">Get started</string>
+    <string name="splash_tv_title">Everybody Can Train</string>
+    <!--     SignUp-->
+    <string name="signup_hint_password">Password</string>
+    <string name="signup_hint_email">Email</string>
+    <string name="signup_hint_last_name">Last Name</string>
+    <string name="signup_hint_first_name">First Name</string>
+    <string name="signup_create_an_account">Create an Account</string>
+
+    <string name="signup_hey_there">Hey there,</string>
+    <string name="signup_already_have_an_account">Already have an account?</string>
+    <string name="signup_login"> Login</string>
+    <string name="singup_Register">Register</string>
+    <!--    Login-->
+    <string name="login_dont_have_an_account">Don’t have an account yet? </string>
+    <string name="login_Register"> Register</string>
+    <string name="login_Welcome_Back">Welcome Back</string>
+    <string name="login_forgot_your_password"><u>Forgot your password?</u></string>
+</resources>
