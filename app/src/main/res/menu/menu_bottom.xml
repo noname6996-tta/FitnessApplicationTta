@@ -15,5 +15,5 @@
     <item
         android:title=""
         android:id="@+id/settingFragment"
-        android:icon="@drawable/ic_baseline_home_24"/>
+        android:icon="@drawable/ic_user"/>
 </menu>

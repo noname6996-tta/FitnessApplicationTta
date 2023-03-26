@@ -22,18 +22,18 @@ private const val BASE_DURATION = 300L
 private const val VARIABLE_DURATION = 300L
 
 class BottomNavigationViewWithIndicator: BottomNavigationView, NavigationBarView.OnItemSelectedListener
-    {
+{
 
     private var externalSelectedListener: OnItemSelectedListener? = null
     private var animator: ValueAnimator? = null
 
     private val indicator = RectF()
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, R.color.white)
+        color = ContextCompat.getColor(context, R.color.pink)
     }
 
-    private val bottomOffset = resources.getDimension(R.dimen.size_16dp)
-    private val defaultSize = resources.getDimension(R.dimen.size_16dp)
+    private val bottomOffset = resources.getDimension(R.dimen.size_12dp)
+    private val defaultSize = resources.getDimension(R.dimen.size_1dp)
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)

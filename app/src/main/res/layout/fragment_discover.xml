@@ -1,6 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FDFDFD">
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:background="@drawable/bg_brand_gradient"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Workout"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:src="@drawable/mask_group"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view9"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="@dimen/size_6dp"
+                android:background="@drawable/bg_white_14"
+                app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+            <View
+                android:id="@+id/view10"
+                android:layout_width="60dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="@dimen/size_6dp"
+                android:background="@drawable/bg_view_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view9" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewWeekGoal"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                app:cardCornerRadius="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view10">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_brand_gradient">
+
+                    <TextView
+                        android:id="@+id/textView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:layout_marginTop="@dimen/size_16dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="WEEK GOAL"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="@dimen/size_16dp"
+                        android:weightSum="7"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:gravity="center"
+                            android:text="24"
+                            android:textColor="@color/gray1" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle" />
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="7X4 CHALLENGE"
+                android:textColor="@color/gray1"
+                android:textSize="@dimen/size_16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewWeekGoal" />
+
+            <View
+                android:id="@+id/view11"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:background="@drawable/bg_blue_linear_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_24dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Fullbody Workout"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16dp"
+                app:layout_constraintStart_toStartOf="@+id/view11"
+                app:layout_constraintTop_toTopOf="@+id/view11" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/group_10289"
+                android:layout_marginRight="@dimen/size_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view11"
+                app:layout_constraintEnd_toEndOf="@+id/view11"
+                app:layout_constraintTop_toTopOf="@+id/view11" />
+
+            <View
+                android:id="@+id/view12"
+                android:layout_width="95dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginBottom="@dimen/size_16dp"
+                android:background="@drawable/bg_white_50dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view11"
+                app:layout_constraintStart_toStartOf="@+id/view11" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/text"
+                app:layout_constraintBottom_toBottomOf="@+id/view12"
+                app:layout_constraintEnd_toEndOf="@+id/view12"
+                app:layout_constraintStart_toStartOf="@+id/view12"
+                app:layout_constraintTop_toTopOf="@+id/view12" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

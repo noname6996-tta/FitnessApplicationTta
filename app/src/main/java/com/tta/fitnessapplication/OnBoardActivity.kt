@@ -59,7 +59,7 @@ class OnBoardActivity : AppCompatActivity() {
                 binding.tvDesFrame.startAnimation(animation_slidein)
             }
             125 -> {
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, SignUpActivity::class.java)
                 startActivity(intent)
                 finish()
             }

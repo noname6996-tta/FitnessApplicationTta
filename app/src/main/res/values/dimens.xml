@@ -7,6 +7,8 @@
     <dimen name="size_20dp">20dp</dimen>
     <dimen name="size_12dp">12dp</dimen>
     <dimen name="size_14dp">14dp</dimen>
+    <dimen name="size_24dp">24dp</dimen>
+    <dimen name="size_1dp">1dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 </resources>

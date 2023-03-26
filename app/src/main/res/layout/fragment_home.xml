@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -28,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_12dp"
                 android:fontFamily="@font/poppins"
-                android:text="home_tv_hello"
+                android:text="@string/login_Welcome_Back"
                 android:textColor="@color/gray1"
                 android:textSize="@dimen/size_14dp"
                 app:layout_constraintStart_toEndOf="@+id/circleImageView"
@@ -39,30 +40,387 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_12dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="home_tv_name_default"
+                android:fontFamily="@font/poppins_bold"
+                android:text="TTA"
                 android:textColor="@color/black"
                 android:textSize="@dimen/size_16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
                 app:layout_constraintStart_toEndOf="@+id/circleImageView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <ImageView
+            <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="4dp"
+                android:layout_height="170dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:background="@drawable/bg_view_radius_blue"
                 android:scaleType="fitCenter"
-                android:background="@drawable/bn_home_bmi"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:background="@drawable/dots"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="@+id/view"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_20dp"
+                android:layout_marginTop="26dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="BMI (Body Mass Index)"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_14dp"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="@dimen/size_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins"
+                android:text="You have a normal weight"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_12dp"
+                app:layout_constraintStart_toStartOf="@+id/textView11"
+                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="95dp"
+                android:layout_height="35dp"
+                android:layout_marginBottom="@dimen/size_16dp"
+                android:background="@drawable/bg_radius_pink"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintStart_toStartOf="@+id/textView12" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="com.tta.fitnessapplication"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="View More"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view4"
+                app:layout_constraintEnd_toEndOf="@+id/view4"
+                app:layout_constraintStart_toStartOf="@+id/view4"
+                app:layout_constraintTop_toTopOf="@+id/view4" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:background="@drawable/bg_blue_linear_16"
+                app:layout_constraintTop_toBottomOf="@+id/view"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Today Target"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_14dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view5"
+                app:layout_constraintStart_toStartOf="@+id/view5"
+                app:layout_constraintTop_toTopOf="@+id/view5" />
+
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="68dp"
+                android:layout_height="28dp"
+                android:layout_marginRight="@dimen/size_20dp"
+                android:background="@drawable/bg_button_radius"
+                app:layout_constraintBottom_toBottomOf="@+id/view5"
+                app:layout_constraintEnd_toEndOf="@+id/view5"
+                app:layout_constraintTop_toTopOf="@+id/view5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Check"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view6"
+                app:layout_constraintEnd_toEndOf="@+id/view6"
+                app:layout_constraintStart_toStartOf="@+id/view6"
+                app:layout_constraintTop_toTopOf="@+id/view6" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Activity Status"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/view" />
+                app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:background="@drawable/bg_view_radius_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/size_20dp"
+                android:src="@drawable/ic_run_bigger"
+                app:layout_constraintBottom_toBottomOf="@+id/view7"
+                app:layout_constraintEnd_toEndOf="@+id/view7"
+                app:layout_constraintTop_toTopOf="@+id/view7" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_20dp"
+                android:layout_marginTop="@dimen/size_20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="You have steps"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16dp"
+                app:layout_constraintStart_toStartOf="@+id/view7"
+                app:layout_constraintTop_toTopOf="@+id/view7" />
+
+            <TextView
+                android:id="@+id/tvHomeStep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="0 Steps"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view7"
+                app:layout_constraintStart_toStartOf="@+id/textView15"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewWater"
+                android:layout_width="0dp"
+                android:layout_height="400dp"
+                android:layout_marginLeft="@dimen/size_12dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:elevation="@dimen/size_4dp"
+                app:cardCornerRadius="@dimen/size_20dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toStartOf="@+id/cardViewSleep"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view7">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="@dimen/size_24dp"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="24dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/rectangle_5666"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imgToScroll"
+                        android:layout_width="@dimen/size_24dp"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="24dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/clip_source"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Water Intake"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView5"
+                        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_8dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="2 Liters"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/size_16dp"
+                        app:layout_constraintStart_toStartOf="@+id/textView16"
+                        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_8dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="Real time update"
+                        android:textColor="@color/gray1"
+                        android:textSize="11dp"
+                        app:layout_constraintStart_toStartOf="@+id/textView16"
+                        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewSleep"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginRight="@dimen/size_12dp"
+                android:elevation="@dimen/size_4dp"
+                app:cardCornerRadius="@dimen/size_20dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardViewWater"
+                app:layout_constraintTop_toBottomOf="@+id/view7">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:layout_marginTop="@dimen/size_24dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Sleep"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView27"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_8dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="8h20m"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/size_16dp"
+                        app:layout_constraintStart_toStartOf="@+id/textView26"
+                        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/sleep_graph"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewEat"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginRight="@dimen/size_12dp"
+                android:elevation="@dimen/size_4dp"
+                app:cardCornerRadius="@dimen/size_20dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardViewWater"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewSleep">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:layout_marginTop="@dimen/size_24dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Calories"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ProgressBar
+                        android:id="@+id/progessChangeFrame"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/circle_shape2"
+                        android:indeterminate="false"
+                        android:max="100"
+                        android:progress="25"
+                        android:progressDrawable="@drawable/circular_progress_bar2"
+                        android:translationZ="100dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/bg_button_radius"
+                        app:layout_constraintBottom_toBottomOf="@+id/progessChangeFrame"
+                        app:layout_constraintEnd_toEndOf="@+id/progessChangeFrame"
+                        app:layout_constraintStart_toStartOf="@+id/progessChangeFrame"
+                        app:layout_constraintTop_toTopOf="@+id/progessChangeFrame" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

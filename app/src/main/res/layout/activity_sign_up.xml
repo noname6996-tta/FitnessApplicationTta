@@ -224,7 +224,7 @@
     </RelativeLayout>
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/btnRegester"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginBottom="24dp"
@@ -243,8 +243,8 @@
         android:textColor="@color/white"
         android:textFontWeight="700"
         android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnRegester"
+        app:layout_constraintEnd_toEndOf="@+id/btnRegester"
+        app:layout_constraintStart_toStartOf="@+id/btnRegester"
+        app:layout_constraintTop_toTopOf="@+id/btnRegester" />
 </androidx.constraintlayout.widget.ConstraintLayout>

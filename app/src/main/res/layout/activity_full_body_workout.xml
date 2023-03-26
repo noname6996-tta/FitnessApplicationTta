@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.FullBodyWorkoutActivity">
+
+    <View
+        android:id="@+id/view18"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@drawable/bg_brand_gradient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:id="@+id/view16"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:background="@drawable/bg_view_gray_8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="24dp"
+        android:layout_height="@dimen/size_24dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+        app:layout_constraintBottom_toBottomOf="@+id/view16"
+        app:layout_constraintEnd_toEndOf="@+id/view16"
+        app:layout_constraintStart_toStartOf="@+id/view16"
+        app:layout_constraintTop_toTopOf="@+id/view16" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:src="@drawable/men10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view9"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="350dp"
+        android:background="@drawable/bg_white_14"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view10"
+        android:layout_width="60dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="@dimen/size_6dp"
+        android:background="@drawable/bg_view_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view9" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginTop="@dimen/size_24dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Fullbody Workout"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view10" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginTop="@dimen/size_4dp"
+        android:fontFamily="@font/poppins"
+        android:text="11 Exercises | 32mins | 320 Calories Burn"
+        android:textColor="@color/gray1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+    <View
+        android:id="@+id/view19"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:background="@drawable/bg_blue_linear_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:src="@drawable/calendar"
+        app:layout_constraintBottom_toBottomOf="@+id/view19"
+        app:layout_constraintStart_toStartOf="@+id/view19"
+        app:layout_constraintTop_toBottomOf="@+id/view9" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Schedule Workout"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/gray1"
+        android:layout_marginLeft="@dimen/size_16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view19"
+        app:layout_constraintStart_toEndOf="@+id/imageView10"
+        app:layout_constraintTop_toTopOf="@+id/view19" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/size_4dp"
+        android:src="@drawable/baseline_navigate_next_24"
+        app:layout_constraintBottom_toBottomOf="@+id/view19"
+        app:layout_constraintEnd_toEndOf="@+id/view19"
+        app:layout_constraintTop_toBottomOf="@+id/view9" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5/27, 09:00 AM"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/size_12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view19"
+        app:layout_constraintEnd_toStartOf="@+id/imageView11"
+        app:layout_constraintTop_toBottomOf="@+id/view9" />
+</androidx.constraintlayout.widget.ConstraintLayout>
