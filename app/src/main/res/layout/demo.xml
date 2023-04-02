@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:src="@drawable/ic_baseline_offline_bolt_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Week 1"
+            android:textColor="@color/gray1"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView15"
+            app:layout_constraintStart_toEndOf="@+id/imageView15"
+            app:layout_constraintTop_toTopOf="@+id/imageView15" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="124dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:layout_marginBottom="@dimen/size_4dp"
+            app:cardCornerRadius="@dimen/size_8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView34"
+            app:layout_constraintTop_toBottomOf="@+id/imageView15">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvDay1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_8dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay1"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay1"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay1" />
+
+                <TextView
+                    android:id="@+id/tvDay2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toEndOf="@+id/imageView16"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay1"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay2"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay1" />
+
+                <TextView
+                    android:id="@+id/tvDay3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="3"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toEndOf="@+id/imageView17"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay1"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay3"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay1" />
+
+                <TextView
+                    android:id="@+id/tvDay4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="4"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toEndOf="@+id/imageView18"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay1"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay4"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay1" />
+
+                <TextView
+                    android:id="@+id/tvDay5"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_8dp"
+                    android:layout_marginBottom="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="5"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay5"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay5"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay5" />
+
+                <TextView
+                    android:id="@+id/tvDay6"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginBottom="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="6"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView20" />
+
+                <ImageView
+                    android:id="@+id/imageView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay5"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay6"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay5" />
+
+                <TextView
+                    android:id="@+id/tvDay7"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginBottom="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="7"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView21" />
+
+                <ImageView
+                    android:id="@+id/imageView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay5"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay7"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay5" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/blue_ribbon"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay7"
+                    app:layout_constraintStart_toEndOf="@+id/imageView22"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay7" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <ImageView
+            android:id="@+id/imgLightWeek2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:src="@drawable/ic_baseline_offline_bolt_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvWeek2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Week 2"
+            android:textColor="@color/gray1"
+            app:layout_constraintBottom_toBottomOf="@+id/imgLightWeek2"
+            app:layout_constraintStart_toEndOf="@+id/imgLightWeek2"
+            app:layout_constraintTop_toTopOf="@+id/imgLightWeek2" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="124dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:layout_marginBottom="@dimen/size_4dp"
+            app:cardCornerRadius="@dimen/size_8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvWeek2"
+            app:layout_constraintTop_toBottomOf="@+id/imgLightWeek2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvDay8"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_8dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="8"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay8"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay8"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay8" />
+
+                <TextView
+                    android:id="@+id/tvDay9"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="9"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay8"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay8"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay9"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay8" />
+
+                <TextView
+                    android:id="@+id/tvDay10"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="10"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay9"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay8"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay10"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay8" />
+
+                <TextView
+                    android:id="@+id/tvDay11"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="11"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay10"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNexyDay11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay8"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay11"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay8" />
+
+                <TextView
+                    android:id="@+id/tvDay12"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_8dp"
+                    android:layout_marginBottom="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="12"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay12"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay12"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay12" />
+
+                <TextView
+                    android:id="@+id/tvDay13"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginBottom="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="13"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay12" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay12"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay13"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay12" />
+
+                <TextView
+                    android:id="@+id/tvDay14"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginBottom="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="14"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay13" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay12"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay14"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay12" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/blue_ribbon"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay14"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay14"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay14" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <ImageView
+            android:id="@+id/imgLightWeek3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:src="@drawable/ic_baseline_offline_bolt_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvWeek3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Week 3"
+            android:textColor="@color/gray1"
+            app:layout_constraintBottom_toBottomOf="@+id/imgLightWeek3"
+            app:layout_constraintStart_toEndOf="@+id/imgLightWeek3"
+            app:layout_constraintTop_toTopOf="@+id/imgLightWeek3" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="124dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:layout_marginBottom="@dimen/size_4dp"
+            app:cardCornerRadius="@dimen/size_8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvWeek3"
+            app:layout_constraintTop_toBottomOf="@+id/imgLightWeek3">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvDay15"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_8dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="15"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay15"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay15"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay15" />
+
+                <TextView
+                    android:id="@+id/tvDay17"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="16"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay15"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay15"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay17"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay15" />
+
+                <TextView
+                    android:id="@+id/tvDay18"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="17"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay17"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay15"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay18"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay15" />
+
+                <TextView
+                    android:id="@+id/tvDay19"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="18"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay18"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNexyDay19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay15"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay19"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay15" />
+
+                <TextView
+                    android:id="@+id/tvDay20"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_8dp"
+                    android:layout_marginBottom="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="19"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay20"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay20"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay20" />
+
+                <TextView
+                    android:id="@+id/tvDay21"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginBottom="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="20"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay20" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay20"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay21"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay20" />
+
+                <TextView
+                    android:id="@+id/tvDay22"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginBottom="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="21"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay21" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay20"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay22"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay20" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/blue_ribbon"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay22"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay22"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay22" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+        <ImageView
+            android:id="@+id/imgLightWeek4"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:src="@drawable/ic_baseline_offline_bolt_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvWeek4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Week 4"
+            android:textColor="@color/gray1"
+            app:layout_constraintBottom_toBottomOf="@+id/imgLightWeek4"
+            app:layout_constraintStart_toEndOf="@+id/imgLightWeek4"
+            app:layout_constraintTop_toTopOf="@+id/imgLightWeek4" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="124dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:layout_marginBottom="@dimen/size_4dp"
+            app:cardCornerRadius="@dimen/size_8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvWeek4"
+            app:layout_constraintTop_toBottomOf="@+id/imgLightWeek4">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvDay23"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_8dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="22"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay23"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay23"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay23" />
+
+                <TextView
+                    android:id="@+id/tvDay24"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="23"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay23"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay23"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay24"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay23" />
+
+                <TextView
+                    android:id="@+id/tvDay25"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="24"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay24"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay23"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay25"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay23" />
+
+                <TextView
+                    android:id="@+id/tvDay26"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="25"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay25"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNexyDay26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay23"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay26"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay23" />
+
+                <TextView
+                    android:id="@+id/tvDay27"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_8dp"
+                    android:layout_marginBottom="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="26"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay27"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay27"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay27" />
+
+                <TextView
+                    android:id="@+id/tvDay28"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginBottom="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="27"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay26" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay27"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay28"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay27" />
+
+                <TextView
+                    android:id="@+id/tvDay29"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginBottom="@dimen/size_8dp"
+                    android:background="@drawable/bg_gray"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="28"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay28" />
+
+                <ImageView
+                    android:id="@+id/imgNextDay29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/baseline_navigate_next_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay27"
+                    app:layout_constraintStart_toEndOf="@+id/tvDay29"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay27" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:src="@drawable/blue_ribbon"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDay29"
+                    app:layout_constraintStart_toEndOf="@+id/imgNextDay29"
+                    app:layout_constraintTop_toTopOf="@+id/tvDay29" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

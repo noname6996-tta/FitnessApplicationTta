@@ -1,5 +1,6 @@
 package com.tta.fitnessapplication.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.google.android.gms.common.api.Scope
 import com.google.android.gms.fitness.Fitness
 import com.tta.fitnessapplication.databinding.FragmentDiscoverBinding
 import com.tta.fitnessapplication.databinding.FragmentHomeBinding
+import com.tta.fitnessapplication.view.activity.FullBodyWorkoutActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
 
 class DiscoverFragment : Fragment() {
@@ -21,6 +23,12 @@ class DiscoverFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        addEvent()
+    }
 
+    private fun addEvent() {
+        binding.view12.setOnClickListener {
+            startActivity(Intent(activity,FullBodyWorkoutActivity::class.java))
+        }
     }
 }

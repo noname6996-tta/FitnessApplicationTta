@@ -3,15 +3,15 @@
     <item
         android:title=""
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_baseline_home_24"/>
+        android:icon="@drawable/home"/>
     <item
         android:title=""
         android:id="@+id/discoverFragment"
-        android:icon="@drawable/ic_baseline_home_24"/>
+        android:icon="@drawable/ic_dumbbell"/>
     <item
         android:title=""
         android:id="@+id/historyFragment"
-        android:icon="@drawable/ic_baseline_home_24"/>
+        android:icon="@drawable/star"/>
     <item
         android:title=""
         android:id="@+id/settingFragment"
