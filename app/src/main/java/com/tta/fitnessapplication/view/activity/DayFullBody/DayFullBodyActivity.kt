@@ -1,4 +1,4 @@
-package com.tta.fitnessapplication.view.activity
+package com.tta.fitnessapplication.view.activity.DayFullBody
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

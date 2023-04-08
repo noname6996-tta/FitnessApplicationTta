@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.tta.fitnessapplication.databinding.ActivityOnBoardBinding
-import com.tta.fitnessapplication.view.activity.MainActivity
 
 class OnBoardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnBoardBinding

@@ -25,7 +25,7 @@ class SleepTrackerActivity : AppCompatActivity() {
 
     private fun addEvent() {
         binding.view13.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher
         }
     }
 
@@ -119,7 +119,7 @@ class SleepTrackerActivity : AppCompatActivity() {
             set1.fillAlpha = 100
             set1.setDrawHorizontalHighlightIndicator(false)
             set1.fillFormatter =
-                IFillFormatter { dataSet, dataProvider -> binding.chart1.axisRight.axisMinimum }
+                IFillFormatter { _, _ -> binding.chart1.axisRight.axisMinimum }
 
             // create a data object with the data sets
             val data = LineData(set1)

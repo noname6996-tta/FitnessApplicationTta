@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.tta.fitnessapplication.databinding.ActivityLoginBinding
-import com.tta.fitnessapplication.view.activity.MainActivity
+import com.tta.fitnessapplication.view.activity.MainActivity.MainActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

@@ -2,11 +2,12 @@ package com.tta.fitnessapplication.api
 
 import com.tta.fitnessapplication.data.model.Exercise
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 
 interface ApiService {
     @GET(ApiPath.GETDATA)
-    fun getData(): Call<List<Exercise>>
+    suspend fun getData(): Response<List<Exercise>>
 }
 
 //    @POST(ApiPath.LOGIN)

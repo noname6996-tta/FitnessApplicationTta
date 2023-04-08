@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.tta.fitnessapplication.databinding.ActivitySignUpBinding
-import com.tta.fitnessapplication.view.activity.MainActivity
+import com.tta.fitnessapplication.view.activity.MainActivity.MainActivity
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
@@ -17,7 +17,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun addEvent(){
         binding.btnRegester.setOnClickListener {
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
         binding.textView3.setOnClickListener {
