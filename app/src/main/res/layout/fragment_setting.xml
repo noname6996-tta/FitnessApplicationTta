@@ -225,6 +225,7 @@
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewAccount"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginLeft="@dimen/size_16dp"
@@ -264,8 +265,8 @@
 
                     <ImageView
                         android:id="@+id/imageView23"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/size_24dp"
+                        android:layout_height="@dimen/size_24dp"
                         android:src="@drawable/ic_user"
                         app:layout_constraintBottom_toBottomOf="@+id/viewPersonData"
                         app:layout_constraintStart_toStartOf="@+id/viewPersonData"
@@ -306,8 +307,8 @@
 
                     <ImageView
                         android:id="@+id/imageAchievement"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/size_24dp"
+                        android:layout_height="@dimen/size_24dp"
                         android:src="@drawable/calendar"
                         app:layout_constraintBottom_toBottomOf="@+id/viewAchievement"
                         app:layout_constraintStart_toStartOf="@+id/viewAchievement"
@@ -334,6 +335,150 @@
                         app:layout_constraintBottom_toBottomOf="@+id/viewAchievement"
                         app:layout_constraintEnd_toEndOf="@+id/viewAchievement"
                         app:layout_constraintTop_toTopOf="@+id/viewAchievement" />
+
+                    <View
+                        android:id="@+id/viewHistory"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_24dp"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="@dimen/size_16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/viewAchievement" />
+
+                    <ImageView
+                        android:id="@+id/imageHistory"
+                        android:layout_width="@dimen/size_24dp"
+                        android:layout_height="@dimen/size_24dp"
+                        android:src="@drawable/graph"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewHistory"
+                        app:layout_constraintStart_toStartOf="@+id/viewHistory"
+                        app:layout_constraintTop_toTopOf="@+id/viewHistory" />
+
+                    <TextView
+                        android:id="@+id/textViewHistory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size_24dp"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="Activity History"
+                        android:textColor="@color/gray1"
+                        android:textSize="@dimen/size_14dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewHistory"
+                        app:layout_constraintStart_toEndOf="@+id/imageHistory"
+                        app:layout_constraintTop_toTopOf="@+id/viewHistory" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_navigate_next_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewHistory"
+                        app:layout_constraintEnd_toEndOf="@+id/viewHistory"
+                        app:layout_constraintTop_toTopOf="@+id/viewHistory" />
+
+                    <View
+                        android:id="@+id/viewProgess"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_24dp"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="@dimen/size_16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/viewHistory" />
+
+                    <ImageView
+                        android:id="@+id/imageProgess"
+                        android:layout_width="@dimen/size_24dp"
+                        android:layout_height="@dimen/size_24dp"
+                        android:src="@drawable/icon_workout"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewProgess"
+                        app:layout_constraintStart_toStartOf="@+id/viewProgess"
+                        app:layout_constraintTop_toTopOf="@+id/viewProgess" />
+
+                    <TextView
+                        android:id="@+id/textViewProgess"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size_24dp"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="Activity Progess"
+                        android:textColor="@color/gray1"
+                        android:textSize="@dimen/size_14dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewProgess"
+                        app:layout_constraintStart_toEndOf="@+id/imageProgess"
+                        app:layout_constraintTop_toTopOf="@+id/viewProgess" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_navigate_next_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewProgess"
+                        app:layout_constraintEnd_toEndOf="@+id/viewProgess"
+                        app:layout_constraintTop_toTopOf="@+id/viewProgess" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="@dimen/size_16dp"
+                android:elevation="@dimen/size_16dp"
+                app:cardCornerRadius="@dimen/size_16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewAccount">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView39"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Notification"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView25"
+                        android:layout_width="@dimen/size_24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="16dp"
+                        android:src="@drawable/icon_notif"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+                    <TextView
+                        android:id="@+id/textView40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_8dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="Pop-up Notification"
+                        android:textColor="@color/gray1"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView25"
+                        app:layout_constraintStart_toEndOf="@+id/imageView25"
+                        app:layout_constraintTop_toTopOf="@+id/imageView25" />
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/size_16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView40"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView40" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
