@@ -1,8 +1,9 @@
-package com.tta.fitnessapplication
+package com.tta.fitnessapplication.view.activity.signup
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.tta.fitnessapplication.view.activity.login.LoginActivity
 import com.tta.fitnessapplication.databinding.ActivitySignUpBinding
 import com.tta.fitnessapplication.view.activity.MainActivity.MainActivity
 
@@ -21,7 +22,7 @@ class SignUpActivity : AppCompatActivity() {
             finish()
         }
         binding.textView3.setOnClickListener {
-            startActivity(Intent(this,LoginActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }

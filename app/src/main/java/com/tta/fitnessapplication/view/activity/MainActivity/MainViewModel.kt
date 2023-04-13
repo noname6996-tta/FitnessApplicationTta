@@ -1,15 +1,11 @@
 package com.tta.fitnessapplication.view.activity.MainActivity
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tta.fitnessapplication.ApiClient
 import com.tta.fitnessapplication.data.model.Exercise
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel(private val repositoryApi: RepositoryApi): ViewModel() {

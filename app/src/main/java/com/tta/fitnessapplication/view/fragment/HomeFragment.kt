@@ -36,6 +36,7 @@ import com.google.android.gms.fitness.result.DataSourcesResult
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.FragmentHomeBinding
 import com.tta.fitnessapplication.view.activity.SleepTrackerActivity
+import com.tta.fitnessapplication.view.activity.watertracker.WaterTrackerActivity
 import java.util.concurrent.TimeUnit
 
 class HomeFragment : Fragment(), OnDataPointListener, GoogleApiClient.ConnectionCallbacks,
@@ -69,6 +70,14 @@ class HomeFragment : Fragment(), OnDataPointListener, GoogleApiClient.Connection
     private fun addEvent() {
         binding.cardViewSleep.setOnClickListener {
             startActivity(Intent(activity,SleepTrackerActivity::class.java))
+        }
+        binding.cardViewWater.setOnClickListener {
+            startActivity(
+                Intent(
+                    activity,
+                    WaterTrackerActivity::class.java
+                )
+            )
         }
     }
 

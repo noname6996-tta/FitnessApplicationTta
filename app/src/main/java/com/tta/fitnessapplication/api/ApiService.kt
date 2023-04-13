@@ -1,13 +1,30 @@
 package com.tta.fitnessapplication.api
 
 import com.tta.fitnessapplication.data.model.Exercise
+import com.tta.fitnessapplication.data.model.UserLoginResponse
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiService {
     @GET(ApiPath.GETDATA)
     suspend fun getData(): Response<List<Exercise>>
+
+    @POST(ApiPath.LOGIN)
+    fun login(
+        @Query("email") email: String,
+        @Query("password") password: String
+    ): Call<UserLoginResponse>
+
+    @POST(ApiPath.INSERT_USER)
+    fun register(
+        @Query("email") email: String,
+        @Query("password") password: String,
+        @Query("firstname") firstname: String,
+        @Query("lastname") lastname: String
+    ): Call<UserLoginResponse>
 }
 
 //    @POST(ApiPath.LOGIN)
