@@ -1,17 +1,16 @@
 package com.tta.fitnessapplication.view.fragment
 
 import android.content.Intent
-import android.content.IntentSender
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ClipDrawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.PieData
@@ -19,57 +18,45 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.Scopes
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.common.api.ResultCallback
-import com.google.android.gms.common.api.Scope
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.fitness.Fitness
 import com.google.android.gms.fitness.data.DataPoint
-import com.google.android.gms.fitness.data.DataSource
+import com.google.android.gms.fitness.data.DataSet
 import com.google.android.gms.fitness.data.DataType
-import com.google.android.gms.fitness.data.Value
-import com.google.android.gms.fitness.request.DataSourcesRequest
-import com.google.android.gms.fitness.request.OnDataPointListener
-import com.google.android.gms.fitness.request.SensorRequest
-import com.google.android.gms.fitness.result.DataSourcesResult
+import com.google.android.gms.fitness.request.DataReadRequest
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.FragmentHomeBinding
 import com.tta.fitnessapplication.view.activity.SleepTrackerActivity
 import com.tta.fitnessapplication.view.activity.watertracker.WaterTrackerActivity
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.concurrent.TimeUnit
 
-class HomeFragment : Fragment(), OnDataPointListener, GoogleApiClient.ConnectionCallbacks,
-    GoogleApiClient.OnConnectionFailedListener  {
-    private val REQUEST_OAUTH = 1
-    private val AUTH_PENDING = "auth_state_pending"
-    private var authInProgress = false
-    private lateinit var mApiClient: GoogleApiClient
+class HomeFragment : Fragment() {
     private lateinit var mImageDrawable: ClipDrawable
     private lateinit var binding: FragmentHomeBinding
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (savedInstanceState != null) {
-            authInProgress = savedInstanceState.getBoolean(AUTH_PENDING)
-        }
-        mApiClient = GoogleApiClient.Builder(requireActivity())
-            .addApi(Fitness.SENSORS_API)
-            .addScope(Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
-            .addConnectionCallbacks(this)
-            .addOnConnectionFailedListener(this)
-            .build()
         initView()
         initProcess()
         addEvent()
+//        val viewModel = HistoryViewModel()
+//        viewModel.getData()
+
     }
 
     private fun addEvent() {
         binding.cardViewSleep.setOnClickListener {
-            startActivity(Intent(activity,SleepTrackerActivity::class.java))
+            startActivity(Intent(activity, SleepTrackerActivity::class.java))
         }
         binding.cardViewWater.setOnClickListener {
             startActivity(
@@ -169,104 +156,5 @@ class HomeFragment : Fragment(), OnDataPointListener, GoogleApiClient.Connection
         binding.pieChart.invalidate()
     }
 
-    override fun onStart() {
-        super.onStart()
-        mApiClient?.connect()
-    }
 
-    override fun onDataPoint(dataPoint: DataPoint?) {
-        for (field in dataPoint?.dataType!!.fields) {
-            val value: Value = dataPoint.getValue(field)
-            activity?.runOnUiThread {
-//                Toast.makeText(
-//                    requireContext(),
-//                    "Field: " + field.name.toString() + " Value: " + value,
-//                    Toast.LENGTH_SHORT
-//                ).show()
-                binding.tvHomeStep.text = "$value steps"
-            }
-        }
-    }
-
-    override fun onConnected(p0: Bundle?) {
-        val dataSourceRequest = DataSourcesRequest.Builder()
-            .setDataTypes(DataType.TYPE_STEP_COUNT_CUMULATIVE)
-            .setDataSourceTypes(DataSource.TYPE_RAW)
-            .build()
-        val dataSourcesResultCallback: ResultCallback<DataSourcesResult?> =
-            ResultCallback<DataSourcesResult?> { dataSourcesResult ->
-                for (dataSource in dataSourcesResult.dataSources) {
-                    if (DataType.TYPE_STEP_COUNT_CUMULATIVE.equals(dataSource.dataType)) {
-                        registerFitnessDataListener(
-                            dataSource,
-                            DataType.TYPE_STEP_COUNT_CUMULATIVE
-                        )
-                    }
-                }
-            }
-        Fitness.SensorsApi.findDataSources(mApiClient, dataSourceRequest)
-            .setResultCallback(dataSourcesResultCallback)
-    }
-
-    private fun registerFitnessDataListener(dataSource: DataSource, dataType: DataType) {
-        val request = SensorRequest.Builder()
-            .setDataSource(dataSource)
-            .setDataType(dataType)
-            .setSamplingRate(3, TimeUnit.SECONDS)
-            .build()
-
-        Fitness.SensorsApi.add(mApiClient, request, this)
-            .setResultCallback { status ->
-                if (status.isSuccess) {
-                    Log.e("GoogleFit", "SensorApi successfully added")
-                }
-            }
-    }
-
-    override fun onConnectionSuspended(p0: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onConnectionFailed(connectionResult: ConnectionResult) {
-        if (!authInProgress) {
-            try {
-                authInProgress = true
-                connectionResult.startResolutionForResult(activity, REQUEST_OAUTH)
-            } catch (e: IntentSender.SendIntentException) {
-            }
-        } else {
-            Log.e("GoogleFit", "authInProgress")
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_OAUTH) {
-            authInProgress = false
-            if (resultCode == AppCompatActivity.RESULT_OK) {
-                if (!mApiClient!!.isConnecting && !mApiClient!!.isConnected) {
-                    mApiClient!!.connect()
-                }
-            } else if (resultCode == AppCompatActivity.RESULT_CANCELED) {
-                Log.e("GoogleFit", "RESULT_CANCELED")
-            }
-        } else {
-            Log.e("GoogleFit", "requestCode NOT request_oauth")
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Fitness.SensorsApi.remove(mApiClient, this)
-            .setResultCallback { status ->
-                if (status.isSuccess) {
-                    mApiClient!!.disconnect()
-                }
-            }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putBoolean(AUTH_PENDING, authInProgress)
-    }
 }
