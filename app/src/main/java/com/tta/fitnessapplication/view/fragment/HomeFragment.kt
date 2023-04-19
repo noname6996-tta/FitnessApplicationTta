@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.animation.Easing
@@ -46,12 +47,35 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //addObsever()
         initView()
         initProcess()
         addEvent()
-//        val viewModel = HistoryViewModel()
-//        viewModel.getData()
+    }
 
+    private fun addObsever() {
+        val viewModel = HistoryViewModel()
+        viewModel.getData()
+        viewModel.listStepsCount.observe(viewLifecycleOwner) {
+            binding.tvHomeStep.text = it.last().value + " steps"
+        }
+        viewModel.listWeight.observe(viewLifecycleOwner) {
+
+        }
+        viewModel.listCaloriesExpended.observe(viewLifecycleOwner) {
+            binding.tvCalor.text = it.last().value + "kCalr"
+        }
+        viewModel.listHeartMinutes.observe(viewLifecycleOwner) {
+            binding.tvHeartRate.text = it.last().value + " BPM"
+        }
+        viewModel.listSleepTracker.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()){
+                binding.textView27.text = it.last().value + " h"
+            }
+        }
+        viewModel.message.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun addEvent() {

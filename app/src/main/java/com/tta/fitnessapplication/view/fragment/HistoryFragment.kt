@@ -7,6 +7,5 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
     private val viewModel = HistoryViewModel()
     override fun getDataBinding(): FragmentHistoryBinding {
         return FragmentHistoryBinding.inflate(layoutInflater)
-        viewModel.getData()
     }
 }

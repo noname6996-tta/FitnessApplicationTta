@@ -272,14 +272,14 @@
                         app:layout_constraintTop_toTopOf="@+id/imageView15" />
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="124dp"
                         android:layout_marginRight="@dimen/size_16dp"
                         android:layout_marginBottom="@dimen/size_4dp"
                         app:cardCornerRadius="@dimen/size_8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/textView34"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView15">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -504,14 +504,14 @@
                         app:layout_constraintTop_toTopOf="@+id/imgLightWeek2" />
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="124dp"
                         android:layout_marginRight="@dimen/size_16dp"
                         android:layout_marginBottom="@dimen/size_4dp"
                         app:cardCornerRadius="@dimen/size_8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/tvWeek2"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imgLightWeek2">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -736,14 +736,14 @@
                         app:layout_constraintTop_toTopOf="@+id/imgLightWeek3" />
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="124dp"
                         android:layout_marginRight="@dimen/size_16dp"
                         android:layout_marginBottom="@dimen/size_4dp"
                         app:cardCornerRadius="@dimen/size_8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/tvWeek3"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imgLightWeek3">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -968,14 +968,14 @@
                         app:layout_constraintTop_toTopOf="@+id/imgLightWeek4" />
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="124dp"
                         android:layout_marginRight="@dimen/size_16dp"
                         android:layout_marginBottom="@dimen/size_4dp"
                         app:cardCornerRadius="@dimen/size_8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/tvWeek4"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imgLightWeek4">
 
                         <androidx.constraintlayout.widget.ConstraintLayout

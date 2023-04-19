@@ -21,7 +21,7 @@ class LoginViewModel : ViewModel() {
                 if (response.body()?.success == 1) {
                     checkLogin.value = true
                 } else {
-                    checkLogin.value = true
+                    checkLogin.value = false
                     message.value = response.body()?.message.toString()
                 }
             }

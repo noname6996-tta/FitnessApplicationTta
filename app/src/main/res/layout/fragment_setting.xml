@@ -20,6 +20,7 @@
                 android:layout_marginTop="@dimen/size_16dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Profile"
+                android:textColor="@color/black"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

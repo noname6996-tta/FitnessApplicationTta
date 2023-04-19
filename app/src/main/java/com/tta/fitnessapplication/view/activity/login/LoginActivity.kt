@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import com.tta.fitnessapplication.databinding.ActivityLoginBinding
 import com.tta.fitnessapplication.view.activity.MainActivity.MainActivity
 import com.tta.fitnessapplication.view.activity.signup.SignUpActivity
@@ -41,6 +42,21 @@ class LoginActivity : AppCompatActivity() {
             }
             if (password.isEmpty()){
                 binding.tvPassword.error = "Vui lòng nhập"
+            }
+            binding.edtEmail.doOnTextChanged { text, start, before, count ->
+                if (text!!.isEmpty()){
+                    binding.tvEmail.error = "Vui lòng nhập"
+                } else {
+                    binding.tvEmail.error = ""
+                }
+            }
+
+            binding.edtPassword.doOnTextChanged { text, start, before, count ->
+                if (text!!.isEmpty()){
+                    binding.tvPassword.error = "Vui lòng nhập"
+                } else {
+                    binding.tvPassword.error = ""
+                }
             }
             if (email.isEmpty()||password.isEmpty()){
 

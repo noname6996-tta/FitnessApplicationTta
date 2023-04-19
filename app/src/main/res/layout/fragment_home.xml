@@ -188,6 +188,50 @@
                 app:layout_constraintTop_toBottomOf="@+id/view5" />
 
             <View
+                android:id="@+id/view25"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/bg_heart_reat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/heart_rate_graph"
+                app:layout_constraintBottom_toBottomOf="@+id/view25"
+                app:layout_constraintEnd_toEndOf="@+id/view25"
+                app:layout_constraintStart_toStartOf="@+id/view25" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Heart Rate"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16dp"
+                app:layout_constraintStart_toStartOf="@+id/view25"
+                app:layout_constraintTop_toTopOf="@+id/view25" />
+
+            <TextView
+                android:id="@+id/tvHeartRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="78 BPM"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                app:layout_constraintStart_toStartOf="@+id/textView42"
+                app:layout_constraintTop_toBottomOf="@+id/textView42" />
+
+            <View
                 android:id="@+id/view7"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
@@ -197,7 +241,7 @@
                 android:background="@drawable/bg_view_radius_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                app:layout_constraintTop_toBottomOf="@+id/view25" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -412,6 +456,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgCricleCalor"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:background="@drawable/bg_button_radius"
@@ -419,6 +464,20 @@
                         app:layout_constraintEnd_toEndOf="@+id/progessChangeFrame"
                         app:layout_constraintStart_toStartOf="@+id/progessChangeFrame"
                         app:layout_constraintTop_toTopOf="@+id/progessChangeFrame" />
+
+                    <TextView
+                        android:id="@+id/tvCalor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="230kCalo"
+                        android:fontFamily="@font/poppins"
+                        android:textSize="12dp"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgCricleCalor"
+                        app:layout_constraintEnd_toEndOf="@+id/imgCricleCalor"
+                        app:layout_constraintStart_toStartOf="@+id/imgCricleCalor"
+                        app:layout_constraintTop_toTopOf="@+id/imgCricleCalor"
+                        />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,67 +50,67 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 //        addListener()
         initUi()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val signInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build()
-
-            val googleSignInClient = GoogleSignIn.getClient(this, signInOptions)
-
-            val signInIntent: Intent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, 0)
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            val signInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestEmail()
+//                .build()
+//
+//            val googleSignInClient = GoogleSignIn.getClient(this, signInOptions)
+//
+//            val signInIntent: Intent = googleSignInClient.signInIntent
+//            startActivityForResult(signInIntent, 0)
+//        }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+//        if (requestCode == 0) {
+//            // The Task returned from this call is always completed, no need to attach
+//            // a listener.
+//            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+//            handleSignInResult(task)
+//        }
+//    }
 
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == 0) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleSignInResult(task)
-        }
-    }
-
-    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-        try {
-            val account1: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
-            Log.w("tta", account1.account.toString())
-            // Signed in successfully, show authenticated UI.
-            val fitnessOptions = FitnessOptions.builder()
-                .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
-                .build()
-
-            account = GoogleSignIn.getAccountForExtension(this, fitnessOptions)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                addDataFit()
-            }
-            settingReadData()
-            showAccountSetting()
-        } catch (e: ApiException) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w("tta", "signInResult:failed code=" + e.message)
-            Log.w("tta", "signInResult:failed code=" + e.printStackTrace())
-            Log.w("tta", "signInResult:failed code=" + e.stackTraceToString())
-        }
-    }
-
-    private fun addListener() {
-        val repositoryApi = RepositoryApi()
-        val viewModelFactory = MainViewModelFactory(repositoryApi)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getData()
-        viewModel.dataExercise.observe(this) {
-            if (it.isSuccessful){
-
-            } else {
-                Log.e("tta",it.errorBody().toString())
-            }
-        }
-    }
+//    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+//        try {
+//            val account1: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
+//            Log.w("tta", account1.account.toString())
+//            // Signed in successfully, show authenticated UI.
+//            val fitnessOptions = FitnessOptions.builder()
+//                .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+//                .build()
+//
+//            account = GoogleSignIn.getAccountForExtension(this, fitnessOptions)
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                addDataFit()
+//            }
+//            settingReadData()
+//            showAccountSetting()
+//        } catch (e: ApiException) {
+//            // The ApiException status code indicates the detailed failure reason.
+//            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+//            Log.w("tta", "signInResult:failed code=" + e.message)
+//            Log.w("tta", "signInResult:failed code=" + e.printStackTrace())
+//            Log.w("tta", "signInResult:failed code=" + e.stackTraceToString())
+//        }
+//    }
+//
+//    private fun addListener() {
+//        val repositoryApi = RepositoryApi()
+//        val viewModelFactory = MainViewModelFactory(repositoryApi)
+//        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+//        viewModel.getData()
+//        viewModel.dataExercise.observe(this) {
+//            if (it.isSuccessful){
+//
+//            } else {
+//                Log.e("tta",it.errorBody().toString())
+//            }
+//        }
+//    }
 
     private fun initUi() {
         navHostFragment =
