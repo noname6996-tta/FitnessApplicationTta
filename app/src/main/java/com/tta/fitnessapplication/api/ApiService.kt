@@ -25,6 +25,11 @@ interface ApiService {
         @Query("firstname") firstname: String,
         @Query("lastname") lastname: String
     ): Call<UserLoginResponse>
+
+    @POST(ApiPath.INSERT_USER)
+    fun getUserProfile(
+        @Query("email") email: String,
+    ): Call<UserLoginResponse>
 }
 
 //    @POST(ApiPath.LOGIN)

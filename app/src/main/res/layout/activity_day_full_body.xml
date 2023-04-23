@@ -57,9 +57,9 @@
         android:background="@drawable/bg_button_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="@dimen/size_4dp"
+        android:layout_marginRight="@dimen/size_16dp"
         android:layout_marginBottom="@dimen/size_4dp"
-        android:layout_marginLeft="@dimen/size_4dp"
+        android:layout_marginLeft="16dp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
