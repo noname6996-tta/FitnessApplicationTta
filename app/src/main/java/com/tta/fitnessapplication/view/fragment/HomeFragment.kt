@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -26,8 +27,12 @@ import com.google.android.gms.fitness.data.DataSet
 import com.google.android.gms.fitness.data.DataType
 import com.google.android.gms.fitness.request.DataReadRequest
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.repository.RepositoryApi
 import com.tta.fitnessapplication.databinding.FragmentHomeBinding
+import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModel
+import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModelFactory
 import com.tta.fitnessapplication.view.activity.SleepTrackerActivity
+import com.tta.fitnessapplication.view.activity.login.LoginActivity
 import com.tta.fitnessapplication.view.activity.watertracker.WaterTrackerActivity
 import java.time.Instant
 import java.time.LocalDateTime
@@ -37,6 +42,7 @@ import java.util.concurrent.TimeUnit
 class HomeFragment : Fragment() {
     private lateinit var mImageDrawable: ClipDrawable
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var mainViewModel: MainViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,9 +54,27 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //addObsever()
+        addDataProfile()
         initView()
         initProcess()
         addEvent()
+    }
+
+    private fun addDataProfile() {
+        val repositoryApi = RepositoryApi()
+        val viewModelFactory = MainViewModelFactory(repositoryApi)
+        mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        if (LoginActivity.emailUser !=""){
+            mainViewModel.getUserData(LoginActivity.emailUser)
+        }
+        mainViewModel.dataExercise.observe(requireActivity()) {
+            if (it.isSuccessful) {
+                var dataProfile = mainViewModel.dataExercise.value?.body()?.data
+                binding.textView2.text = "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
+            } else {
+                Log.e("tta", it.errorBody().toString())
+            }
+        }
     }
 
     private fun addObsever() {
@@ -69,7 +93,7 @@ class HomeFragment : Fragment() {
             binding.tvHeartRate.text = it.last().value + " BPM"
         }
         viewModel.listSleepTracker.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 binding.textView27.text = it.last().value + " h"
             }
         }

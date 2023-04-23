@@ -10,6 +10,9 @@ import com.tta.fitnessapplication.view.activity.MainActivity.MainActivity
 import com.tta.fitnessapplication.view.activity.signup.SignUpActivity
 
 class LoginActivity : AppCompatActivity() {
+    companion object{
+        var emailUser : String = ""
+    }
     private lateinit var binding: ActivityLoginBinding
     private val viewModel = LoginViewModel()
     private var check = false
@@ -27,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.checkLogin.observe(this){
             check = it
             if (check){
+                emailUser = binding.edtEmail.text.toString()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }

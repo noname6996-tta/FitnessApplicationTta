@@ -4,12 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tta.fitnessapplication.data.model.Exercise
+import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class MainViewModel(private val repositoryApi: RepositoryApi): ViewModel() {
-    val dataExercise = MutableLiveData<Response<List<Exercise>>>()
+    val dataExercise = MutableLiveData<Response<ResponseProfile>>()
     val message = MutableLiveData<String>()
 //    fun getData(){
 //        ApiClient.API.getData().enqueue(object : Callback<List<Exercise>>{
@@ -28,9 +29,9 @@ class MainViewModel(private val repositoryApi: RepositoryApi): ViewModel() {
 //        })
 //    }
 
-    fun getData(){
+    fun getUserData(email: String){
         viewModelScope.launch {
-            val list = repositoryApi.getData()
+            val list = repositoryApi.getProfile(email)
             dataExercise.value = list
         }
     }

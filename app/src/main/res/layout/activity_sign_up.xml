@@ -53,6 +53,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edt_login"
             android:hint="@string/signup_hint_first_name"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -79,6 +80,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edt_login"
             android:hint="@string/signup_hint_last_name"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -106,6 +108,7 @@
             android:background="@drawable/bg_edt_login"
             android:gravity="left"
             android:hint="@string/signup_hint_email"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -135,6 +138,8 @@
             android:background="@drawable/bg_edt_login"
             android:gravity="left"
             android:hint="@string/signup_hint_password"
+            android:inputType="textPassword"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -227,9 +232,9 @@
         android:id="@+id/btnRegester"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/bg_button_radius"
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"

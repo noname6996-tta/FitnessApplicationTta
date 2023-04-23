@@ -11,6 +11,6 @@ data class User(
     var phone: String,
     var email: String,
     var password: String,
-    var fistname: String,
+    var firstname: String,
     var lastname: String
 )
