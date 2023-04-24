@@ -1,6 +1,7 @@
 package com.tta.fitnessapplication.api
 
 import com.tta.fitnessapplication.data.model.Exercise
+import com.tta.fitnessapplication.data.model.ResponseFullBody
 import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.UserLoginResponse
 import retrofit2.Call
@@ -31,6 +32,9 @@ interface ApiService {
     suspend fun getUserProfile(
         @Query("email") email: String,
     ): Response<ResponseProfile>
+
+    @GET(ApiPath.FULLBODY)
+    fun getFullBody(): Call<ResponseFullBody>
 }
 
 //    @POST(ApiPath.LOGIN)

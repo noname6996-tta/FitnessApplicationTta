@@ -10,5 +10,15 @@ class DayFullBodyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDayFullBodyBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initUi()
+        addObsever()
+    }
+
+    private fun initUi() {
+
+    }
+
+    private fun addObsever() {
+
     }
 }

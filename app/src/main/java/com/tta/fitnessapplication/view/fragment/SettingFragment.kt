@@ -33,11 +33,29 @@ class SettingFragment : Fragment() {
         val repositoryApi = RepositoryApi()
         val viewModelFactory = MainViewModelFactory(repositoryApi)
         mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        if (LoginActivity.emailUser !=""){
+            mainViewModel.getUserData(LoginActivity.emailUser)
+        }
         mainViewModel.dataExercise.observe(requireActivity()) {
             if (it.isSuccessful) {
                 var dataProfile = mainViewModel.dataExercise.value?.body()?.data
-                binding.textView23.text = "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
-                binding.textView24.text = "${dataProfile!![0].gender} "
+                binding.tvUserName.text = "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
+                binding.tvGenderUser.text = "${dataProfile!![0].gender} "
+                if (dataProfile!![0].tall==""||dataProfile!![0].tall.isEmpty()){
+                    binding.tvHeight.text = "_"
+                } else {
+                    binding.tvHeight.text = "${dataProfile!![0].tall} "
+                }
+                if (dataProfile!![0].weight==""||dataProfile!![0].weight.isEmpty()){
+                    binding.tvWeight.text = "_"
+                } else {
+                    binding.tvWeight.text = "${dataProfile!![0].weight} "
+                }
+                if (dataProfile!![0].age==0){
+                    binding.tvAge.text = "_"
+                } else {
+                    binding.tvAge.text = "${dataProfile!![0].age} "
+                }
             } else {
                 Log.e("tta", it.errorBody().toString())
             }

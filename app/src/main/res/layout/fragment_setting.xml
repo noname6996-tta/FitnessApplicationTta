@@ -48,7 +48,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view14" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_16dp"
@@ -60,7 +60,7 @@
                 app:layout_constraintTop_toTopOf="@+id/circleImageView2" />
 
             <TextView
-                android:id="@+id/textView24"
+                android:id="@+id/tvGenderUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_4dp"
@@ -68,8 +68,8 @@
                 android:text="Male"
                 android:textColor="@color/gray1"
                 android:textSize="@dimen/size_12dp"
-                app:layout_constraintStart_toStartOf="@+id/textView23"
-                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                app:layout_constraintStart_toStartOf="@+id/tvUserName"
+                app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
             <View
                 android:id="@+id/view15"
