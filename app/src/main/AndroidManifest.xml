@@ -35,6 +35,9 @@
             android:name=".view.activity.FullBodyWorkoutActivity"
             android:exported="false" />
         <activity
+            android:name=".view.activity.DayFullBody.DayFullBodyActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activity.SleepTrackerActivity"
             android:exported="false">
             <meta-data

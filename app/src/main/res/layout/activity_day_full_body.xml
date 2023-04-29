@@ -40,9 +40,9 @@
         android:id="@+id/tvDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Day 1"
         android:layout_marginBottom="@dimen/size_16dp"
         android:fontFamily="@font/poppins_semibold"
+        android:text="Day 1"
         android:textColor="@color/white"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/textView38"
@@ -57,26 +57,34 @@
         android:layout_marginRight="@dimen/size_4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view23" />
+        app:layout_constraintTop_toBottomOf="@+id/view23">
+
+        <TextView
+            android:id="@+id/tvDayFullBodyStatus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/gray1" />
+    </androidx.cardview.widget.CardView>
 
     <View
         android:id="@+id/view24"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:layout_marginBottom="@dimen/size_4dp"
         android:background="@drawable/bg_button_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="@dimen/size_16dp"
-        android:layout_marginBottom="@dimen/size_4dp"
-        android:layout_marginLeft="16dp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
         android:text="Start"
         android:textColor="@color/white"
-        android:fontFamily="@font/poppins_semibold"
         android:textSize="@dimen/size_16dp"
         app:layout_constraintBottom_toBottomOf="@+id/view24"
         app:layout_constraintEnd_toEndOf="@+id/view24"

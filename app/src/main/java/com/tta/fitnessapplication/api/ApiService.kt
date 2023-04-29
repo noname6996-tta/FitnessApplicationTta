@@ -1,6 +1,8 @@
 package com.tta.fitnessapplication.api
 
 import com.tta.fitnessapplication.data.model.Exercise
+import com.tta.fitnessapplication.data.model.Fullbody
+import com.tta.fitnessapplication.data.model.ResponseExercise
 import com.tta.fitnessapplication.data.model.ResponseFullBody
 import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.UserLoginResponse
@@ -35,6 +37,19 @@ interface ApiService {
 
     @GET(ApiPath.FULLBODY)
     fun getFullBody(): Call<ResponseFullBody>
+
+    @POST(ApiPath.SELECT_FULLBODY)
+    fun getDayFullBody(
+        @Query("id") id: String,
+    ): Call<Fullbody>
+
+    @GET(ApiPath.EXERCISE)
+    fun getALlExercise(): Call<ResponseExercise>
+
+    @POST(ApiPath.SELECT_EXERCISE)
+    fun getExercise(
+        @Query("id") id: String,
+    ): Call<Exercise>
 }
 
 //    @POST(ApiPath.LOGIN)

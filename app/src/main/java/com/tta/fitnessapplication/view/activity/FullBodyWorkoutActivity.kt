@@ -18,12 +18,9 @@ class FullBodyWorkoutActivity : AppCompatActivity() {
 
     private fun addEvent() {
         binding.tvDay1.setOnClickListener {
-            startActivity(
-                Intent(
-                    this,
-                    DayFullBodyActivity::class.java
-                )
-            )
+            var intent = Intent(this, DayFullBodyActivity::class.java)
+            intent.putExtra("day",1)
+            startActivity(intent)
         }
     }
 }
