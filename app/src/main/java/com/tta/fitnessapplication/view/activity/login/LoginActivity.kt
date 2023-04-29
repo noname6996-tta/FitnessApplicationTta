@@ -19,6 +19,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding.edtEmail.setText("theanh682001@gmail.com")
+        binding.edtPassword.setText("123456")
         setContentView(binding.root)
         addObsever()
         addEvent()
