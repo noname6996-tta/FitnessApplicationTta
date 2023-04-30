@@ -28,6 +28,10 @@ class DayFullBodyActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
             this.finish()
         }
+        adapter.setClcickSendData {
+            var bottomSheetFragment = ExerciseBottomSheetFragment()
+            bottomSheetFragment.show(supportFragmentManager,bottomSheetFragment.tag)
+        }
     }
 
     private fun initUi() {
