@@ -52,7 +52,7 @@
                     app:tabIndicator="@drawable/tab_indicator"
                     app:tabIndicatorColor="#FFD101"
                     app:tabIndicatorGravity="bottom"
-                    app:tabMode="scrollable"
+                    app:tabMode="auto"
                     app:tabSelectedTextColor="#FFD101"
                     app:tabTextAppearance="@style/tab_text"
                     app:tabTextColor="#FFFFFF" />
@@ -64,6 +64,63 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_16dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Jumping jacks"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewPager2" />
+
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="390 Calories Burn"
+                    android:textColor="@color/gray1"
+                    android:textSize="12dp"
+                    app:layout_constraintStart_toStartOf="@+id/textView23"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                <TextView
+                    android:id="@+id/textView43"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_16dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Descriptions"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+                <TextView
+                    android:id="@+id/tvDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_16dp"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/gray1"
+                    android:textSize="@dimen/size_14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView43" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_16dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Focus Area"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDesc" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

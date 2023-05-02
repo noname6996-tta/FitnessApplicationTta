@@ -14,8 +14,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:src="@drawable/alarm_clock"
             android:layout_width="match_parent"
+            android:src="@drawable/baseline_menu_24"
             android:layout_height="match_parent" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
