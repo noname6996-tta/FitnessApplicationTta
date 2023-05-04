@@ -1,11 +1,13 @@
 package com.tta.fitnessapplication.view.activity.DayFullBody
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tta.fitnessapplication.data.model.Exercise
 import com.tta.fitnessapplication.data.utils.Logger
 import com.tta.fitnessapplication.databinding.ActivityDayFullBodyBinding
+import com.tta.fitnessapplication.view.activity.doexercise.DoExerciseActivity
 
 class DayFullBodyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDayFullBodyBinding
@@ -31,6 +33,9 @@ class DayFullBodyActivity : AppCompatActivity() {
         adapter.setClcickSendData {
             var bottomSheetFragment = ExerciseBottomSheetFragment()
             bottomSheetFragment.show(supportFragmentManager,bottomSheetFragment.tag)
+        }
+        binding.view24.setOnClickListener {
+            startActivity(Intent(this,DoExerciseActivity::class.java))
         }
     }
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@layout/fragment_prepare">
+
+    <fragment
+        android:id="@+id/doingExerciseFragment"
+        android:name="com.tta.fitnessapplication.view.activity.doexercise.fragment.DoingExerciseFragment"
+        android:label="DoingExerciseFragment"
+        tools:layout="@layout/fragment_doingexercise">
+        <action
+            android:id="@+id/action_doingExerciseFragment_to_restFragment"
+            app:destination="@id/restFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/prepareFragment"
+        android:name="com.tta.fitnessapplication.view.activity.doexercise.fragment.PrepareFragment"
+        android:label="PrepareFragment"
+        tools:layout="@layout/fragment_prepare">
+        <action
+            android:id="@+id/action_prepareFragment_to_doingExerciseFragment"
+            app:destination="@id/doingExerciseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/restFragment"
+        android:name="com.tta.fitnessapplication.view.activity.doexercise.fragment.RestFragment"
+        android:label="RestFragment"
+        tools:layout="@layout/fragment_restexercise">
+        <action
+            android:id="@+id/action_restFragment_to_doingExerciseFragment"
+            app:destination="@id/doingExerciseFragment" />
+    </fragment>
+
+</navigation>
