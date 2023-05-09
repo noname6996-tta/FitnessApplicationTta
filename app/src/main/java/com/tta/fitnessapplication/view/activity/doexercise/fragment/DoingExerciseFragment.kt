@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import com.tta.fitnessapplication.data.utils.Logger
 import com.tta.fitnessapplication.databinding.FragmentDoingexerciseBinding
 import com.tta.fitnessapplication.view.activity.DayFullBody.DayFullBodyViewModel
+import com.tta.fitnessapplication.view.activity.doexercise.DoExerciseActivity.Companion.listExercise
+import com.tta.fitnessapplication.view.activity.doexercise.DoExerciseActivity.Companion.numberExercise
 
 class DoingExerciseFragment : Fragment() {
     private val viewModel = DayFullBodyViewModel()
@@ -26,8 +28,11 @@ class DoingExerciseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.e("tta",numberExercise.toString()+listExercise[numberExercise])
         binding.btnNext.setOnClickListener {
-            Logger.logTest("${viewModel.dataExercise.value}")
+            numberExercise++
+            // check khi number == list.size thì hoàn thành bài tập
+            Log.e("tta",numberExercise.toString()+listExercise[numberExercise])
             val action = DoingExerciseFragmentDirections.actionDoingExerciseFragmentToRestFragment()
             findNavController().navigate(action)
         }

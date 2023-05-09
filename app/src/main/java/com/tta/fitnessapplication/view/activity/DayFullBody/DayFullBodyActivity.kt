@@ -35,7 +35,9 @@ class DayFullBodyActivity : AppCompatActivity() {
             bottomSheetFragment.show(supportFragmentManager,bottomSheetFragment.tag)
         }
         binding.view24.setOnClickListener {
-            startActivity(Intent(this,DoExerciseActivity::class.java))
+            var intent = Intent(this,DoExerciseActivity::class.java)
+            intent.putExtra("listExercise", listExercise)
+            startActivity(intent)
         }
     }
 
