@@ -10,12 +10,13 @@ import com.tta.fitnessapplication.data.model.Exercise
 import com.tta.fitnessapplication.databinding.ActivityDoExerciseBinding
 
 class DoExerciseActivity : AppCompatActivity() {
-    companion object{
+    companion object {
         var listExercise = ArrayList<Exercise>()
         var numberExercise = 0
     }
+
     private lateinit var navController: NavController
-    private lateinit var binding : ActivityDoExerciseBinding
+    private lateinit var binding: ActivityDoExerciseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,5 +36,10 @@ class DoExerciseActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    override fun onBackPressed() {
+        onBackPressedDispatcher.onBackPressed()
+        finish()
     }
 }

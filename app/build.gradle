@@ -93,7 +93,8 @@ dependencies {
     //lottie
     def lottieVersion = "6.0.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
-
+    // circle progess bar
+    implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
 }
 
 kapt {
