@@ -25,7 +25,7 @@ class RestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val timer = object: CountDownTimer(20000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                binding.tvDemo.text = millisUntilFinished.toString()
+                binding.tvCountDown.text = millisUntilFinished.toString()
             }
 
             override fun onFinish() {
