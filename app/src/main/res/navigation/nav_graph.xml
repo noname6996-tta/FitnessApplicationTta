@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_discover" />
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.tta.fitnessapplication.view.fragment.HistoryFragment"
+        android:name="com.tta.fitnessapplication.view.fragment.articlesfragment.HistoryFragment"
         android:label="HistoryFragment"
         tools:layout="@layout/fragment_history" />
     <fragment

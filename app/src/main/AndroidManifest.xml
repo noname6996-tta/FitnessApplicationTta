@@ -20,6 +20,12 @@
             android:name=".view.activity.doexercise.DoExerciseActivity"
             android:exported="false" />
         <activity
+            android:name=".view.activity.DoneSingUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.WebViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activity.calortracker.CalorTrackerActivity"
             android:exported="false">
             <meta-data

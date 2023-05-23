@@ -18,6 +18,7 @@ class LoginViewModel : ViewModel() {
                 call: Call<UserLoginResponse>,
                 response: Response<UserLoginResponse>
             ) {
+                Log.e("ttaaaaa",call.request().toString())
                 if (response.body()?.success == 1) {
                     checkLogin.value = true
                 } else {
