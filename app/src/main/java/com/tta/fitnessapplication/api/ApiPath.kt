@@ -21,5 +21,8 @@ object ApiPath {
     const val DEMO = "XDjAzlDHSSsEEyxi/aggregatesDatasets"
     const val EXERCISE = "/exercise/exerciser/getAllData.php"
     const val SELECT_EXERCISE = "/exercise/exerciser/selectExercise.php"
+    const val VIDEO = "/video/getAllData.php"
+    const val ARTICLE = "/article/getAllData.php"
+    const val TOOL = "/tool/getAllData.php"
     //https://v1.nocodeapi.com/trantheanh/fit/XDjAzlDHSSsEEyxi/aggregatesDatasets?dataTypeName=steps_count
 }
