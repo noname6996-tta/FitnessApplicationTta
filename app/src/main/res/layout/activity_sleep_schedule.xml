@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.SleepTracker.SleepScheduleActivity">
+
+    <View
+        android:id="@+id/view13"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:background="@drawable/bg_view_gray_8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+        app:layout_constraintBottom_toBottomOf="@+id/view13"
+        app:layout_constraintEnd_toEndOf="@+id/view13"
+        app:layout_constraintStart_toStartOf="@+id/view13"
+        app:layout_constraintTop_toTopOf="@+id/view13" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Sleep Tracker"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view13" />
+
+    <View
+        android:id="@+id/view20"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:background="@drawable/bg_view_radius_light_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:src="@drawable/ic_sleep"
+        app:layout_constraintBottom_toBottomOf="@+id/view20"
+        app:layout_constraintEnd_toEndOf="@+id/view20"
+        app:layout_constraintTop_toTopOf="@+id/view20" />
+
+    <TextView
+        android:id="@+id/textView57"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_16dp"
+        android:fontFamily="@font/poppins"
+        android:text="Ideal Hours for Sleep"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_16dp"
+        app:layout_constraintStart_toStartOf="@+id/view20"
+        app:layout_constraintTop_toTopOf="@+id/view20" />
+
+    <TextView
+        android:id="@+id/textView58"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:fontFamily="@font/poppins"
+        android:text="8hours 30minutes"
+        android:textColor="@color/text"
+        android:textSize="@dimen/size_14dp"
+        app:layout_constraintStart_toStartOf="@+id/textView57"
+        app:layout_constraintTop_toBottomOf="@+id/textView57" />
+
+    <View
+        android:id="@+id/view22"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:background="@drawable/bg_view_radius_blue"
+        app:layout_constraintBottom_toBottomOf="@+id/view20"
+        app:layout_constraintStart_toStartOf="@+id/textView58"
+        app:layout_constraintTop_toBottomOf="@+id/textView58" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Find More"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view22"
+        app:layout_constraintEnd_toEndOf="@+id/view22"
+        app:layout_constraintStart_toStartOf="@+id/view22"
+        app:layout_constraintTop_toTopOf="@+id/view22" />
+
+    <TextView
+        android:id="@+id/textView59"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_16dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Your Schedule"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view20" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recCandelar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView59" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recSchedule"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recCandelar" />
+</androidx.constraintlayout.widget.ConstraintLayout>
