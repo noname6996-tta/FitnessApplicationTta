@@ -27,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loginPreferences = getSharedPreferences(Constant.LOGIN_PREFS, MODE_PRIVATE)
-        loginPrefsEditor = loginPreferences.edit();
+        loginPrefsEditor = loginPreferences.edit()
         saveLogin = loginPreferences.getBoolean(Constant.SAVE_USER, false);
         if (saveLogin) {
             startActivity(Intent(this, MainActivity::class.java))
