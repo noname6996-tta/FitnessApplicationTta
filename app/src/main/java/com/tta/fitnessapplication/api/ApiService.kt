@@ -2,10 +2,14 @@ package com.tta.fitnessapplication.api
 
 import com.tta.fitnessapplication.data.model.Exercise
 import com.tta.fitnessapplication.data.model.Fullbody
+import com.tta.fitnessapplication.data.model.ResoinseArticle
 import com.tta.fitnessapplication.data.model.ResponseExercise
 import com.tta.fitnessapplication.data.model.ResponseFullBody
 import com.tta.fitnessapplication.data.model.ResponseProfile
+import com.tta.fitnessapplication.data.model.ResponseTool
+import com.tta.fitnessapplication.data.model.ResponseVideo
 import com.tta.fitnessapplication.data.model.UserLoginResponse
+import com.tta.fitnessapplication.data.model.Video
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -50,6 +54,15 @@ interface ApiService {
     fun getExercise(
         @Query("id") id: String,
     ): Call<Exercise>
+
+    @GET(ApiPath.VIDEO)
+    fun getVideo(): Call<ResponseVideo>
+
+    @GET(ApiPath.ARTICLE)
+    fun getArticle(): Call<ResoinseArticle>
+
+    @GET(ApiPath.TOOL)
+    fun getTool(): Call<ResponseTool>
 }
 
 //    @POST(ApiPath.LOGIN)

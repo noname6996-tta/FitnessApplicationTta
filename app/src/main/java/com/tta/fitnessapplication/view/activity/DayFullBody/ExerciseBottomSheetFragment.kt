@@ -13,18 +13,23 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.internal.FlowLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.model.Exercise
 import com.tta.fitnessapplication.databinding.DialogBottomSheetInfoExerciseBinding
+import com.tta.fitnessapplication.view.fragment.dayfullbodyfragement.ImageFragment.Companion.image
+import com.tta.fitnessapplication.view.fragment.dayfullbodyfragement.VideoFragment.Companion.urlExercise
 
-class ExerciseBottomSheetFragment : BottomSheetDialogFragment() {
+class ExerciseBottomSheetFragment(exercise: Exercise) : BottomSheetDialogFragment() {
     private lateinit var binding: DialogBottomSheetInfoExerciseBinding
     private lateinit var dialog: BottomSheetDialog
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager2: ViewPager2
     private lateinit var adapterPager: FragmentPageAdapter
+    private var exercise = exercise
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
         return dialog
@@ -52,6 +57,17 @@ class ExerciseBottomSheetFragment : BottomSheetDialogFragment() {
 
         binding.view13.setOnClickListener {
             dialog.dismiss()
+        }
+
+        binding.textView23.text = exercise.name
+        binding.tvDesc.text = exercise.title
+        binding.tvFocusArea.text = exercise.area
+        image = exercise.image
+        urlExercise = exercise.name
+        if (exercise.type=="0"){
+            binding.tvTimeTodo.text = exercise.number+"s"
+        } else {
+            binding.tvTimeTodo.text = "x"+exercise.number
         }
     }
 

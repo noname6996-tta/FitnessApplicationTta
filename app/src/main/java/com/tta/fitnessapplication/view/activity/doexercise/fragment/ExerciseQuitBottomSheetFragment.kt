@@ -53,8 +53,8 @@ class ExerciseQuitBottomSheetFragment : BottomSheetDialogFragment() {
         }
 
         binding.tvShowInfo.setOnClickListener {
-            var bottomSheetFragment = ExerciseBottomSheetFragment()
-            bottomSheetFragment.show(requireActivity().supportFragmentManager,bottomSheetFragment.tag)
+//            var bottomSheetFragment = ExerciseBottomSheetFragment()
+//            bottomSheetFragment.show(requireActivity().supportFragmentManager,bottomSheetFragment.tag)
         }
     }
 }

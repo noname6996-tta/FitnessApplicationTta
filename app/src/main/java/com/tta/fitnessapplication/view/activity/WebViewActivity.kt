@@ -32,6 +32,7 @@ class WebViewActivity : AppCompatActivity() {
         btn.setOnClickListener {
             onBackPressed()
         }
+
     }
 
     override fun onBackPressed() {

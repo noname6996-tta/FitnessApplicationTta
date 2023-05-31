@@ -1,17 +1,17 @@
 package com.tta.fitnessapplication.view.fragment
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ClipDrawable
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.animation.Easing
@@ -20,29 +20,22 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.fitness.Fitness
-import com.google.android.gms.fitness.data.DataPoint
-import com.google.android.gms.fitness.data.DataSet
-import com.google.android.gms.fitness.data.DataType
-import com.google.android.gms.fitness.request.DataReadRequest
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.repository.RepositoryApi
+import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.databinding.FragmentHomeBinding
 import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModel
 import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModelFactory
-import com.tta.fitnessapplication.view.activity.SleepTrackerActivity
+import com.tta.fitnessapplication.view.activity.SleepTracker.SleepTrackerActivity
 import com.tta.fitnessapplication.view.activity.login.LoginActivity
 import com.tta.fitnessapplication.view.activity.watertracker.WaterTrackerActivity
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.util.concurrent.TimeUnit
 
 class HomeFragment : Fragment() {
     private lateinit var mImageDrawable: ClipDrawable
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var loginPreferences: SharedPreferences
+    private lateinit var loginPrefsEditor: SharedPreferences.Editor
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,7 +46,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //addObsever()
+        addObsever()
         addDataProfile()
         initView()
         initProcess()
@@ -64,12 +57,19 @@ class HomeFragment : Fragment() {
         val repositoryApi = RepositoryApi()
         val viewModelFactory = MainViewModelFactory(repositoryApi)
         mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-        if (LoginActivity.emailUser !=""){
-            mainViewModel.getUserData(LoginActivity.emailUser)
+        loginPreferences = requireActivity().getSharedPreferences(
+            Constant.LOGIN_PREFS,
+            AppCompatActivity.MODE_PRIVATE
+        )
+        loginPrefsEditor = loginPreferences.edit();
+        var token = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
+        if (token !=""){
+            mainViewModel.getUserData(token)
         }
         mainViewModel.dataExercise.observe(requireActivity()) {
             if (it.isSuccessful) {
                 var dataProfile = mainViewModel.dataExercise.value?.body()?.data
+                Log.e("dataProfile",dataProfile.toString())
                 binding.textView2.text = "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
             } else {
                 Log.e("tta", it.errorBody().toString())
@@ -87,7 +87,7 @@ class HomeFragment : Fragment() {
 
         }
         viewModel.listCaloriesExpended.observe(viewLifecycleOwner) {
-            binding.tvCalor.text = it.last().value + "kCalr"
+            binding.tvCalor.text = it.last().value + "Calr"
         }
         viewModel.listHeartMinutes.observe(viewLifecycleOwner) {
             binding.tvHeartRate.text = it.last().value + " BPM"
@@ -95,6 +95,9 @@ class HomeFragment : Fragment() {
         viewModel.listSleepTracker.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 binding.textView27.text = it.last().value + " h"
+            }
+            else {
+                binding.textView27.text = "No data"
             }
         }
         viewModel.message.observe(viewLifecycleOwner) {

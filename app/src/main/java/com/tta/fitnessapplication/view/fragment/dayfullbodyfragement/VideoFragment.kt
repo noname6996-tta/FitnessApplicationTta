@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import com.tta.fitnessapplication.databinding.FragemntVideoBinding
 
 class VideoFragment : Fragment(){
+    companion object {
+        var urlExercise = ""
+    }
     private lateinit var binding : FragemntVideoBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -16,5 +19,10 @@ class VideoFragment : Fragment(){
     ): View? {
         binding = FragemntVideoBinding.inflate(layoutInflater)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 }

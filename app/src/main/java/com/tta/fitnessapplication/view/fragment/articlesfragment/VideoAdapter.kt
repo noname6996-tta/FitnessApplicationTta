@@ -41,7 +41,7 @@ class VideoAdapter : RecyclerView.Adapter<VideoAdapter.VideoAdapterViewHolder>()
             }
         }
 
-        holder.binding.tvVideoDesc.text = image.desc
+        holder.binding.tvVideoDesc.text = image.tittle
         holder.binding.tvVideoName.text = image.name
     }
 
