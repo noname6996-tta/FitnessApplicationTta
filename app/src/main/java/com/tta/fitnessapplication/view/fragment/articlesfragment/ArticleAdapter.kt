@@ -1,15 +1,12 @@
 package com.tta.fitnessapplication.view.fragment.articlesfragment
 
 import android.content.Context
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tta.fitnessapplication.data.model.Article
-import com.tta.fitnessapplication.data.model.Video
 import com.tta.fitnessapplication.databinding.LayoutItemArticleBinding
-import com.tta.fitnessapplication.databinding.LayoutItemVideoBinding
 
 class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleAdapterViewHolder>() {
     private var imageList: List<Article> = listOf()
