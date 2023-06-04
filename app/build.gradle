@@ -95,6 +95,8 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottieVersion"
     // circle progess bar
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
+    // The view calendar library
+    implementation 'com.kizitonwose.calendar:view:2.3.0'
 }
 
 kapt {
