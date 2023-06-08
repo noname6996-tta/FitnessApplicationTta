@@ -24,4 +24,12 @@
     <string name="after_signup_title">It will help us to know more about you!</string>
     <string name="after_signup_choose_gender">Choose Gender</string>
     <string name="after_signup_Date_of_Birth">Date of Birth</string>
+    //
+    <string name="example_3_input_dialog_title">Enter event title</string>
+    <string name="example_3_empty_input_text">Text is empty</string>
+    <string name="example_3_dialog_delete_confirmation">Delete this event?</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="close">Close</string>
+    <string name="example_3_title">Example 3</string>
 </resources>

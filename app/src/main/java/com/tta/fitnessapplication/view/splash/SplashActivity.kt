@@ -16,6 +16,7 @@ import com.tta.fitnessapplication.view.onboarding.OnBoardActivity
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.databinding.ActivitySplashBinding
+import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryActivity
 import com.tta.fitnessapplication.view.activity.MainActivity.MainActivity
 
 class SplashActivity : AppCompatActivity() {
@@ -30,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
         loginPrefsEditor = loginPreferences.edit()
         saveLogin = loginPreferences.getBoolean(Constant.SAVE_USER, false)
         if (saveLogin) {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, HistoryActivity::class.java))
             this.finish()
         } else {
 

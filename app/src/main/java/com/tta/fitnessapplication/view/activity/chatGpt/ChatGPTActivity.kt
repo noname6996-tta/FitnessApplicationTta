@@ -1,6 +1,7 @@
 package com.tta.fitnessapplication.view.activity.chatGpt
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
@@ -72,17 +73,14 @@ class ChatGPTActivity : AppCompatActivity() {
         messageList.add(Message("Typing... ", Message.SENT_BY_BOT))
         val jsonBody = JSONObject()
         try {
-            jsonBody.put("model", "text-davinci-003")
-            jsonBody.put("prompt", question)
-            jsonBody.put("max_tokens", 4000)
-            jsonBody.put("temperature", 0)
+            jsonBody.put("prompt", "{$question}")
         } catch (e: JSONException) {
             e.printStackTrace()
         }
         val body: RequestBody = jsonBody.toString().toRequestBody(JSON)
         val request: Request = Request.Builder()
-            .url("https://api.openai.com/v1/completions")
-            .header("Authorization", "Bearer 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")
+            .url("https://v1.nocodeapi.com/jemuel/chatgpt/CiQXrcUHRgOmfliA/search")
+//            .url("https://v1.nocodeapi.com/trantheanh/chatgpt/bYDrWkWrcGvCncfD/search")
             .post(body)
             .build()
         client.newCall(request).enqueue(object : Callback {
@@ -92,8 +90,10 @@ class ChatGPTActivity : AppCompatActivity() {
 
             @Throws(IOException::class)
             override fun onResponse(call: Call, response: Response) {
+                Log.e("tta",response.body.toString())
                 if (response.isSuccessful) {
                     var jsonObject: JSONObject? = null
+
                     try {
                         jsonObject = JSONObject(response.body!!.string())
                         val jsonArray = jsonObject.getJSONArray("choices")

@@ -12,4 +12,10 @@
     <color name="pink">#EEA4CE</color>
     <color name="text">#92A3FD</color>
     <color name="light_blue">#EAF0FE</color>
+    <color name="example_3_black">#D9000000</color>
+    <color name="example_3_white">#D9FFFFFF</color>
+    <color name="example_3_blue">#1973E8</color>
+    <color name="example_3_blue_light">#D2E3FC</color>
+    <color name="example_3_toolbar_color">#607D8B</color>
+    <color name="example_3_statusbar_color">#455A64</color>
 </resources>
