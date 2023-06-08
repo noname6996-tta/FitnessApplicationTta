@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
         loginPrefsEditor = loginPreferences.edit()
         saveLogin = loginPreferences.getBoolean(Constant.SAVE_USER, false)
         if (saveLogin) {
-            startActivity(Intent(this, HistoryActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             this.finish()
         } else {
 

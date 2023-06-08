@@ -55,6 +55,13 @@ class PrepareFragment : Fragment() {
             timer.cancel()
         }
 
+        binding.imgBack.setOnClickListener {
+            timer.cancel()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+            requireActivity().finish()
+
+        }
+
         if (exercise!=null){
             binding.tvNameExercise.text = exercise.name
             Glide.with(requireActivity())
@@ -80,8 +87,10 @@ class PrepareFragment : Fragment() {
                     }
 
                     override fun onFinish() {
-                        val action  = PrepareFragmentDirections.actionPrepareFragmentToDoingExerciseFragment()
-                        findNavController().navigate(action)
+                        view?.post {
+                            val action  = PrepareFragmentDirections.actionPrepareFragmentToDoingExerciseFragment()
+                            findNavController().navigate(action)
+                        }
                     }
                 }
                 timer2.start()

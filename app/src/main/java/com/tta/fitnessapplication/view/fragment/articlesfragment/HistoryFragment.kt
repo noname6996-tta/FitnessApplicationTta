@@ -22,6 +22,8 @@ class HistoryFragment : Fragment() {
     private val adapterVideo = VideoAdapter()
     private val adapterArticle = ArticleAdapter()
     private val viewModel = ArticleViewModel()
+    private var arrayArticle = ArrayList<Article>()
+    private var arrayVideo = ArrayList<Video>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,129 +40,6 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObsever()
-        var arrayVideo = ArrayList<Video>()
-        arrayVideo.add(
-            Video(
-                0,
-                "demo1",
-                "https://www.youtube.com/watch?v=tu4HfcmMn1E&list=RD479nj6B6wAY&index=6",
-                "https://yt3.ggpht.com/lK_4iP2d9hyh3XwAOh49H1iGJZXPhIkTNObrP0CcJI22wtDy_cthZqYW94FEnCQfzSRSf0y22Q=s48-c-k-c0x00ffffff-no-nd-rj",
-                "cool"
-            )
-        )
-        arrayVideo.add(
-            Video(
-                0,
-                "demo1",
-                "https://www.youtube.com/watch?v=tu4HfcmMn1E&list=RD479nj6B6wAY&index=6",
-                "https://yt3.ggpht.com/lK_4iP2d9hyh3XwAOh49H1iGJZXPhIkTNObrP0CcJI22wtDy_cthZqYW94FEnCQfzSRSf0y22Q=s48-c-k-c0x00ffffff-no-nd-rj",
-                "cool"
-            )
-        )
-        arrayVideo.add(
-            Video(
-                0,
-                "demo1",
-                "https://www.youtube.com/watch?v=tu4HfcmMn1E&list=RD479nj6B6wAY&index=6",
-                "https://yt3.ggpht.com/lK_4iP2d9hyh3XwAOh49H1iGJZXPhIkTNObrP0CcJI22wtDy_cthZqYW94FEnCQfzSRSf0y22Q=s48-c-k-c0x00ffffff-no-nd-rj",
-                "cool"
-            )
-        )
-        arrayVideo.add(
-            Video(
-                0,
-                "demo1",
-                "https://www.youtube.com/watch?v=tu4HfcmMn1E&list=RD479nj6B6wAY&index=6",
-                "https://yt3.ggpht.com/lK_4iP2d9hyh3XwAOh49H1iGJZXPhIkTNObrP0CcJI22wtDy_cthZqYW94FEnCQfzSRSf0y22Q=s48-c-k-c0x00ffffff-no-nd-rj",
-                "cool"
-            )
-        )
-        arrayVideo.add(
-            Video(
-                0,
-                "demo1",
-                "https://www.youtube.com/watch?v=tu4HfcmMn1E&list=RD479nj6B6wAY&index=6",
-                "https://yt3.ggpht.com/lK_4iP2d9hyh3XwAOh49H1iGJZXPhIkTNObrP0CcJI22wtDy_cthZqYW94FEnCQfzSRSf0y22Q=s48-c-k-c0x00ffffff-no-nd-rj",
-                "cool"
-            )
-        )
-        arrayVideo.add(
-            Video(
-                0,
-                "demo1",
-                "https://www.youtube.com/watch?v=tu4HfcmMn1E&list=RD479nj6B6wAY&index=6",
-                "https://yt3.ggpht.com/lK_4iP2d9hyh3XwAOh49H1iGJZXPhIkTNObrP0CcJI22wtDy_cthZqYW94FEnCQfzSRSf0y22Q=s48-c-k-c0x00ffffff-no-nd-rj",
-                "cool"
-            )
-        )
-        adapterVideo.setImageList(arrayVideo, requireContext())
-
-        var arrayArticle = ArrayList<Article>()
-        arrayArticle.add(
-            Article(
-                0,
-                "tta reader",
-                "5 mins read",
-                "https://icdn.dantri.com.vn/zoom/300_200/2023/05/22/b9f30157647aba24e36b-crop-1684724294175.jpeg",
-                "https://dantri.com.vn/xa-hoi/can-giai-phap-manh-me-co-cau-lai-doanh-nghiep-thua-lo-kem-hieu-qua-20230523094746495.htm"
-            )
-        )
-        arrayArticle.add(
-            Article(
-                0,
-                "tta reader",
-                "5 mins read",
-                "https://icdn.dantri.com.vn/zoom/300_200/2023/05/22/b9f30157647aba24e36b-crop-1684724294175.jpeg",
-                "https://dantri.com.vn/xa-hoi/can-giai-phap-manh-me-co-cau-lai-doanh-nghiep-thua-lo-kem-hieu-qua-20230523094746495.htm"
-            )
-        )
-        arrayArticle.add(
-            Article(
-                0,
-                "tta reader",
-                "5 mins read",
-                "https://icdn.dantri.com.vn/zoom/300_200/2023/05/22/b9f30157647aba24e36b-crop-1684724294175.jpeg",
-                "https://dantri.com.vn/xa-hoi/can-giai-phap-manh-me-co-cau-lai-doanh-nghiep-thua-lo-kem-hieu-qua-20230523094746495.htm"
-            )
-        )
-        arrayArticle.add(
-            Article(
-                0,
-                "tta reader",
-                "5 mins read",
-                "https://icdn.dantri.com.vn/zoom/300_200/2023/05/22/b9f30157647aba24e36b-crop-1684724294175.jpeg",
-                "https://dantri.com.vn/xa-hoi/can-giai-phap-manh-me-co-cau-lai-doanh-nghiep-thua-lo-kem-hieu-qua-20230523094746495.htm"
-            )
-        )
-        arrayArticle.add(
-            Article(
-                0,
-                "tta reader",
-                "5 mins read",
-                "https://icdn.dantri.com.vn/zoom/300_200/2023/05/22/b9f30157647aba24e36b-crop-1684724294175.jpeg",
-                "https://dantri.com.vn/xa-hoi/can-giai-phap-manh-me-co-cau-lai-doanh-nghiep-thua-lo-kem-hieu-qua-20230523094746495.htm"
-            )
-        )
-        arrayArticle.add(
-            Article(
-                0,
-                "tta reader",
-                "5 mins read",
-                "https://icdn.dantri.com.vn/zoom/300_200/2023/05/22/b9f30157647aba24e36b-crop-1684724294175.jpeg",
-                "https://dantri.com.vn/xa-hoi/can-giai-phap-manh-me-co-cau-lai-doanh-nghiep-thua-lo-kem-hieu-qua-20230523094746495.htm"
-            )
-        )
-        arrayArticle.add(
-            Article(
-                0,
-                "tta reader",
-                "5 mins read",
-                "https://icdn.dantri.com.vn/zoom/300_200/2023/05/22/b9f30157647aba24e36b-crop-1684724294175.jpeg",
-                "https://dantri.com.vn/xa-hoi/can-giai-phap-manh-me-co-cau-lai-doanh-nghiep-thua-lo-kem-hieu-qua-20230523094746495.htm"
-            )
-        )
-        adapterArticle.setImageList(arrayArticle, requireContext())
-
         adapterArticle.setClickDeleteImage {
             var intent = Intent(requireContext(), WebViewActivity::class.java)
             intent.putExtra("url", arrayArticle[it].url)
@@ -182,10 +61,12 @@ class HistoryFragment : Fragment() {
         viewModel.getListVideo()
         viewModel.getListArticle()
         viewModel.listVideo.observe(viewLifecycleOwner) {
-
+            arrayVideo.addAll(it)
+            adapterVideo.setImageList(arrayVideo, requireContext())
         }
         viewModel.listArticle.observe(viewLifecycleOwner) {
-
+            arrayArticle.addAll(it)
+            adapterArticle.setImageList(arrayArticle, requireContext())
         }
         viewModel.message.observe(viewLifecycleOwner) {
             AlertDialog.Builder(requireContext())

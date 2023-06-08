@@ -21,5 +21,9 @@ class FullBodyWorkoutActivity : AppCompatActivity() {
             intent.putExtra("day",1)
             startActivity(intent)
         }
+        binding.view16.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+            this.finish()
+        }
     }
 }

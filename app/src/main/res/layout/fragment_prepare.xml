@@ -87,4 +87,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/circularProgressBar"
         app:layout_constraintTop_toTopOf="@+id/circularProgressBar" />
+
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/size_8dp"
+        android:background="@drawable/bg_blue_linear_16"
+        android:padding="10dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
