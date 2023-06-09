@@ -6,153 +6,378 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.watertracker.WaterTrackerActivity">
 
-    <View
-        android:id="@+id/view13"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginLeft="@dimen/size_16dp"
-        android:layout_marginTop="@dimen/size_16dp"
-        android:background="@drawable/bg_view_gray_8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
-        app:layout_constraintBottom_toBottomOf="@+id/view13"
-        app:layout_constraintEnd_toEndOf="@+id/view13"
-        app:layout_constraintStart_toStartOf="@+id/view13"
-        app:layout_constraintTop_toTopOf="@+id/view13" />
-
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Water Tracker"
-        android:textColor="@color/black"
-        android:textSize="@dimen/size_16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view13"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view13" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:foregroundGravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/waves" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="400dp"
-        android:background="#DAF0FF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView41"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Your have drink"
-        android:textColor="@color/text"
-        android:textSize="@dimen/size_16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/waterAnimation" />
+            <View
+                android:id="@+id/view13"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:background="@drawable/bg_view_gray_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/waterAnimation"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="@dimen/size_20dp"
-        android:foregroundGravity="bottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/water_circle" />
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+                app:layout_constraintBottom_toBottomOf="@+id/view13"
+                app:layout_constraintEnd_toEndOf="@+id/view13"
+                app:layout_constraintStart_toStartOf="@+id/view13"
+                app:layout_constraintTop_toTopOf="@+id/view13" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="100L"
-        android:textColor="@color/black"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView41"
-        app:layout_constraintEnd_toEndOf="@+id/waterAnimation"
-        app:layout_constraintStart_toStartOf="@+id/waterAnimation"
-        app:layout_constraintTop_toTopOf="@+id/waterAnimation" />
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Water Tracker"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view13"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view13" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/appCompatButton2"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="@dimen/size_16dp"
-        android:background="@drawable/bg_button_radius"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="+ 200ml"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView41" />
+            <TextView
+                android:id="@+id/textView61"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Today"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_24dp"
+                app:layout_constraintStart_toStartOf="@+id/view13"
+                app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
-    <View
-        android:id="@+id/view21"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="@dimen/size_16dp"
-        android:layout_marginTop="@dimen/size_24dp"
-        android:layout_marginRight="@dimen/size_16dp"
-        android:background="@drawable/bg_blue_linear_16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatButton2" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationView2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:foregroundGravity="bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/waves" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/size_16dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Daily Drink Schedule"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/view21"
-        app:layout_constraintStart_toStartOf="@+id/view21"
-        app:layout_constraintTop_toTopOf="@+id/view21" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/waterAnimation"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:foregroundGravity="bottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView61"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/water_circle" />
 
-    <View
-        android:id="@+id/view22"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:layout_marginRight="@dimen/size_16dp"
-        android:background="@drawable/bg_view_radius_blue"
-        app:layout_constraintBottom_toBottomOf="@+id/view21"
-        app:layout_constraintEnd_toEndOf="@+id/view21"
-        app:layout_constraintTop_toTopOf="@+id/view21" />
+            <TextView
+                android:id="@+id/textView60"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="100L"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="@+id/waterAnimation"
+                app:layout_constraintEnd_toEndOf="@+id/waterAnimation"
+                app:layout_constraintStart_toStartOf="@+id/waterAnimation"
+                app:layout_constraintTop_toTopOf="@+id/waterAnimation" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:text="Check"
-        android:textColor="@color/white"
-        android:textSize="@dimen/size_12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view22"
-        app:layout_constraintEnd_toEndOf="@+id/view22"
-        app:layout_constraintStart_toStartOf="@+id/view22"
-        app:layout_constraintTop_toTopOf="@+id/view22" />
+            <View
+                android:id="@+id/view21"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_24dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:background="@drawable/bg_edt_login"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/waterAnimation" />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/view21"
+                app:layout_constraintEnd_toEndOf="@+id/view21"
+                app:layout_constraintStart_toStartOf="@+id/view21"
+                app:layout_constraintTop_toTopOf="@+id/view21" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Progess"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/view21"
+                app:layout_constraintStart_toStartOf="@+id/view21"
+                app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="45%"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/seekBar"
+                app:layout_constraintStart_toStartOf="@+id/view21"
+                app:layout_constraintTop_toTopOf="@+id/view21" />
+
+            <TextView
+                android:id="@+id/textView62"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Daily Goal"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/view21"
+                app:layout_constraintEnd_toEndOf="@+id/view21"
+                app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="2000ml"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/seekBar"
+                app:layout_constraintEnd_toEndOf="@+id/view21"
+                app:layout_constraintTop_toTopOf="@+id/view21" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardCup"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                app:cardCornerRadius="@dimen/size_16dp"
+                android:layout_margin="@dimen/size_16dp"
+                app:layout_constraintTop_toBottomOf="@+id/view21">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imgCup100ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_cup_100ml"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imgCup125ml"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvCup100ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100ml"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/text"
+                        app:layout_constraintEnd_toEndOf="@+id/imgCup100ml"
+                        app:layout_constraintStart_toStartOf="@+id/imgCup100ml"
+                        app:layout_constraintTop_toBottomOf="@+id/imgCup100ml" />
+
+                    <ImageView
+                        android:id="@+id/imgCup125ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_cup_125ml"
+                        app:layout_constraintStart_toEndOf="@+id/imgCup100ml"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imgCup150ml"/>
+
+                    <TextView
+                        android:id="@+id/tvCup125ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="125ml"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/text"
+                        app:layout_constraintEnd_toEndOf="@+id/imgCup125ml"
+                        app:layout_constraintStart_toStartOf="@+id/imgCup125ml"
+                        app:layout_constraintTop_toBottomOf="@+id/imgCup125ml" />
+
+                    <ImageView
+                        android:id="@+id/imgCup150ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_cup_150ml"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imgCup125ml"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvCup150ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="150ml"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/text"
+                        app:layout_constraintEnd_toEndOf="@+id/imgCup150ml"
+                        app:layout_constraintStart_toStartOf="@+id/imgCup150ml"
+                        app:layout_constraintTop_toBottomOf="@+id/imgCup150ml" />
+
+                    <ImageView
+                        android:id="@+id/imgCup200ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_cup_200ml"
+                        app:layout_constraintEnd_toStartOf="@+id/imgCup125ml"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCup100ml" />
+
+                    <TextView
+                        android:id="@+id/tvCup200ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="200ml"
+                        android:textColor="@color/text"
+                        app:layout_constraintEnd_toEndOf="@+id/imgCup100ml"
+                        app:layout_constraintStart_toStartOf="@+id/imgCup100ml"
+                        app:layout_constraintTop_toBottomOf="@+id/imgCup200ml" />
+
+                    <ImageView
+                        android:id="@+id/imgCup250ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_cup_250ml"
+                        app:layout_constraintEnd_toStartOf="@+id/imgCup150ml"
+                        app:layout_constraintStart_toEndOf="@+id/imgCup100ml"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCup125ml" />
+
+                    <TextView
+                        android:id="@+id/tvCup250ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="250ml"
+                        android:textColor="@color/text"
+                        app:layout_constraintEnd_toEndOf="@+id/imgCup125ml"
+                        app:layout_constraintStart_toStartOf="@+id/imgCup125ml"
+                        app:layout_constraintTop_toBottomOf="@+id/imgCup250ml" />
+
+                    <ImageView
+                        android:id="@+id/imgCup300ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_cup_300ml"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imgCup125ml"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCup150ml" />
+
+                    <TextView
+                        android:id="@+id/tvCup300ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="300ml"
+                        android:textColor="@color/text"
+                        app:layout_constraintEnd_toEndOf="@+id/imgCup150ml"
+                        app:layout_constraintStart_toStartOf="@+id/imgCup150ml"
+                        app:layout_constraintTop_toBottomOf="@+id/imgCup300ml" />
+
+                    <ImageView
+                        android:id="@+id/imgCup350ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_cup_350ml"
+                        app:layout_constraintEnd_toStartOf="@+id/imgCup125ml"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCup200ml" />
+
+                    <TextView
+                        android:id="@+id/tvCup350ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="350ml"
+                        android:textColor="@color/text"
+                        app:layout_constraintEnd_toEndOf="@+id/imgCup100ml"
+                        app:layout_constraintStart_toStartOf="@+id/imgCup100ml"
+                        app:layout_constraintTop_toBottomOf="@+id/imgCup350ml" />
+
+                    <ImageView
+                        android:id="@+id/imgCup400ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_cup_400ml"
+                        app:layout_constraintEnd_toStartOf="@+id/imgCup150ml"
+                        app:layout_constraintStart_toEndOf="@+id/imgCup100ml"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCup250ml" />
+
+                    <TextView
+                        android:id="@+id/tvCup400ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="400ml"
+                        android:textColor="@color/text"
+                        app:layout_constraintEnd_toEndOf="@+id/imgCup125ml"
+                        app:layout_constraintStart_toStartOf="@+id/imgCup125ml"
+                        app:layout_constraintTop_toBottomOf="@+id/imgCup400ml" />
+
+                    <ImageView
+                        android:id="@+id/imgCupCustomize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_cup"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imgCup125ml"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCup300ml" />
+
+                    <TextView
+                        android:id="@+id/tvCupCustomize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="Customize"
+                        android:textColor="@color/text"
+                        app:layout_constraintEnd_toEndOf="@+id/imgCup150ml"
+                        app:layout_constraintStart_toStartOf="@+id/imgCup150ml"
+                        app:layout_constraintTop_toBottomOf="@+id/imgCupCustomize" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/appCompatButton"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="@dimen/size_16dp"
+                android:background="@drawable/bg_button_radius"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="+ Drink"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardCup" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
