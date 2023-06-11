@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.activity.watertracker.waterHistory.WaterHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.watertracker.watercaculate.WaterCaculateActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activity.HistoryActivity.HistoryActivity"
             android:exported="false">
             <meta-data
