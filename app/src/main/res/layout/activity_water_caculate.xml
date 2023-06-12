@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.watertracker.watercaculate.WaterCaculateActivity"
-    android:background="@color/example_3_blue">
+    android:background="@color/example_3_blue"
+    tools:context=".view.activity.watertracker.watercaculate.WaterCaculateActivity">
+
     <ImageView
+        android:id="@+id/imageView38"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="@dimen/size_8dp"
@@ -23,20 +25,252 @@
         android:layout_marginStart="@dimen/size_16dp"
         android:layout_marginEnd="@dimen/size_8dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnSetTarget"
         android:background="@drawable/bg_view_radius_blue"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Calculate"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSetTarget"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSetTarget"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_radius_pink"
-        android:layout_marginEnd="@dimen/size_16dp"
         android:layout_marginStart="@dimen/size_8dp"
+        android:layout_marginEnd="@dimen/size_16dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_radius_pink"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Set as Daily Target"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnCaculate" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardWeather"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginRight="@dimen/size_8dp"
+        android:layout_marginBottom="@dimen/size_16dp"
+        app:cardCornerRadius="@dimen/size_16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCaculate"
+        app:layout_constraintEnd_toStartOf="@+id/cardFitnessLevel"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_water_weather"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Weather"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/spinnerWeather"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView34" />
+
+            <Spinner
+                android:id="@+id/spinnerWeather"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/size_8dp"
+                android:layout_marginRight="@dimen/size_8dp"
+                android:layout_marginBottom="@dimen/size_16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardFitnessLevel"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="@dimen/size_8dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:layout_marginBottom="@dimen/size_16dp"
+        app:cardCornerRadius="@dimen/size_16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCaculate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cardWeather">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_water_activity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Fitness level"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/spinnerFitness"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView35" />
+
+            <Spinner
+                android:id="@+id/spinnerFitness"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/size_8dp"
+                android:layout_marginRight="@dimen/size_8dp"
+                android:layout_marginBottom="@dimen/size_16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardGender"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginRight="@dimen/size_8dp"
+        android:layout_marginBottom="@dimen/size_16dp"
+        app:cardCornerRadius="@dimen/size_16dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardWeather"
+        app:layout_constraintEnd_toStartOf="@+id/cardFitnessLevel"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_water_gender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Gender"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/spinnerGender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView36" />
+
+            <Spinner
+                android:id="@+id/spinnerGender"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/size_8dp"
+                android:layout_marginRight="@dimen/size_8dp"
+                android:layout_marginBottom="@dimen/size_16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardWeight"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:layout_marginBottom="@dimen/size_16dp"
+        app:cardCornerRadius="@dimen/size_16dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardFitnessLevel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/cardFitnessLevel">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_water_weight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Weight"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/edtWeight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView37" />
+
+            <EditText
+                android:id="@+id/edtWeight"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:hint="Weight"
+                android:layout_marginLeft="@dimen/size_8dp"
+                android:layout_marginRight="@dimen/size_8dp"
+                android:layout_marginBottom="@dimen/size_16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView63"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Your daily Goal"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView38" />
+
+    <TextView
+        android:id="@+id/tvYourDailyGoal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="2000ml"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardGender"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView63" />
 </androidx.constraintlayout.widget.ConstraintLayout>
