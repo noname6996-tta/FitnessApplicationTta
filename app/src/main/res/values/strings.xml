@@ -32,4 +32,21 @@
     <string name="save">Save</string>
     <string name="close">Close</string>
     <string name="example_3_title">Example 3</string>
+    //
+    <string-array name="Gender">
+        <item>MALE</item>
+        <item>FEMALE</item>
+    </string-array>
+    <string-array name="ActivityLevel">
+        <item>SEDENTARY</item>
+        <item>MODERATE</item>
+        <item>ACTIVE</item>
+    </string-array>
+    <string-array name="Climate">
+        <item>COLD</item>
+        <item>MILD</item>
+        <item>HOT</item>
+        <item>VERY_HOT</item>
+    </string-array>
+
 </resources>

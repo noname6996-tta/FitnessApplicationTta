@@ -16,6 +16,7 @@ import com.tta.fitnessapplication.data.repository.RepositoryApi
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.databinding.FragmentDiscoverBinding
 import com.tta.fitnessapplication.databinding.FragmentSettingBinding
+import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryActivity
 import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModel
 import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModelFactory
 import com.tta.fitnessapplication.view.activity.login.LoginActivity
@@ -26,7 +27,6 @@ class SettingFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var loginPreferences: SharedPreferences
     private lateinit var loginPrefsEditor: SharedPreferences.Editor
-    private var saveLogin: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -103,6 +103,10 @@ class SettingFragment : Fragment() {
                     })
                 .setNegativeButton("Không", null)
                 .show()
+        }
+
+        binding.viewHistory.setOnClickListener {
+            requireActivity().startActivity(Intent(activity, HistoryActivity::class.java))
         }
     }
 }

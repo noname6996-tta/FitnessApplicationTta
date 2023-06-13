@@ -1,23 +1,22 @@
 package com.tta.fitnessapplication.view.splash
 
+import android.Manifest.permission.ACTIVITY_RECOGNITION
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import android.Manifest.permission.ACTIVITY_RECOGNITION
-import android.content.SharedPreferences
-import android.os.Build
-import androidx.annotation.RequiresApi
-import com.tta.fitnessapplication.view.onboarding.OnBoardActivity
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.databinding.ActivitySplashBinding
-import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryActivity
 import com.tta.fitnessapplication.view.activity.MainActivity.MainActivity
+import com.tta.fitnessapplication.view.onboarding.OnBoardActivity
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding

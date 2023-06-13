@@ -256,7 +256,7 @@
         android:fontFamily="@font/poppins_semibold"
         android:text="Your daily Goal"
         android:textColor="@color/white"
-        android:textSize="@dimen/size_16dp"
+        android:textSize="@dimen/size_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView38" />
@@ -268,7 +268,7 @@
         android:fontFamily="@font/poppins_bold"
         android:text="2000ml"
         android:textColor="@color/white"
-        android:textSize="@dimen/size_24dp"
+        android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/cardGender"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
