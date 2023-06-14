@@ -43,52 +43,7 @@ data class Event(val id: String, val text: String, val date: LocalDate)
 class HistoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryBinding
     private val eventsAdapter = HistoryAdapter {
-        AlertDialog.Builder(this@HistoryActivity)
-            .setMessage(R.string.example_3_dialog_delete_confirmation)
-            .setPositiveButton(R.string.delete) { _, _ ->
-                deleteEvent(it)
-            }
-            .setNegativeButton(R.string.close, null)
-            .show()
-    }
 
-    private val inputDialog by lazy {
-        val editText = AppCompatEditText(this@HistoryActivity)
-        val layout = FrameLayout(this@HistoryActivity).apply {
-            // Setting the padding on the EditText only pads the input area
-            // not the entire EditText so we wrap it in a FrameLayout.
-            val padding = dpToPx(20, this@HistoryActivity)
-            setPadding(padding, padding, padding, padding)
-            addView(
-                editText, FrameLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-            )
-        }
-        AlertDialog.Builder(this@HistoryActivity)
-            .setTitle(getString(R.string.example_3_input_dialog_title))
-            .setView(layout)
-            .setPositiveButton(R.string.save) { _, _ ->
-                saveEvent(editText.text.toString())
-                // Prepare EditText for reuse.
-                editText.setText("")
-            }
-            .setNegativeButton(R.string.close, null)
-            .create()
-            .apply {
-                setOnShowListener {
-                    // Show the keyboard
-                    editText.requestFocus()
-                    context.inputMethodManager
-                        .toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-                }
-                setOnDismissListener {
-                    // Hide the keyboard
-                    context.inputMethodManager
-                        .toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
-                }
-            }
     }
 
     private var selectedDate: LocalDate? = null
@@ -133,7 +88,6 @@ class HistoryActivity : AppCompatActivity() {
             // Show today's events initially.
             binding.exThreeCalendar.post { selectDate(today) }
         }
-        binding.exThreeAddButton.setOnClickListener { inputDialog.show() }
     }
 
     private fun selectDate(date: LocalDate) {
@@ -145,30 +99,6 @@ class HistoryActivity : AppCompatActivity() {
             updateAdapterForDate(date)
         }
     }
-
-    private fun saveEvent(text: String) {
-        if (text.isBlank()) {
-            Toast.makeText(
-                this@HistoryActivity,
-                R.string.example_3_empty_input_text,
-                Toast.LENGTH_LONG
-            )
-                .show()
-        } else {
-            selectedDate?.let {
-                events[it] =
-                    events[it].orEmpty().plus(Event(UUID.randomUUID().toString(), text, it))
-                updateAdapterForDate(it)
-            }
-        }
-    }
-
-    private fun deleteEvent(event: Event) {
-        val date = event.date
-        events[date] = events[date].orEmpty().minus(event)
-        updateAdapterForDate(date)
-    }
-
 
     private fun updateAdapterForDate(date: LocalDate) {
         eventsAdapter.apply {
@@ -182,7 +112,7 @@ class HistoryActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         binding.topAppBar.setBackgroundColor(
-            this@HistoryActivity.getColorCompat(R.color.example_3_toolbar_color),
+            this@HistoryActivity.getColorCompat(R.color.text),
         )
     }
 

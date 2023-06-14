@@ -2,9 +2,11 @@ package com.tta.fitnessapplication.data.model
 
 import com.google.gson.annotations.SerializedName
 
-open class BaseResponse(
+open class BaseResponse<T>(
     @SerializedName("response")
-    var response : Int,
+    val response: Int? = null,
     @SerializedName("message")
-    var message : String
+    val message: String? = null,
+    @SerializedName("data")
+    val data: T? = null
 )

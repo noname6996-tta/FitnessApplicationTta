@@ -7,8 +7,10 @@ data class History(
     var id : Int? = null,
     @SerializedName("id_user")
     var id_user : Int? = null,
-    @SerializedName("datetime")
-    var datetime : String? = null,
+    @SerializedName("date")
+    var date : String? = null,
+    @SerializedName("time")
+    var time : String? = null,
     @SerializedName("activity")
     var activity : String? = null,
     @SerializedName("type")

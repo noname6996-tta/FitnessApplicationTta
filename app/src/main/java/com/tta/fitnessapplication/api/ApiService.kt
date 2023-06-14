@@ -1,7 +1,9 @@
 package com.tta.fitnessapplication.api
 
+import com.tta.fitnessapplication.data.model.BaseResponse
 import com.tta.fitnessapplication.data.model.Exercise
 import com.tta.fitnessapplication.data.model.Fullbody
+import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.ResoinseArticle
 import com.tta.fitnessapplication.data.model.ResponseExercise
 import com.tta.fitnessapplication.data.model.ResponseFullBody
@@ -63,6 +65,12 @@ interface ApiService {
 
     @GET(ApiPath.TOOL)
     fun getTool(): Call<ResponseTool>
+
+    @POST(ApiPath.HISTORY_BY_DATE)
+    fun getHistoryByDate(
+        @Query("id_user") id_user : Int,
+        @Query("date") date : String
+    ) : Call<BaseResponse<MutableList<History>>>
 }
 
 //    @POST(ApiPath.LOGIN)

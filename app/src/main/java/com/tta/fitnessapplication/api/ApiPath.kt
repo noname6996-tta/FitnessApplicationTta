@@ -24,5 +24,6 @@ object ApiPath {
     const val VIDEO = "/video/getAllData.php"
     const val ARTICLE = "/article/getAllData.php"
     const val TOOL = "/tool/getAllData.php"
+    const val HISTORY_BY_DATE = "/history/getAllDataByDate.php"
     //https://v1.nocodeapi.com/trantheanh/fit/XDjAzlDHSSsEEyxi/aggregatesDatasets?dataTypeName=steps_count
 }
