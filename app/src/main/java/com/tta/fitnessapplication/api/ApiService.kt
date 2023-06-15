@@ -68,8 +68,15 @@ interface ApiService {
 
     @POST(ApiPath.HISTORY_BY_DATE)
     fun getHistoryByDate(
-        @Query("id_user") id_user : Int,
+        @Query("id_user") id_user : String,
         @Query("date") date : String
+    ) : Call<BaseResponse<MutableList<History>>>
+
+    @POST(ApiPath.HISTORY_BY_DATE_AND_TYPE)
+    fun getHistoryByDateAndType(
+        @Query("id_user") id_user : String,
+        @Query("date") date : String,
+        @Query("type") type : String
     ) : Call<BaseResponse<MutableList<History>>>
 }
 

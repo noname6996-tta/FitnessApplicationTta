@@ -12,15 +12,17 @@ import retrofit2.Response
 class LoginViewModel : ViewModel() {
     val checkLogin = MutableLiveData<Boolean>()
     val message = MutableLiveData<String>()
+    val idUser = MutableLiveData<String>()
     fun login(email: String, password: String) {
         ApiClient.API.login(email, password).enqueue(object : Callback<UserLoginResponse> {
             override fun onResponse(
                 call: Call<UserLoginResponse>,
                 response: Response<UserLoginResponse>
             ) {
-                Log.e("ttaaaaa",call.request().toString())
                 if (response.body()?.success == 1) {
                     checkLogin.value = true
+                    idUser.value = response.body()?.email
+                    Log.e("ttaaaaa",response.body()?.email.toString())
                 } else {
                     checkLogin.value = false
                     message.value = response.body()?.message.toString()

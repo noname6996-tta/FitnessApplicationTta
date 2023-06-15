@@ -14,5 +14,7 @@ class Constant {
         const val PREFERENCE_NAME = "InfoApp"
         const val PREF_LOGGED_IN = "pref_login"
         const val PREF_TOKEN = "pref_token"
+        const val IDUSER = "IDUSER"
+        const val WATER_INNEED = "WATER_INNEED"
     }
 }

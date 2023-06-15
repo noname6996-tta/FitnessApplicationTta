@@ -10,6 +10,8 @@ import com.tta.fitnessapplication.data.utils.Constant.Companion.EMAIL_USER
 import com.tta.fitnessapplication.data.utils.Constant.Companion.LOGIN_PREFS
 import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_LOGIN
 import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_USER
+import com.tta.fitnessapplication.data.utils.Constant.PREF.IDUSER
+import com.tta.fitnessapplication.data.utils.Constant.PREF.WATER_INNEED
 import com.tta.fitnessapplication.databinding.ActivityLoginBinding
 import com.tta.fitnessapplication.view.activity.MainActivity.MainActivity
 import com.tta.fitnessapplication.view.activity.signup.SignUpActivity
@@ -30,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         binding.edtEmail.setText("theanh682001@gmail.com")
         binding.edtPassword.setText("123456")
         setContentView(binding.root)
-
+        addObsever()
         loginPreferences = getSharedPreferences(LOGIN_PREFS, MODE_PRIVATE)
         loginPrefsEditor = loginPreferences.edit();
         saveLogin = loginPreferences.getBoolean(SAVE_LOGIN, false);
@@ -41,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
-        addObsever()
+
         addEvent()
     }
     private fun addObsever() {
@@ -57,13 +59,18 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
         }
+        viewModel.idUser.observe(this){
+            loginPrefsEditor.putString(IDUSER, it)
+            loginPrefsEditor.putString(IDUSER, it)
+            loginPrefsEditor.commit()
+        }
     }
 
     private fun saveUser() {
         /// put data to home
         // save data
         loginPrefsEditor.putBoolean(SAVE_USER, true);
-        loginPrefsEditor.putString(EMAIL_USER, emailUser);
+        loginPrefsEditor.putString(WATER_INNEED, "2000");
         loginPrefsEditor.commit();
         // go to home
         startActivity(Intent(this, MainActivity::class.java))

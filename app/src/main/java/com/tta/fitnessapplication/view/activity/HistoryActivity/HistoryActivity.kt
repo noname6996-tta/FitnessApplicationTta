@@ -1,20 +1,17 @@
 package com.tta.fitnessapplication.view.activity.HistoryActivity
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.FrameLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition
@@ -23,9 +20,10 @@ import com.kizitonwose.calendar.view.MonthDayBinder
 import com.kizitonwose.calendar.view.MonthHeaderFooterBinder
 import com.kizitonwose.calendar.view.ViewContainer
 import com.tta.fitnessapplication.R
-import com.tta.fitnessapplication.data.utils.dpToPx
+import com.tta.fitnessapplication.data.model.History
+import com.tta.fitnessapplication.data.utils.Constant
+import com.tta.fitnessapplication.data.utils.Constant.PREF.IDUSER
 import com.tta.fitnessapplication.data.utils.getColorCompat
-import com.tta.fitnessapplication.data.utils.inputMethodManager
 import com.tta.fitnessapplication.data.utils.makeInVisible
 import com.tta.fitnessapplication.data.utils.makeVisible
 import com.tta.fitnessapplication.data.utils.setTextColorRes
@@ -36,15 +34,11 @@ import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
-import java.util.UUID
-
-data class Event(val id: String, val text: String, val date: LocalDate)
 
 class HistoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryBinding
-    private val eventsAdapter = HistoryAdapter {
-
-    }
+    private var viewModel = HistoryViewModel()
+    private val eventsAdapter = HistoryAdapter()
 
     private var selectedDate: LocalDate? = null
     private val today = LocalDate.now()
@@ -52,16 +46,45 @@ class HistoryActivity : AppCompatActivity() {
     private val titleSameYearFormatter = DateTimeFormatter.ofPattern("MMMM")
     private val titleFormatter = DateTimeFormatter.ofPattern("MMM yyyy")
     private val selectionFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")
-    private val events = mutableMapOf<LocalDate, List<Event>>()
+    private val fullDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    private val events = mutableMapOf<LocalDate, List<History>>()
+
+    private lateinit var loginPreferences: SharedPreferences
+    private lateinit var idUser : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        loginPreferences = getSharedPreferences(Constant.LOGIN_PREFS, MODE_PRIVATE)
+        idUser = loginPreferences.getString(IDUSER,"").toString()
+        addObserver()
+        initUi()
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+            this.finish()
+        }
+    }
+
+    private fun addObserver() {
+        viewModel.message.observe(this){
+            Snackbar.make(binding.root,it,Snackbar.LENGTH_SHORT).show()
+        }
+        viewModel.list.observe(this){
+            Log.e("this",it.toString())
+            if (it != null) {
+                eventsAdapter.events.clear()
+                eventsAdapter.events.addAll(it)
+                eventsAdapter.notifyDataSetChanged()
+            }
+        }
+
+    }
+
+    private fun initUi(){
         binding.exThreeRv.apply {
             layoutManager = LinearLayoutManager(this@HistoryActivity, RecyclerView.VERTICAL, false)
             adapter = eventsAdapter
-            addItemDecoration(DividerItemDecoration(this@HistoryActivity, RecyclerView.VERTICAL))
         }
 
         binding.exThreeCalendar.monthScrollListener = {
@@ -84,7 +107,7 @@ class HistoryActivity : AppCompatActivity() {
             scrollToMonth(currentMonth)
         }
 
-        if (savedInstanceState == null) {
+        if (binding.root == null) {
             // Show today's events initially.
             binding.exThreeCalendar.post { selectDate(today) }
         }
@@ -106,7 +129,8 @@ class HistoryActivity : AppCompatActivity() {
             events.addAll(this@HistoryActivity.events[date].orEmpty())
             notifyDataSetChanged()
         }
-        binding.exThreeSelectedDateText.text = selectionFormatter.format(date)
+        binding.exThreeSelectedDateText.text ="Day: " +fullDateFormatter.format(date)
+        viewModel.getListHistoryByDate(idUser,fullDateFormatter.format(date))
     }
 
     override fun onStart() {
@@ -119,7 +143,7 @@ class HistoryActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         binding.topAppBar.setBackgroundColor(
-            this@HistoryActivity.getColorCompat(R.color.purple_500),
+            this@HistoryActivity.getColorCompat(R.color.text),
         )
     }
 

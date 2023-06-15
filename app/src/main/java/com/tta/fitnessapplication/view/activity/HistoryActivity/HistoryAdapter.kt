@@ -2,13 +2,15 @@ package com.tta.fitnessapplication.view.activity.HistoryActivity
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.utils.layoutInflater
 import com.tta.fitnessapplication.databinding.HistoryItemViewBinding
 
-class HistoryAdapter(val onClick: (Event) -> Unit) :
-    RecyclerView.Adapter<HistoryAdapter.Example3EventsViewHolder>() {
+class HistoryAdapter() : RecyclerView.Adapter<HistoryAdapter.Example3EventsViewHolder>() {
 
-    val events = mutableListOf<Event>()
+    val events = mutableListOf<History>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Example3EventsViewHolder {
         return Example3EventsViewHolder(
@@ -24,15 +26,16 @@ class HistoryAdapter(val onClick: (Event) -> Unit) :
 
     inner class Example3EventsViewHolder(private val binding: HistoryItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-        init {
-            itemView.setOnClickListener {
-                onClick(events[bindingAdapterPosition])
+        fun bind(event: History) {
+            binding.tvActivity.text = event.activity
+            binding.tvValue.text = event.value
+            binding.tvDateTime.text = "${event.date} - ${event.time}"
+            when (event.type) {
+                0 -> binding.imgType.setImageResource(R.drawable.alarm_clock)
+                1 -> binding.imgType.setImageResource(R.drawable.ic_cup)
+                2 -> binding.imgType.setImageResource(R.drawable.ic_sleep)
+                3 -> binding.imgType.setImageResource(R.drawable.ic_water_caculate)
             }
-        }
-
-        fun bind(event: Event) {
-            binding.itemEventText.text = event.text
         }
     }
 }
