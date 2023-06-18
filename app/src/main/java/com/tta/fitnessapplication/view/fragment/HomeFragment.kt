@@ -78,7 +78,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun addObsever() {
-        val viewModel = HistoryViewModel()
+        val viewModel = HistoryViewModelGoogleData()
         viewModel.getData()
         viewModel.listStepsCount.observe(viewLifecycleOwner) {
             binding.tvHomeStep.text = it.last().value + " steps"

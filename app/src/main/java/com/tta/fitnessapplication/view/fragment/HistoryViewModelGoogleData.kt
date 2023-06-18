@@ -1,6 +1,5 @@
 package com.tta.fitnessapplication.view.fragment
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tta.fitnessapplication.api.ApiClientDemo
@@ -10,7 +9,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HistoryViewModel : ViewModel() {
+class HistoryViewModelGoogleData : ViewModel() {
     val listStepsCount = MutableLiveData<List<DataFit>>()
     val listCaloriesExpended = MutableLiveData<List<DataFit>>()
     val listHeartMinutes = MutableLiveData<List<DataFit>>()
