@@ -45,7 +45,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Water Tracker"
                 android:textColor="@color/black"
-                android:textSize="@dimen/size_20dp"
+                android:textSize="@dimen/size_16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/view13"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
