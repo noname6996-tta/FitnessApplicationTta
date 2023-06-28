@@ -85,16 +85,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView34" />
 
-            <Spinner
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/spinnerWeather"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="@dimen/size_8dp"
-                android:layout_marginRight="@dimen/size_8dp"
-                android:layout_marginBottom="@dimen/size_16dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" >
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/tvWeather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Weather"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textSize="@dimen/size_14dp"
+                    android:singleLine="true"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -135,16 +147,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView35" />
 
-            <Spinner
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/spinnerFitness"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="@dimen/size_8dp"
-                android:layout_marginRight="@dimen/size_8dp"
-                android:layout_marginBottom="@dimen/size_16dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/tvFitness"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Fitness level"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textSize="@dimen/size_14dp"
+                    android:singleLine="true"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -185,16 +209,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView36" />
 
-            <Spinner
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/spinnerGender"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="@dimen/size_8dp"
-                android:layout_marginRight="@dimen/size_8dp"
-                android:layout_marginBottom="@dimen/size_16dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/tvGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Gender"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:textSize="@dimen/size_14dp"
+                    android:singleLine="true"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

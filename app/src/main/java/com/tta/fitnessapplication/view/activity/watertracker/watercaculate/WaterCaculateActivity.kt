@@ -6,6 +6,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.utils.hideKeyboard
+import com.tta.fitnessapplication.data.utils.showAnimatedAlertDialog
 import com.tta.fitnessapplication.databinding.ActivityWaterCaculateBinding
 import com.tta.fitnessapplication.databinding.ActivityWaterTrackerBinding
 
@@ -27,19 +29,26 @@ class WaterCaculateActivity : AppCompatActivity() {
     private fun addEvent() {
         binding.imageView38.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         binding.btnCaculate.setOnClickListener {
-            var healthInformation: HealthInformation = HealthInformation(
-                age = 22,
-                gender = gender,
-                weight = binding.edtWeight.text.toString().trim().toDouble(),
-                climate = climate,
-                activityLevel = activityLevel
-            )
-           binding.tvYourDailyGoal.text = calculateWaterIntake(healthInformation).toString()
+            var weight = binding.edtWeight.text.toString().trim()
+            if (weight.isNotEmpty()) {
+                var healthInformation: HealthInformation = HealthInformation(
+                    age = 22,
+                    gender = gender,
+                    weight = binding.edtWeight.text.toString().trim().toDouble(),
+                    climate = climate,
+                    activityLevel = activityLevel
+                )
+                binding.tvYourDailyGoal.text =
+                    (calculateWaterIntake(healthInformation) * 10).toInt().toString() + " ml"
+            } else {
+                showAnimatedAlertDialog(this, "Notification", "You must fill the weight blank")
+            }
+
         }
         binding.btnSetTarget.setOnClickListener {
 
         }
-        binding.spinnerGender.onItemSelectedListener = object :
+        binding.tvGender.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -58,7 +67,7 @@ class WaterCaculateActivity : AppCompatActivity() {
                 gender = Gender.MALE
             }
         }
-        binding.spinnerFitness.onItemSelectedListener = object :
+        binding.tvFitness.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -77,7 +86,7 @@ class WaterCaculateActivity : AppCompatActivity() {
                 activityLevel = ActivityLevel.SEDENTARY
             }
         }
-        binding.spinnerWeather.onItemSelectedListener = object :
+        binding.tvWeather.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -104,14 +113,32 @@ class WaterCaculateActivity : AppCompatActivity() {
         val activityLevel = resources.getStringArray(R.array.ActivityLevel)
         val climate = resources.getStringArray(R.array.Climate)
 
-        val adapterGender = ArrayAdapter(this, android.R.layout.simple_spinner_item, gender)
+        val adapterGender = ArrayAdapter(this, android.R.layout.simple_list_item_1, gender)
         val adapterActivityLevel =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item, activityLevel)
-        val adapterClimate = ArrayAdapter(this, android.R.layout.simple_spinner_item, climate)
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, activityLevel)
+        val adapterClimate = ArrayAdapter(this, android.R.layout.simple_list_item_1, climate)
+        binding.spinnerFitness.setOnClickListener {
+            this.hideKeyboard()
+        }
+        binding.spinnerGender.setOnClickListener {
+            this.hideKeyboard()
+        }
+        binding.spinnerWeather.setOnClickListener {
+            this.hideKeyboard()
+        }
+        binding.tvGender.setOnClickListener {
+            this.hideKeyboard()
+        }
+        binding.tvFitness.setOnClickListener {
+            this.hideKeyboard()
+        }
+        binding.tvWeather.setOnClickListener {
+            this.hideKeyboard()
+        }
+        binding.tvGender.setAdapter(adapterGender)
+        binding.tvFitness.setAdapter(adapterActivityLevel)
+        binding.tvWeather.setAdapter(adapterClimate)
 
-        binding.spinnerGender.adapter = adapterGender
-        binding.spinnerFitness.adapter = adapterActivityLevel
-        binding.spinnerWeather.adapter = adapterClimate
 
     }
 
