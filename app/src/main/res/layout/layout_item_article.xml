@@ -23,7 +23,6 @@
                 android:id="@+id/cardView6"
                 android:layout_width="160dp"
                 android:layout_height="140dp"
-                android:layout_marginTop="10dp"
                 app:cardCornerRadius="@dimen/size_16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -31,9 +30,10 @@
 
                 <ImageView
                     android:id="@+id/imgArticle"
+                    android:scaleType="centerCrop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bg_line_black" />
+                    />
             </androidx.cardview.widget.CardView>
 
             <TextView

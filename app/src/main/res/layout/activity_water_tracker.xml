@@ -135,6 +135,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
             <TextView
+                android:id="@+id/tvPercentDrink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_16dp"

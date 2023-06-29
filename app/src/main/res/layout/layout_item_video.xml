@@ -22,31 +22,20 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardImage"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="@dimen/size_8dp"
+                android:layout_height="150dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_brand_gradient">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginRight="@dimen/size_16dp"
-                        android:src="@drawable/ic_music_record_100"
-                        app:layout_constraintBottom_toBottomOf="@+id/imgVideo"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/imgVideo" />
+                    android:layout_height="match_parent">
 
                     <ImageView
                         android:id="@+id/imgVideo"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/bg_second_brand_gradient"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +52,7 @@
                 android:layout_margin="@dimen/size_8dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/poppins"
+                android:singleLine="true"
                 android:text="some video fun"
                 android:textColor="@color/black"
                 android:textSize="@dimen/size_14dp"
@@ -77,6 +67,7 @@
                 android:layout_margin="@dimen/size_8dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/poppins"
+                android:singleLine="true"
                 android:text="some video fun"
                 android:textColor="@color/gray1"
                 android:textSize="@dimen/size_12dp"

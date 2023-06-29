@@ -20,10 +20,12 @@ import androidx.core.content.ContextCompat
 import com.kizitonwose.calendar.core.Week
 import com.kizitonwose.calendar.core.yearMonth
 import com.tta.fitnessapplication.R
+import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.Month
 import java.time.YearMonth
 import java.time.format.TextStyle
+import java.util.Calendar
 import java.util.Locale
 
 fun View.makeVisible() {
@@ -106,7 +108,7 @@ fun getWeekPageTitle(week: Week): String {
     }
 }
 
- fun showAnimatedAlertDialog(context: Context, title: String, message: String) {
+fun showAnimatedAlertDialog(context: Context, title: String, message: String) {
     val alertDialog = AlertDialog.Builder(context)
         .create()
 
@@ -140,4 +142,10 @@ fun Activity.hideKeyboard() {
         ) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
     }
+}
+
+fun getCurrentTime(): String {
+    val calendar = Calendar.getInstance()
+    val dateFormat = SimpleDateFormat("hh:mm:ss")
+    return dateFormat.format(calendar.time)
 }

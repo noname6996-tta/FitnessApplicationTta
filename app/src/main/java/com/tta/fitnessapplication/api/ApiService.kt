@@ -68,16 +68,28 @@ interface ApiService {
 
     @POST(ApiPath.HISTORY_BY_DATE)
     fun getHistoryByDate(
-        @Query("id_user") id_user : String,
-        @Query("date") date : String
-    ) : Call<BaseResponse<MutableList<History>>>
+        @Query("id_user") id_user: String,
+        @Query("date") date: String
+    ): Call<BaseResponse<MutableList<History>>>
 
     @POST(ApiPath.HISTORY_BY_DATE_AND_TYPE)
     fun getHistoryByDateAndType(
-        @Query("id_user") id_user : String,
-        @Query("date") date : String,
-        @Query("type") type : String
-    ) : Call<BaseResponse<MutableList<History>>>
+        @Query("id_user") id_user: String,
+        @Query("date") date: String,
+        @Query("type") type: String
+    ): Call<BaseResponse<MutableList<History>>>
+
+    @POST(ApiPath.INSERT_HISTORY)
+    fun createHistory(
+        @Query("id_user") id_user: String,
+//      yyyy-mm-dd
+        @Query("date") date: String,
+//      hh:mm:ss
+        @Query("time") time: String,
+        @Query("activity") activity: String,
+        @Query("type") type: String,
+        @Query("value") value: String,
+    ): Call<BaseResponse<String>>
 }
 
 //    @POST(ApiPath.LOGIN)

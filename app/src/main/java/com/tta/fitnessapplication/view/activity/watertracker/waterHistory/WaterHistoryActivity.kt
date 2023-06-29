@@ -21,6 +21,10 @@ import com.kizitonwose.calendar.view.ViewContainer
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.utils.Constant
+import com.tta.fitnessapplication.data.utils.Constant.DATE.fullDateFormatter
+import com.tta.fitnessapplication.data.utils.Constant.DATE.titleFormatter
+import com.tta.fitnessapplication.data.utils.Constant.DATE.titleSameYearFormatter
+import com.tta.fitnessapplication.data.utils.Constant.DATE.today
 import com.tta.fitnessapplication.data.utils.getColorCompat
 import com.tta.fitnessapplication.data.utils.makeInVisible
 import com.tta.fitnessapplication.data.utils.makeVisible
@@ -41,12 +45,7 @@ class WaterHistoryActivity : AppCompatActivity() {
     private val eventsAdapter = HistoryAdapter()
 
     private var selectedDate: LocalDate? = null
-    private val today = LocalDate.now()
 
-    private val titleSameYearFormatter = DateTimeFormatter.ofPattern("MMMM")
-    private val titleFormatter = DateTimeFormatter.ofPattern("MMM yyyy")
-    private val selectionFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")
-    private val fullDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     private val events = mutableMapOf<LocalDate, List<History>>()
 
     private lateinit var loginPreferences: SharedPreferences
