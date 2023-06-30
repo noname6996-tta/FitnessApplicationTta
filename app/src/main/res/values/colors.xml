@@ -18,4 +18,6 @@
     <color name="example_3_blue_light">#D2E3FC</color>
     <color name="example_3_toolbar_color">#607D8B</color>
     <color name="example_3_statusbar_color">#455A64</color>
+    <color name="colorDekraOrange">#92A3FD</color>
+    <color name="colorDekraYellow">#92A3FD</color>
 </resources>

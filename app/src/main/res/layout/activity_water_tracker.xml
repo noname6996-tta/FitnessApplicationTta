@@ -118,6 +118,8 @@
                 android:id="@+id/seekBar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:progressDrawable="@drawable/seekbar_style"
+                android:thumb="@drawable/custom_thumb"
                 app:layout_constraintBottom_toBottomOf="@+id/view21"
                 app:layout_constraintEnd_toEndOf="@+id/view21"
                 app:layout_constraintStart_toStartOf="@+id/view21"
@@ -387,19 +389,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatButton">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#FFFFFF">
+
                     <ImageView
                         android:id="@+id/imgterCaculateTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:src="@drawable/ic_water_caculate"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tvWaterCaculateTitle"
@@ -407,8 +410,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="Calculate the amount of water you need to use each day"
                         android:maxLines="2"
+                        android:text="Calculate the amount of water you need to use each day"
                         android:textColor="@color/black"
                         android:textSize="@dimen/size_14dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -420,13 +423,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
+                        android:text="Click here for details"
                         android:textColor="@color/text"
                         android:textSize="@dimen/size_12dp"
-                        android:text="Click here for details"
-                        app:layout_constraintStart_toEndOf="@+id/imgterCaculateTitle"
-                        app:layout_constraintTop_toBottomOf="@+id/tvWaterCaculateTitle"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                        app:layout_constraintStart_toEndOf="@+id/imgterCaculateTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWaterCaculateTitle" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -436,22 +438,23 @@
                 android:layout_height="120dp"
                 android:layout_margin="16dp"
                 app:cardCornerRadius="@dimen/size_16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardViewWaterCaculate"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/cardViewWaterCaculate">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <ImageView
                         android:id="@+id/imgterCaculateHistory"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:src="@drawable/ic_history_water"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tvWaterCaculateHistory"
@@ -459,8 +462,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="History of you drinking water"
                         android:maxLines="2"
+                        android:text="History of you drinking water"
                         android:textColor="@color/black"
                         android:textSize="@dimen/size_14dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -472,13 +475,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
+                        android:text="Click here for details"
                         android:textColor="@color/text"
                         android:textSize="@dimen/size_12dp"
-                        android:text="Click here for details"
-                        app:layout_constraintStart_toEndOf="@+id/imgterCaculateHistory"
-                        app:layout_constraintTop_toBottomOf="@+id/tvWaterCaculateHistory"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                        app:layout_constraintStart_toEndOf="@+id/imgterCaculateHistory"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWaterCaculateHistory" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
