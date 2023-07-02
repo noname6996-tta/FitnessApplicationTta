@@ -27,6 +27,7 @@ import com.tta.fitnessapplication.databinding.FragmentHomeBinding
 import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModel
 import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModelFactory
 import com.tta.fitnessapplication.view.activity.SleepTracker.SleepTrackerActivity
+import com.tta.fitnessapplication.view.activity.calortracker.CalorTrackerActivity
 import com.tta.fitnessapplication.view.activity.login.LoginActivity
 import com.tta.fitnessapplication.view.activity.watertracker.WaterTrackerActivity
 
@@ -63,14 +64,15 @@ class HomeFragment : Fragment() {
         )
         loginPrefsEditor = loginPreferences.edit();
         var token = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
-        if (token !=""){
+        if (token != "") {
             mainViewModel.getUserData(token)
         }
         mainViewModel.dataExercise.observe(requireActivity()) {
             if (it.isSuccessful) {
                 var dataProfile = mainViewModel.dataExercise.value?.body()?.data
-                Log.e("dataProfile",dataProfile.toString())
-                binding.textView2.text = "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
+                Log.e("dataProfile", dataProfile.toString())
+                binding.textView2.text =
+                    "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
             } else {
                 Log.e("tta", it.errorBody().toString())
             }
@@ -95,8 +97,7 @@ class HomeFragment : Fragment() {
         viewModel.listSleepTracker.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 binding.textView27.text = it.last().value + " h"
-            }
-            else {
+            } else {
                 binding.textView27.text = "No data"
             }
         }
@@ -116,6 +117,9 @@ class HomeFragment : Fragment() {
                     WaterTrackerActivity::class.java
                 )
             )
+        }
+        binding.cardViewEat.setOnClickListener {
+            startActivity(Intent(activity, CalorTrackerActivity::class.java))
         }
     }
 

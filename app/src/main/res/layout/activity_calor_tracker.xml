@@ -6,4 +6,172 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.calortracker.CalorTrackerActivity">
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_brand_gradient"
+        android:scaleType="fitCenter"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view13"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:background="@drawable/bg_view_gray_8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+        app:layout_constraintBottom_toBottomOf="@+id/view13"
+        app:layout_constraintEnd_toEndOf="@+id/view13"
+        app:layout_constraintStart_toStartOf="@+id/view13"
+        app:layout_constraintTop_toTopOf="@+id/view13" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Meal Planner"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/size_16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view13" />
+
+    <TextView
+        android:id="@+id/textView61"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Today"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/size_24dp"
+        app:layout_constraintStart_toStartOf="@+id/view13"
+        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+    <ProgressBar
+        android:id="@+id/progessChangeFrame"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="@dimen/size_20dp"
+        android:background="@drawable/circle_meal"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="25"
+        android:progressDrawable="@drawable/circular_progress_bar_meal"
+        android:translationZ="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView61" />
+
+    <TextView
+        android:id="@+id/tvKcalLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:text="____\nKCAL LEFT"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/size_16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/progessChangeFrame"
+        app:layout_constraintEnd_toEndOf="@+id/progessChangeFrame"
+        app:layout_constraintStart_toStartOf="@+id/progessChangeFrame"
+        app:layout_constraintTop_toTopOf="@+id/progessChangeFrame" />
+
+    <TextView
+        android:id="@+id/tvKcalEaten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="____\nEATEN"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/size_14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/progessChangeFrame"
+        app:layout_constraintEnd_toStartOf="@+id/progessChangeFrame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/progessChangeFrame" />
+
+    <TextView
+        android:id="@+id/tvKcalBurn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="____\nBURN"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/size_14dp"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/progessChangeFrame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/progessChangeFrame"
+        app:layout_constraintTop_toTopOf="@+id/progessChangeFrame" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView7"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="@dimen/size_16dp"
+        app:cardCornerRadius="@dimen/size_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progessChangeFrame" />
+
+    <View
+        android:id="@+id/view21"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:background="@drawable/bg_blue_linear_16"
+        android:layout_marginTop="@dimen/size_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView7" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Daily Meal Schedule"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/view21"
+        app:layout_constraintStart_toStartOf="@+id/view21"
+        app:layout_constraintTop_toTopOf="@+id/view21" />
+
+    <View
+        android:id="@+id/view22"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:background="@drawable/bg_view_radius_blue"
+        app:layout_constraintBottom_toBottomOf="@+id/view21"
+        app:layout_constraintEnd_toEndOf="@+id/view21"
+        app:layout_constraintTop_toTopOf="@+id/view21" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Check"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view22"
+        app:layout_constraintEnd_toEndOf="@+id/view22"
+        app:layout_constraintStart_toStartOf="@+id/view22"
+        app:layout_constraintTop_toTopOf="@+id/view22" />
 </androidx.constraintlayout.widget.ConstraintLayout>
