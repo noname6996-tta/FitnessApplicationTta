@@ -6,172 +6,359 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.calortracker.CalorTrackerActivity">
 
-    <View
-        android:id="@+id/view"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/bg_brand_gradient"
-        android:scaleType="fitCenter"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cardView7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <View
-        android:id="@+id/view13"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginLeft="@dimen/size_16dp"
-        android:layout_marginTop="@dimen/size_16dp"
-        android:background="@drawable/bg_view_gray_8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
-        app:layout_constraintBottom_toBottomOf="@+id/view13"
-        app:layout_constraintEnd_toEndOf="@+id/view13"
-        app:layout_constraintStart_toStartOf="@+id/view13"
-        app:layout_constraintTop_toTopOf="@+id/view13" />
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/bg_brand_gradient"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Meal Planner"
-        android:textColor="#FFFFFF"
-        android:textSize="@dimen/size_16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view13"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view13" />
+            <View
+                android:id="@+id/view13"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:background="@drawable/bg_view_gray_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView61"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_16dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Today"
-        android:textColor="#FFFFFF"
-        android:textSize="@dimen/size_24dp"
-        app:layout_constraintStart_toStartOf="@+id/view13"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+                app:layout_constraintBottom_toBottomOf="@+id/view13"
+                app:layout_constraintEnd_toEndOf="@+id/view13"
+                app:layout_constraintStart_toStartOf="@+id/view13"
+                app:layout_constraintTop_toTopOf="@+id/view13" />
 
-    <ProgressBar
-        android:id="@+id/progessChangeFrame"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="@dimen/size_20dp"
-        android:background="@drawable/circle_meal"
-        android:indeterminate="false"
-        android:max="100"
-        android:progress="25"
-        android:progressDrawable="@drawable/circular_progress_bar_meal"
-        android:translationZ="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView61" />
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Meal Planner"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/size_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view13"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view13" />
 
-    <TextView
-        android:id="@+id/tvKcalLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:gravity="center"
-        android:text="____\nKCAL LEFT"
-        android:textColor="#FFFFFF"
-        android:textSize="@dimen/size_16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/progessChangeFrame"
-        app:layout_constraintEnd_toEndOf="@+id/progessChangeFrame"
-        app:layout_constraintStart_toStartOf="@+id/progessChangeFrame"
-        app:layout_constraintTop_toTopOf="@+id/progessChangeFrame" />
+            <TextView
+                android:id="@+id/textView61"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Today"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/size_24dp"
+                app:layout_constraintStart_toStartOf="@+id/view13"
+                app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
-    <TextView
-        android:id="@+id/tvKcalEaten"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="____\nEATEN"
-        android:textColor="#FFFFFF"
-        android:textSize="@dimen/size_14dp"
-        app:layout_constraintBottom_toBottomOf="@+id/progessChangeFrame"
-        app:layout_constraintEnd_toStartOf="@+id/progessChangeFrame"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/progessChangeFrame" />
+            <ProgressBar
+                android:id="@+id/progessChangeFrame"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="@dimen/size_20dp"
+                android:background="@drawable/circle_meal"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="25"
+                android:progressDrawable="@drawable/circular_progress_bar_meal"
+                android:translationZ="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView61" />
 
-    <TextView
-        android:id="@+id/tvKcalBurn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="____\nBURN"
-        android:textColor="#FFFFFF"
-        android:textSize="@dimen/size_14dp"
-        android:translationZ="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/progessChangeFrame"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/progessChangeFrame"
-        app:layout_constraintTop_toTopOf="@+id/progessChangeFrame" />
+            <TextView
+                android:id="@+id/tvKcalLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="____\nKCAL LEFT"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/size_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/progessChangeFrame"
+                app:layout_constraintEnd_toEndOf="@+id/progessChangeFrame"
+                app:layout_constraintStart_toStartOf="@+id/progessChangeFrame"
+                app:layout_constraintTop_toTopOf="@+id/progessChangeFrame" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView7"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_margin="@dimen/size_16dp"
-        app:cardCornerRadius="@dimen/size_16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progessChangeFrame" />
+            <TextView
+                android:id="@+id/tvKcalEaten"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="____\nEATEN"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/size_14dp"
+                app:layout_constraintBottom_toBottomOf="@+id/progessChangeFrame"
+                app:layout_constraintEnd_toStartOf="@+id/progessChangeFrame"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/progessChangeFrame" />
 
-    <View
-        android:id="@+id/view21"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="@dimen/size_16dp"
-        android:layout_marginRight="@dimen/size_16dp"
-        android:background="@drawable/bg_blue_linear_16"
-        android:layout_marginTop="@dimen/size_16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView7" />
+            <TextView
+                android:id="@+id/tvKcalBurn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="____\nBURN"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/size_14dp"
+                android:translationZ="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/progessChangeFrame"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/progessChangeFrame"
+                app:layout_constraintTop_toTopOf="@+id/progessChangeFrame" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/size_16dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Daily Meal Schedule"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/view21"
-        app:layout_constraintStart_toStartOf="@+id/view21"
-        app:layout_constraintTop_toTopOf="@+id/view21" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView7"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_margin="@dimen/size_16dp"
+                app:cardCornerRadius="@dimen/size_16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progessChangeFrame">
 
-    <View
-        android:id="@+id/view22"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:layout_marginRight="@dimen/size_16dp"
-        android:background="@drawable/bg_view_radius_blue"
-        app:layout_constraintBottom_toBottomOf="@+id/view21"
-        app:layout_constraintEnd_toEndOf="@+id/view21"
-        app:layout_constraintTop_toTopOf="@+id/view21" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:text="Check"
-        android:textColor="@color/white"
-        android:textSize="@dimen/size_12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view22"
-        app:layout_constraintEnd_toEndOf="@+id/view22"
-        app:layout_constraintStart_toStartOf="@+id/view22"
-        app:layout_constraintTop_toTopOf="@+id/view22" />
+                    <TextView
+                        android:id="@+id/tvProtein"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Protein"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@+id/tvNumberProtein"
+                        app:layout_constraintEnd_toStartOf="@+id/tvCarbohydrate"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvCarbohydrate"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Carb"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@+id/tvNumberCarb"
+                        app:layout_constraintEnd_toStartOf="@+id/tvFat"
+                        app:layout_constraintStart_toEndOf="@+id/tvProtein"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvFat"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Fat"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@+id/tvNumberFat"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvCarbohydrate"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvNumberProtein"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="128/225"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/tvProtein"
+                        app:layout_constraintStart_toStartOf="@+id/tvProtein"
+                        app:layout_constraintTop_toBottomOf="@+id/tvProtein" />
+
+                    <TextView
+                        android:id="@+id/tvNumberCarb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="128/225"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/tvCarbohydrate"
+                        app:layout_constraintStart_toStartOf="@+id/tvCarbohydrate"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCarbohydrate" />
+
+                    <TextView
+                        android:id="@+id/tvNumberFat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="128/225"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/tvFat"
+                        app:layout_constraintStart_toStartOf="@+id/tvFat"
+                        app:layout_constraintTop_toBottomOf="@+id/tvFat" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:id="@+id/view21"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:background="@drawable/bg_blue_linear_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Daily Meal Schedule"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/view21"
+                app:layout_constraintStart_toStartOf="@+id/view21"
+                app:layout_constraintTop_toTopOf="@+id/view21" />
+
+            <View
+                android:id="@+id/view22"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:background="@drawable/bg_view_radius_blue"
+                app:layout_constraintBottom_toBottomOf="@+id/view21"
+                app:layout_constraintEnd_toEndOf="@+id/view21"
+                app:layout_constraintTop_toTopOf="@+id/view21" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Check"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view22"
+                app:layout_constraintEnd_toEndOf="@+id/view22"
+                app:layout_constraintStart_toStartOf="@+id/view22"
+                app:layout_constraintTop_toTopOf="@+id/view22" />
+
+            <Spinner
+                android:id="@+id/spinnerDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view21" />
+
+            <TextView
+                android:id="@+id/textView67"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Today Meal Phanner"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/spinnerDay" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recMeal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerDay" />
+
+            <TextView
+                android:id="@+id/textView68"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Find some things to eat"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recMeal" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recSuggestFood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView68" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewHistoryWaterTracker"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="@dimen/size_16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recSuggestFood">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imgterCaculateHistory"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="@dimen/size_8dp"
+                        android:src="@drawable/ic_calories"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvWaterCaculateHistory"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:maxLines="2"
+                        android:text="Calculate calories per day you should consume"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imgterCaculateHistory"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvWaterCaculateHistoryDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Click here for details"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/size_12dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imgterCaculateHistory"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWaterCaculateHistory" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

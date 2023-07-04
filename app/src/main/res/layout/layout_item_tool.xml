@@ -18,8 +18,9 @@
 
         <ImageView
             android:id="@+id/imgTool"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/alarm_clock" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

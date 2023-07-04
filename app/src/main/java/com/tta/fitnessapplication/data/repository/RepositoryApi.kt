@@ -6,10 +6,6 @@ import com.tta.fitnessapplication.data.model.ResponseProfile
 import retrofit2.Response
 
 class RepositoryApi {
-    suspend fun getData() : Response<List<Exercise>> {
-        return ApiClient.API.getData()
-    }
-
     suspend fun getProfile(email: String) : Response<ResponseProfile> {
         return ApiClient.API.getUserProfile(email)
     }

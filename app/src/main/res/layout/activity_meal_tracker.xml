@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.MealTracker.MealTrackerActivity">
+    tools:context=".view.activity.calortracker.MealTracker.MealTrackerActivity">
     <View
         android:id="@+id/view13"
         android:layout_width="32dp"
@@ -38,40 +38,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view13" />
 
-    <TextView
-        android:id="@+id/textView64"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_16dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="You have burn"
-        android:textColor="@color/black"
-        android:textSize="@dimen/size_16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
-
-    <TextView
-        android:id="@+id/textView65"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="250Calor"
-        android:textColor="@color/black"
-        android:textSize="@dimen/size_16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView64" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/waterAnimation"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:foregroundGravity="bottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView65"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/calor" />
 </androidx.constraintlayout.widget.ConstraintLayout>

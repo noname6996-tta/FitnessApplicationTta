@@ -1,4 +1,4 @@
-package com.tta.fitnessapplication.view.activity.MealTracker
+package com.tta.fitnessapplication.view.activity.calortracker.MealTracker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

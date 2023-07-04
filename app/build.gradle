@@ -97,6 +97,8 @@ dependencies {
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
     // The view calendar library
     implementation 'com.kizitonwose.calendar:view:2.3.0'
+    // baloon
+    implementation "com.github.skydoves:balloon:1.5.4"
 }
 
 kapt {
