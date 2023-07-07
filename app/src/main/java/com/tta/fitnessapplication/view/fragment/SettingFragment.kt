@@ -14,13 +14,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import com.tta.fitnessapplication.data.utils.Constant
-import com.tta.fitnessapplication.databinding.FragmentDiscoverBinding
 import com.tta.fitnessapplication.databinding.FragmentSettingBinding
 import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryActivity
 import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModel
 import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModelFactory
 import com.tta.fitnessapplication.view.activity.login.LoginActivity
-import com.tta.fitnessapplication.view.base.BaseFragment
 
 class SettingFragment : Fragment() {
     private lateinit var binding: FragmentSettingBinding

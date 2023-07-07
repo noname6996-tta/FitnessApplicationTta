@@ -14,7 +14,6 @@ import com.tta.fitnessapplication.data.model.Video
 import com.tta.fitnessapplication.databinding.FragmentHistoryBinding
 import com.tta.fitnessapplication.view.activity.WebViewActivity
 import com.tta.fitnessapplication.view.activity.chatGpt.ChatGPTActivity
-import com.tta.fitnessapplication.view.base.BaseFragment
 
 class HistoryFragment : Fragment() {
     private var _binding: FragmentHistoryBinding? = null

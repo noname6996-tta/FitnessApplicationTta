@@ -61,7 +61,10 @@ class LoginActivity : AppCompatActivity() {
         }
         viewModel.idUser.observe(this){
             loginPrefsEditor.putString(IDUSER, it)
-            loginPrefsEditor.putString(IDUSER, it)
+            loginPrefsEditor.commit()
+        }
+        viewModel.emailUser.observe(this){
+            loginPrefsEditor.putString(EMAIL_USER, it)
             loginPrefsEditor.commit()
         }
     }

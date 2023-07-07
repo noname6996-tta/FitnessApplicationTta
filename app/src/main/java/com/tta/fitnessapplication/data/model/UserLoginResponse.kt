@@ -8,5 +8,7 @@ data class UserLoginResponse(
     @SerializedName("message")
     var message: String,
     @SerializedName("email")
-    var email: String
+    var email: String,
+    @SerializedName("id")
+    var id: String
 )

@@ -13,6 +13,7 @@ class LoginViewModel : ViewModel() {
     val checkLogin = MutableLiveData<Boolean>()
     val message = MutableLiveData<String>()
     val idUser = MutableLiveData<String>()
+    val emailUser = MutableLiveData<String>()
     fun login(email: String, password: String) {
         ApiClient.API.login(email, password).enqueue(object : Callback<UserLoginResponse> {
             override fun onResponse(
@@ -21,7 +22,8 @@ class LoginViewModel : ViewModel() {
             ) {
                 if (response.body()?.success == 1) {
                     checkLogin.value = true
-                    idUser.value = response.body()?.email
+                    idUser.value = response.body()?.id
+                    emailUser.value = response.body()?.email
                     Log.e("ttaaaaa",response.body()?.email.toString())
                 } else {
                     checkLogin.value = false
