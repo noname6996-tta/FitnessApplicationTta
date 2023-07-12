@@ -1,34 +1,19 @@
 package com.tta.fitnessapplication.view.fragment
 
 import android.content.Intent
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.FragmentDiscoverBinding
 import com.tta.fitnessapplication.view.activity.FullBodyWorkout.FullBodyWorkoutActivity
+import com.tta.fitnessapplication.view.base.BaseFragment
 import java.util.Calendar
 
-class DiscoverFragment : Fragment() {
-    private lateinit var binding: FragmentDiscoverBinding
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentDiscoverBinding.inflate(layoutInflater)
-        return binding.root
+class DiscoverFragment : BaseFragment<FragmentDiscoverBinding>() {
+    override fun getDataBinding(): FragmentDiscoverBinding {
+        return FragmentDiscoverBinding.inflate(layoutInflater)
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initUi()
-        addEvent()
-    }
-
-    private fun initUi() {
+    override fun initView() {
+        super.initView()
         var arrayDay = ArrayList<String>()
         val calendar = Calendar.getInstance()
         // Set the calendar to the current week
@@ -78,7 +63,7 @@ class DiscoverFragment : Fragment() {
         }
     }
 
-    private fun addEvent() {
+    override fun addEvent() {
         binding.view12.setOnClickListener {
             startActivity(Intent(activity, FullBodyWorkoutActivity::class.java))
         }

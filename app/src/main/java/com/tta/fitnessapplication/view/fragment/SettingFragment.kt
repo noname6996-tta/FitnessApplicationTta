@@ -4,13 +4,8 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
-import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import com.tta.fitnessapplication.data.utils.Constant
@@ -19,27 +14,19 @@ import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryActivity
 import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModel
 import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModelFactory
 import com.tta.fitnessapplication.view.activity.login.LoginActivity
+import com.tta.fitnessapplication.view.base.BaseFragment
 
-class SettingFragment : Fragment() {
-    private lateinit var binding: FragmentSettingBinding
+class SettingFragment : BaseFragment<FragmentSettingBinding>() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var loginPreferences: SharedPreferences
     private lateinit var loginPrefsEditor: SharedPreferences.Editor
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSettingBinding.inflate(layoutInflater)
-        return binding.root
+
+    override fun getDataBinding(): FragmentSettingBinding {
+        return FragmentSettingBinding.inflate(layoutInflater)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        addDataProfile()
-        addEvent()
-    }
-
-    private fun addDataProfile() {
+    override fun addObservers() {
+        super.addObservers()
         val repositoryApi = RepositoryApi()
         val viewModelFactory = MainViewModelFactory(repositoryApi)
         mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
@@ -77,10 +64,9 @@ class SettingFragment : Fragment() {
                 Log.e("tta", it.errorBody().toString())
             }
         }
-
     }
 
-    private fun addEvent() {
+    override fun addEvent() {
         binding.viewLogout.setOnClickListener {
             AlertDialog.Builder(requireContext())
                 .setTitle("Thông báo")

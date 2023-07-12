@@ -9,7 +9,7 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragment<T: ViewBinding>: Fragment() {
     private var _binding: T? = null
-    private val binding: T
+    protected val binding: T
         get() = _binding as T
 
     override fun onCreateView(

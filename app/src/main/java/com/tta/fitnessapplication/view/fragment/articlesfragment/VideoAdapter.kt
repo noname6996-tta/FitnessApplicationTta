@@ -1,7 +1,6 @@
 package com.tta.fitnessapplication.view.fragment.articlesfragment
 
 import android.content.Context
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -31,10 +30,10 @@ class VideoAdapter : RecyclerView.Adapter<VideoAdapter.VideoAdapterViewHolder>()
     }
 
     override fun onBindViewHolder(holder: VideoAdapterViewHolder, position: Int) {
-        var image = imageList[position]
+        val image = imageList[position]
         Glide.with(context)
             .load(image.image)
-            .into(holder.binding.imgVideo);
+            .into(holder.binding.imgVideo)
         holder.binding.layoutItem.setOnClickListener {
             onClickDeleteImage?.let {
                 it(position)
@@ -51,5 +50,5 @@ class VideoAdapter : RecyclerView.Adapter<VideoAdapter.VideoAdapterViewHolder>()
 
     class VideoAdapterViewHolder(
         val binding: LayoutItemVideoBinding
-    ) : RecyclerView.ViewHolder(binding.root) {}
+    ) : RecyclerView.ViewHolder(binding.root)
 }

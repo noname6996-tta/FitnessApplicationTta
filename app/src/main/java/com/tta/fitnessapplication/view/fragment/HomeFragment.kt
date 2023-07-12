@@ -5,14 +5,10 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ClipDrawable
-import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.PieData
@@ -28,58 +24,20 @@ import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModel
 import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModelFactory
 import com.tta.fitnessapplication.view.activity.SleepTracker.SleepTrackerActivity
 import com.tta.fitnessapplication.view.activity.calortracker.CalorTrackerActivity
-import com.tta.fitnessapplication.view.activity.login.LoginActivity
 import com.tta.fitnessapplication.view.activity.watertracker.WaterTrackerActivity
+import com.tta.fitnessapplication.view.base.BaseFragment
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private lateinit var mImageDrawable: ClipDrawable
-    private lateinit var binding: FragmentHomeBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var loginPreferences: SharedPreferences
     private lateinit var loginPrefsEditor: SharedPreferences.Editor
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
-        return binding.root
+    override fun getDataBinding(): FragmentHomeBinding {
+        return FragmentHomeBinding.inflate(layoutInflater)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        addObsever()
-        addDataProfile()
-        initView()
-        initProcess()
-        addEvent()
-    }
-
-    private fun addDataProfile() {
-        val repositoryApi = RepositoryApi()
-        val viewModelFactory = MainViewModelFactory(repositoryApi)
-        mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-        loginPreferences = requireActivity().getSharedPreferences(
-            Constant.LOGIN_PREFS,
-            AppCompatActivity.MODE_PRIVATE
-        )
-        loginPrefsEditor = loginPreferences.edit();
-        var token = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
-        if (token != "") {
-            mainViewModel.getUserData(token)
-        }
-        mainViewModel.dataExercise.observe(requireActivity()) {
-            if (it.isSuccessful) {
-                var dataProfile = mainViewModel.dataExercise.value?.body()?.data
-                Log.e("dataProfile", dataProfile.toString())
-                binding.textView2.text =
-                    "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
-            } else {
-                Log.e("tta", it.errorBody().toString())
-            }
-        }
-    }
-
-    private fun addObsever() {
+    override fun addObservers() {
+        super.addObservers()
         val viewModel = HistoryViewModelGoogleData()
         viewModel.getData()
         viewModel.listStepsCount.observe(viewLifecycleOwner) {
@@ -106,7 +64,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun addEvent() {
+    override fun addEvent() {
         binding.cardViewSleep.setOnClickListener {
             startActivity(Intent(activity, SleepTrackerActivity::class.java))
         }
@@ -121,15 +79,31 @@ class HomeFragment : Fragment() {
         binding.cardViewEat.setOnClickListener {
             startActivity(Intent(activity, CalorTrackerActivity::class.java))
         }
+        val repositoryApi = RepositoryApi()
+        val viewModelFactory = MainViewModelFactory(repositoryApi)
+        mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        loginPreferences = requireActivity().getSharedPreferences(
+            Constant.LOGIN_PREFS,
+            AppCompatActivity.MODE_PRIVATE
+        )
+        loginPrefsEditor = loginPreferences.edit();
+        var token = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
+        if (token != "") {
+            mainViewModel.getUserData(token)
+        }
+        mainViewModel.dataExercise.observe(requireActivity()) {
+            if (it.isSuccessful) {
+                var dataProfile = mainViewModel.dataExercise.value?.body()?.data
+                Log.e("dataProfile", dataProfile.toString())
+                binding.textView2.text =
+                    "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
+            } else {
+                Log.e("tta", it.errorBody().toString())
+            }
+        }
     }
 
-    private fun initProcess() {
-        mImageDrawable = binding.imgToScroll.drawable as ClipDrawable
-        mImageDrawable.level = 5000
-
-    }
-
-    private fun initView() {
+    override fun initView() {
         // on below line we are setting user percent value,
         // setting description as enabled and offset for pie chart
         binding.pieChart.setUsePercentValues(true)
@@ -209,7 +183,10 @@ class HomeFragment : Fragment() {
 
         // loading chart
         binding.pieChart.invalidate()
+
+        //
+        mImageDrawable = binding.imgToScroll.drawable as ClipDrawable
+        mImageDrawable.level = 5000
+        //
     }
-
-
 }

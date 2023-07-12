@@ -50,5 +50,5 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleAdapterViewHol
 
     class ArticleAdapterViewHolder(
         val binding: LayoutItemArticleBinding
-    ) : RecyclerView.ViewHolder(binding.root) {}
+    ) : RecyclerView.ViewHolder(binding.root)
 }
