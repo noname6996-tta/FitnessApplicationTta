@@ -48,6 +48,18 @@
                 app:layout_constraintStart_toEndOf="@+id/circleImageView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+            <ImageView
+                android:id="@+id/imgNotifiHome"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:background="@drawable/bg_blue_linear_16"
+                android:padding="10dp"
+                android:src="@drawable/icon_notif_black"
+                app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
@@ -198,6 +210,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
             <ImageView
+                android:id="@+id/imageView39"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -469,17 +482,214 @@
                         android:id="@+id/tvCalor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="230kCalo"
                         android:fontFamily="@font/poppins"
-                        android:textSize="12dp"
+                        android:text="230kCalo"
                         android:textColor="@color/white"
+                        android:textSize="12dp"
                         app:layout_constraintBottom_toBottomOf="@+id/imgCricleCalor"
                         app:layout_constraintEnd_toEndOf="@+id/imgCricleCalor"
                         app:layout_constraintStart_toStartOf="@+id/imgCricleCalor"
-                        app:layout_constraintTop_toTopOf="@+id/imgCricleCalor"
-                        />
+                        app:layout_constraintTop_toTopOf="@+id/imgCricleCalor" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvWorkoutProgess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Workout Progess"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16dp"
+                app:layout_constraintStart_toStartOf="@+id/cardViewWater"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewEat" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewWeekGoal"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                app:cardCornerRadius="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/tvWorkoutProgess">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_brand_gradient">
+
+                    <TextView
+                        android:id="@+id/textView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:layout_marginTop="@dimen/size_16dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="WEEK GOAL"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_marginBottom="@dimen/size_16dp"
+                        android:weightSum="7"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+                        <TextView
+                            android:id="@+id/tvDay1"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:gravity="center"
+                            android:text="24"
+                            android:textColor="@color/gray1" />
+
+                        <TextView
+                            android:id="@+id/tvDay2"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:gravity="center"
+                            android:text="24"
+                            android:textColor="@color/gray1" />
+
+                        <TextView
+                            android:id="@+id/tvDay3"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:gravity="center"
+                            android:text="24"
+                            android:textColor="@color/gray1" />
+
+                        <TextView
+                            android:id="@+id/tvDay4"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:gravity="center"
+                            android:text="24"
+                            android:textColor="@color/gray1" />
+
+                        <TextView
+                            android:id="@+id/tvDay5"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:gravity="center"
+                            android:text="24"
+                            android:textColor="@color/gray1" />
+
+                        <TextView
+                            android:id="@+id/tvDay6"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:gravity="center"
+                            android:text="24"
+                            android:textColor="@color/gray1" />
+
+                        <TextView
+                            android:id="@+id/tvDay7"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_circle"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:gravity="center"
+                            android:text="24"
+                            android:textColor="@color/gray1" />
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvLatestProgess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Latest Progess"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16dp"
+                app:layout_constraintStart_toStartOf="@+id/cardViewWater"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewWeekGoal" />
+
+            <TextView
+                android:id="@+id/tvSeeMoreHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/poppins"
+                android:padding="10dp"
+                android:text="See more"
+                android:textColor="@color/gray1"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvLatestProgess"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvLatestProgess" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recLatesProgess"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvLatestProgess" />
+
+            <TextView
+                android:id="@+id/tvNoDataRecycle"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_margin="16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Let do somethings bro"
+                android:textColor="@color/text"
+                android:textSize="16dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvLatestProgess" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
