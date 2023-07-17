@@ -4,4 +4,9 @@
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/poppins_semibold</item>
     </style>
+    <style name="FullScreenDialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
 </resources>

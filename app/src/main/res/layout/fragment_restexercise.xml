@@ -5,6 +5,18 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="@dimen/size_8dp"
+        android:background="@drawable/bg_blue_linear_16"
+        android:padding="10dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+        android:translationZ="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tvCountDown"
         android:layout_width="wrap_content"

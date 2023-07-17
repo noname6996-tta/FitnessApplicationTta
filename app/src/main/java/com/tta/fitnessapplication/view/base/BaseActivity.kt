@@ -13,6 +13,7 @@ abstract class BaseActivity<T: ViewBinding>: AppCompatActivity() {
         _binding = getDataBinding()
         setContentView(_binding!!.root)
         initViewModel()
+        initView()
         addEvent()
         addObservers()
         initData()
@@ -23,6 +24,7 @@ abstract class BaseActivity<T: ViewBinding>: AppCompatActivity() {
     open fun initViewModel() {}
 
     open fun addEvent() {}
+    open fun initView() {}
 
     open fun addObservers() {}
 

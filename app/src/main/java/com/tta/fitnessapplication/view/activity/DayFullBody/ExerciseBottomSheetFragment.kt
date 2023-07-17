@@ -1,19 +1,18 @@
 package com.tta.fitnessapplication.view.activity.DayFullBody
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.internal.FlowLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.tta.fitnessapplication.R
@@ -23,7 +22,8 @@ import com.tta.fitnessapplication.view.fragment.dayfullbodyfragement.ImageFragme
 import com.tta.fitnessapplication.view.fragment.dayfullbodyfragement.VideoFragment.Companion.urlExercise
 
 class ExerciseBottomSheetFragment(exercise: Exercise) : BottomSheetDialogFragment() {
-    private lateinit var binding: DialogBottomSheetInfoExerciseBinding
+    private var _binding: DialogBottomSheetInfoExerciseBinding? = null
+    private val binding get() = _binding!!
     private lateinit var dialog: BottomSheetDialog
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     private lateinit var tabLayout: TabLayout
@@ -40,7 +40,7 @@ class ExerciseBottomSheetFragment(exercise: Exercise) : BottomSheetDialogFragmen
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DialogBottomSheetInfoExerciseBinding.inflate(layoutInflater)
+        _binding = DialogBottomSheetInfoExerciseBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -64,10 +64,10 @@ class ExerciseBottomSheetFragment(exercise: Exercise) : BottomSheetDialogFragmen
         binding.tvFocusArea.text = exercise.area
         image = exercise.image
         urlExercise = exercise.name
-        if (exercise.type=="0"){
-            binding.tvTimeTodo.text = exercise.number+"s"
+        if (exercise.type == "0") {
+            binding.tvTimeTodo.text = exercise.number + "s"
         } else {
-            binding.tvTimeTodo.text = "x"+exercise.number
+            binding.tvTimeTodo.text = "x" + exercise.number
         }
     }
 
@@ -105,5 +105,27 @@ class ExerciseBottomSheetFragment(exercise: Exercise) : BottomSheetDialogFragmen
                 tabLayout.selectTab(tabLayout.getTabAt(position))
             }
         })
+    }
+
+    interface OnDismissListener {
+        fun onDialogDismissed()
+    }
+
+    private var dismissListener: OnDismissListener? = null
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+
+        dismissListener?.onDialogDismissed()
+    }
+
+    // Method to set the dismiss listener
+    fun setDismissListener(listener: OnDismissListener) {
+        dismissListener = listener
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

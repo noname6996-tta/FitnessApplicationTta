@@ -2,8 +2,10 @@ package com.tta.fitnessapplication.view.activity.doexercise
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.tta.fitnessapplication.R
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.tta.fitnessapplication.data.model.Exercise
@@ -25,12 +27,13 @@ class DoExerciseActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.navHostFragment) as NavHostFragment
-        navController = navHostFragment.navController
+        navController = navHostFragment.findNavController()
 
         // get data form listExercise
         val list = intent.getParcelableArrayListExtra<Exercise>("listExercise")
         if (list != null) {
             listExercise = list
+            Log.e("Exercise",listExercise.toString())
         }
     }
 

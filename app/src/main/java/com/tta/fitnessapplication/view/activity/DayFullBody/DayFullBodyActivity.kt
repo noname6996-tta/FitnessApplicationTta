@@ -32,12 +32,11 @@ class DayFullBodyActivity : AppCompatActivity() {
             this.finish()
         }
         adapter.setClcickSendData {
-            Log.e("Exercise",listExercise[it].toString())
             var bottomSheetFragment = ExerciseBottomSheetFragment(listExercise[it])
-            bottomSheetFragment.show(supportFragmentManager,bottomSheetFragment.tag)
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
         binding.view24.setOnClickListener {
-            var intent = Intent(this,DoExerciseActivity::class.java)
+            var intent = Intent(this, DoExerciseActivity::class.java)
             intent.putExtra("listExercise", listExercise)
             startActivity(intent)
         }
@@ -53,19 +52,13 @@ class DayFullBodyActivity : AppCompatActivity() {
     private fun addObsever() {
         if (day != 0) {
             viewModel.getDayFullBody(day.toString())
-            viewModel.dataDayFullBody.observe(this) {
-                binding.tvDay.text = it.name
-                binding.tvDayFullBodyStatus.text = "Time : ${it.time}, workout :${it.workout}"
-                var listIdExercise = it.idexercise
-                val separated: List<String> = listIdExercise.split(",")
-                Logger.logTest(separated.toString())
-                for (i in 1..it.workout.toInt()) {
-                    viewModel.getExercise(separated[i])
-                }
-            }
+        }
+        viewModel.dataDayFullBody.observe(this) {
+            binding.tvDay.text = it.name
+            binding.tvDayFullBodyStatus.text = "Time : ${it.time}, workout :${it.workout}"
         }
         viewModel.dataExercise.observe(this) {
-            listExercise.add(it)
+            listExercise.addAll(it)
             adapter.setListExercise(listExercise, this)
         }
 

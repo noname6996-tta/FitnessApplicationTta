@@ -99,6 +99,8 @@ dependencies {
     implementation 'com.kizitonwose.calendar:view:2.3.0'
     // baloon
     implementation "com.github.skydoves:balloon:1.5.4"
+    // dialog
+    implementation 'com.github.chnouman:AwesomeDialog:1.0.5'
 }
 
 kapt {

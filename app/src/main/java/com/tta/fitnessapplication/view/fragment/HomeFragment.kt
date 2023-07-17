@@ -52,30 +52,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun addObservers() {
         super.addObservers()
         //
-        val viewModel = HistoryViewModelGoogleData()
-        viewModel.getData()
-        viewModel.listStepsCount.observe(viewLifecycleOwner) {
-            binding.tvHomeStep.text = it.last().value + " steps"
-        }
-        viewModel.listWeight.observe(viewLifecycleOwner) {
-
-        }
-        viewModel.listCaloriesExpended.observe(viewLifecycleOwner) {
-            binding.tvCalor.text = it.last().value + "Calr"
-        }
-        viewModel.listHeartMinutes.observe(viewLifecycleOwner) {
-            binding.tvHeartRate.text = it.last().value + " BPM"
-        }
-        viewModel.listSleepTracker.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
-                binding.textView27.text = it.last().value + " h"
-            } else {
-                binding.textView27.text = "No data"
-            }
-        }
-        viewModel.message.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-        }
+//        val viewModel = HistoryViewModelGoogleData()
+//        viewModel.getData()
+//        viewModel.listStepsCount.observe(viewLifecycleOwner) {
+//            binding.tvHomeStep.text = it.last().value + " steps"
+//        }
+//        viewModel.listWeight.observe(viewLifecycleOwner) {
+//
+//        }
+//        viewModel.listCaloriesExpended.observe(viewLifecycleOwner) {
+//            binding.tvCalor.text = it.last().value + "Calr"
+//        }
+//        viewModel.listHeartMinutes.observe(viewLifecycleOwner) {
+//            binding.tvHeartRate.text = it.last().value + " BPM"
+//        }
+//        viewModel.listSleepTracker.observe(viewLifecycleOwner) {
+//            if (it.isNotEmpty()) {
+//                binding.textView27.text = it.last().value + " h"
+//            } else {
+//                binding.textView27.text = "No data"
+//            }
+//        }
+//        viewModel.message.observe(viewLifecycleOwner) {
+//            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+//        }
         //
         val repositoryApi = RepositoryApi()
         val viewModelFactory = MainViewModelFactory(repositoryApi)

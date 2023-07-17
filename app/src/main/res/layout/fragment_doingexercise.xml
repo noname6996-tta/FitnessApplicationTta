@@ -5,8 +5,9 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_margin="@dimen/size_8dp"
         android:background="@drawable/bg_blue_linear_16"
         android:padding="10dp"
@@ -26,10 +27,11 @@
         android:id="@+id/tvSkip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_16dp"
         android:drawableRight="@drawable/baseline_skip_next_24"
         android:fontFamily="@font/poppins_semibold"
         android:padding="@dimen/size_8dp"
-        android:text="Skip"
+        android:text="Next"
         android:textColor="@color/gray1"
         android:textSize="@dimen/size_16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,6 +42,7 @@
         android:id="@+id/tvPrevious"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_16dp"
         android:drawableLeft="@drawable/baseline_skip_previous_24"
         android:fontFamily="@font/poppins_semibold"
         android:padding="@dimen/size_8dp"

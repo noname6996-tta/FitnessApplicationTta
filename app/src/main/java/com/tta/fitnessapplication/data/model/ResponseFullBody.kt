@@ -7,6 +7,8 @@ data class ResponseFullBody(
     var response : Int,
     @SerializedName("message")
     var message : String,
+    @SerializedName("fullbody")
+    var fullbody : Fullbody,
     @SerializedName("data")
-    var data : List<Fullbody>
+    var data : List<Exercise>
 )

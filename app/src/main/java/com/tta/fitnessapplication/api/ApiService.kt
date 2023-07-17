@@ -47,7 +47,7 @@ interface ApiService {
     @POST(ApiPath.SELECT_FULLBODY)
     fun getDayFullBody(
         @Query("id") id: String,
-    ): Call<Fullbody>
+    ): Call<ResponseFullBody>
 
     @GET(ApiPath.EXERCISE)
     fun getALlExercise(): Call<ResponseExercise>

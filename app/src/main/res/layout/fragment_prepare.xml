@@ -47,16 +47,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/imgShowInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:src="@drawable/baseline_info_24"
-        app:layout_constraintBottom_toBottomOf="@+id/tvNameExercise"
-        app:layout_constraintStart_toEndOf="@+id/tvNameExercise"
-        app:layout_constraintTop_toTopOf="@+id/tvNameExercise" />
-
     <TextView
         android:id="@+id/textView44"
         android:layout_width="wrap_content"
@@ -90,8 +80,8 @@
 
     <ImageView
         android:id="@+id/imgBack"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_margin="@dimen/size_8dp"
         android:background="@drawable/bg_blue_linear_16"
         android:padding="10dp"

@@ -1,101 +1,135 @@
 package com.tta.fitnessapplication.view.activity.doexercise.fragment
 
-import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.awesomedialog.AwesomeDialog
+import com.example.awesomedialog.background
+import com.example.awesomedialog.body
+import com.example.awesomedialog.icon
+import com.example.awesomedialog.onNegative
+import com.example.awesomedialog.onPositive
+import com.example.awesomedialog.title
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.FragmentPrepareBinding
-import com.tta.fitnessapplication.view.activity.DayFullBody.ExerciseBottomSheetFragment
-import com.tta.fitnessapplication.view.activity.doexercise.DoExerciseActivity
 import com.tta.fitnessapplication.view.activity.doexercise.DoExerciseActivity.Companion.listExercise
-import java.util.concurrent.TimeUnit
+import com.tta.fitnessapplication.view.base.BaseFragment
 
-class PrepareFragment : Fragment() {
-    companion object{
-        var pause = false
-    }
-    private lateinit var binding : FragmentPrepareBinding
-    private var timeToPause = 0
-    var bottomSheetFragment = ExerciseQuitBottomSheetFragment()
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentPrepareBinding.inflate(layoutInflater)
-        return binding.root
+class PrepareFragment : BaseFragment<FragmentPrepareBinding>() {
+    private lateinit var countdownTimer: CountDownTimer
+    private var totalTimeInMillis: Long = 20000 // 20 seconds
+    private var timeRemainingInMillis: Long = totalTimeInMillis
+    private var isTimerRunning: Boolean = false
+    override fun getDataBinding(): FragmentPrepareBinding {
+        return FragmentPrepareBinding.inflate(layoutInflater)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        var exercise = listExercise[0]
-        val seconds = 20L // duration in seconds
-        val duration = TimeUnit.SECONDS.toMillis(seconds)
-        val timer = object: CountDownTimer(duration, TimeUnit.SECONDS.toMillis(1L)) {
-            override fun onTick(millisUntilFinished: Long) {
-                binding.tvCountDown.text = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished).toString()+"s"
-                timeToPause = millisUntilFinished.toInt()
-            }
-
-            override fun onFinish() {
-                val action  = PrepareFragmentDirections.actionPrepareFragmentToDoingExerciseFragment()
-                findNavController().navigate(action)
-            }
-        }
-        timer.start()
-
+    override fun addEvent() {
+        super.addEvent()
         binding.imgNext.setOnClickListener {
-            val action  = PrepareFragmentDirections.actionPrepareFragmentToDoingExerciseFragment()
+            stopTimer()
+            val action = PrepareFragmentDirections.actionPrepareFragmentToDoingExerciseFragment()
             findNavController().navigate(action)
-            timer.cancel()
         }
 
         binding.imgBack.setOnClickListener {
-            timer.cancel()
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-            requireActivity().finish()
-
+            pauseCountDown()
+            AwesomeDialog.build(requireActivity())
+                .title(
+                    "Notification",
+                    titleColor = ContextCompat.getColor(requireContext(), android.R.color.white)
+                )
+                .body(
+                    "What is your problem?",
+                    color = ContextCompat.getColor(requireContext(), android.R.color.white)
+                )
+                .icon(R.drawable.icon_bed)
+                .background(R.drawable.bg_blue_linear_16)
+                .onPositive(
+                    "I just take a look",
+                    buttonBackgroundColor = R.drawable.bg_pink_linear_16,
+                    textColor = ContextCompat.getColor(requireContext(), android.R.color.black)
+                ) {
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                    requireActivity().finish()
+                }
+                .onNegative(
+                    "Cancel",
+                    buttonBackgroundColor = R.drawable.bg_pink_linear_16,
+                    textColor = ContextCompat.getColor(requireContext(), android.R.color.black)
+                ) {
+                    resumeCountDown()
+                }
         }
+    }
 
-        if (exercise!=null){
+    override fun initView() {
+        super.initView()
+        var exercise = listExercise[0]
+        if (exercise != null) {
             binding.tvNameExercise.text = exercise.name
             Glide.with(requireActivity())
                 .load(exercise.image)
                 .error(R.drawable.alarm_clock)
                 .into(binding.imgExercise);
-            binding.imgShowInfo.setOnClickListener {
-                pause = true
-                timer.cancel()
-                bottomSheetFragment.show(requireActivity().supportFragmentManager,bottomSheetFragment.tag)
+        }
+        // Initialize the timer
+        countdownTimer = object : CountDownTimer(timeRemainingInMillis, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timeRemainingInMillis = millisUntilFinished
+                updateTimerText()
             }
+
+            override fun onFinish() {
+                // Do something when the countdown is complete
+                stopTimer()
+                findNavController().navigate(R.id.action_prepareFragment_to_doingExerciseFragment)
+            }
+        }
+        startCountDown()
+    }
+
+    private fun updateTimerText() {
+        val seconds = (timeRemainingInMillis / 1000)
+        binding.tvCountDown.text = String.format("%02d", seconds)
+    }
+
+    private fun startCountDown() {
+        if (!isTimerRunning) {
+            isTimerRunning = true
+            countdownTimer.start()
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (!pause){
-            if (timeToPause!=0){
-                val timer2 = object: CountDownTimer(timeToPause.toLong(), TimeUnit.SECONDS.toMillis(1L)) {
-                    override fun onTick(millisUntilFinished: Long) {
-                        binding.tvCountDown.text =  TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished).toString()+"s"
-                        timeToPause = millisUntilFinished.toInt()
-                    }
-
-                    override fun onFinish() {
-                        view?.post {
-                            val action  = PrepareFragmentDirections.actionPrepareFragmentToDoingExerciseFragment()
-                            findNavController().navigate(action)
-                        }
-                    }
-                }
-                timer2.start()
-            }
-
+    private fun pauseCountDown() {
+        if (isTimerRunning) {
+            isTimerRunning = false
+            countdownTimer.cancel()
         }
+    }
+
+    private fun resumeCountDown() {
+        if (!isTimerRunning) {
+            isTimerRunning = true
+            countdownTimer = object : CountDownTimer(timeRemainingInMillis, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    timeRemainingInMillis = millisUntilFinished
+                    updateTimerText()
+                }
+
+                override fun onFinish() {
+                    // Do something when the countdown is complete
+                    stopTimer()
+                    findNavController().navigate(R.id.action_prepareFragment_to_doingExerciseFragment)
+                }
+            }
+            countdownTimer.start()
+        }
+    }
+
+    private fun stopTimer() {
+        countdownTimer.cancel()
     }
 }
