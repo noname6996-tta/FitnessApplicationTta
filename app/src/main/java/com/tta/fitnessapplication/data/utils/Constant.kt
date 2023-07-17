@@ -29,4 +29,9 @@ class Constant {
         val selectionFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")
         val fullDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     }
+
+    object GPT {
+        //    val API_KEY = "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"
+        val API_KEY = "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"
+    }
 }

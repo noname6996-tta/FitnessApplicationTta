@@ -17,83 +17,93 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 
+
+// key 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
 class ChatGPTActivity : AppCompatActivity() {
+//    val API_KEY = "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"
+    val API_KEY = "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"
     lateinit var recyclerView: RecyclerView
-    lateinit var welcomeTextView: TextView
+    lateinit var welcomeText: TextView
     lateinit var messageEditText: EditText
     lateinit var sendButton: ImageButton
     lateinit var messageList: MutableList<Message>
     lateinit var messageAdapter: MessageAdapter
-    var client = OkHttpClient()
+    val client = OkHttpClient()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_gptactivity)
         messageList = ArrayList()
         recyclerView = findViewById(R.id.recycler_view)
-        welcomeTextView = findViewById(R.id.welcome_text)
+        welcomeText = findViewById(R.id.welcome_text)
         messageEditText = findViewById(R.id.message_edit_text)
         sendButton = findViewById(R.id.send_btn)
-
-        //setup recycler view
         messageAdapter = MessageAdapter(messageList)
         recyclerView.adapter = messageAdapter
-        val llm = LinearLayoutManager(this)
-        llm.stackFromEnd = true
-        recyclerView.layoutManager = llm
-        sendButton.setOnClickListener(View.OnClickListener { v: View? ->
+        val layoutManger = LinearLayoutManager(this)
+        layoutManger.stackFromEnd = true
+        recyclerView.layoutManager = layoutManger
+
+        sendButton.setOnClickListener {
             val question = messageEditText.text.toString().trim { it <= ' ' }
             addToChat(question, Message.SENT_BY_ME)
             messageEditText.setText("")
             callAPI(question)
-            welcomeTextView.visibility = View.GONE
-        })
+            welcomeText.visibility = View.GONE
+        }
     }
 
-    private fun addToChat(message: String?, sentBy: String?) {
+    private fun addToChat(message: String, sentBy: String) {
         runOnUiThread {
             messageList.add(Message(message, sentBy))
             messageAdapter.notifyDataSetChanged()
             recyclerView.smoothScrollToPosition(messageAdapter.itemCount)
         }
+
     }
 
     fun addResponse(response: String?) {
         messageList.removeAt(messageList.size - 1)
-        addToChat(response, Message.SENT_BY_BOT)
+        addToChat(response!!, Message.SENT_BY_BOT)
+
     }
 
-    private fun callAPI(question: String?) {
-        //okhttp
-        messageList.add(Message("Typing... ", Message.SENT_BY_BOT))
+    private fun callAPI(question: String) {
+        //call okhttp
+        messageList.add(Message("Typing...", Message.SENT_BY_BOT))
         val jsonBody = JSONObject()
         try {
-            jsonBody.put("prompt", "{$question}")
+                jsonBody.put("model", "gpt-3.5-turbo")
+                val messageArr = JSONArray()
+                val obj = JSONObject()
+                obj.put("role", "user")
+                obj.put("content", question)
+                messageArr.put(obj)
+
+                jsonBody.put("messages", messageArr)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        val body: RequestBody = jsonBody.toString().toRequestBody(JSON)
+        val body: RequestBody = RequestBody.create(JSON, jsonBody.toString())
         val request: Request = Request.Builder()
-            .url("https://v1.nocodeapi.com/jemuel/chatgpt/CiQXrcUHRgOmfliA/search")
-//            .url("https://v1.nocodeapi.com/trantheanh/chatgpt/bYDrWkWrcGvCncfD/search")
+            .url("https://api.openai.com/v1/chat/completions")
+            .header("Authorization", "Bearer $API_KEY")
             .post(body)
             .build()
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                addResponse("Failed to load response due to " + e.message)
+                addResponse("Failed to load response due to ${e.message}")
             }
 
-            @Throws(IOException::class)
             override fun onResponse(call: Call, response: Response) {
-                Log.e("tta",response.body.toString())
                 if (response.isSuccessful) {
                     var jsonObject: JSONObject? = null
-
                     try {
                         jsonObject = JSONObject(response.body!!.string())
                         val jsonArray = jsonObject.getJSONArray("choices")
@@ -103,10 +113,12 @@ class ChatGPTActivity : AppCompatActivity() {
                         e.printStackTrace()
                     }
                 } else {
-                    addResponse("Failed to load response due to " + response.body.toString())
+                    addResponse("Failed to load response due to ${response.body.toString()}")
                 }
             }
+
         })
+
     }
 
     companion object {
