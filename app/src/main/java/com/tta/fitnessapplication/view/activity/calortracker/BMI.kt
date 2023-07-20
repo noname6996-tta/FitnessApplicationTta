@@ -21,16 +21,16 @@ fun calculateFat(calories: Double): Double {
 }
 
 // Ví dụ sử dụng
-//fun main() {
-//    val totalCalories = 2000.0 // Tổng lượng calo hàng ngày
-//    val protein = calculateProtein(totalCalories)
-//    val carbohydrate = calculateCarbohydrate(totalCalories)
-//    val fat = calculateFat(totalCalories)
-//
-//    println("Lượng protein cần ăn: $protein gram")
-//    println("Lượng carbohydrate cần ăn: $carbohydrate gram")
-//    println("Lượng chất béo cần ăn: $fat gram")
-//}
+fun main() {
+    val totalCalories = 2000.0 // Tổng lượng calo hàng ngày
+    val protein = calculateProtein(totalCalories)
+    val carbohydrate = calculateCarbohydrate(totalCalories)
+    val fat = calculateFat(totalCalories)
+
+    println("Lượng protein cần ăn: $protein gram")
+    println("Lượng carbohydrate cần ăn: $carbohydrate gram")
+    println("Lượng chất béo cần ăn: $fat gram")
+}
 
 // Hàm tính lượng calo hàng ngày
 fun calculateDailyCalories(
