@@ -33,22 +33,22 @@ fun main() {
 }
 
 // Hàm tính lượng calo hàng ngày
-fun calculateDailyCalories(
-    weight: Double, // Cân nặng (kg)
-    height: Double, // Chiều cao (cm)
-    age: Int, // Tuổi
-    isMale: Boolean, // Giới tính: true nếu là nam, false nếu là nữ
-    activityLevel: Double // Mức độ hoạt động (từ 1.2 đến 2.5)
-): Double {
-    val bmr: Double
-    if (isMale) {
-        bmr = 10 * weight + 6.25 * height - 5 * age + 5
-    } else {
-        bmr = 10 * weight + 6.25 * height - 5 * age - 161
-    }
-    val dailyCalories = bmr * activityLevel
-    return dailyCalories
-}
+//fun calculateDailyCalories(
+//    weight: Double, // Cân nặng (kg)
+//    height: Double, // Chiều cao (cm)
+//    age: Int, // Tuổi
+//    isMale: Boolean, // Giới tính: true nếu là nam, false nếu là nữ
+//    activityLevel: Double // Mức độ hoạt động (từ 1.2 đến 2.5)
+//): Double {
+//    val bmr: Double
+//    if (isMale) {
+//        bmr = 10 * weight + 6.25 * height - 5 * age + 5
+//    } else {
+//        bmr = 10 * weight + 6.25 * height - 5 * age - 161
+//    }
+//    val dailyCalories = bmr * activityLevel
+//    return dailyCalories
+//}
 
 // Ví dụ sử dụng
 //fun main() {
