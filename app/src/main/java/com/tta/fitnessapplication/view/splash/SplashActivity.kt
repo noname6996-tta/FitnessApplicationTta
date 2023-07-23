@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.databinding.ActivitySplashBinding
-import com.tta.fitnessapplication.view.activity.MainActivity.MainActivity
+import com.tta.fitnessapplication.view.MainActivity
 import com.tta.fitnessapplication.view.onboarding.OnBoardActivity
 
 class SplashActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.tta.fitnessapplication.view.activity.MainActivity
+package com.tta.fitnessapplication.view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

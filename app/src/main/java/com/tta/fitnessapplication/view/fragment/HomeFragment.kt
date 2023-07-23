@@ -7,7 +7,6 @@ import android.graphics.Typeface
 import android.graphics.drawable.ClipDrawable
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -19,7 +18,6 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
-import com.google.android.material.snackbar.Snackbar
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import com.tta.fitnessapplication.data.utils.Constant
@@ -28,8 +26,8 @@ import com.tta.fitnessapplication.databinding.FragmentHomeBinding
 import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryActivity
 import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryAdapter
 import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryViewModel
-import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModel
-import com.tta.fitnessapplication.view.activity.MainActivity.MainViewModelFactory
+import com.tta.fitnessapplication.view.MainViewModel
+import com.tta.fitnessapplication.view.MainViewModelFactory
 import com.tta.fitnessapplication.view.activity.SleepTracker.SleepTrackerActivity
 import com.tta.fitnessapplication.view.activity.calortracker.CalorTrackerActivity
 import com.tta.fitnessapplication.view.activity.watertracker.WaterTrackerActivity

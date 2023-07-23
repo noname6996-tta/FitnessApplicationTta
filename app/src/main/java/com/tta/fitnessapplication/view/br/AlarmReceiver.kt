@@ -10,7 +10,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.noti.TaskInfo
-import com.tta.fitnessapplication.view.activity.MainActivity.MainActivity
+import com.tta.fitnessapplication.view.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

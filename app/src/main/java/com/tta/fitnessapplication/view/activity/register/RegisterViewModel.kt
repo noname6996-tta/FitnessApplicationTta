@@ -1,4 +1,4 @@
-package com.tta.fitnessapplication.view.activity.signup
+package com.tta.fitnessapplication.view.activity.register
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

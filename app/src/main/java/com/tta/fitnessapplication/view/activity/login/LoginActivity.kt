@@ -13,8 +13,8 @@ import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_USER
 import com.tta.fitnessapplication.data.utils.Constant.PREF.IDUSER
 import com.tta.fitnessapplication.data.utils.Constant.PREF.WATER_INNEED
 import com.tta.fitnessapplication.databinding.ActivityLoginBinding
-import com.tta.fitnessapplication.view.activity.MainActivity.MainActivity
-import com.tta.fitnessapplication.view.activity.signup.SignUpActivity
+import com.tta.fitnessapplication.view.MainActivity
+import com.tta.fitnessapplication.view.activity.register.SignUpActivity
 
 class LoginActivity : AppCompatActivity() {
     companion object{

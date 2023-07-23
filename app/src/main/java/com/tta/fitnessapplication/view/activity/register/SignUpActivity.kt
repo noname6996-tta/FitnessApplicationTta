@@ -1,4 +1,4 @@
-package com.tta.fitnessapplication.view.activity.signup
+package com.tta.fitnessapplication.view.activity.register
 
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -6,13 +6,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.widget.doOnTextChanged
-import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.view.activity.login.LoginActivity
 import com.tta.fitnessapplication.databinding.ActivitySignUpBinding
 import com.tta.fitnessapplication.view.activity.AfterSigUpActivity
-import com.tta.fitnessapplication.view.activity.MainActivity.MainActivity
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding

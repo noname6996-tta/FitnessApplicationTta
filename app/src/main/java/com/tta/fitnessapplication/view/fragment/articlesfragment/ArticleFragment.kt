@@ -10,7 +10,7 @@ import com.tta.fitnessapplication.view.activity.WebViewActivity
 import com.tta.fitnessapplication.view.activity.chatGpt.ChatGPTActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
 
-class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
+class ArticleFragment : BaseFragment<FragmentHistoryBinding>() {
     private val adapterVideo = VideoAdapter()
     private val adapterArticle = ArticleAdapter()
     private val viewModel = ArticleViewModel()

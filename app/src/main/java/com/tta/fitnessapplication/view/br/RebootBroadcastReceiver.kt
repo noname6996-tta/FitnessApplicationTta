@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.Intent
 import com.tta.fitnessapplication.data.model.noti.TaskInfo
 import com.tta.fitnessapplication.data.repository.TaskCategoryRepositoryImpl
-import com.tta.fitnessapplication.view.activity.MainActivity.MainActivity
+import com.tta.fitnessapplication.view.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main

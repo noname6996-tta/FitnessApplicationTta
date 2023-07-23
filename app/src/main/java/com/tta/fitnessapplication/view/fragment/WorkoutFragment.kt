@@ -8,7 +8,7 @@ import com.tta.fitnessapplication.view.activity.FullBodyWorkout.FullBodyWorkoutA
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.util.Calendar
 
-class DiscoverFragment : BaseFragment<FragmentDiscoverBinding>() {
+class WorkoutFragment : BaseFragment<FragmentDiscoverBinding>() {
     override fun getDataBinding(): FragmentDiscoverBinding {
         return FragmentDiscoverBinding.inflate(layoutInflater)
     }
