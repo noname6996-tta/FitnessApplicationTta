@@ -18,9 +18,6 @@ import com.tta.fitnessapplication.view.base.BaseFragment
 
 class SettingFragment : BaseFragment<FragmentSettingBinding>() {
     private lateinit var mainViewModel: MainViewModel
-    private lateinit var loginPreferences: SharedPreferences
-    private lateinit var loginPrefsEditor: SharedPreferences.Editor
-
     override fun getDataBinding(): FragmentSettingBinding {
         return FragmentSettingBinding.inflate(layoutInflater)
     }
@@ -30,11 +27,6 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         val repositoryApi = RepositoryApi()
         val viewModelFactory = MainViewModelFactory(repositoryApi)
         mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-        loginPreferences = requireActivity().getSharedPreferences(
-            Constant.LOGIN_PREFS,
-            AppCompatActivity.MODE_PRIVATE
-        )
-        loginPrefsEditor = loginPreferences.edit();
         var token = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
         if (token != "") {
             mainViewModel.getUserData(token)

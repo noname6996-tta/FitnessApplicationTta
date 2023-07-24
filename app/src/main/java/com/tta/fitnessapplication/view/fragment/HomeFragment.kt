@@ -1,13 +1,11 @@
 package com.tta.fitnessapplication.view.fragment
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ClipDrawable
 import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,11 +21,11 @@ import com.tta.fitnessapplication.data.repository.RepositoryApi
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.fullDateFormatter
 import com.tta.fitnessapplication.databinding.FragmentHomeBinding
+import com.tta.fitnessapplication.view.MainViewModel
+import com.tta.fitnessapplication.view.MainViewModelFactory
 import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryActivity
 import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryAdapter
 import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryViewModel
-import com.tta.fitnessapplication.view.MainViewModel
-import com.tta.fitnessapplication.view.MainViewModelFactory
 import com.tta.fitnessapplication.view.activity.SleepTracker.SleepTrackerActivity
 import com.tta.fitnessapplication.view.activity.calortracker.CalorTrackerActivity
 import com.tta.fitnessapplication.view.activity.watertracker.WaterTrackerActivity
@@ -41,8 +39,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private var viewModelHistory = HistoryViewModel()
     private val today = LocalDate.now()
     private val eventsAdapter = HistoryAdapter()
-    private lateinit var loginPreferences: SharedPreferences
-    private lateinit var loginPrefsEditor: SharedPreferences.Editor
     override fun getDataBinding(): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(layoutInflater)
     }
@@ -78,13 +74,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         val repositoryApi = RepositoryApi()
         val viewModelFactory = MainViewModelFactory(repositoryApi)
         mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-        loginPreferences = requireActivity().getSharedPreferences(
-            Constant.LOGIN_PREFS,
-            AppCompatActivity.MODE_PRIVATE
-        )
-        loginPrefsEditor = loginPreferences.edit();
-        var token = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
-        var idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
+        val token = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
+        val idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
         if (token != "") {
             mainViewModel.getUserData(token)
         }
@@ -248,7 +239,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun initCalender() {
-        var arrayDay = ArrayList<String>()
+        val arrayDay = ArrayList<String>()
         val calendar = Calendar.getInstance()
         // Set the calendar to the current week
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
