@@ -1,8 +1,13 @@
 package com.tta.fitnessapplication.view.fragment.articlesfragment
 
-import android.app.AlertDialog
 import android.content.Intent
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.awesomedialog.AwesomeDialog
+import com.example.awesomedialog.body
+import com.example.awesomedialog.icon
+import com.example.awesomedialog.onPositive
+import com.example.awesomedialog.title
+import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.Article
 import com.tta.fitnessapplication.data.model.Video
 import com.tta.fitnessapplication.databinding.FragmentHistoryBinding
@@ -58,14 +63,12 @@ class ArticleFragment : BaseFragment<FragmentHistoryBinding>() {
             adapterArticle.setImageList(arrayArticle, requireContext())
         }
         viewModel.message.observe(viewLifecycleOwner) {
-            AlertDialog.Builder(requireContext())
-                .setTitle("Thông báo")
-                .setMessage(it)
-                .setPositiveButton(
-                    "OK"
-                ) { _, _ ->
+            AwesomeDialog.build(requireActivity())
+                .title("Alert !")
+                .body(it)
+                .icon(R.drawable.alarm_clock)
+                .onPositive("ok") {
                 }
-                .show()
         }
     }
 }
