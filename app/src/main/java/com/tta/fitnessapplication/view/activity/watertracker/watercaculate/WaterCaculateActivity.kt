@@ -1,33 +1,26 @@
 package com.tta.fitnessapplication.view.activity.watertracker.watercaculate
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.findNavController
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.hideKeyboard
 import com.tta.fitnessapplication.data.utils.showAnimatedAlertDialog
 import com.tta.fitnessapplication.databinding.ActivityWaterCaculateBinding
-import com.tta.fitnessapplication.databinding.ActivityWaterTrackerBinding
+import com.tta.fitnessapplication.view.base.BaseFragment
 
-class WaterCaculateActivity : AppCompatActivity() {
-    private var _binding: ActivityWaterCaculateBinding? = null
-    private val binding get() = _binding!!
+class WaterCaculateActivity : BaseFragment<ActivityWaterCaculateBinding>() {
     private var gender: Gender = Gender.MALE
     private var activityLevel: ActivityLevel = ActivityLevel.SEDENTARY
     private var climate: Climate = Climate.COLD
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        _binding = ActivityWaterCaculateBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        addobsever()
-        initUi()
-        addEvent()
+
+    override fun getDataBinding(): ActivityWaterCaculateBinding {
+        return ActivityWaterCaculateBinding.inflate(layoutInflater)
     }
 
-    private fun addEvent() {
-        binding.imageView38.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+    override fun addEvent() {
+        binding.imageView38.setOnClickListener { findNavController().popBackStack() }
         binding.btnCaculate.setOnClickListener {
             var weight = binding.edtWeight.text.toString().trim()
             if (weight.isNotEmpty()) {
@@ -41,7 +34,11 @@ class WaterCaculateActivity : AppCompatActivity() {
                 binding.tvYourDailyGoal.text =
                     (calculateWaterIntake(healthInformation) * 10).toInt().toString() + " ml"
             } else {
-                showAnimatedAlertDialog(this, "Notification", "You must fill the weight blank")
+                showAnimatedAlertDialog(
+                    requireContext(),
+                    "Notification",
+                    "You must fill the weight blank"
+                )
             }
 
         }
@@ -108,15 +105,18 @@ class WaterCaculateActivity : AppCompatActivity() {
         }
     }
 
-    private fun initUi() {
+    override fun initView() {
+        super.initView()
         val gender = resources.getStringArray(R.array.Gender)
         val activityLevel = resources.getStringArray(R.array.ActivityLevel)
         val climate = resources.getStringArray(R.array.Climate)
 
-        val adapterGender = ArrayAdapter(this, android.R.layout.simple_list_item_1, gender)
+        val adapterGender =
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, gender)
         val adapterActivityLevel =
-            ArrayAdapter(this, android.R.layout.simple_list_item_1, activityLevel)
-        val adapterClimate = ArrayAdapter(this, android.R.layout.simple_list_item_1, climate)
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, activityLevel)
+        val adapterClimate =
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, climate)
         binding.spinnerFitness.setOnClickListener {
             this.hideKeyboard()
         }
@@ -138,13 +138,5 @@ class WaterCaculateActivity : AppCompatActivity() {
         binding.tvGender.setAdapter(adapterGender)
         binding.tvFitness.setAdapter(adapterActivityLevel)
         binding.tvWeather.setAdapter(adapterClimate)
-
-
     }
-
-    private fun addobsever() {
-
-    }
-
-
 }

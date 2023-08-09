@@ -10,6 +10,7 @@ import com.example.awesomedialog.title
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.Article
 import com.tta.fitnessapplication.data.model.Video
+import com.tta.fitnessapplication.databinding.FragmentDiscoverBinding
 import com.tta.fitnessapplication.databinding.FragmentHistoryBinding
 import com.tta.fitnessapplication.view.activity.WebViewActivity
 import com.tta.fitnessapplication.view.activity.chatGpt.ChatGPTActivity
@@ -24,7 +25,6 @@ class ArticleFragment : BaseFragment<FragmentHistoryBinding>() {
     override fun getDataBinding(): FragmentHistoryBinding {
         return FragmentHistoryBinding.inflate(layoutInflater)
     }
-
     override fun initView() {
         super.initView()
         binding.recyclerView.adapter = adapterVideo

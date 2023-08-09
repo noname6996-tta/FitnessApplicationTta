@@ -22,10 +22,10 @@ class PrepareFragment : BaseFragment<FragmentPrepareBinding>() {
     private var totalTimeInMillis: Long = 20000 // 20 seconds
     private var timeRemainingInMillis: Long = totalTimeInMillis
     private var isTimerRunning: Boolean = false
+
     override fun getDataBinding(): FragmentPrepareBinding {
         return FragmentPrepareBinding.inflate(layoutInflater)
     }
-
     override fun addEvent() {
         super.addEvent()
         binding.imgNext.setOnClickListener {

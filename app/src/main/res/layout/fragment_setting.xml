@@ -487,7 +487,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardOther"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/size_16dp"
                 app:cardCornerRadius="@dimen/size_16dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -636,6 +636,47 @@
                         app:layout_constraintBottom_toBottomOf="@+id/viewSetting"
                         app:layout_constraintEnd_toEndOf="@+id/viewSetting"
                         app:layout_constraintTop_toTopOf="@+id/viewSetting" />
+
+                    <View
+                        android:id="@+id/viewAboutUs"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_24dp"
+                        android:layout_margin="@dimen/size_16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/viewSetting" />
+
+                    <ImageView
+                        android:id="@+id/imageView33"
+                        android:layout_width="@dimen/size_24dp"
+                        android:layout_height="@dimen/size_24dp"
+                        android:src="@drawable/baseline_info_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewAboutUs"
+                        app:layout_constraintStart_toStartOf="@+id/viewAboutUs"
+                        app:layout_constraintTop_toTopOf="@+id/viewAboutUs" />
+
+                    <TextView
+                        android:id="@+id/tvAboutUs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size_24dp"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="AboutUs"
+                        android:textColor="@color/gray1"
+                        android:textSize="@dimen/size_14dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewAboutUs"
+                        app:layout_constraintStart_toEndOf="@+id/imageView33"
+                        app:layout_constraintTop_toTopOf="@+id/viewAboutUs" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_navigate_next_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewAboutUs"
+                        app:layout_constraintEnd_toEndOf="@+id/viewAboutUs"
+                        app:layout_constraintTop_toTopOf="@+id/viewAboutUs" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 

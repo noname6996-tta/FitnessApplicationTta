@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private fun initUi() {
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.frameMain) as NavHostFragment
-        navController = navHostFragment.findNavController()
+        navController = navHostFragment.navController
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {

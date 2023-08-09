@@ -30,7 +30,7 @@
             </intent-filter>
         </receiver>
         <activity
-            android:name=".view.activity.calortracker.MealTracker.MealTrackerActivity"
+            android:name=".view.activity.calortracker.FindMeal.FindMealActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.watertracker.waterHistory.WaterHistoryActivity"
@@ -64,7 +64,7 @@
             android:name=".view.activity.WebViewActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.calortracker.CalorTrackerActivity"
+            android:name=".view.activity.calortracker.CalorieTrackerActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -95,13 +95,6 @@
         </activity>
         <activity
             android:name=".view.activity.AfterSigUpActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.activity.login.LoginActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

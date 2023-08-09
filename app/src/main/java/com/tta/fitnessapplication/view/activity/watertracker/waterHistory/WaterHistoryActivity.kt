@@ -1,13 +1,11 @@
 package com.tta.fitnessapplication.view.activity.watertracker.waterHistory
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -33,57 +31,58 @@ import com.tta.fitnessapplication.databinding.ActivityWaterHistoryBinding
 import com.tta.fitnessapplication.databinding.Example3CalendarDayBinding
 import com.tta.fitnessapplication.databinding.Example3CalendarHeaderBinding
 import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryAdapter
-import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryViewModel
+import com.tta.fitnessapplication.view.base.BaseFragment
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
-import java.time.format.DateTimeFormatter
 
-class WaterHistoryActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityWaterHistoryBinding
-    private var viewModel = HistoryViewModel()
+class WaterHistoryActivity : BaseFragment<ActivityWaterHistoryBinding>() {
     private val eventsAdapter = HistoryAdapter()
-
     private var selectedDate: LocalDate? = null
-
     private val events = mutableMapOf<LocalDate, List<History>>()
-
-    private lateinit var loginPreferences: SharedPreferences
     private lateinit var idUser: String
+    override fun getDataBinding(): ActivityWaterHistoryBinding {
+        return ActivityWaterHistoryBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityWaterHistoryBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        loginPreferences = getSharedPreferences(Constant.LOGIN_PREFS, MODE_PRIVATE)
-        idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
-        addObserver()
-        initUi()
-        binding.topAppBar.setNavigationOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-            this.finish()
-        }
+
     }
 
-    private fun addObserver() {
-        viewModel.message.observe(this) {
-            Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
-        }
-        viewModel.list.observe(this) {
-            Log.e("this", it.toString())
-            if (it != null) {
-                eventsAdapter.events.clear()
-                eventsAdapter.events.addAll(it)
-                eventsAdapter.notifyDataSetChanged()
+    override fun initViewModel() {
+        super.initViewModel()
+        idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
+        //        viewModel.message.observe(this) {
+//            Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
+//        }
+//        viewModel.list.observe(this) {
+//            Log.e("this", it.toString())
+//            if (it != null) {
+//                eventsAdapter.events.clear()
+//                eventsAdapter.events.addAll(it)
+//                eventsAdapter.notifyDataSetChanged()
+//            }
+//        }
+        mainViewModel.listHistoryByDateAndType.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                var list = it.body()?.data
+                if (list != null) {
+                    eventsAdapter.events.clear()
+                    eventsAdapter.events.addAll(list)
+                    eventsAdapter.notifyDataSetChanged()
+                }
+            } else {
+                Snackbar.make(binding.root, it.errorBody().toString(), Snackbar.LENGTH_SHORT).show()
             }
         }
-
     }
 
-    private fun initUi() {
+    override fun initView() {
+        super.initView()
         binding.exThreeRv.apply {
             layoutManager =
-                LinearLayoutManager(this@WaterHistoryActivity, RecyclerView.VERTICAL, false)
+                LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             adapter = eventsAdapter
         }
 
@@ -111,6 +110,9 @@ class WaterHistoryActivity : AppCompatActivity() {
             // Show today's events initially.
             binding.exThreeCalendar.post { selectDate(today) }
         }
+        binding.topAppBar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun selectDate(date: LocalDate) {
@@ -130,20 +132,20 @@ class WaterHistoryActivity : AppCompatActivity() {
             notifyDataSetChanged()
         }
         binding.exThreeSelectedDateText.text = "Day: " + fullDateFormatter.format(date)
-        viewModel.getListHistoryByDateAndTypr(idUser, fullDateFormatter.format(date), "1")
+        mainViewModel.getListHistoryByDateAndType(idUser, fullDateFormatter.format(date), "1")
     }
 
     override fun onStart() {
         super.onStart()
         binding.topAppBar.setBackgroundColor(
-            this@WaterHistoryActivity.getColorCompat(R.color.text),
+            requireContext().getColorCompat(R.color.text),
         )
     }
 
     override fun onStop() {
         super.onStop()
         binding.topAppBar.setBackgroundColor(
-            this@WaterHistoryActivity.getColorCompat(R.color.text),
+            requireContext().getColorCompat(R.color.text),
         )
     }
 

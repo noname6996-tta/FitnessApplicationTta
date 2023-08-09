@@ -1,84 +1,83 @@
 package com.tta.fitnessapplication.view.activity.watertracker
 
-import android.content.Intent
-import android.content.SharedPreferences
-import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.fullDateFormatter
 import com.tta.fitnessapplication.data.utils.Constant.DATE.today
 import com.tta.fitnessapplication.data.utils.getCurrentTime
 import com.tta.fitnessapplication.data.utils.showAnimatedAlertDialog
 import com.tta.fitnessapplication.databinding.ActivityWaterTrackerBinding
-import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryViewModel
-import com.tta.fitnessapplication.view.activity.watertracker.waterHistory.WaterHistoryActivity
-import com.tta.fitnessapplication.view.activity.watertracker.watercaculate.WaterCaculateActivity
+import com.tta.fitnessapplication.view.base.BaseFragment
 
-class WaterTrackerActivity : AppCompatActivity() {
-    private var _binding: ActivityWaterTrackerBinding? = null
-    private val binding get() = _binding!!
-    private var viewModel = HistoryViewModel()
-    private lateinit var loginPreferences: SharedPreferences
+class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
+
     private lateinit var idUser: String
     private var drink = 0
-    // just for now
     private val dailyWater = 2000
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        _binding = ActivityWaterTrackerBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        loginPreferences = getSharedPreferences(Constant.LOGIN_PREFS, MODE_PRIVATE)
+    override fun getDataBinding(): ActivityWaterTrackerBinding {
+        return ActivityWaterTrackerBinding.inflate(layoutInflater)
+    }
+
+    override fun initViewModel() {
+        super.initViewModel()
         idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
-        addObserver()
-        initUi()
-        addEvent()
-    }
-
-    private fun addObserver() {
-        viewModel.getListHistoryByDateAndTypr(idUser, fullDateFormatter.format(today), "1")
-        viewModel.message.observe(this) {
-            Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
-        }
-        viewModel.isDone.observe(this){
-            if (it){
-                viewModel.getListHistoryByDateAndTypr(idUser, fullDateFormatter.format(today), "1")
-                showAnimatedAlertDialog(this,"Successful","Good jobs my friend")
-            } else {
-                showAnimatedAlertDialog(this,"Notification","Oh some thing went wrong!")
-            }
-        }
-        viewModel.list.observe(this) {
-            var value = 0
-            if (it != null) {
-                for (i in 0 until it.size) {
-                    value += it[i].value!!.toInt()
+        mainViewModel.getListHistoryByDateAndType(idUser, fullDateFormatter.format(today), "1")
+        mainViewModel.listHistoryByDateAndType.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                if (it.body()?.response == 0) {
+//                    Snackbar.make(binding.root, "No data", Snackbar.LENGTH_SHORT).show()
+                } else {
+                    var value = 0
+                    if (it.body()?.data != null) {
+                        for (i in 0 until it.body()?.data!!.size) {
+                            value += it.body()?.data!![i].value!!.toInt()
+                        }
+                        binding.textView60.text = "$value ml"
+                        var percent: Float = ((value / dailyWater * 100).toFloat())
+                        binding.tvPercentDrink.text = "$percent%"
+                        binding.seekBar.progress = percent.toInt()
+                    }
                 }
-                binding.textView60.text = "$value ml"
-                var percent : Float = ((value / dailyWater * 100).toFloat())
-                binding.tvPercentDrink.text = "$percent%"
-                binding.seekBar.progress = percent.toInt()
+            } else {
+                Snackbar.make(binding.root, it.errorBody().toString(), Snackbar.LENGTH_SHORT).show()
+            }
+        }
+        mainViewModel.createHistoryStatus.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                mainViewModel.getListHistoryByDateAndType(
+                    idUser,
+                    fullDateFormatter.format(today),
+                    "1"
+                )
+                showAnimatedAlertDialog(requireContext(), "Successful", "Good jobs my friend")
+            } else {
+                showAnimatedAlertDialog(
+                    requireContext(),
+                    "Notification",
+                    "Oh some thing went wrong!"
+                )
             }
         }
     }
 
-    private fun initUi() {
+    override fun initView() {
+        super.initView()
         binding.seekBar.max = 100
         binding.seekBar.isEnabled = false
-
     }
 
-    private fun addEvent() {
+
+    override fun addEvent() {
         binding.view13.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-            this.finish()
+            findNavController().popBackStack()
         }
         binding.cardViewWaterCaculate.setOnClickListener {
-            startActivity(Intent(this, WaterCaculateActivity::class.java))
+            findNavController().navigate(R.id.action_waterTrackerActivity_to_waterCaculateActivity)
         }
         binding.cardViewHistoryWaterTracker.setOnClickListener {
-            startActivity(Intent(this, WaterHistoryActivity::class.java))
+            findNavController().navigate(R.id.action_waterTrackerActivity_to_waterHistoryActivity)
         }
         binding.imgCup100ml.setOnClickListener {
             drink = 100
@@ -118,7 +117,7 @@ class WaterTrackerActivity : AppCompatActivity() {
         }
 
         binding.appCompatButton.setOnClickListener {
-            viewModel.createHistory(
+            mainViewModel.createHistory(
                 idUser,
                 fullDateFormatter.format(today),
                 getCurrentTime(),

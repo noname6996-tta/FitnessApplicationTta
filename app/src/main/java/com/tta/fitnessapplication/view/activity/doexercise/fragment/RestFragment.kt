@@ -12,6 +12,7 @@ import com.example.awesomedialog.onNegative
 import com.example.awesomedialog.onPositive
 import com.example.awesomedialog.title
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.databinding.FragmentPrepareBinding
 import com.tta.fitnessapplication.databinding.FragmentRestexerciseBinding
 import com.tta.fitnessapplication.view.activity.doexercise.DoExerciseActivity
 import com.tta.fitnessapplication.view.activity.doexercise.DoExerciseActivity.Companion.numberExercise
@@ -22,10 +23,10 @@ class RestFragment : BaseFragment<FragmentRestexerciseBinding>() {
     private var totalTimeInMillis: Long = 20000 // 20 seconds
     private var timeRemainingInMillis: Long = totalTimeInMillis
     private var isTimerRunning: Boolean = false
+
     override fun getDataBinding(): FragmentRestexerciseBinding {
         return FragmentRestexerciseBinding.inflate(layoutInflater)
     }
-
     override fun addEvent() {
         super.addEvent()
         binding.btnBack.setOnClickListener {

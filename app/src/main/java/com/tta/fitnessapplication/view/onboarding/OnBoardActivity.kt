@@ -7,6 +7,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.ActivityOnBoardBinding
+import com.tta.fitnessapplication.view.MainActivity
 import com.tta.fitnessapplication.view.activity.login.LoginActivity
 
 class OnBoardActivity : AppCompatActivity() {
@@ -60,7 +61,7 @@ class OnBoardActivity : AppCompatActivity() {
                 binding.tvDesFrame.startAnimation(animation_slidein)
             }
             125 -> {
-                val intent = Intent(this, LoginActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }

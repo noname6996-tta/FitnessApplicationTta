@@ -12,30 +12,30 @@ import retrofit2.Response
 class RegisterViewModel : ViewModel(){
     val success = MutableLiveData<Int>()
     val message = MutableLiveData<String>()
-    fun register(email: String,password: String,firstname: String,lastname: String)
-    {
-        ApiClient.API.register(email, password, firstname, lastname).enqueue(object :
-            Callback<UserLoginResponse> {
-            override fun onResponse(
-                call: Call<UserLoginResponse>,
-                response: Response<UserLoginResponse>
-            ) {
-                Log.e("tta",call.request().toString())
-                Log.e("tta",response.body().toString())
-                if (response.body()?.success==1){
-                    success.value = response.body()?.success
-                    message.value = response.body()?.message
-                } else {
-                    message.value = response.body()?.message
-                }
-            }
-
-            override fun onFailure(call: Call<UserLoginResponse>, t: Throwable) {
-                message.value = t.toString()
-                Log.e("tta",call.request().toString())
-                Log.e("tta",t.toString())
-            }
-
-        })
-    }
+//    fun register(email: String,password: String,firstname: String,lastname: String)
+//    {
+//        ApiClient.API.register(email, password, firstname, lastname).enqueue(object :
+//            Callback<UserLoginResponse> {
+//            override fun onResponse(
+//                call: Call<UserLoginResponse>,
+//                response: Response<UserLoginResponse>
+//            ) {
+//                Log.e("tta",call.request().toString())
+//                Log.e("tta",response.body().toString())
+//                if (response.body()?.success==1){
+//                    success.value = response.body()?.success
+//                    message.value = response.body()?.message
+//                } else {
+//                    message.value = response.body()?.message
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<UserLoginResponse>, t: Throwable) {
+//                message.value = t.toString()
+//                Log.e("tta",call.request().toString())
+//                Log.e("tta",t.toString())
+//            }
+//
+//        })
+//    }
 }

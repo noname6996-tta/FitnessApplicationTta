@@ -6,8 +6,9 @@ import android.graphics.Typeface
 import android.graphics.drawable.ClipDrawable
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.animation.Easing
@@ -17,26 +18,19 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
 import com.tta.fitnessapplication.R
-import com.tta.fitnessapplication.data.repository.RepositoryApi
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.fullDateFormatter
 import com.tta.fitnessapplication.databinding.FragmentHomeBinding
-import com.tta.fitnessapplication.view.MainViewModel
-import com.tta.fitnessapplication.view.MainViewModelFactory
-import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryActivity
+import com.tta.fitnessapplication.view.HistoryViewModelGoogleData
 import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryAdapter
-import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryViewModel
 import com.tta.fitnessapplication.view.activity.SleepTracker.SleepTrackerActivity
-import com.tta.fitnessapplication.view.activity.calortracker.CalorTrackerActivity
-import com.tta.fitnessapplication.view.activity.watertracker.WaterTrackerActivity
+import com.tta.fitnessapplication.view.activity.calortracker.CalorieTrackerActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.time.LocalDate
 import java.util.Calendar
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private lateinit var mImageDrawable: ClipDrawable
-    private lateinit var mainViewModel: MainViewModel
-    private var viewModelHistory = HistoryViewModel()
     private val today = LocalDate.now()
     private val eventsAdapter = HistoryAdapter()
     override fun getDataBinding(): FragmentHomeBinding {
@@ -71,15 +65,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 //            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
 //        }
         //
-        val repositoryApi = RepositoryApi()
-        val viewModelFactory = MainViewModelFactory(repositoryApi)
-        mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-        val token = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
+
+        val emailUser = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
         val idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
-        if (token != "") {
-            mainViewModel.getUserData(token)
+        if (emailUser != "") {
+            mainViewModel.getUserData(emailUser)
         }
-        mainViewModel.dataExercise.observe(requireActivity()) {
+        mainViewModel.dataExercise.observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
                 var dataProfile = mainViewModel.dataExercise.value?.body()?.data
                 Log.e("dataProfile", dataProfile.toString())
@@ -90,24 +82,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         }
         //
-        viewModelHistory.getListHistoryByDate(idUser, fullDateFormatter.format(today))
-
-        viewModelHistory.message.observe(this) {
-            binding.tvNoDataRecycle.visibility = View.VISIBLE
-            binding.tvNoDataRecycle.text = it
-        }
-        viewModelHistory.list.observe(this) {
-            Log.e("this", it.toString())
-
-            if (it != null) {
-                binding.tvNoDataRecycle.visibility = View.GONE
-                eventsAdapter.events.clear()
-                for (i in 0 until it.size) {
-                    if (i <= 2) {
-                        eventsAdapter.events.add(it[i])
+        mainViewModel.getHistoryByDate(idUser, fullDateFormatter.format(today))
+        mainViewModel.listHistoryByDate.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                if (it.body()?.response == 0) {
+                    binding.tvNoDataRecycle.visibility = View.VISIBLE
+                    binding.tvNoDataRecycle.text = it.body()?.message
+                } else {
+                    if (!it.body()?.data.isNullOrEmpty()) {
+                        binding.tvNoDataRecycle.visibility = View.GONE
+                        eventsAdapter.events.clear()
+                        for (i in 0 until it.body()?.data!!.size) {
+                            if (i <= 2) {
+                                eventsAdapter.events.add(it.body()?.data!![i])
+                            }
+                        }
+                        eventsAdapter.notifyDataSetChanged()
                     }
                 }
-                eventsAdapter.notifyDataSetChanged()
             }
         }
     }
@@ -117,19 +109,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             startActivity(Intent(activity, SleepTrackerActivity::class.java))
         }
         binding.cardViewWater.setOnClickListener {
-            startActivity(
-                Intent(
-                    activity,
-                    WaterTrackerActivity::class.java
-                )
-            )
+            findNavController().navigate(R.id.action_homeFragment_to_waterTrackerActivity)
         }
         binding.cardViewEat.setOnClickListener {
-            startActivity(Intent(activity, CalorTrackerActivity::class.java))
+            startActivity(Intent(activity, CalorieTrackerActivity::class.java))
         }
 
         binding.tvSeeMoreHistory.setOnClickListener {
-            startActivity(Intent(activity, HistoryActivity::class.java))
+            findNavController().navigate(R.id.action_homeFragment_to_historyActivity)
         }
 
         binding.imgNotifiHome.setOnClickListener {

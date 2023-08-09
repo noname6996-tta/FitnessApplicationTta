@@ -3,35 +3,28 @@ package com.tta.fitnessapplication.view.fragment
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.tta.fitnessapplication.data.repository.RepositoryApi
 import com.tta.fitnessapplication.data.utils.Constant
+import com.tta.fitnessapplication.data.utils.Constant.Companion.BASE_URL
 import com.tta.fitnessapplication.databinding.FragmentSettingBinding
 import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryActivity
-import com.tta.fitnessapplication.view.MainViewModel
-import com.tta.fitnessapplication.view.MainViewModelFactory
+import com.tta.fitnessapplication.view.activity.WebViewActivity
 import com.tta.fitnessapplication.view.activity.login.LoginActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
 
 class SettingFragment : BaseFragment<FragmentSettingBinding>() {
-    private lateinit var mainViewModel: MainViewModel
     override fun getDataBinding(): FragmentSettingBinding {
         return FragmentSettingBinding.inflate(layoutInflater)
     }
 
     override fun addObservers() {
         super.addObservers()
-        val repositoryApi = RepositoryApi()
-        val viewModelFactory = MainViewModelFactory(repositoryApi)
-        mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         var token = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
         if (token != "") {
             mainViewModel.getUserData(token)
         }
-        mainViewModel.dataExercise.observe(requireActivity()) {
+        mainViewModel.dataExercise.observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
                 var dataProfile = mainViewModel.dataExercise.value?.body()?.data
                 binding.tvUserName.text =
@@ -83,6 +76,27 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
         binding.viewHistory.setOnClickListener {
             requireActivity().startActivity(Intent(activity, HistoryActivity::class.java))
+        }
+
+        binding.viewAboutUs.setOnClickListener {
+            val url = "$BASE_URL/fitnessweb/aboutUs"
+            val intent = Intent(requireActivity(), WebViewActivity::class.java)
+            intent.putExtra("url", url)
+            startActivity(intent)
+        }
+
+        binding.viewContactUs.setOnClickListener {
+            val url = "$BASE_URL/fitnessweb//fitnessweb/contact/"
+            val intent = Intent(requireActivity(), WebViewActivity::class.java)
+            intent.putExtra("url", url)
+            startActivity(intent)
+        }
+
+        binding.viewPrivacy.setOnClickListener {
+            val url = "$BASE_URL/fitnessweb/PrivacyPolicy"
+            val intent = Intent(requireActivity(), WebViewActivity::class.java)
+            intent.putExtra("url", url)
+            startActivity(intent)
         }
     }
 }

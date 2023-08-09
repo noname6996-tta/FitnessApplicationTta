@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.FragemntVideoBinding
 import com.tta.fitnessapplication.view.base.BaseFragment
 

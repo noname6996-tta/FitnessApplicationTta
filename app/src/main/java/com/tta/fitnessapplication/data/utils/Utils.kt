@@ -17,6 +17,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.kizitonwose.calendar.core.Week
 import com.kizitonwose.calendar.core.yearMonth
 import com.tta.fitnessapplication.R
@@ -134,13 +135,13 @@ fun showAnimatedAlertDialog(context: Context, title: String, message: String) {
     alertDialog.show()
 }
 
-fun Activity.hideKeyboard() {
-    if (currentFocus != null) {
-        val inputMethodManager = getSystemService(
+fun Fragment.hideKeyboard() {
+    if (requireActivity().currentFocus != null) {
+        val inputMethodManager = requireActivity().getSystemService(
             Context
                 .INPUT_METHOD_SERVICE
         ) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+        inputMethodManager.hideSoftInputFromWindow(requireActivity().currentFocus!!.windowToken, 0)
     }
 }
 

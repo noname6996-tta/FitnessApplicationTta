@@ -15,6 +15,7 @@ import com.example.awesomedialog.title
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.Exercise
 import com.tta.fitnessapplication.databinding.FragmentDoingexerciseBinding
+import com.tta.fitnessapplication.databinding.FragmentHistoryBinding
 import com.tta.fitnessapplication.view.activity.DayFullBody.ExerciseBottomSheetFragment
 import com.tta.fitnessapplication.view.activity.doexercise.DoExerciseActivity.Companion.listExercise
 import com.tta.fitnessapplication.view.activity.doexercise.DoExerciseActivity.Companion.numberExercise
@@ -29,7 +30,6 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>(){
     override fun getDataBinding(): FragmentDoingexerciseBinding {
         return FragmentDoingexerciseBinding.inflate(layoutInflater)
     }
-
     override fun initView() {
         super.initView()
         // Initialize the timer
@@ -49,7 +49,7 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>(){
         exercise = listExercise[numberExercise]
         if (exercise != null) {
             binding.textView45.text = exercise.name
-            Glide.with(requireActivity())
+            Glide.with(requireContext())
                 .load(exercise.image)
                 .error(R.drawable.alarm_clock)
                 .into(binding.imageView24)
@@ -112,6 +112,7 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>(){
 
     override fun addEvent() {
         binding.tvSkip.setOnClickListener {
+            stopTimer()
             numberExercise++
             // check khi number == list.size thì hoàn thành bài tập
             Log.e("tta", numberExercise.toString() + listExercise[numberExercise])
@@ -119,6 +120,7 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>(){
             findNavController().navigate(action)
         }
         binding.tvPrevious.setOnClickListener {
+            stopTimer()
             numberExercise--
             // check khi number == list.size thì hoàn thành bài tập
             Log.e("tta", numberExercise.toString() + listExercise[numberExercise])
@@ -158,7 +160,7 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>(){
             pauseCountDown()
 //            val dialog = ExerciseBottomSheetFragment(exercise)
 //            dialog.setDismissListener(this)
-//            dialog.show(requireActivity().supportFragmentManager, "FullScreenDialog")
+//            dialog.show(requireContext().supportFragmentManager, "FullScreenDialog")
 
         }
     }

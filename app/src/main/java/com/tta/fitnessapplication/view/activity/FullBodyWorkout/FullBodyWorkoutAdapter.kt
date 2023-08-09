@@ -63,5 +63,5 @@ class FullBodyWorkoutAdapter : RecyclerView.Adapter<FullBodyWorkoutAdapter.FullB
 
     class FullBodyWorkoutAdapterViewHolder(
         val binding: LayoutItemHomeworkoutBinding
-    ) : RecyclerView.ViewHolder(binding.root) {}
+    ) : RecyclerView.ViewHolder(binding.root)
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.calortracker.CalorTrackerActivity">
+    tools:context=".view.activity.calortracker.CalorieTrackerActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -12,7 +12,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FEFEFF">
 
             <View
                 android:id="@+id/view"
@@ -27,7 +28,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
-                android:id="@+id/view13"
+                android:id="@+id/viewBack"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginLeft="@dimen/size_16dp"
@@ -41,10 +42,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
-                app:layout_constraintBottom_toBottomOf="@+id/view13"
-                app:layout_constraintEnd_toEndOf="@+id/view13"
-                app:layout_constraintStart_toStartOf="@+id/view13"
-                app:layout_constraintTop_toTopOf="@+id/view13" />
+                app:layout_constraintBottom_toBottomOf="@+id/viewBack"
+                app:layout_constraintEnd_toEndOf="@+id/viewBack"
+                app:layout_constraintStart_toStartOf="@+id/viewBack"
+                app:layout_constraintTop_toTopOf="@+id/viewBack" />
 
             <TextView
                 android:id="@+id/textView25"
@@ -54,10 +55,10 @@
                 android:text="Meal Planner"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/size_16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/view13"
+                app:layout_constraintBottom_toBottomOf="@+id/viewBack"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/view13" />
+                app:layout_constraintTop_toTopOf="@+id/viewBack" />
 
             <TextView
                 android:id="@+id/textView61"
@@ -68,7 +69,7 @@
                 android:text="Today"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/size_24dp"
-                app:layout_constraintStart_toStartOf="@+id/view13"
+                app:layout_constraintStart_toStartOf="@+id/viewBack"
                 app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
             <ProgressBar
@@ -133,6 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_margin="@dimen/size_16dp"
+                android:background="@color/white"
                 app:cardCornerRadius="@dimen/size_16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -258,13 +260,32 @@
                 app:layout_constraintStart_toStartOf="@+id/view22"
                 app:layout_constraintTop_toTopOf="@+id/view22" />
 
-            <Spinner
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/spinnerDay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size_16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_margin="@dimen/size_8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="@dimen/size_8dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view21" />
+                app:layout_constraintTop_toBottomOf="@+id/view21">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/tvBreakfast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_button_radius"
+                    android:hint="Breakfast"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="@dimen/size_14dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textView67"
@@ -272,9 +293,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Today Meal Phanner"
+                android:text="Today Meal Planner"
                 android:textColor="@color/black"
                 android:textSize="@dimen/size_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/spinnerDay"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/spinnerDay" />
 
@@ -283,9 +305,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_16dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerDay" />
+
+            <TextView
+                android:id="@+id/tvMeal"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:gravity="center"
+                android:text="No Data"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerDay" />
+
+            <Button
+                android:id="@+id/btnAddSomethingToEat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_radius_pink"
+                android:text="Add something in your meals"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMeal"
+
+                />
 
             <TextView
                 android:id="@+id/textView68"
@@ -297,12 +345,16 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/size_16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recMeal" />
+                app:layout_constraintTop_toBottomOf="@+id/btnAddSomethingToEat" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recSuggestFood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginRight="@dimen/size_8dp"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView68" />
@@ -313,6 +365,7 @@
                 android:layout_height="120dp"
                 android:layout_margin="16dp"
                 app:cardCornerRadius="@dimen/size_16dp"
+                app:cardElevation="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -320,7 +373,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
 
                     <ImageView
                         android:id="@+id/imgterCaculateHistory"
@@ -336,7 +390,9 @@
                         android:id="@+id/tvWaterCaculateHistory"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="20dp"
+                        android:layout_marginRight="16dp"
                         android:fontFamily="@font/poppins_medium"
                         android:maxLines="2"
                         android:text="Calculate calories per day you should consume"
@@ -350,6 +406,7 @@
                         android:id="@+id/tvWaterCaculateHistoryDesc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Click here for details"
                         android:textColor="@color/text"

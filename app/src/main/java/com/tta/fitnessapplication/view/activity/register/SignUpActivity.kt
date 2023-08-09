@@ -1,51 +1,51 @@
 package com.tta.fitnessapplication.view.activity.register
 
-import android.app.AlertDialog
-import android.content.DialogInterface
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.Toast
-import com.tta.fitnessapplication.view.activity.login.LoginActivity
+import androidx.navigation.fragment.findNavController
+import com.example.awesomedialog.AwesomeDialog
+import com.example.awesomedialog.body
+import com.example.awesomedialog.icon
+import com.example.awesomedialog.onPositive
+import com.example.awesomedialog.title
+import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.ActivitySignUpBinding
-import com.tta.fitnessapplication.view.activity.AfterSigUpActivity
+import com.tta.fitnessapplication.view.base.BaseFragment
 
-class SignUpActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySignUpBinding
-    private val viewModel = RegisterViewModel()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        addObsever()
-        addEvent()
+class SignUpActivity : BaseFragment<ActivitySignUpBinding>() {
+    override fun getDataBinding(): ActivitySignUpBinding {
+        return ActivitySignUpBinding.inflate(layoutInflater)
     }
 
-    private fun addObsever() {
-        viewModel.message.observe(this) {
-            AlertDialog.Builder(this)
-                .setTitle("Thông báo")
-                .setMessage(it)
-                .setPositiveButton("OK",
-                    DialogInterface.OnClickListener { _, _ ->
-                    })
-                .show()
-        }
-        viewModel.success.observe(this) {
-            if (it == 1) {
-                Toast.makeText(this,"Đăng ký thành công vui lòng đăng nhập",Toast.LENGTH_SHORT)
-                startActivity(Intent(this, AfterSigUpActivity::class.java))
-                finish()
-            }
-        }
+    override fun initViewModel() {
+        super.initViewModel()
+//        mainViewModel.message.observe(viewLifecycleOwner) {
+//            AwesomeDialog.build(requireActivity())
+//                .title("Notification !")
+//                .body(it)
+//                .icon(R.drawable.alarm_clock)
+//                .onPositive("ok") {
+//                }
+//        }
+//        mainViewModel.success.observe(viewLifecycleOwner) {
+//            if (it == 1) {
+//                AwesomeDialog.build(requireActivity())
+//                    .title("Notification !")
+//                    .body("Register success, but i need some information for your profiles")
+//                    .icon(R.drawable.alarm_clock)
+//                    .onPositive("ok") {
+//                    }
+////                startActivity(Intent(this, AfterSigUpActivity::class.java))
+////                finish()
+//            }
+//        }
     }
 
-    private fun addEvent() {
+
+    override fun addEvent() {
         binding.btnRegester.setOnClickListener {
-//            val email = binding.edtEmail.text.toString()
-//            val password = binding.edtPassword.text.toString()
-//            val firstName = binding.edtUsernameFirstname.text.toString()
-//            val lastName = binding.edtUsernameLastname.text.toString()
+            val email = binding.edtEmail.text.toString()
+            val password = binding.edtPassword.text.toString()
+            val firstName = binding.edtUsernameFirstname.text.toString()
+            val lastName = binding.edtUsernameLastname.text.toString()
 //            if (email.isEmpty()) {
 //                binding.tvEmail.error = "Vui lòng nhập"
 //            }
@@ -91,15 +91,14 @@ class SignUpActivity : AppCompatActivity() {
 //            if (email.isEmpty() || password.isEmpty()||firstName.isEmpty() || lastName.isEmpty()) {
 //
 //            } else {
-//                viewModel.register(email, password,firstName,lastName)
+//                mainViewModel.register(email, password,firstName,lastName)
 //            }
-            Toast.makeText(this,"Đăng ký thành công vui lòng đăng nhập",Toast.LENGTH_SHORT)
-            startActivity(Intent(this, AfterSigUpActivity::class.java))
-            finish()
+//            Toast.makeText(this,"Đăng ký thành công vui lòng đăng nhập",Toast.LENGTH_SHORT)
+//            startActivity(Intent(this, AfterSigUpActivity::class.java))
+//            finish()
         }
         binding.textView3.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
+            findNavController().navigate(R.id.action_signUpActivity_to_loginActivity)
         }
     }
 }

@@ -1,11 +1,13 @@
 package com.tta.fitnessapplication.view.activity.login
 
-import android.content.Intent
-import android.content.SharedPreferences
-import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context.MODE_PRIVATE
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
+import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant.Companion.EMAIL_USER
 import com.tta.fitnessapplication.data.utils.Constant.Companion.LOGIN_PREFS
 import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_LOGIN
@@ -13,52 +15,45 @@ import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_USER
 import com.tta.fitnessapplication.data.utils.Constant.PREF.IDUSER
 import com.tta.fitnessapplication.data.utils.Constant.PREF.WATER_INNEED
 import com.tta.fitnessapplication.databinding.ActivityLoginBinding
-import com.tta.fitnessapplication.view.MainActivity
-import com.tta.fitnessapplication.view.activity.register.SignUpActivity
+import com.tta.fitnessapplication.view.base.BaseFragment
 
-class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
-    private val viewModel = LoginViewModel()
+class LoginActivity : BaseFragment<ActivityLoginBinding>() {
     private var check = false
-    private lateinit var loginPreferences: SharedPreferences
-    private lateinit var loginPrefsEditor: SharedPreferences.Editor
     private var saveLogin: Boolean = false
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+
+    override fun initView() {
+        super.initView()
         binding.edtEmail.setText("theanh682001@gmail.com")
         binding.edtPassword.setText("123456")
-        setContentView(binding.root)
-        addObserver()
-        loginPreferences = getSharedPreferences(LOGIN_PREFS, MODE_PRIVATE)
+        loginPreferences = requireActivity().getSharedPreferences(LOGIN_PREFS, MODE_PRIVATE)
         loginPrefsEditor = loginPreferences.edit();
         saveLogin = loginPreferences.getBoolean(SAVE_LOGIN, false);
         if (saveLogin) {
-            startActivity(Intent(this, MainActivity::class.java))
-            this.finish()
+            binding.progessBarLogin.visibility = View.GONE
+            findNavController().navigate(R.id.action_loginActivity_to_homeFragment)
         }
-        addEvent()
     }
 
-    private fun addObserver() {
-        viewModel.message.observe(this) {
-            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
-        }
-        viewModel.checkLogin.observe(this) {
-            check = it
+    override fun getDataBinding(): ActivityLoginBinding {
+        return ActivityLoginBinding.inflate(layoutInflater)
+    }
+
+    override fun initViewModel() {
+        super.initViewModel()
+        mainViewModel.login.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                check = true
+                loginPrefsEditor.putString(IDUSER, it.body()?.id)
+                loginPrefsEditor.commit()
+                loginPrefsEditor.putString(EMAIL_USER, it.body()?.email)
+                loginPrefsEditor.commit()
+            } else {
+                check = false
+                Snackbar.make(binding.root, it.errorBody().toString(), Snackbar.LENGTH_SHORT).show()
+            }
             if (check) {
                 saveUser()
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
             }
-        }
-        viewModel.idUser.observe(this) {
-            loginPrefsEditor.putString(IDUSER, it)
-            loginPrefsEditor.commit()
-        }
-        viewModel.emailUser.observe(this) {
-            loginPrefsEditor.putString(EMAIL_USER, it)
-            loginPrefsEditor.commit()
         }
     }
 
@@ -68,10 +63,12 @@ class LoginActivity : AppCompatActivity() {
         loginPrefsEditor.putString(WATER_INNEED, "2000");
         loginPrefsEditor.commit();
         // go to home
-        startActivity(Intent(this, MainActivity::class.java))
+        binding.progessBarLogin.visibility = View.GONE
+        findNavController().navigate(R.id.action_loginActivity_to_homeFragment)
     }
 
-    private fun addEvent() {
+
+    override fun addEvent() {
         binding.view.setOnClickListener {
             val email = binding.edtEmail.text.toString()
             val password = binding.edtPassword.text.toString()
@@ -99,13 +96,14 @@ class LoginActivity : AppCompatActivity() {
             if (email.isEmpty() || password.isEmpty()) {
 
             } else {
-                viewModel.login(email, password)
+                binding.progessBarLogin.visibility = View.VISIBLE
+                mainViewModel.login(email, password)
             }
         }
 
         binding.textView3.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
-            finish()
+//            startActivity(Intent(this, SignUpActivity::class.java))
+//            finish()
         }
     }
 }

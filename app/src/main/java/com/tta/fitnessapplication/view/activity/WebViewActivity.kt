@@ -1,9 +1,9 @@
 package com.tta.fitnessapplication.view.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.MaterialToolbar
 import com.tta.fitnessapplication.R
 
@@ -19,7 +19,7 @@ class WebViewActivity : AppCompatActivity() {
 
         // this will load the url of the website
         var url = intent.getStringExtra("url")
-        if (url!=null){
+        if (url != null) {
             webView.loadUrl(url.toString())
         }
         // this will enable the javascript settings, it can also allow xss vulnerabilities
