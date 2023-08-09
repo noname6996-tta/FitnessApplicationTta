@@ -31,7 +31,7 @@ class HistoryAdapter() : RecyclerView.Adapter<HistoryAdapter.Example3EventsViewH
             binding.tvValue.text = event.value
             binding.tvDateTime.text = "${event.date} - ${event.time}"
             when (event.type) {
-                0 -> binding.imgType.setImageResource(R.drawable.alarm_clock)
+                0 -> binding.imgType.setImageResource(R.drawable.ic_logo)
                 1 -> binding.imgType.setImageResource(R.drawable.ic_cup)
                 2 -> binding.imgType.setImageResource(R.drawable.ic_sleep)
                 3 -> binding.imgType.setImageResource(R.drawable.ic_water_caculate)

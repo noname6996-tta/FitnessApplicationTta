@@ -30,8 +30,7 @@ class PrepareFragment : BaseFragment<FragmentPrepareBinding>() {
         super.addEvent()
         binding.imgNext.setOnClickListener {
             stopTimer()
-            val action = PrepareFragmentDirections.actionPrepareFragmentToDoingExerciseFragment()
-            findNavController().navigate(action)
+            findNavController().navigate(R.id.action_prepareFragment_to_doingExerciseFragment)
         }
 
         binding.imgBack.setOnClickListener {
@@ -67,7 +66,7 @@ class PrepareFragment : BaseFragment<FragmentPrepareBinding>() {
 
     override fun initView() {
         super.initView()
-        var exercise = listExercise[0]
+        val exercise = listExercise[0]
         if (exercise != null) {
             binding.tvNameExercise.text = exercise.name
             Glide.with(requireActivity())

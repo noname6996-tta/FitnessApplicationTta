@@ -67,6 +67,7 @@ class WorkoutFragment : BaseFragment<FragmentDiscoverBinding>() {
     override fun addEvent() {
         binding.view12.setOnClickListener {
             startActivity(Intent(activity, FullBodyWorkoutActivity::class.java))
+            requireActivity().finish()
         }
     }
 }

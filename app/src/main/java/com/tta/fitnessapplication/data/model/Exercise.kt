@@ -9,11 +9,13 @@ data class Exercise(
     var image: String,
     var title: String,
     var area: String,
+    var link: String,
     var type: String,
     var number: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
+        parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
@@ -29,6 +31,7 @@ data class Exercise(
         parcel.writeString(image)
         parcel.writeString(title)
         parcel.writeString(area)
+        parcel.writeString(link)
         parcel.writeString(type)
         parcel.writeString(number)
     }

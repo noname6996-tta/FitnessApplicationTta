@@ -14,24 +14,27 @@ import com.example.awesomedialog.onPositive
 import com.example.awesomedialog.title
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.Exercise
+import com.tta.fitnessapplication.data.utils.Constant
+import com.tta.fitnessapplication.data.utils.getCurrentTime
 import com.tta.fitnessapplication.databinding.FragmentDoingexerciseBinding
-import com.tta.fitnessapplication.databinding.FragmentHistoryBinding
-import com.tta.fitnessapplication.view.activity.DayFullBody.ExerciseBottomSheetFragment
 import com.tta.fitnessapplication.view.activity.doexercise.DoExerciseActivity.Companion.listExercise
 import com.tta.fitnessapplication.view.activity.doexercise.DoExerciseActivity.Companion.numberExercise
 import com.tta.fitnessapplication.view.base.BaseFragment
 
-class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>(){
+class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>() {
     private lateinit var countdownTimer: CountDownTimer
     private var totalTimeInMillis: Long = 20000 // 20 seconds
     private var timeRemainingInMillis: Long = totalTimeInMillis
     private var isTimerRunning: Boolean = false
     private lateinit var exercise: Exercise
+    private var idUser = ""
     override fun getDataBinding(): FragmentDoingexerciseBinding {
         return FragmentDoingexerciseBinding.inflate(layoutInflater)
     }
+
     override fun initView() {
         super.initView()
+        idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
         // Initialize the timer
         countdownTimer = object : CountDownTimer(timeRemainingInMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -110,10 +113,45 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>(){
     }
 
 
+    fun checkDone() {
+        if (numberExercise == listExercise.size - 1) {
+            Log.e("Exercise", "Done")
+            mainViewModel.createHistory(
+                idUser,
+                Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
+                getCurrentTime(),
+                "Do exercise",
+                "0",
+                ""
+            )
+            AwesomeDialog.build(requireActivity())
+                .title(
+                    "Notification",
+                    titleColor = ContextCompat.getColor(requireContext(), android.R.color.white)
+                )
+                .body(
+                    "Good jobs my friend",
+                    color = ContextCompat.getColor(requireContext(), android.R.color.white)
+                )
+                .icon(R.drawable.icon_bed)
+                .background(R.drawable.bg_blue_linear_16)
+                .onPositive(
+                    "Done",
+                    buttonBackgroundColor = R.drawable.bg_pink_linear_16,
+                    textColor = ContextCompat.getColor(requireContext(), android.R.color.black)
+                ) {
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                    requireActivity().finish()
+                }
+        }
+    }
+
+
     override fun addEvent() {
         binding.tvSkip.setOnClickListener {
             stopTimer()
             numberExercise++
+            checkDone()
             // check khi number == list.size thì hoàn thành bài tập
             Log.e("tta", numberExercise.toString() + listExercise[numberExercise])
             val action = DoingExerciseFragmentDirections.actionDoingExerciseFragmentToRestFragment()
@@ -197,6 +235,7 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>(){
                     // Do something when the countdown is complete
                     stopTimer()
                     numberExercise++
+                    checkDone()
                     findNavController().navigate(R.id.action_doingExerciseFragment_to_restFragment)
                 }
             }

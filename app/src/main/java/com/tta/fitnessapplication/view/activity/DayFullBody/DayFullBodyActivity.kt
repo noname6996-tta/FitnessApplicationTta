@@ -2,9 +2,7 @@ package com.tta.fitnessapplication.view.activity.DayFullBody
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tta.fitnessapplication.data.model.Exercise
 import com.tta.fitnessapplication.data.utils.Logger

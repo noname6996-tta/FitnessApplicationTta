@@ -63,7 +63,7 @@ class ExerciseBottomSheetFragment(exercise: Exercise) : BottomSheetDialogFragmen
         binding.tvDesc.text = exercise.title
         binding.tvFocusArea.text = exercise.area
         image = exercise.image
-        urlExercise = exercise.name
+        urlExercise = exercise.link
         if (exercise.type == "0") {
             binding.tvTimeTodo.text = exercise.number + "s"
         } else {

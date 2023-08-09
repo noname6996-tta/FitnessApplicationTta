@@ -86,7 +86,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         }
 
         binding.viewContactUs.setOnClickListener {
-            val url = "$BASE_URL/fitnessweb//fitnessweb/contact/"
+            val url = "$BASE_URL/fitnessweb/fitnessweb/contact/"
             val intent = Intent(requireActivity(), WebViewActivity::class.java)
             intent.putExtra("url", url)
             startActivity(intent)
