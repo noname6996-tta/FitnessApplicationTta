@@ -48,5 +48,10 @@
         <item>HOT</item>
         <item>VERY_HOT</item>
     </string-array>
+    <string-array name="Meal">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+    </string-array>
 
 </resources>

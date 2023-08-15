@@ -14,7 +14,7 @@ class ItemTodayMealAdapter :
     private var listSomeThingToEat: List<Meal> = listOf()
     private lateinit var context: Context
 
-    fun setListExercise(listSomeThingToEat: List<Meal>, context: Context) {
+    fun setListExercise(listSomeThingToEat: List<Meal> , context: Context) {
         this.listSomeThingToEat = listSomeThingToEat
         this.context = context
         notifyDataSetChanged()
