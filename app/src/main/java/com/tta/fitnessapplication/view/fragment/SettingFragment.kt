@@ -5,6 +5,8 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
+import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.Companion.BASE_URL
 import com.tta.fitnessapplication.databinding.FragmentSettingBinding
@@ -75,7 +77,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         }
 
         binding.viewHistory.setOnClickListener {
-            requireActivity().startActivity(Intent(activity, HistoryActivity::class.java))
+            findNavController().navigate(R.id.action_settingFragment_to_historyActivity)
         }
 
         binding.viewAboutUs.setOnClickListener {

@@ -6,7 +6,6 @@ import android.graphics.Typeface
 import android.graphics.drawable.ClipDrawable
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +20,6 @@ import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.fullDateFormatter
 import com.tta.fitnessapplication.databinding.FragmentHomeBinding
-import com.tta.fitnessapplication.view.HistoryViewModelGoogleData
 import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryAdapter
 import com.tta.fitnessapplication.view.activity.SleepTracker.SleepTrackerActivity
 import com.tta.fitnessapplication.view.activity.calortracker.CalorieTrackerActivity
