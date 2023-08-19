@@ -2,24 +2,16 @@ package com.tta.fitnessapplication.view.fragment.articlesfragment
 
 import android.content.Intent
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.awesomedialog.AwesomeDialog
-import com.example.awesomedialog.body
-import com.example.awesomedialog.icon
-import com.example.awesomedialog.onPositive
-import com.example.awesomedialog.title
-import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.Article
 import com.tta.fitnessapplication.data.model.Video
-import com.tta.fitnessapplication.databinding.FragmentDiscoverBinding
 import com.tta.fitnessapplication.databinding.FragmentHistoryBinding
 import com.tta.fitnessapplication.view.activity.WebViewActivity
-import com.tta.fitnessapplication.view.activity.chatGpt.ChatGPTActivity
+import com.tta.fitnessapplication.view.activity.chat.ChatGPTActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
 
 class ArticleFragment : BaseFragment<FragmentHistoryBinding>() {
     private val adapterVideo = VideoAdapter()
     private val adapterArticle = ArticleAdapter()
-    private val viewModel = ArticleViewModel()
     private var arrayArticle = ArrayList<Article>()
     private var arrayVideo = ArrayList<Video>()
     override fun getDataBinding(): FragmentHistoryBinding {
@@ -50,25 +42,23 @@ class ArticleFragment : BaseFragment<FragmentHistoryBinding>() {
         }
     }
 
+    override fun initViewModel() {
+        super.initViewModel()
+        mainViewModel.getVideo()
+        mainViewModel.getArticle()
+    }
+
     override fun addObservers() {
         super.addObservers()
-        viewModel.getListVideo()
-        viewModel.getListArticle()
-        viewModel.listVideo.observe(viewLifecycleOwner) {
+        mainViewModel.listVideo.observe(viewLifecycleOwner) {
+            arrayVideo.clear()
             arrayVideo.addAll(it)
             adapterVideo.setImageList(arrayVideo, requireContext())
         }
-        viewModel.listArticle.observe(viewLifecycleOwner) {
+        mainViewModel.listArticle.observe(viewLifecycleOwner) {
+            arrayArticle.clear()
             arrayArticle.addAll(it)
             adapterArticle.setImageList(arrayArticle, requireContext())
-        }
-        viewModel.message.observe(viewLifecycleOwner) {
-            AwesomeDialog.build(requireActivity())
-                .title("Alert !")
-                .body(it)
-                .icon(R.drawable.alarm_clock)
-                .onPositive("ok") {
-                }
         }
     }
 }

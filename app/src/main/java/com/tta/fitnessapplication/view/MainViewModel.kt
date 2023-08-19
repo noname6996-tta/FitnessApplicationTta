@@ -3,11 +3,14 @@ package com.tta.fitnessapplication.view
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tta.fitnessapplication.data.model.Article
 import com.tta.fitnessapplication.data.model.BaseResponse
 import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.UserLoginResponse
+import com.tta.fitnessapplication.data.model.Video
 import com.tta.fitnessapplication.data.repository.RepositoryApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -17,6 +20,8 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     val listHistoryByDate = MutableLiveData<Response<BaseResponse<MutableList<History>>>>()
     val listHistoryByDateAndType = MutableLiveData<Response<BaseResponse<MutableList<History>>>>()
     val createHistoryStatus = MutableLiveData<Response<BaseResponse<String>>>()
+    val listVideo = MutableLiveData<List<Video>>()
+    val listArticle = MutableLiveData<List<Article>>()
 
     fun getUserData(email: String) {
         viewModelScope.launch {
@@ -65,6 +70,18 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
         viewModelScope.launch {
             createHistoryStatus.value =
                 repositoryApi.createHistory(idUser, date, time, activity, type, value)
+        }
+    }
+
+    fun getVideo() {
+        viewModelScope.launch {
+            listVideo.value = repositoryApi.getVideo().body()?.data
+        }
+    }
+
+    fun getArticle() {
+        viewModelScope.launch {
+            listArticle.value = repositoryApi.getListArticle().body()?.data
         }
     }
 }

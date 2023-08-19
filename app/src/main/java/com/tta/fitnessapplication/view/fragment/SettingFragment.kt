@@ -10,7 +10,6 @@ import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.Companion.BASE_URL
 import com.tta.fitnessapplication.databinding.FragmentSettingBinding
-import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryActivity
 import com.tta.fitnessapplication.view.activity.WebViewActivity
 import com.tta.fitnessapplication.view.activity.login.LoginActivity
 import com.tta.fitnessapplication.view.base.BaseFragment

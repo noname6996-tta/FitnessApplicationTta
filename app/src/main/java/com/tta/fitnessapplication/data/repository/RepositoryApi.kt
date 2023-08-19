@@ -3,7 +3,9 @@ package com.tta.fitnessapplication.data.repository
 import com.tta.fitnessapplication.api.ApiClient
 import com.tta.fitnessapplication.data.model.BaseResponse
 import com.tta.fitnessapplication.data.model.History
+import com.tta.fitnessapplication.data.model.ResoinseArticle
 import com.tta.fitnessapplication.data.model.ResponseProfile
+import com.tta.fitnessapplication.data.model.ResponseVideo
 import com.tta.fitnessapplication.data.model.UserLoginResponse
 import retrofit2.Response
 
@@ -49,5 +51,12 @@ class RepositoryApi {
         value: String
     ): Response<BaseResponse<String>> {
         return ApiClient.API.createHistory(idUser, date, time, activity, type, value)
+    }
+
+    suspend fun getListArticle():  Response<ResoinseArticle>{
+        return ApiClient.API.getArticle()
+    }
+    suspend fun getVideo():  Response<ResponseVideo>{
+        return ApiClient.API.getVideo()
     }
 }

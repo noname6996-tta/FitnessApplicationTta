@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/example_3_blue"
-    tools:context=".view.activity.watertracker.watercaculate.WaterCaculateActivity">
+    tools:context=".view.activity.tracker.watertracker.watercaculate.WaterCaculateActivity">
 
     <ImageView
         android:id="@+id/imageView38"

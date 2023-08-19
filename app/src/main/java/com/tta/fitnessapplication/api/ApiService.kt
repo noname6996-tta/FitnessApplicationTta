@@ -59,10 +59,10 @@ interface ApiService {
     ): Call<Exercise>
 
     @GET(ApiPath.VIDEO)
-    fun getVideo(): Call<ResponseVideo>
+    suspend fun getVideo(): Response<ResponseVideo>
 
     @GET(ApiPath.ARTICLE)
-    fun getArticle(): Call<ResoinseArticle>
+    suspend fun getArticle(): Response<ResoinseArticle>
 
     @GET(ApiPath.TOOL)
     fun getTool(): Call<ResponseTool>

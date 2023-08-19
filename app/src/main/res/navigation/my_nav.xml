@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/doingExerciseFragment"
-        android:name="com.tta.fitnessapplication.view.activity.doexercise.fragment.DoingExerciseFragment"
+        android:name="com.tta.fitnessapplication.view.activity.workout.doexercise.fragment.DoingExerciseFragment"
         android:label="DoingExerciseFragment"
         tools:layout="@layout/fragment_doingexercise">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/prepareFragment"
-        android:name="com.tta.fitnessapplication.view.activity.doexercise.fragment.PrepareFragment"
+        android:name="com.tta.fitnessapplication.view.activity.workout.doexercise.fragment.PrepareFragment"
         android:label="PrepareFragment"
         tools:layout="@layout/fragment_prepare">
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/restFragment"
-        android:name="com.tta.fitnessapplication.view.activity.doexercise.fragment.RestFragment"
+        android:name="com.tta.fitnessapplication.view.activity.workout.doexercise.fragment.RestFragment"
         android:label="RestFragment"
         tools:layout="@layout/fragment_restexercise">
         <action

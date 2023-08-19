@@ -5,7 +5,7 @@ import androidx.core.content.ContextCompat
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.FragmentDiscoverBinding
 import com.tta.fitnessapplication.databinding.FragmentSettingBinding
-import com.tta.fitnessapplication.view.activity.FullBodyWorkout.FullBodyWorkoutActivity
+import com.tta.fitnessapplication.view.activity.workout.FullBodyWorkout.FullBodyWorkoutActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.util.Calendar
 

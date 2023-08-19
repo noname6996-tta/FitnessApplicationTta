@@ -20,9 +20,9 @@ import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.fullDateFormatter
 import com.tta.fitnessapplication.databinding.FragmentHomeBinding
-import com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryAdapter
-import com.tta.fitnessapplication.view.activity.SleepTracker.SleepTrackerActivity
-import com.tta.fitnessapplication.view.activity.calortracker.CalorieTrackerActivity
+import com.tta.fitnessapplication.view.activity.history.HistoryAdapter
+import com.tta.fitnessapplication.view.activity.tracker.SleepTracker.SleepTrackerActivity
+import com.tta.fitnessapplication.view.activity.tracker.calortracker.CalorieTrackerActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.time.LocalDate
 import java.util.Calendar

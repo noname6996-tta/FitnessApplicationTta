@@ -30,71 +30,71 @@
             </intent-filter>
         </receiver>
         <activity
-            android:name=".view.activity.calortracker.FindMeal.FindMealActivity"
+            android:name=".view.activity.tracker.calortracker.FindMeal.FindMealActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.watertracker.waterHistory.WaterHistoryActivity"
+            android:name=".view.activity.tracker.watertracker.waterHistory.WaterHistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.watertracker.watercaculate.WaterCaculateActivity"
+            android:name=".view.activity.tracker.watertracker.watercaculate.WaterCaculateActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.HistoryActivity.HistoryActivity"
+            android:name=".view.activity.history.HistoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.activity.chatGpt.ChatGPTActivity"
+            android:name=".view.activity.chat.ChatGPTActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.SleepTracker.SleepScheduleActivity"
+            android:name=".view.activity.tracker.SleepTracker.SleepScheduleActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.ChooseProgess.ChooseProgessActivity"
+            android:name=".view.activity.chooseprogess.ChooseProgessActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.doexercise.DoExerciseActivity"
+            android:name=".view.activity.workout.doexercise.DoExerciseActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.DoneSingUpActivity"
+            android:name=".view.activity.register.DoneSingUpActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.WebViewActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.calortracker.CalorieTrackerActivity"
+            android:name=".view.activity.tracker.calortracker.CalorieTrackerActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.activity.watertracker.WaterTrackerActivity"
+            android:name=".view.activity.tracker.watertracker.WaterTrackerActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.activity.PersonData.PersonDataActivity"
+            android:name=".view.activity.user.PersonDataActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.FullBodyWorkout.FullBodyWorkoutActivity"
+            android:name=".view.activity.workout.FullBodyWorkout.FullBodyWorkoutActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.DayFullBody.DayFullBodyActivity"
+            android:name=".view.activity.workout.DayFullBody.DayFullBodyActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.SleepTracker.SleepTrackerActivity"
+            android:name=".view.activity.tracker.SleepTracker.SleepTrackerActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.activity.AfterSigUpActivity"
+            android:name=".view.activity.register.AfterSigUpActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

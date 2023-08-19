@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/waterTrackerActivity"
-        android:name="com.tta.fitnessapplication.view.activity.watertracker.WaterTrackerActivity"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.watertracker.WaterTrackerActivity"
         android:label="activity_water_tracker"
         tools:layout="@layout/activity_water_tracker">
         <action
@@ -74,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/historyActivity"
-        android:name="com.tta.fitnessapplication.view.activity.HistoryActivity.HistoryActivity"
+        android:name="com.tta.fitnessapplication.view.activity.history.HistoryActivity"
         android:label="HistoryActivity"
         tools:layout="@layout/activity_history">
         <action
@@ -86,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/waterHistoryActivity"
-        android:name="com.tta.fitnessapplication.view.activity.watertracker.waterHistory.WaterHistoryActivity"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.watertracker.waterHistory.WaterHistoryActivity"
         android:label="WaterHistoryActivity"
         tools:layout="@layout/activity_water_history" >
         <action
@@ -95,7 +95,7 @@
     </fragment>
     <fragment
         android:id="@+id/waterCaculateActivity"
-        android:name="com.tta.fitnessapplication.view.activity.watertracker.watercaculate.WaterCaculateActivity"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.watertracker.watercaculate.WaterCaculateActivity"
         android:label="activity_water_caculate"
         tools:layout="@layout/activity_water_caculate" >
         <action

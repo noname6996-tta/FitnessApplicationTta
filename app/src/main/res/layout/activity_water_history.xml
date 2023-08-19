@@ -30,7 +30,7 @@
             android:background="@color/white"
             android:clickable="true"
             android:focusable="true"
-            tools:context=".view.activity.HistoryActivity.HistoryActivity">
+            tools:context=".view.activity.history.HistoryActivity">
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"

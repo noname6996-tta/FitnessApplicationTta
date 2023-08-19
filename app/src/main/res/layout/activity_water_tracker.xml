@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.watertracker.WaterTrackerActivity">
+    tools:context=".view.activity.tracker.watertracker.WaterTrackerActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
