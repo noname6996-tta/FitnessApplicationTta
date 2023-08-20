@@ -296,48 +296,6 @@
                         app:layout_constraintTop_toTopOf="@+id/viewPersonData" />
 
                     <View
-                        android:id="@+id/viewAchievement"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_24dp"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="@dimen/size_16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/viewPersonData" />
-
-                    <ImageView
-                        android:id="@+id/imageAchievement"
-                        android:layout_width="@dimen/size_24dp"
-                        android:layout_height="@dimen/size_24dp"
-                        android:src="@drawable/calendar"
-                        app:layout_constraintBottom_toBottomOf="@+id/viewAchievement"
-                        app:layout_constraintStart_toStartOf="@+id/viewAchievement"
-                        app:layout_constraintTop_toTopOf="@+id/viewAchievement" />
-
-                    <TextView
-                        android:id="@+id/textViewAchievement"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/size_24dp"
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="@font/poppins"
-                        android:gravity="center"
-                        android:text="Achievement"
-                        android:textColor="@color/gray1"
-                        android:textSize="@dimen/size_14dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/viewAchievement"
-                        app:layout_constraintStart_toEndOf="@+id/imageAchievement"
-                        app:layout_constraintTop_toTopOf="@+id/viewAchievement" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_navigate_next_24"
-                        app:layout_constraintBottom_toBottomOf="@+id/viewAchievement"
-                        app:layout_constraintEnd_toEndOf="@+id/viewAchievement"
-                        app:layout_constraintTop_toTopOf="@+id/viewAchievement" />
-
-                    <View
                         android:id="@+id/viewHistory"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_24dp"
@@ -346,7 +304,7 @@
                         android:layout_marginRight="@dimen/size_16dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/viewAchievement" />
+                        app:layout_constraintTop_toBottomOf="@+id/viewPersonData" />
 
                     <ImageView
                         android:id="@+id/imageHistory"

@@ -1,9 +1,7 @@
-package com.tta.fitnessapplication.view.activity.login
+package com.tta.fitnessapplication.view.login
 
 import android.content.Context.MODE_PRIVATE
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar

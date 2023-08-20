@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginActivity"
-        android:name="com.tta.fitnessapplication.view.activity.login.LoginActivity"
+        android:name="com.tta.fitnessapplication.view.login.LoginActivity"
         android:label="LoginActivity"
         tools:layout="@layout/activity_login">
         <action
