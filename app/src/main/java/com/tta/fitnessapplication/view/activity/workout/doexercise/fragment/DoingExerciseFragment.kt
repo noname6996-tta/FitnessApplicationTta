@@ -17,7 +17,6 @@ import com.tta.fitnessapplication.data.model.Exercise
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.getCurrentTime
 import com.tta.fitnessapplication.databinding.FragmentDoingexerciseBinding
-import com.tta.fitnessapplication.view.activity.doexercise.fragment.DoingExerciseFragmentDirections
 import com.tta.fitnessapplication.view.activity.workout.doexercise.DoExerciseActivity.Companion.listExercise
 import com.tta.fitnessapplication.view.activity.workout.doexercise.DoExerciseActivity.Companion.numberExercise
 import com.tta.fitnessapplication.view.base.BaseFragment
