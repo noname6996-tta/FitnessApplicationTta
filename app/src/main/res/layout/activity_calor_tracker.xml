@@ -47,6 +47,25 @@
                 app:layout_constraintStart_toStartOf="@+id/viewBack"
                 app:layout_constraintTop_toTopOf="@+id/viewBack" />
 
+            <View
+                android:id="@+id/viewInfo"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="@dimen/size_16dp"
+                android:background="@drawable/bg_view_gray_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_more_horiz_24"
+                app:layout_constraintBottom_toBottomOf="@+id/viewInfo"
+                app:layout_constraintEnd_toEndOf="@+id/viewInfo"
+                app:layout_constraintStart_toStartOf="@+id/viewInfo"
+                app:layout_constraintTop_toTopOf="@+id/viewInfo" />
+
             <TextView
                 android:id="@+id/textView25"
                 android:layout_width="wrap_content"
@@ -54,7 +73,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Meal Planner"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/size_16dp"
+                android:textSize="@dimen/size_20dp"
                 app:layout_constraintBottom_toBottomOf="@+id/viewBack"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

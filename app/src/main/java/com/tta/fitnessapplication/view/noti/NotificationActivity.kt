@@ -1,12 +1,11 @@
 package com.tta.fitnessapplication.view.noti
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.databinding.ActivityNotificationBinding
+import com.tta.fitnessapplication.view.base.BaseActivity
 
-class NotificationActivity(var type : Int) : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notification)
+class NotificationActivity(var type: Int) : BaseActivity<ActivityNotificationBinding>() {
+    override fun getDataBinding(): ActivityNotificationBinding {
+        return ActivityNotificationBinding.inflate(layoutInflater)
     }
+
 }

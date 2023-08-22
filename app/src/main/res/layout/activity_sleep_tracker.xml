@@ -26,6 +26,25 @@
         app:layout_constraintStart_toStartOf="@+id/view13"
         app:layout_constraintTop_toTopOf="@+id/view13" />
 
+    <View
+        android:id="@+id/viewInfo"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="@dimen/size_16dp"
+        android:background="@drawable/bg_view_gray_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_more_horiz_24"
+        app:layout_constraintBottom_toBottomOf="@+id/viewInfo"
+        app:layout_constraintEnd_toEndOf="@+id/viewInfo"
+        app:layout_constraintStart_toStartOf="@+id/viewInfo"
+        app:layout_constraintTop_toTopOf="@+id/viewInfo" />
+
     <TextView
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
