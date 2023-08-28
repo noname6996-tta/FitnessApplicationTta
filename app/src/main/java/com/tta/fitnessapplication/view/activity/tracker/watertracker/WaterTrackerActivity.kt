@@ -2,6 +2,11 @@ package com.tta.fitnessapplication.view.activity.tracker.watertracker
 
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.skydoves.balloon.ArrowPositionRules
+import com.skydoves.balloon.Balloon
+import com.skydoves.balloon.BalloonAnimation
+import com.skydoves.balloon.BalloonSizeSpec
+import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.fullDateFormatter
@@ -125,6 +130,25 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
                 "1",
                 drink.toString()
             )
+        }
+
+        val balloonWater = Balloon.Builder(requireContext())
+            .setWidthRatio(1.0f)
+            .setHeight(BalloonSizeSpec.WRAP)
+            .setText("Track your daily water drinking history. Try to drink water every day!")
+            .setTextColorResource(R.color.white)
+            .setTextSize(15f)
+            .setArrowPositionRules(ArrowPositionRules.ALIGN_BALLOON)
+            .setArrowSize(10)
+            .setArrowPosition(0.5f)
+            .setPadding(12)
+            .setCornerRadius(8f)
+            .setBackgroundColorResource(R.color.text)
+            .setBalloonAnimation(BalloonAnimation.ELASTIC)
+            .build()
+
+        binding.viewInfo.setOnClickListener {
+            binding.viewInfo.showAsDropDown(balloonWater)
         }
     }
 }
