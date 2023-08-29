@@ -22,6 +22,11 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import com.skydoves.balloon.ArrowPositionRules
+import com.skydoves.balloon.Balloon
+import com.skydoves.balloon.BalloonAnimation
+import com.skydoves.balloon.BalloonSizeSpec
+import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.databinding.ActivitySleepTrackerBinding
 
 class SleepTrackerActivity : AppCompatActivity(), OnSeekBarChangeListener,
@@ -61,6 +66,24 @@ class SleepTrackerActivity : AppCompatActivity(), OnSeekBarChangeListener,
 
         binding.view22.setOnClickListener {
             startActivity(Intent(this, SleepScheduleActivity::class.java))
+        }
+        val balloonSleep = Balloon.Builder(this)
+            .setWidthRatio(1.0f)
+            .setHeight(BalloonSizeSpec.WRAP)
+            .setText("Track your daily water drinking history. Try to drink water every day!")
+            .setTextColorResource(com.tta.fitnessapplication.R.color.white)
+            .setTextSize(15f)
+            .setArrowPositionRules(ArrowPositionRules.ALIGN_BALLOON)
+            .setArrowSize(10)
+            .setArrowPosition(0.5f)
+            .setPadding(12)
+            .setCornerRadius(8f)
+            .setBackgroundColorResource(com.tta.fitnessapplication.R.color.text)
+            .setBalloonAnimation(BalloonAnimation.ELASTIC)
+            .build()
+
+        binding.viewInfo.setOnClickListener {
+            binding.viewInfo.showAsDropDown(balloonSleep)
         }
     }
 
