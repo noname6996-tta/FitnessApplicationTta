@@ -3,6 +3,7 @@ package com.tta.fitnessapplication.view.activity.tracker.calortracker
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.skydoves.balloon.ArrowPositionRules
@@ -95,7 +96,7 @@ class CalorieTrackerActivity : BaseActivity<ActivityCalorTrackerBinding>() {
         val balloonFat = Balloon.Builder(this)
             .setWidthRatio(1.0f)
             .setHeight(BalloonSizeSpec.WRAP)
-            .setText("balloonCarb!")
+            .setText("balloonFat!")
             .setTextColorResource(R.color.white)
             .setTextSize(15f)
             .setArrowPositionRules(ArrowPositionRules.ALIGN_BALLOON)
@@ -108,6 +109,24 @@ class CalorieTrackerActivity : BaseActivity<ActivityCalorTrackerBinding>() {
             .build()
         binding.tvFat.setOnClickListener {
             binding.tvFat.showAsDropDown(balloonFat)
+        }
+        val balloonCalorie = Balloon.Builder(this)
+            .setWidthRatio(1.0f)
+            .setHeight(BalloonSizeSpec.WRAP)
+            .setText("Track your daily eating history. Try to eat healthy every day!")
+            .setTextColorResource(R.color.white)
+            .setTextSize(15f)
+            .setArrowPositionRules(ArrowPositionRules.ALIGN_BALLOON)
+            .setArrowSize(10)
+            .setArrowPosition(0.5f)
+            .setPadding(12)
+            .setCornerRadius(8f)
+            .setBackgroundColorResource(R.color.text)
+            .setBalloonAnimation(BalloonAnimation.ELASTIC)
+            .build()
+
+        binding.viewInfo.setOnClickListener {
+            binding.viewInfo.showAsDropDown(balloonCalorie)
         }
         binding.recSuggestFood.adapter = somethingToEatAdapter
         val linearLayoutManager = LinearLayoutManager(this)

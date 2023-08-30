@@ -5,6 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.skydoves.balloon.ArrowPositionRules
+import com.skydoves.balloon.Balloon
+import com.skydoves.balloon.BalloonAnimation
+import com.skydoves.balloon.BalloonSizeSpec
+import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.ActivityFullBodyWorkoutBinding
 import com.tta.fitnessapplication.databinding.ActivityWaterTrackerBinding
 import com.tta.fitnessapplication.view.MainActivity
@@ -51,6 +56,25 @@ class FullBodyWorkoutActivity : AppCompatActivity() {
             var intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             this.finish()
+        }
+
+        val balloonFullBody = Balloon.Builder(this)
+            .setWidthRatio(1.0f)
+            .setHeight(BalloonSizeSpec.WRAP)
+            .setText("Track your daily eating history. Try to eat healthy every day!")
+            .setTextColorResource(R.color.white)
+            .setTextSize(15f)
+            .setArrowPositionRules(ArrowPositionRules.ALIGN_BALLOON)
+            .setArrowSize(10)
+            .setArrowPosition(0.5f)
+            .setPadding(12)
+            .setCornerRadius(8f)
+            .setBackgroundColorResource(R.color.text)
+            .setBalloonAnimation(BalloonAnimation.ELASTIC)
+            .build()
+
+        binding.viewInfo.setOnClickListener {
+            binding.viewInfo.showAsDropDown(balloonFullBody)
         }
     }
 }

@@ -70,7 +70,7 @@ class SleepTrackerActivity : AppCompatActivity(), OnSeekBarChangeListener,
         val balloonSleep = Balloon.Builder(this)
             .setWidthRatio(1.0f)
             .setHeight(BalloonSizeSpec.WRAP)
-            .setText("Track your daily water drinking history. Try to drink water every day!")
+            .setText("Track your daily sleep history. Try to sleep enough every day!")
             .setTextColorResource(com.tta.fitnessapplication.R.color.white)
             .setTextSize(15f)
             .setArrowPositionRules(ArrowPositionRules.ALIGN_BALLOON)
