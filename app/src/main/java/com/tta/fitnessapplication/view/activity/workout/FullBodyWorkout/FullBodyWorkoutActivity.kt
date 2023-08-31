@@ -9,6 +9,7 @@ import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
+import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.ActivityFullBodyWorkoutBinding
 import com.tta.fitnessapplication.databinding.ActivityWaterTrackerBinding
