@@ -77,6 +77,5 @@ class FullBodyWorkoutActivity : AppCompatActivity() {
         binding.viewInfo.setOnClickListener {
             binding.viewInfo.showAsDropDown(balloonFullBody)
         }
-        ///aaaaaaaaa
     }
 }

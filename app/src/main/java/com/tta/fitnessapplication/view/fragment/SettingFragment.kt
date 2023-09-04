@@ -53,51 +53,57 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
     }
 
     override fun addEvent() {
-        binding.viewLogout.setOnClickListener {
-            AlertDialog.Builder(requireContext())
-                .setTitle("Thông báo")
-                .setMessage("Bạn có muốn đăng xuất không ?")
-                .setPositiveButton("Có",
-                    DialogInterface.OnClickListener { _, _ ->
-                        loginPreferences =
-                            requireActivity().getSharedPreferences(
-                                Constant.LOGIN_PREFS,
-                                AppCompatActivity.MODE_PRIVATE
-                            )
-                        loginPrefsEditor = loginPreferences.edit()
-                        loginPrefsEditor.clear()
-                        loginPrefsEditor.commit()
-                        val intent = Intent(requireContext(), LoginActivity::class.java)
-                        startActivity(intent)
-                        requireActivity().finish()
-                    })
-                .setNegativeButton("Không", null)
-                .show()
-        }
+        with(binding){
+            viewLogout.setOnClickListener {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Thông báo")
+                    .setMessage("Bạn có muốn đăng xuất không ?")
+                    .setPositiveButton("Có",
+                        DialogInterface.OnClickListener { _, _ ->
+                            loginPreferences =
+                                requireActivity().getSharedPreferences(
+                                    Constant.LOGIN_PREFS,
+                                    AppCompatActivity.MODE_PRIVATE
+                                )
+                            loginPrefsEditor = loginPreferences.edit()
+                            loginPrefsEditor.clear()
+                            loginPrefsEditor.commit()
+                            val intent = Intent(requireContext(), LoginActivity::class.java)
+                            startActivity(intent)
+                            requireActivity().finish()
+                        })
+                    .setNegativeButton("Không", null)
+                    .show()
+            }
 
-        binding.viewHistory.setOnClickListener {
-            findNavController().navigate(R.id.action_settingFragment_to_historyActivity)
-        }
+            viewHistory.setOnClickListener {
+                findNavController().navigate(R.id.action_settingFragment_to_historyActivity)
+            }
 
-        binding.viewAboutUs.setOnClickListener {
-            val url = "$BASE_URL/fitnessweb/aboutUs"
-            val intent = Intent(requireActivity(), WebViewActivity::class.java)
-            intent.putExtra("url", url)
-            startActivity(intent)
-        }
+            viewAboutUs.setOnClickListener {
+                val url = "$BASE_URL/fitnessweb/aboutUs"
+                val intent = Intent(requireActivity(), WebViewActivity::class.java)
+                intent.putExtra("url", url)
+                startActivity(intent)
+            }
 
-        binding.viewContactUs.setOnClickListener {
-            val url = "$BASE_URL/fitnessweb/fitnessweb/contact/"
-            val intent = Intent(requireActivity(), WebViewActivity::class.java)
-            intent.putExtra("url", url)
-            startActivity(intent)
-        }
+            viewContactUs.setOnClickListener {
+                val url = "$BASE_URL/fitnessweb/fitnessweb/contact/"
+                val intent = Intent(requireActivity(), WebViewActivity::class.java)
+                intent.putExtra("url", url)
+                startActivity(intent)
+            }
 
-        binding.viewPrivacy.setOnClickListener {
-            val url = "$BASE_URL/fitnessweb/PrivacyPolicy"
-            val intent = Intent(requireActivity(), WebViewActivity::class.java)
-            intent.putExtra("url", url)
-            startActivity(intent)
+            viewPrivacy.setOnClickListener {
+                val url = "$BASE_URL/fitnessweb/PrivacyPolicy"
+                val intent = Intent(requireActivity(), WebViewActivity::class.java)
+                intent.putExtra("url", url)
+                startActivity(intent)
+            }
+
+            viewSetting.setOnClickListener {
+                findNavController().navigate(R.id.action_settingFragment_to_changeThemesFragment)
+            }
         }
     }
 }

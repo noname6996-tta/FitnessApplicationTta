@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_settingFragment_to_historyActivity"
             app:destination="@id/historyActivity" />
+        <action
+            android:id="@+id/action_settingFragment_to_changeThemesFragment"
+            app:destination="@id/changeThemesFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginActivity"
@@ -101,5 +104,14 @@
         <action
             android:id="@+id/action_waterCaculateActivity_to_waterTrackerActivity"
             app:destination="@id/waterTrackerActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeThemesFragment"
+        android:name="com.tta.fitnessapplication.view.fragment.ChangeThemesFragment"
+        android:label="ChangeThemesFragment"
+        tools:layout="@layout/fragment_change_themes">
+        <action
+            android:id="@+id/action_changeThemesFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
 </navigation>
