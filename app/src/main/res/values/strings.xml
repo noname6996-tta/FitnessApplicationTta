@@ -32,6 +32,8 @@
     <string name="save">Save</string>
     <string name="close">Close</string>
     <string name="example_3_title">Example 3</string>
+    <string name="setting">Setting</string>
+    <string name="change_themes">Change Themes</string>
     //
     <string-array name="Gender">
         <item>MALE</item>
