@@ -5,18 +5,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.example.awesomedialog.AwesomeDialog
+import com.example.awesomedialog.background
+import com.example.awesomedialog.body
+import com.example.awesomedialog.icon
+import com.example.awesomedialog.onPositive
+import com.example.awesomedialog.title
+import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.repository.RepositoryApi
+import com.tta.fitnessapplication.data.utils.ConnectivityLiveData
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.view.MainViewModel
 import com.tta.fitnessapplication.view.MainViewModelFactory
 
-abstract class BaseFragment<T: ViewBinding>: Fragment() {
+abstract class BaseFragment<T : ViewBinding> : Fragment() {
     private var _binding: T? = null
+    protected var isConnect = false
     protected val binding: T
         get() = checkNotNull(_binding) {
             "Fragment $this binding cannot be accessed before onCreateView() or after onDestroyView()"
@@ -29,6 +39,7 @@ abstract class BaseFragment<T: ViewBinding>: Fragment() {
     protected lateinit var loginPreferences: SharedPreferences
     protected lateinit var loginPrefsEditor: SharedPreferences.Editor
     protected lateinit var mainViewModel: MainViewModel
+    private lateinit var connectivityLiveData: ConnectivityLiveData
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +64,7 @@ abstract class BaseFragment<T: ViewBinding>: Fragment() {
         addEvent()
         addObservers()
         initData()
+        checkConnectInternet()
     }
 
     abstract fun getDataBinding(): T
@@ -70,5 +82,19 @@ abstract class BaseFragment<T: ViewBinding>: Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun checkConnectInternet() {
+        connectivityLiveData = ConnectivityLiveData(requireActivity().application)
+        connectivityLiveData.observe(viewLifecycleOwner, Observer { isAvailable ->
+            isConnect = when (isAvailable) {
+                true -> {
+                    true
+                }
+                false -> {
+                    false
+                }
+            }
+        })
     }
 }

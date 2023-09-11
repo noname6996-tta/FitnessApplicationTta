@@ -75,80 +75,86 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
 
 
     override fun addEvent() {
-        binding.view13.setOnClickListener {
-            findNavController().popBackStack()
-        }
-        binding.cardViewWaterCaculate.setOnClickListener {
-            findNavController().navigate(R.id.action_waterTrackerActivity_to_waterCaculateActivity)
-        }
-        binding.cardViewHistoryWaterTracker.setOnClickListener {
-            findNavController().navigate(R.id.action_waterTrackerActivity_to_waterHistoryActivity)
-        }
-        binding.imgCup100ml.setOnClickListener {
-            drink = 100
-            binding.appCompatButton.text = "+$drink ml"
-        }
-        binding.imgCup125ml.setOnClickListener {
-            drink = 125
-            binding.appCompatButton.text = "+$drink ml"
-        }
-        binding.imgCup150ml.setOnClickListener {
-            drink = 150
-            binding.appCompatButton.text = "+$drink ml"
-        }
-        binding.imgCup200ml.setOnClickListener {
-            drink = 200
-            binding.appCompatButton.text = "+$drink ml"
-        }
-        binding.imgCup250ml.setOnClickListener {
-            drink = 250
-            binding.appCompatButton.text = "+$drink ml"
-        }
-        binding.imgCup300ml.setOnClickListener {
-            drink = 300
-            binding.appCompatButton.text = "+$drink ml"
-        }
-        binding.imgCup350ml.setOnClickListener {
-            drink = 350
-            binding.appCompatButton.text = "+$drink ml"
-        }
-        binding.imgCup400ml.setOnClickListener {
-            drink = 400
-            binding.appCompatButton.text = "+$drink ml"
-        }
-        binding.imgCupCustomize.setOnClickListener {
-            drink = 500
-            binding.appCompatButton.text = "+$drink ml"
-        }
+        with(binding){
+            view13.setOnClickListener {
+                findNavController().popBackStack()
+            }
+            cardViewWaterCaculate.setOnClickListener {
+                findNavController().navigate(R.id.action_waterTrackerActivity_to_waterCaculateActivity)
+            }
+            cardViewHistoryWaterTracker.setOnClickListener {
+                findNavController().navigate(R.id.action_waterTrackerActivity_to_waterHistoryActivity)
+            }
+            imgCup100ml.setOnClickListener {
+                drink = 100
+                appCompatButton.text = "+$drink ml"
+            }
+            imgCup125ml.setOnClickListener {
+                drink = 125
+                appCompatButton.text = "+$drink ml"
+            }
+            imgCup150ml.setOnClickListener {
+                drink = 150
+                appCompatButton.text = "+$drink ml"
+            }
+            imgCup200ml.setOnClickListener {
+                drink = 200
+                appCompatButton.text = "+$drink ml"
+            }
+            imgCup250ml.setOnClickListener {
+                drink = 250
+                appCompatButton.text = "+$drink ml"
+            }
+            imgCup300ml.setOnClickListener {
+                drink = 300
+                appCompatButton.text = "+$drink ml"
+            }
+            imgCup350ml.setOnClickListener {
+                drink = 350
+                appCompatButton.text = "+$drink ml"
+            }
+            imgCup400ml.setOnClickListener {
+                drink = 400
+                appCompatButton.text = "+$drink ml"
+            }
+            imgCupCustomize.setOnClickListener {
+                drink = 500
+                appCompatButton.text = "+$drink ml"
+            }
 
-        binding.appCompatButton.setOnClickListener {
-            mainViewModel.createHistory(
-                idUser,
-                fullDateFormatter.format(today),
-                getCurrentTime(),
-                "Drink water",
-                "1",
-                drink.toString()
-            )
-        }
+            appCompatButton.setOnClickListener {
+                mainViewModel.createHistory(
+                    idUser,
+                    fullDateFormatter.format(today),
+                    getCurrentTime(),
+                    "Drink water",
+                    "1",
+                    drink.toString()
+                )
+            }
 
-        val balloonWater = Balloon.Builder(requireContext())
-            .setWidthRatio(1.0f)
-            .setHeight(BalloonSizeSpec.WRAP)
-            .setText("Track your daily water drinking history. Try to drink water every day!")
-            .setTextColorResource(R.color.white)
-            .setTextSize(15f)
-            .setArrowPositionRules(ArrowPositionRules.ALIGN_BALLOON)
-            .setArrowSize(10)
-            .setArrowPosition(0.5f)
-            .setPadding(12)
-            .setCornerRadius(8f)
-            .setBackgroundColorResource(R.color.text)
-            .setBalloonAnimation(BalloonAnimation.ELASTIC)
-            .build()
+            val balloonWater = Balloon.Builder(requireContext())
+                .setWidthRatio(1.0f)
+                .setHeight(BalloonSizeSpec.WRAP)
+                .setText("Track your daily water drinking history. Try to drink water every day!")
+                .setTextColorResource(R.color.white)
+                .setTextSize(15f)
+                .setArrowPositionRules(ArrowPositionRules.ALIGN_BALLOON)
+                .setArrowSize(10)
+                .setArrowPosition(0.5f)
+                .setPadding(12)
+                .setCornerRadius(8f)
+                .setBackgroundColorResource(R.color.text)
+                .setBalloonAnimation(BalloonAnimation.ELASTIC)
+                .build()
 
-        binding.viewInfo.setOnClickListener {
-            binding.viewInfo.showAsDropDown(balloonWater)
+            viewInfo.setOnClickListener {
+                viewInfo.showAsDropDown(balloonWater)
+            }
+
+            clSettingNoti.setOnClickListener {
+                findNavController().navigate(R.id.action_waterTrackerActivity_to_notificationActivity)
+            }
         }
     }
 }

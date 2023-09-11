@@ -1,13 +1,13 @@
 package com.tta.fitnessapplication.view.onboarding
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.ActivityOnBoardBinding
-import com.tta.fitnessapplication.view.MainActivity
+import com.tta.fitnessapplication.view.login.LoginActivity
 
 class OnBoardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnBoardBinding
@@ -41,6 +41,7 @@ class OnBoardActivity : AppCompatActivity() {
                 binding.tvDesFrame.startAnimation(animation_slidein)
 
             }
+
             75 -> {
                 binding.imgFrame.setImageResource(R.drawable.img_frame_three)
                 binding.tvTitleFrame.text = "Eat Well"
@@ -50,6 +51,7 @@ class OnBoardActivity : AppCompatActivity() {
                 binding.tvTitleFrame.startAnimation(animation_slidein)
                 binding.tvDesFrame.startAnimation(animation_slidein)
             }
+
             100 -> {
                 binding.imgFrame.setImageResource(R.drawable.img_frame_four)
                 binding.tvTitleFrame.text = "Improve Sleep  Quality"
@@ -59,8 +61,9 @@ class OnBoardActivity : AppCompatActivity() {
                 binding.tvTitleFrame.startAnimation(animation_slidein)
                 binding.tvDesFrame.startAnimation(animation_slidein)
             }
+
             125 -> {
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }

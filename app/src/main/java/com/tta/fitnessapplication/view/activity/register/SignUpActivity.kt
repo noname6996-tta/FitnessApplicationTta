@@ -1,16 +1,11 @@
 package com.tta.fitnessapplication.view.activity.register
 
-import androidx.navigation.fragment.findNavController
-import com.example.awesomedialog.AwesomeDialog
-import com.example.awesomedialog.body
-import com.example.awesomedialog.icon
-import com.example.awesomedialog.onPositive
-import com.example.awesomedialog.title
-import com.tta.fitnessapplication.R
+import android.content.Intent
 import com.tta.fitnessapplication.databinding.ActivitySignUpBinding
-import com.tta.fitnessapplication.view.base.BaseFragment
+import com.tta.fitnessapplication.view.base.BaseActivity
+import com.tta.fitnessapplication.view.login.LoginActivity
 
-class SignUpActivity : BaseFragment<ActivitySignUpBinding>() {
+class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     override fun getDataBinding(): ActivitySignUpBinding {
         return ActivitySignUpBinding.inflate(layoutInflater)
     }
@@ -98,7 +93,8 @@ class SignUpActivity : BaseFragment<ActivitySignUpBinding>() {
 //            finish()
         }
         binding.textView3.setOnClickListener {
-            findNavController().navigate(R.id.action_signUpActivity_to_loginActivity)
+            this.finish()
+            startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
         }
     }
 }

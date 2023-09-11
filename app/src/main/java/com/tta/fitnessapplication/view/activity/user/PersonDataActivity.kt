@@ -1,12 +1,10 @@
 package com.tta.fitnessapplication.view.activity.user
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.databinding.ActivityPersonDataBinding
+import com.tta.fitnessapplication.view.base.BaseActivity
 
-class PersonDataActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_person_data)
+class PersonDataActivity : BaseActivity<ActivityPersonDataBinding>() {
+    override fun getDataBinding(): ActivityPersonDataBinding {
+        return ActivityPersonDataBinding.inflate(layoutInflater)
     }
 }

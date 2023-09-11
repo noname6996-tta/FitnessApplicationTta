@@ -34,6 +34,9 @@
     <string name="example_3_title">Example 3</string>
     <string name="setting">Setting</string>
     <string name="change_themes">Change Themes</string>
+    <string name="calculate_the_amount_of_water_you_need_to_use_each_day">Calculate the amount of water you need to use each day</string>
+    <string name="setting_noti">Set up notifications to remind you to drink water</string>
+    <string name="click_here_for_details">Click here for details</string>
     //
     <string-array name="Gender">
         <item>MALE</item>

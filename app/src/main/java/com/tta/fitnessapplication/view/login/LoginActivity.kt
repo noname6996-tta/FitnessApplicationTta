@@ -1,6 +1,6 @@
 package com.tta.fitnessapplication.view.login
 
-import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
@@ -13,9 +13,10 @@ import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_USER
 import com.tta.fitnessapplication.data.utils.Constant.PREF.IDUSER
 import com.tta.fitnessapplication.data.utils.Constant.PREF.WATER_INNEED
 import com.tta.fitnessapplication.databinding.ActivityLoginBinding
-import com.tta.fitnessapplication.view.base.BaseFragment
+import com.tta.fitnessapplication.view.MainActivity
+import com.tta.fitnessapplication.view.base.BaseActivity
 
-class LoginActivity : BaseFragment<ActivityLoginBinding>() {
+class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private var check = false
     private var saveLogin: Boolean = false
 
@@ -23,12 +24,13 @@ class LoginActivity : BaseFragment<ActivityLoginBinding>() {
         super.initView()
         binding.edtEmail.setText("theanh682001@gmail.com")
         binding.edtPassword.setText("123456")
-        loginPreferences = requireActivity().getSharedPreferences(LOGIN_PREFS, MODE_PRIVATE)
+        loginPreferences = this.getSharedPreferences(LOGIN_PREFS, MODE_PRIVATE)
         loginPrefsEditor = loginPreferences.edit();
         saveLogin = loginPreferences.getBoolean(SAVE_LOGIN, false);
         if (saveLogin) {
             binding.progessBarLogin.visibility = View.GONE
-            findNavController().navigate(R.id.action_loginActivity_to_homeFragment)
+            this.finish()
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
         }
     }
 
@@ -38,7 +40,7 @@ class LoginActivity : BaseFragment<ActivityLoginBinding>() {
 
     override fun initViewModel() {
         super.initViewModel()
-        mainViewModel.login.observe(viewLifecycleOwner) {
+        mainViewModel.login.observe(this) {
             if (it.isSuccessful) {
                 check = true
                 loginPrefsEditor.putString(IDUSER, it.body()?.id)
@@ -62,7 +64,8 @@ class LoginActivity : BaseFragment<ActivityLoginBinding>() {
         loginPrefsEditor.commit();
         // go to home
         binding.progessBarLogin.visibility = View.GONE
-        findNavController().navigate(R.id.action_loginActivity_to_homeFragment)
+        this.finish()
+        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
     }
 
 

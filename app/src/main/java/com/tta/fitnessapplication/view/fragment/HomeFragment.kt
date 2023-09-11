@@ -66,7 +66,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         val emailUser = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
         val idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
-        if (emailUser != "") {
+        if (emailUser != ""&&isConnect) {
             mainViewModel.getUserData(emailUser)
         }
         mainViewModel.dataExercise.observe(viewLifecycleOwner) {
@@ -79,8 +79,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 Log.e("tta", it.errorBody().toString())
             }
         }
-        //
-        mainViewModel.getHistoryByDate(idUser, fullDateFormatter.format(today))
+        if (isConnect){
+            mainViewModel.getHistoryByDate(idUser, fullDateFormatter.format(today))
+        }
         mainViewModel.listHistoryByDate.observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
                 if (it.body()?.response == 0) {
