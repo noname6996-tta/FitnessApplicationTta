@@ -58,17 +58,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view13" />
 
-    <com.github.mikephil.charting.charts.BarChart
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chart1"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginLeft="@dimen/size_16dp"
-        android:layout_marginTop="@dimen/size_16dp"
-        android:layout_marginRight="@dimen/size_16dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+        app:layout_constraintTop_toBottomOf="@+id/textView25">
 
+        <include
+            layout="@layout/item_chart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <View
         android:id="@+id/view20"
         android:layout_width="match_parent"

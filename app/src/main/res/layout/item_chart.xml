@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!-- plus 42dp one time   -->
+    <View
+        android:id="@+id/viewY"
+        android:layout_width="2dp"
+        android:layout_height="240dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        android:background="#D2CFCF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/viewX"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginEnd="@dimen/size_20dp"
+        android:background="#D2CFCF"
+        app:layout_constraintBottom_toBottomOf="@+id/viewY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/viewY" />
+
+    <View
+        android:id="@+id/viewX1"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="-6dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/dashed_bg"
+        app:layout_constraintBottom_toTopOf="@+id/viewX"
+        app:layout_constraintEnd_toEndOf="@+id/viewX"
+        app:layout_constraintStart_toStartOf="@+id/viewX" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="2h"
+        android:textColor="@color/text"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewX1"
+        app:layout_constraintEnd_toStartOf="@+id/viewX1"
+        app:layout_constraintTop_toTopOf="@+id/viewX1" />
+
+    <View
+        android:id="@+id/viewX2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="-6dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/dashed_bg"
+        app:layout_constraintBottom_toTopOf="@+id/viewX1"
+        app:layout_constraintEnd_toEndOf="@+id/viewX"
+        app:layout_constraintStart_toStartOf="@+id/viewX" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="4h"
+        android:textColor="@color/text"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewX2"
+        app:layout_constraintEnd_toStartOf="@+id/viewX2"
+        app:layout_constraintTop_toTopOf="@+id/viewX2" />
+
+    <View
+        android:id="@+id/viewX3"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="-6dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/dashed_bg"
+        app:layout_constraintBottom_toTopOf="@+id/viewX2"
+        app:layout_constraintEnd_toEndOf="@+id/viewX"
+        app:layout_constraintStart_toStartOf="@+id/viewX" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="6h"
+        android:textColor="@color/text"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewX3"
+        app:layout_constraintEnd_toStartOf="@+id/viewX3"
+        app:layout_constraintTop_toTopOf="@+id/viewX3" />
+
+    <View
+        android:id="@+id/viewX4"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="-6dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/dashed_bg"
+        app:layout_constraintBottom_toTopOf="@+id/viewX3"
+        app:layout_constraintEnd_toEndOf="@+id/viewX"
+        app:layout_constraintStart_toStartOf="@+id/viewX" />
+
+    <TextView
+        android:id="@+id/textView72"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="8h"
+        android:textColor="@color/text"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewX4"
+        app:layout_constraintEnd_toStartOf="@+id/viewX4"
+        app:layout_constraintTop_toTopOf="@+id/viewX4" />
+
+    <View
+        android:id="@+id/viewX5"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="-6dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/dashed_bg"
+        app:layout_constraintBottom_toTopOf="@+id/viewX4"
+        app:layout_constraintEnd_toEndOf="@+id/viewX"
+        app:layout_constraintStart_toStartOf="@+id/viewX" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="10h"
+        android:textColor="@color/text"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewX5"
+        app:layout_constraintEnd_toStartOf="@+id/viewX5"
+        app:layout_constraintTop_toTopOf="@+id/viewX5" />
+
+    <View
+        android:id="@+id/viewColume1"
+        android:layout_width="@dimen/size_20dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_view_radius_blue_top"
+        app:layout_constraintBottom_toTopOf="@+id/viewX"
+        app:layout_constraintEnd_toStartOf="@+id/viewColume2"
+        app:layout_constraintStart_toEndOf="@+id/viewY" />
+
+    <View
+        android:id="@+id/viewColume2"
+        android:layout_width="@dimen/size_20dp"
+        android:layout_height="82dp"
+        android:background="@drawable/bg_view_radius_blue_top"
+        app:layout_constraintBottom_toTopOf="@+id/viewX"
+        app:layout_constraintEnd_toStartOf="@+id/viewColume3"
+        app:layout_constraintStart_toEndOf="@+id/viewColume1" />
+
+    <View
+        android:id="@+id/viewColume3"
+        android:layout_width="@dimen/size_20dp"
+        android:layout_height="124dp"
+        android:background="@drawable/bg_view_radius_blue_top"
+        app:layout_constraintBottom_toTopOf="@+id/viewX"
+        app:layout_constraintEnd_toStartOf="@+id/viewColume4"
+        app:layout_constraintStart_toEndOf="@+id/viewColume2" />
+
+    <View
+        android:id="@+id/viewColume4"
+        android:layout_width="@dimen/size_20dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_view_radius_blue_top"
+        app:layout_constraintBottom_toTopOf="@+id/viewX"
+        app:layout_constraintEnd_toStartOf="@+id/viewColume5"
+        app:layout_constraintStart_toEndOf="@+id/viewColume3" />
+
+    <View
+        android:id="@+id/viewColume5"
+        android:layout_width="@dimen/size_20dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_view_radius_blue_top"
+        app:layout_constraintBottom_toTopOf="@+id/viewX"
+        app:layout_constraintEnd_toStartOf="@+id/viewColume6"
+        app:layout_constraintStart_toEndOf="@+id/viewColume4" />
+
+    <View
+        android:id="@+id/viewColume6"
+        android:layout_width="@dimen/size_20dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_view_radius_blue_top"
+        app:layout_constraintBottom_toTopOf="@+id/viewX"
+        app:layout_constraintEnd_toStartOf="@+id/viewColume7"
+        app:layout_constraintStart_toEndOf="@+id/viewColume5" />
+
+    <View
+        android:id="@+id/viewColume7"
+        android:layout_width="@dimen/size_20dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_view_radius_blue_top"
+        app:layout_constraintBottom_toTopOf="@+id/viewX"
+        app:layout_constraintEnd_toEndOf="@+id/viewX"
+        app:layout_constraintStart_toEndOf="@+id/viewColume6" />
+</androidx.constraintlayout.widget.ConstraintLayout>
