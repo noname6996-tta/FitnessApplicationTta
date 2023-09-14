@@ -8,6 +8,7 @@ import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
+import com.skydoves.balloon.showAlignTop
 import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.databinding.ActivitySleepTrackerBinding
 
@@ -63,6 +64,25 @@ class SleepTrackerActivity : AppCompatActivity() {
 
         binding.viewInfo.setOnClickListener {
             binding.viewInfo.showAsDropDown(balloonSleep)
+        }
+
+        val balloonInfoColumnone = Balloon.Builder(this)
+            .setWidthRatio(1.0f)
+            .setHeight(BalloonSizeSpec.WRAP)
+            .setText("2h")
+            .setTextColorResource(com.tta.fitnessapplication.R.color.white)
+            .setTextSize(15f)
+            .setArrowPositionRules(ArrowPositionRules.ALIGN_BALLOON)
+            .setArrowSize(10)
+            .setArrowPosition(0.5f)
+            .setPadding(2)
+            .setCornerRadius(8f)
+            .setBackgroundColorResource(com.tta.fitnessapplication.R.color.text)
+            .setBalloonAnimation(BalloonAnimation.ELASTIC)
+            .build()
+
+        binding.chart.viewColume1.setOnClickListener {
+            binding.chart.viewColume1.showAlignTop(balloonInfoColumnone)
         }
     }
 }

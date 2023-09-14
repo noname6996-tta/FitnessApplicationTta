@@ -197,4 +197,81 @@
         app:layout_constraintBottom_toTopOf="@+id/viewX"
         app:layout_constraintEnd_toEndOf="@+id/viewX"
         app:layout_constraintStart_toEndOf="@+id/viewColume6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Mon"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintEnd_toEndOf="@+id/viewColume1"
+        app:layout_constraintStart_toStartOf="@+id/viewColume1"
+        app:layout_constraintTop_toBottomOf="@+id/viewX" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Tue"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintEnd_toEndOf="@+id/viewColume2"
+        app:layout_constraintStart_toStartOf="@+id/viewColume2"
+        app:layout_constraintTop_toBottomOf="@+id/viewX" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Wed"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintEnd_toEndOf="@+id/viewColume3"
+        app:layout_constraintStart_toStartOf="@+id/viewColume3"
+        app:layout_constraintTop_toBottomOf="@+id/viewX" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Thu"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintEnd_toEndOf="@+id/viewColume4"
+        app:layout_constraintStart_toStartOf="@+id/viewColume4"
+        app:layout_constraintTop_toBottomOf="@+id/viewX" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Fri"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintEnd_toEndOf="@+id/viewColume5"
+        app:layout_constraintStart_toStartOf="@+id/viewColume5"
+        app:layout_constraintTop_toBottomOf="@+id/viewX" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Sat"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintEnd_toEndOf="@+id/viewColume6"
+        app:layout_constraintStart_toStartOf="@+id/viewColume6"
+        app:layout_constraintTop_toBottomOf="@+id/viewX" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Sun"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintEnd_toEndOf="@+id/viewColume7"
+        app:layout_constraintStart_toStartOf="@+id/viewColume7"
+        app:layout_constraintTop_toBottomOf="@+id/viewX" />
 </androidx.constraintlayout.widget.ConstraintLayout>
