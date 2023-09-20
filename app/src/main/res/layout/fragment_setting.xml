@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,7 +10,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView22"
@@ -19,9 +18,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_16dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Profile"
+                android:text="@string/profile"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +40,7 @@
                 android:id="@+id/circleImageView2"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
-                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginStart="@dimen/size_16dp"
                 android:layout_marginTop="@dimen/size_16dp"
                 android:src="@drawable/latest_pic"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,11 +50,11 @@
                 android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginStart="@dimen/size_16dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Stefani Wong"
+                android:text="@string/text_loading"
                 android:textColor="@color/black"
-                android:textSize="@dimen/size_14dp"
+                android:textSize="@dimen/text_size_14sp"
                 app:layout_constraintStart_toEndOf="@+id/circleImageView2"
                 app:layout_constraintTop_toTopOf="@+id/circleImageView2" />
 
@@ -65,9 +64,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_4dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Male"
+                android:text="@string/text_loading"
                 android:textColor="@color/gray1"
-                android:textSize="@dimen/size_12dp"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintStart_toStartOf="@+id/tvUserName"
                 app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
@@ -75,7 +74,7 @@
                 android:id="@+id/view15"
                 android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:layout_marginRight="@dimen/size_16dp"
+                android:layout_marginEnd="@dimen/size_16dp"
                 android:background="@drawable/bg_button_radius"
                 app:layout_constraintBottom_toBottomOf="@+id/circleImageView2"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -85,9 +84,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Edit"
+                android:text="@string/edit"
                 android:textColor="@color/white"
-                android:textSize="@dimen/size_12dp"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/view15"
                 app:layout_constraintEnd_toEndOf="@+id/view15"
                 app:layout_constraintStart_toStartOf="@+id/view15"
@@ -107,8 +106,8 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:layout_marginLeft="@dimen/size_16dp"
-                    android:layout_marginRight="7dp"
+                    android:layout_marginStart="@dimen/size_16dp"
+                    android:layout_marginEnd="7dp"
                     android:layout_weight="1"
                     app:cardCornerRadius="@dimen/size_16dp">
 
@@ -121,9 +120,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
-                            android:text="180cm"
+                            android:text="@string/text_loading"
                             android:textColor="@color/text"
-                            android:textSize="@dimen/size_16dp"
+                            android:textSize="@dimen/text_size_16sp"
                             app:layout_constraintBottom_toTopOf="@+id/tvTitleHeight"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -134,9 +133,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Height"
-                            android:textSize="@dimen/size_14dp"
-
+                            android:text="@string/height"
+                            android:textSize="@dimen/text_size_14sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -161,9 +159,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
-                            android:text="180cm"
+                            android:text="@string/text_loading"
                             android:textColor="@color/text"
-                            android:textSize="@dimen/size_16dp"
+                            android:textSize="@dimen/text_size_16sp"
                             app:layout_constraintBottom_toTopOf="@+id/tvTitleWeight"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -174,9 +172,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Weight"
-                            android:textSize="@dimen/size_14dp"
-
+                            android:text="@string/weight"
+                            android:textSize="@dimen/text_size_14sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -187,8 +184,8 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginRight="@dimen/size_16dp"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginEnd="@dimen/size_16dp"
                     android:layout_weight="1"
                     app:cardCornerRadius="@dimen/size_16dp">
 
@@ -201,9 +198,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
-                            android:text="180cm"
+                            android:text="@string/text_loading"
                             android:textColor="@color/text"
-                            android:textSize="@dimen/size_16dp"
+                            android:textSize="@dimen/text_size_16sp"
                             app:layout_constraintBottom_toTopOf="@+id/tvTitleAge"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -378,6 +375,48 @@
                         app:layout_constraintBottom_toBottomOf="@+id/viewProgess"
                         app:layout_constraintEnd_toEndOf="@+id/viewProgess"
                         app:layout_constraintTop_toTopOf="@+id/viewProgess" />
+
+                    <View
+                        android:id="@+id/viewTodayTarget"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_24dp"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="@dimen/size_16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/viewProgess" />
+
+                    <ImageView
+                        android:id="@+id/imageTodayTarget"
+                        android:layout_width="@dimen/size_24dp"
+                        android:layout_height="@dimen/size_24dp"
+                        android:src="@drawable/calendar"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewTodayTarget"
+                        app:layout_constraintStart_toStartOf="@+id/viewTodayTarget"
+                        app:layout_constraintTop_toTopOf="@+id/viewTodayTarget" />
+
+                    <TextView
+                        android:id="@+id/textViewTodayTarget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size_24dp"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="@string/today_target"
+                        android:textColor="@color/gray1"
+                        android:textSize="@dimen/text_size_14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewTodayTarget"
+                        app:layout_constraintStart_toEndOf="@+id/imageTodayTarget"
+                        app:layout_constraintTop_toTopOf="@+id/viewTodayTarget" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_navigate_next_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewTodayTarget"
+                        app:layout_constraintEnd_toEndOf="@+id/viewTodayTarget"
+                        app:layout_constraintTop_toTopOf="@+id/viewTodayTarget" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -425,17 +464,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size_8dp"
                         android:fontFamily="@font/poppins"
-                        android:text="Pop-up Notification"
+                        android:text="Notification"
                         android:textColor="@color/gray1"
                         android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView25"
                         app:layout_constraintStart_toEndOf="@+id/imageView25"
                         app:layout_constraintTop_toTopOf="@+id/imageView25" />
 
-                    <Switch
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/size_16dp"
+                        android:padding="16dp"
+                        android:src="@drawable/baseline_navigate_next_24"
                         app:layout_constraintBottom_toBottomOf="@+id/textView40"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView40" />
@@ -657,8 +697,8 @@
                         android:id="@+id/viewLogout"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_24dp"
-                        android:layout_marginTop="@dimen/size_16dp"
                         android:layout_marginLeft="@dimen/size_16dp"
+                        android:layout_marginTop="@dimen/size_16dp"
                         android:layout_marginRight="@dimen/size_16dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

@@ -1,6 +1,317 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/view13"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:background="@drawable/bg_view_gray_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+                app:layout_constraintBottom_toBottomOf="@+id/view13"
+                app:layout_constraintEnd_toEndOf="@+id/view13"
+                app:layout_constraintStart_toStartOf="@+id/view13"
+                app:layout_constraintTop_toTopOf="@+id/view13" />
+
+            <View
+                android:id="@+id/viewInfo"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="@dimen/size_16dp"
+                android:background="@drawable/bg_view_gray_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/baseline_more_horiz_24"
+                app:layout_constraintBottom_toBottomOf="@+id/viewInfo"
+                app:layout_constraintEnd_toEndOf="@+id/viewInfo"
+                app:layout_constraintStart_toStartOf="@+id/viewInfo"
+                app:layout_constraintTop_toTopOf="@+id/viewInfo" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/activity_tracker"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/view13"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view13" />
+
+            <View
+                android:id="@+id/view26"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginStart="@dimen/size_16dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="@dimen/size_16dp"
+                android:background="@drawable/bg_view_radius_light_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+            <TextView
+                android:id="@+id/textView73"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/size_24dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/today_target"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16sp"
+                app:layout_constraintStart_toStartOf="@+id/view26"
+                app:layout_constraintTop_toTopOf="@+id/view26" />
+
+            <View
+                android:id="@+id/viewWater"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_raduis_white_12dp"
+                app:layout_constraintEnd_toStartOf="@+id/viewSleep"
+                app:layout_constraintStart_toStartOf="@+id/view26"
+                app:layout_constraintTop_toBottomOf="@+id/textView73" />
+
+            <ImageView
+                android:id="@+id/imgWater"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_cup"
+                app:layout_constraintBottom_toBottomOf="@+id/viewWater"
+                app:layout_constraintStart_toStartOf="@+id/viewWater"
+                app:layout_constraintTop_toTopOf="@+id/viewWater" />
+
+            <TextView
+                android:id="@+id/tvWaterTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="@string/water_intake"
+                android:textColor="@color/gray1"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/viewWater"
+                app:layout_constraintEnd_toEndOf="@+id/viewWater"
+                app:layout_constraintStart_toEndOf="@+id/imgWater" />
+
+            <TextView
+                android:id="@+id/tvWaterValue"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="center|start"
+                android:text="@string/water_intake"
+                android:textColor="@color/text"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintBottom_toTopOf="@+id/tvWaterTitle"
+                app:layout_constraintEnd_toEndOf="@+id/viewWater"
+                app:layout_constraintStart_toEndOf="@+id/imgWater"
+                app:layout_constraintTop_toTopOf="@+id/viewWater" />
+
+            <View
+                android:id="@+id/viewSleep"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="@dimen/size_16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/size_8dp"
+                android:background="@drawable/bg_raduis_white_12dp"
+                app:layout_constraintEnd_toEndOf="@+id/view26"
+                app:layout_constraintStart_toEndOf="@+id/viewWater"
+                app:layout_constraintTop_toBottomOf="@+id/textView73" />
+
+            <ImageView
+                android:id="@+id/imgSleep"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_sleep"
+                app:layout_constraintBottom_toBottomOf="@+id/viewSleep"
+                app:layout_constraintStart_toStartOf="@+id/viewSleep"
+                app:layout_constraintTop_toTopOf="@+id/viewSleep" />
+
+            <TextView
+                android:id="@+id/tvSleepTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="@string/sleep_intake"
+                android:textColor="@color/gray1"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/viewSleep"
+                app:layout_constraintEnd_toEndOf="@+id/viewSleep"
+                app:layout_constraintStart_toEndOf="@+id/imgSleep" />
+
+            <TextView
+                android:id="@+id/tvSleepValue"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="center|start"
+                android:text="@string/water_intake"
+                android:textColor="@color/text"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintBottom_toTopOf="@+id/tvSleepTitle"
+                app:layout_constraintEnd_toEndOf="@+id/viewSleep"
+                app:layout_constraintStart_toEndOf="@+id/imgSleep"
+                app:layout_constraintTop_toTopOf="@+id/viewSleep" />
+
+            <View
+                android:id="@+id/viewFood"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="@dimen/size_8dp"
+                android:background="@drawable/bg_raduis_white_12dp"
+                app:layout_constraintEnd_toStartOf="@+id/viewExercise"
+                app:layout_constraintStart_toStartOf="@+id/view26"
+                app:layout_constraintTop_toBottomOf="@+id/viewWater" />
+
+            <ImageView
+                android:id="@+id/imgFood"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_breafast"
+                app:layout_constraintBottom_toBottomOf="@+id/viewFood"
+                app:layout_constraintStart_toStartOf="@+id/viewFood"
+                app:layout_constraintTop_toTopOf="@+id/viewFood" />
+
+            <TextView
+                android:id="@+id/tvFoodTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="@string/food_intake"
+                android:textColor="@color/gray1"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/viewFood"
+                app:layout_constraintEnd_toEndOf="@+id/viewFood"
+                app:layout_constraintStart_toEndOf="@+id/imgFood" />
+
+            <TextView
+                android:id="@+id/tvFoodValue"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="center|start"
+                android:text="@string/water_intake"
+                android:textColor="@color/text"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintBottom_toTopOf="@+id/tvFoodTitle"
+                app:layout_constraintEnd_toEndOf="@+id/viewFood"
+                app:layout_constraintStart_toEndOf="@+id/imgFood"
+                app:layout_constraintTop_toTopOf="@+id/viewFood" />
+
+            <View
+                android:id="@+id/viewExercise"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginStart="@dimen/size_8dp"
+                android:layout_marginEnd="@dimen/size_16dp"
+                android:background="@drawable/bg_raduis_white_12dp"
+                app:layout_constraintEnd_toEndOf="@+id/view26"
+                app:layout_constraintStart_toEndOf="@+id/viewFood"
+                app:layout_constraintTop_toBottomOf="@+id/viewSleep" />
+
+            <ImageView
+                android:id="@+id/imgExercise"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/group_10289"
+                app:layout_constraintBottom_toBottomOf="@+id/viewExercise"
+                app:layout_constraintStart_toStartOf="@+id/viewExercise"
+                app:layout_constraintTop_toTopOf="@+id/viewExercise" />
+
+            <TextView
+                android:id="@+id/tvExerciseTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="@string/exercise_intake"
+                android:textColor="@color/gray1"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/viewExercise"
+                app:layout_constraintEnd_toEndOf="@+id/viewExercise"
+                app:layout_constraintStart_toEndOf="@+id/imgExercise" />
+
+            <TextView
+                android:id="@+id/tvExerciseValue"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="center|start"
+                android:text="@string/water_intake"
+                android:textColor="@color/text"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintBottom_toTopOf="@+id/tvExerciseTitle"
+                app:layout_constraintEnd_toEndOf="@+id/viewExercise"
+                app:layout_constraintStart_toEndOf="@+id/imgExercise"
+                app:layout_constraintTop_toTopOf="@+id/viewExercise" />
+
+            <TextView
+                android:id="@+id/textView74"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/latest_activity"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view26" />
+
+            <TextView
+                android:id="@+id/tvShowHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size_16dp"
+                android:text="@string/see_more"
+                android:textColor="@color/gray1"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView74"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView74" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvShowHistory" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,8 +11,8 @@ import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.Companion.BASE_URL
 import com.tta.fitnessapplication.databinding.FragmentSettingBinding
 import com.tta.fitnessapplication.view.activity.WebViewActivity
-import com.tta.fitnessapplication.view.login.LoginActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
+import com.tta.fitnessapplication.view.login.LoginActivity
 
 class SettingFragment : BaseFragment<FragmentSettingBinding>() {
     override fun getDataBinding(): FragmentSettingBinding {
@@ -53,7 +53,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
     }
 
     override fun addEvent() {
-        with(binding){
+        with(binding) {
             viewLogout.setOnClickListener {
                 AlertDialog.Builder(requireContext())
                     .setTitle("Thông báo")
@@ -103,6 +103,14 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
             viewSetting.setOnClickListener {
                 findNavController().navigate(R.id.action_settingFragment_to_changeThemesFragment)
+            }
+
+            viewTodayTarget.setOnClickListener {
+                findNavController().navigate(R.id.action_settingFragment_to_todayTarget)
+            }
+
+            cardView4.setOnClickListener{
+                // go to notification fragment
             }
         }
     }

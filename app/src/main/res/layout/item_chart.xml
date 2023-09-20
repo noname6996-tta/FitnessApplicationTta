@@ -8,10 +8,10 @@
         android:id="@+id/viewY"
         android:layout_width="2dp"
         android:layout_height="240dp"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="20dp"
         android:background="#D2CFCF"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toEndOf="@+id/tvValueY5"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -36,6 +36,7 @@
         app:layout_constraintStart_toStartOf="@+id/viewX" />
 
     <TextView
+        android:id="@+id/tvValueY1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
@@ -43,8 +44,19 @@
         android:textColor="@color/text"
         android:textSize="@dimen/text_size_14sp"
         app:layout_constraintBottom_toBottomOf="@+id/viewX1"
-        app:layout_constraintEnd_toStartOf="@+id/viewX1"
+        app:layout_constraintStart_toStartOf="@+id/tvValueY5"
         app:layout_constraintTop_toTopOf="@+id/viewX1" />
+
+    <TextView
+        android:id="@+id/tvValueY0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="hour"
+        android:textColor="@color/text"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintStart_toStartOf="@+id/tvValueY5"
+        app:layout_constraintTop_toBottomOf="@+id/viewY" />
 
     <View
         android:id="@+id/viewX2"
@@ -58,6 +70,7 @@
         app:layout_constraintStart_toStartOf="@+id/viewX" />
 
     <TextView
+        android:id="@+id/tvValueY2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
@@ -65,7 +78,7 @@
         android:textColor="@color/text"
         android:textSize="@dimen/text_size_14sp"
         app:layout_constraintBottom_toBottomOf="@+id/viewX2"
-        app:layout_constraintEnd_toStartOf="@+id/viewX2"
+        app:layout_constraintStart_toStartOf="@+id/tvValueY5"
         app:layout_constraintTop_toTopOf="@+id/viewX2" />
 
     <View
@@ -80,6 +93,7 @@
         app:layout_constraintStart_toStartOf="@+id/viewX" />
 
     <TextView
+        android:id="@+id/tvValueY3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
@@ -87,7 +101,7 @@
         android:textColor="@color/text"
         android:textSize="@dimen/text_size_14sp"
         app:layout_constraintBottom_toBottomOf="@+id/viewX3"
-        app:layout_constraintEnd_toStartOf="@+id/viewX3"
+        app:layout_constraintStart_toStartOf="@+id/tvValueY5"
         app:layout_constraintTop_toTopOf="@+id/viewX3" />
 
     <View
@@ -102,7 +116,7 @@
         app:layout_constraintStart_toStartOf="@+id/viewX" />
 
     <TextView
-        android:id="@+id/textView72"
+        android:id="@+id/tvValueY4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
@@ -110,7 +124,7 @@
         android:textColor="@color/text"
         android:textSize="@dimen/text_size_14sp"
         app:layout_constraintBottom_toBottomOf="@+id/viewX4"
-        app:layout_constraintEnd_toStartOf="@+id/viewX4"
+        app:layout_constraintStart_toStartOf="@+id/tvValueY5"
         app:layout_constraintTop_toTopOf="@+id/viewX4" />
 
     <View
@@ -125,6 +139,8 @@
         app:layout_constraintStart_toStartOf="@+id/viewX" />
 
     <TextView
+        android:id="@+id/tvValueY5"
+        android:layout_marginStart="@dimen/size_4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
@@ -132,71 +148,78 @@
         android:textColor="@color/text"
         android:textSize="@dimen/text_size_14sp"
         app:layout_constraintBottom_toBottomOf="@+id/viewX5"
-        app:layout_constraintEnd_toStartOf="@+id/viewX5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/viewX5" />
 
-    <View
+    <com.tta.fitnessapplication.ui.VerticalProgressBar
         android:id="@+id/viewColume1"
         android:layout_width="@dimen/size_20dp"
-        android:layout_height="40dp"
-        android:background="@drawable/bg_view_radius_blue_top"
+        android:layout_height="0dp"
+        android:progressDrawable="@drawable/custom_progressbar"
         app:layout_constraintBottom_toTopOf="@+id/viewX"
         app:layout_constraintEnd_toStartOf="@+id/viewColume2"
-        app:layout_constraintStart_toEndOf="@+id/viewY" />
+        app:layout_constraintStart_toEndOf="@+id/viewY"
+        app:layout_constraintTop_toTopOf="@+id/viewX5" />
 
-    <View
+    <com.tta.fitnessapplication.ui.VerticalProgressBar
         android:id="@+id/viewColume2"
         android:layout_width="@dimen/size_20dp"
-        android:layout_height="82dp"
-        android:background="@drawable/bg_view_radius_blue_top"
+        android:layout_height="0dp"
+        android:progressDrawable="@drawable/custom_progressbar"
         app:layout_constraintBottom_toTopOf="@+id/viewX"
         app:layout_constraintEnd_toStartOf="@+id/viewColume3"
-        app:layout_constraintStart_toEndOf="@+id/viewColume1" />
+        app:layout_constraintStart_toEndOf="@+id/viewColume1"
+        app:layout_constraintTop_toTopOf="@+id/viewX5" />
 
-    <View
+    <com.tta.fitnessapplication.ui.VerticalProgressBar
         android:id="@+id/viewColume3"
         android:layout_width="@dimen/size_20dp"
-        android:layout_height="124dp"
-        android:background="@drawable/bg_view_radius_blue_top"
+        android:layout_height="0dp"
+        android:progressDrawable="@drawable/custom_progressbar"
         app:layout_constraintBottom_toTopOf="@+id/viewX"
         app:layout_constraintEnd_toStartOf="@+id/viewColume4"
-        app:layout_constraintStart_toEndOf="@+id/viewColume2" />
+        app:layout_constraintStart_toEndOf="@+id/viewColume2"
+        app:layout_constraintTop_toTopOf="@+id/viewX5" />
 
-    <View
+    <com.tta.fitnessapplication.ui.VerticalProgressBar
         android:id="@+id/viewColume4"
         android:layout_width="@dimen/size_20dp"
-        android:layout_height="40dp"
-        android:background="@drawable/bg_view_radius_blue_top"
+        android:layout_height="0dp"
+        android:progressDrawable="@drawable/custom_progressbar"
         app:layout_constraintBottom_toTopOf="@+id/viewX"
         app:layout_constraintEnd_toStartOf="@+id/viewColume5"
-        app:layout_constraintStart_toEndOf="@+id/viewColume3" />
+        app:layout_constraintStart_toEndOf="@+id/viewColume3"
+        app:layout_constraintTop_toTopOf="@+id/viewX5" />
 
-    <View
+    <com.tta.fitnessapplication.ui.VerticalProgressBar
         android:id="@+id/viewColume5"
         android:layout_width="@dimen/size_20dp"
-        android:layout_height="40dp"
-        android:background="@drawable/bg_view_radius_blue_top"
+        android:layout_height="0dp"
+        android:progressDrawable="@drawable/custom_progressbar"
         app:layout_constraintBottom_toTopOf="@+id/viewX"
         app:layout_constraintEnd_toStartOf="@+id/viewColume6"
-        app:layout_constraintStart_toEndOf="@+id/viewColume4" />
+        app:layout_constraintStart_toEndOf="@+id/viewColume4"
+        app:layout_constraintTop_toTopOf="@+id/viewX5" />
 
-    <View
+    <com.tta.fitnessapplication.ui.VerticalProgressBar
         android:id="@+id/viewColume6"
         android:layout_width="@dimen/size_20dp"
-        android:layout_height="40dp"
-        android:background="@drawable/bg_view_radius_blue_top"
+        android:layout_height="0dp"
+        android:progressDrawable="@drawable/custom_progressbar"
         app:layout_constraintBottom_toTopOf="@+id/viewX"
         app:layout_constraintEnd_toStartOf="@+id/viewColume7"
-        app:layout_constraintStart_toEndOf="@+id/viewColume5" />
+        app:layout_constraintStart_toEndOf="@+id/viewColume5"
+        app:layout_constraintTop_toTopOf="@+id/viewX5" />
 
-    <View
+    <com.tta.fitnessapplication.ui.VerticalProgressBar
         android:id="@+id/viewColume7"
         android:layout_width="@dimen/size_20dp"
-        android:layout_height="40dp"
-        android:background="@drawable/bg_view_radius_blue_top"
+        android:layout_height="0dp"
+        android:progressDrawable="@drawable/custom_progressbar"
         app:layout_constraintBottom_toTopOf="@+id/viewX"
         app:layout_constraintEnd_toEndOf="@+id/viewX"
-        app:layout_constraintStart_toEndOf="@+id/viewColume6" />
+        app:layout_constraintStart_toEndOf="@+id/viewColume6"
+        app:layout_constraintTop_toTopOf="@+id/viewX5" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_historyActivity"
             app:destination="@id/historyActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_todayTarget"
+            app:destination="@id/todayTarget" />
     </fragment>
     <fragment
         android:id="@+id/discoverFragment"
@@ -38,6 +41,9 @@
         <action
             android:id="@+id/action_settingFragment_to_changeThemesFragment"
             app:destination="@id/changeThemesFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_todayTarget"
+            app:destination="@id/todayTarget" />
     </fragment>
     <fragment
         android:id="@+id/waterTrackerActivity"
@@ -101,4 +107,19 @@
         android:name="com.tta.fitnessapplication.view.noti.NotificationActivity"
         android:label="activity_notification"
         tools:layout="@layout/activity_notification" />
+    <fragment
+        android:id="@+id/todayTarget"
+        tools:layout="@layout/fragment_today_target"
+        android:name="com.tta.fitnessapplication.view.fragment.TodayTarget"
+        android:label="TodayTarget" >
+        <action
+            android:id="@+id/action_todayTarget_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_todayTarget_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_todayTarget_to_historyActivity"
+            app:destination="@id/historyActivity" />
+    </fragment>
 </navigation>

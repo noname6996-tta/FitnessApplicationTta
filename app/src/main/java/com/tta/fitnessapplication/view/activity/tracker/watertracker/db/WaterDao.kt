@@ -15,4 +15,7 @@ interface WaterDao {
 
     @Query("SELECT * FROM water_planner ORDER BY id ASC")
     fun readAllData(): LiveData<List<Water>>
+
+    @Query("SELECT * FROM water_planner WHERE date = :inputDate")
+    fun getWaterListByDate(inputDate: String): List<Water>
 }

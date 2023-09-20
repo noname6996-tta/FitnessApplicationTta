@@ -37,6 +37,19 @@
     <string name="calculate_the_amount_of_water_you_need_to_use_each_day">Calculate the amount of water you need to use each day</string>
     <string name="setting_noti">Set up notifications to remind you to drink water</string>
     <string name="click_here_for_details">Click here for details</string>
+    <string name="activity_tracker">Activity Tracker</string>
+    <string name="today_target">Today target</string>
+    <string name="water_intake">Water intake</string>
+    <string name="food_intake">Food intake</string>
+    <string name="sleep_intake">Sleep intake</string>
+    <string name="exercise_intake">Exercise today</string>
+    <string name="latest_activity">Latest Activity</string>
+    <string name="profile">Profile</string>
+    <string name="text_loading">____</string>
+    <string name="edit">Edit</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="see_more">See more</string>
     //
     <string-array name="Gender">
         <item>MALE</item>

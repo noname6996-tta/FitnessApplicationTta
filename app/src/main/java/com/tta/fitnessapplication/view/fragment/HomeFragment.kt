@@ -104,23 +104,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun addEvent() {
-        binding.cardViewSleep.setOnClickListener {
-            startActivity(Intent(activity, SleepTrackerActivity::class.java))
-        }
-        binding.cardViewWater.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_waterTrackerActivity)
-        }
-        binding.cardViewEat.setOnClickListener {
-            startActivity(Intent(activity, CalorieTrackerActivity::class.java))
+        with(binding){
+            cardViewSleep.setOnClickListener {
+                startActivity(Intent(activity, SleepTrackerActivity::class.java))
+            }
+            cardViewWater.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_waterTrackerActivity)
+            }
+            cardViewEat.setOnClickListener {
+                startActivity(Intent(activity, CalorieTrackerActivity::class.java))
+            }
+
+            tvSeeMoreHistory.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_historyActivity)
+            }
+
+            imgNotifiHome.setOnClickListener {
+                // go to noti activity
+            }
+            view6.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_todayTarget)
+            }
         }
 
-        binding.tvSeeMoreHistory.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_historyActivity)
-        }
-
-        binding.imgNotifiHome.setOnClickListener {
-            // go to noti activity
-        }
     }
 
     override fun initView() {
@@ -245,31 +251,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.tvDay7.text = arrayDay[6]
         when (dayNumber) {
             arrayDay[0] -> {
-                binding.tvDay1.setTextColor(ContextCompat.getColor(requireContext(), R.color.text))
+                binding.tvDay1.setTextColor(Color.RED)
             }
 
             arrayDay[1] -> {
-                binding.tvDay2.setTextColor(ContextCompat.getColor(requireContext(), R.color.text))
+                binding.tvDay2.setTextColor(Color.RED)
             }
 
             arrayDay[2] -> {
-                binding.tvDay3.setTextColor(ContextCompat.getColor(requireContext(), R.color.text))
+                binding.tvDay3.setTextColor(Color.RED)
             }
 
             arrayDay[3] -> {
-                binding.tvDay4.setTextColor(ContextCompat.getColor(requireContext(), R.color.text))
+                binding.tvDay4.setTextColor(Color.RED)
             }
 
             arrayDay[4] -> {
-                binding.tvDay5.setTextColor(ContextCompat.getColor(requireContext(), R.color.text))
+                binding.tvDay5.setTextColor(Color.RED)
             }
 
             arrayDay[5] -> {
-                binding.tvDay6.setTextColor(ContextCompat.getColor(requireContext(), R.color.text))
+                binding.tvDay6.setTextColor(Color.RED)
             }
 
             arrayDay[6] -> {
-                binding.tvDay7.setTextColor(ContextCompat.getColor(requireContext(), R.color.text))
+                binding.tvDay7.setTextColor(Color.RED)
             }
         }
     }

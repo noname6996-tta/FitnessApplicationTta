@@ -25,11 +25,11 @@ class Constant {
     }
 
     object DATE {
-        val today = LocalDate.now()
-        val titleSameYearFormatter = DateTimeFormatter.ofPattern("MMMM")
-        val titleFormatter = DateTimeFormatter.ofPattern("MMM yyyy")
-        val selectionFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")
-        val fullDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val today: LocalDate = LocalDate.now()
+        val titleSameYearFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("MMMM")
+        val titleFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("MMM yyyy")
+        val selectionFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")
+        val fullDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     }
 
     object GPT {

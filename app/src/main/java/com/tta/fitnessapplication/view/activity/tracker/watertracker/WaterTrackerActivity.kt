@@ -1,5 +1,10 @@
 package com.tta.fitnessapplication.view.activity.tracker.watertracker
 
+import android.content.res.Resources
+import android.util.Log
+import android.util.TypedValue
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.skydoves.balloon.ArrowPositionRules
@@ -8,6 +13,7 @@ import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.model.Water
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.fullDateFormatter
 import com.tta.fitnessapplication.data.utils.Constant.DATE.today
@@ -15,9 +21,14 @@ import com.tta.fitnessapplication.data.utils.getCurrentTime
 import com.tta.fitnessapplication.data.utils.showAnimatedAlertDialog
 import com.tta.fitnessapplication.databinding.ActivityWaterTrackerBinding
 import com.tta.fitnessapplication.view.base.BaseFragment
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.TextStyle
+import java.util.Calendar
+import java.util.Locale
 
 class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
-
+    private lateinit var waterViewModel: WaterViewModel
     private lateinit var idUser: String
     private var drink = 0
     private val dailyWater = 2000
@@ -29,6 +40,11 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
         super.initViewModel()
         idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
         mainViewModel.getListHistoryByDateAndType(idUser, fullDateFormatter.format(today), "1")
+        waterViewModel = ViewModelProvider(this)[WaterViewModel::class.java]
+    }
+
+    override fun addObservers() {
+        super.addObservers()
         mainViewModel.listHistoryByDateAndType.observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
                 if (it.body()?.response == 0) {
@@ -65,17 +81,73 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
                 )
             }
         }
+        waterViewModel.readAllData.observe(viewLifecycleOwner) {
+            val listDataChart = arrayOf(0, 0, 0, 0, 0, 0, 0)
+            var valueWater = 0
+            for (item in it) {
+                if (item.date == fullDateFormatter.format(today)) {
+                    valueWater += item.value.toInt()
+                }
+                for (i in 0 until getWeekDates().size) {
+                    if (getWeekDates()[i].toString() == item.date) {
+                        listDataChart[i] = item.value.toInt() + listDataChart[i]
+                        listDataChart[i] = listDataChart[i]
+                    }
+                }
+                binding.chart.viewColume1.setProgress((listDataChart[0]*0.05).toInt())
+                binding.chart.viewColume2.setProgress((listDataChart[1]*0.05).toInt())
+                binding.chart.viewColume3.setProgress((listDataChart[2]*0.05).toInt())
+                binding.chart.viewColume4.setProgress((listDataChart[3]*0.05).toInt())
+                binding.chart.viewColume5.setProgress((listDataChart[4]*0.05).toInt())
+                binding.chart.viewColume6.setProgress((listDataChart[5]*0.05).toInt())
+                binding.chart.viewColume7.setProgress((listDataChart[6]*0.05).toInt())
+
+            }
+            binding.textView60.text = "$valueWater ml"
+            val result = valueWater.toFloat() / dailyWater.toFloat()  // Calculate the value
+            // Convert the result to a SeekBar progress value (0-100)
+            val progress = (result * 100).toInt()
+            binding.tvPercentDrink.text = "${progress}%"
+            binding.seekBar.progress = progress.toInt()
+        }
     }
 
     override fun initView() {
         super.initView()
-        binding.seekBar.max = 100
-        binding.seekBar.isEnabled = false
+        with(binding) {
+            seekBar.max = 100
+            seekBar.isEnabled = false
+            chart.tvValueY0.text = "ml"
+            chart.tvValueY1.text = "400"
+            chart.tvValueY2.text = "800"
+            chart.tvValueY3.text = "1200"
+            chart.tvValueY4.text = "1600"
+            chart.tvValueY5.text = "2000"
+        }
     }
 
+    fun getWeekDates(): List<String> {
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val dates = mutableListOf<String>()
+
+        // Set the calendar to the start of the week
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.firstDayOfWeek)
+
+        for (i in 0 until 7) {
+            val date = calendar.time
+            val formattedDate = dateFormat.format(date)
+            dates.add(formattedDate)
+
+            // Increment the calendar to the next day
+            calendar.add(Calendar.DAY_OF_WEEK, 1)
+        }
+
+        return dates
+    }
 
     override fun addEvent() {
-        with(binding){
+        with(binding) {
             view13.setOnClickListener {
                 findNavController().popBackStack()
             }
@@ -123,14 +195,24 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
             }
 
             appCompatButton.setOnClickListener {
-                mainViewModel.createHistory(
-                    idUser,
+//                mainViewModel.createHistory(
+//                    idUser,
+//                    fullDateFormatter.format(today),
+//                    getCurrentTime(),
+//                    "Drink water",
+//                    "1",
+//                    drink.toString()
+//                )
+                val water = Water(
+                    0,
                     fullDateFormatter.format(today),
                     getCurrentTime(),
                     "Drink water",
                     "1",
                     drink.toString()
                 )
+                waterViewModel.addWater(water)
+                showAnimatedAlertDialog(requireContext(), "Successful", "Good jobs my friend")
             }
 
             val balloonWater = Balloon.Builder(requireContext())
