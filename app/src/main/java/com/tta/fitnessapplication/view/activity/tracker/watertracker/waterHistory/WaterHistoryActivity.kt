@@ -1,14 +1,13 @@
 package com.tta.fitnessapplication.view.activity.tracker.watertracker.waterHistory
 
-import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.children
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition
@@ -31,12 +30,14 @@ import com.tta.fitnessapplication.databinding.ActivityWaterHistoryBinding
 import com.tta.fitnessapplication.databinding.Example3CalendarDayBinding
 import com.tta.fitnessapplication.databinding.Example3CalendarHeaderBinding
 import com.tta.fitnessapplication.view.activity.history.HistoryAdapter
+import com.tta.fitnessapplication.view.activity.tracker.watertracker.WaterViewModel
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
 
 class WaterHistoryActivity : BaseFragment<ActivityWaterHistoryBinding>() {
+    private lateinit var waterViewModel: WaterViewModel
     private val eventsAdapter = HistoryAdapter()
     private var selectedDate: LocalDate? = null
     private val events = mutableMapOf<LocalDate, List<History>>()
@@ -45,35 +46,32 @@ class WaterHistoryActivity : BaseFragment<ActivityWaterHistoryBinding>() {
         return ActivityWaterHistoryBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun initViewModel() {
         super.initViewModel()
         idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
-        //        viewModel.message.observe(this) {
-//            Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
-//        }
-//        viewModel.list.observe(this) {
-//            Log.e("this", it.toString())
-//            if (it != null) {
-//                eventsAdapter.events.clear()
-//                eventsAdapter.events.addAll(it)
-//                eventsAdapter.notifyDataSetChanged()
-//            }
-//        }
-        mainViewModel.listHistoryByDateAndType.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                var list = it.body()?.data
-                if (list != null) {
-                    eventsAdapter.events.clear()
-                    eventsAdapter.events.addAll(list)
-                    eventsAdapter.notifyDataSetChanged()
-                }
-            } else {
-                Snackbar.make(binding.root, it.errorBody().toString(), Snackbar.LENGTH_SHORT).show()
+        waterViewModel = ViewModelProvider(this)[WaterViewModel::class.java]
+    }
+
+    override fun addObservers() {
+        super.addObservers()
+        waterViewModel._waterList.observe(viewLifecycleOwner) {
+            val list = ArrayList<History>()
+            for (item in it) {
+                val history = History(
+                    null,
+                    null,
+                    item.date,
+                    item.time,
+                    item.activity,
+                    item.type.toInt(),
+                    item.value
+                )
+                list.add(history)
+            }
+            if (list != null) {
+                eventsAdapter.events.clear()
+                eventsAdapter.events.addAll(list)
+                eventsAdapter.notifyDataSetChanged()
             }
         }
     }
@@ -93,7 +91,7 @@ class WaterHistoryActivity : BaseFragment<ActivityWaterHistoryBinding>() {
                 titleFormatter.format(it.yearMonth)
             }
             // Select the first day of the visible month.
-            selectDate(it.yearMonth.atDay(1))
+            selectDate(it.yearMonth.atDay(today.dayOfMonth))
         }
 
         val daysOfWeek = daysOfWeek()
@@ -132,7 +130,7 @@ class WaterHistoryActivity : BaseFragment<ActivityWaterHistoryBinding>() {
             notifyDataSetChanged()
         }
         binding.exThreeSelectedDateText.text = "Day: " + fullDateFormatter.format(date)
-        mainViewModel.getListHistoryByDateAndType(idUser, fullDateFormatter.format(date), "1")
+        waterViewModel.getWaterListByDate(fullDateFormatter.format(date))
     }
 
     override fun onStart() {

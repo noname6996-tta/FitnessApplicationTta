@@ -1,12 +1,7 @@
 package com.tta.fitnessapplication.view.activity.tracker.watertracker
 
-import android.content.res.Resources
-import android.util.Log
-import android.util.TypedValue
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
@@ -22,16 +17,13 @@ import com.tta.fitnessapplication.data.utils.showAnimatedAlertDialog
 import com.tta.fitnessapplication.databinding.ActivityWaterTrackerBinding
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.TextStyle
 import java.util.Calendar
-import java.util.Locale
 
 class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
     private lateinit var waterViewModel: WaterViewModel
     private lateinit var idUser: String
     private var drink = 0
-    private val dailyWater = 2000
+    private lateinit var dailyWater: String
     override fun getDataBinding(): ActivityWaterTrackerBinding {
         return ActivityWaterTrackerBinding.inflate(layoutInflater)
     }
@@ -39,48 +31,12 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
     override fun initViewModel() {
         super.initViewModel()
         idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
-        mainViewModel.getListHistoryByDateAndType(idUser, fullDateFormatter.format(today), "1")
+        dailyWater = loginPreferences.getString(Constant.PREF.WATER_INNEED, "2000").toString()
         waterViewModel = ViewModelProvider(this)[WaterViewModel::class.java]
     }
 
     override fun addObservers() {
         super.addObservers()
-        mainViewModel.listHistoryByDateAndType.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                if (it.body()?.response == 0) {
-//                    Snackbar.make(binding.root, "No data", Snackbar.LENGTH_SHORT).show()
-                } else {
-                    var value = 0
-                    if (it.body()?.data != null) {
-                        for (i in 0 until it.body()?.data!!.size) {
-                            value += it.body()?.data!![i].value!!.toInt()
-                        }
-                        binding.textView60.text = "$value ml"
-                        var percent: Float = ((value / dailyWater * 100).toFloat())
-                        binding.tvPercentDrink.text = "$percent%"
-                        binding.seekBar.progress = percent.toInt()
-                    }
-                }
-            } else {
-                Snackbar.make(binding.root, it.errorBody().toString(), Snackbar.LENGTH_SHORT).show()
-            }
-        }
-        mainViewModel.createHistoryStatus.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                mainViewModel.getListHistoryByDateAndType(
-                    idUser,
-                    fullDateFormatter.format(today),
-                    "1"
-                )
-                showAnimatedAlertDialog(requireContext(), "Successful", "Good jobs my friend")
-            } else {
-                showAnimatedAlertDialog(
-                    requireContext(),
-                    "Notification",
-                    "Oh some thing went wrong!"
-                )
-            }
-        }
         waterViewModel.readAllData.observe(viewLifecycleOwner) {
             val listDataChart = arrayOf(0, 0, 0, 0, 0, 0, 0)
             var valueWater = 0
@@ -94,17 +50,18 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
                         listDataChart[i] = listDataChart[i]
                     }
                 }
-                binding.chart.viewColume1.setProgress((listDataChart[0]*0.05).toInt())
-                binding.chart.viewColume2.setProgress((listDataChart[1]*0.05).toInt())
-                binding.chart.viewColume3.setProgress((listDataChart[2]*0.05).toInt())
-                binding.chart.viewColume4.setProgress((listDataChart[3]*0.05).toInt())
-                binding.chart.viewColume5.setProgress((listDataChart[4]*0.05).toInt())
-                binding.chart.viewColume6.setProgress((listDataChart[5]*0.05).toInt())
-                binding.chart.viewColume7.setProgress((listDataChart[6]*0.05).toInt())
+                binding.chart.viewColume1.setProgress((listDataChart[0] * 0.05).toInt())
+                binding.chart.viewColume2.setProgress((listDataChart[1] * 0.05).toInt())
+                binding.chart.viewColume3.setProgress((listDataChart[2] * 0.05).toInt())
+                binding.chart.viewColume4.setProgress((listDataChart[3] * 0.05).toInt())
+                binding.chart.viewColume5.setProgress((listDataChart[4] * 0.05).toInt())
+                binding.chart.viewColume6.setProgress((listDataChart[5] * 0.05).toInt())
+                binding.chart.viewColume7.setProgress((listDataChart[6] * 0.05).toInt())
 
             }
             binding.textView60.text = "$valueWater ml"
-            val result = valueWater.toFloat() / dailyWater.toFloat()  // Calculate the value
+            val result =
+                valueWater.toFloat() / dailyWater!!.toInt().toFloat()  // Calculate the value
             // Convert the result to a SeekBar progress value (0-100)
             val progress = (result * 100).toInt()
             binding.tvPercentDrink.text = "${progress}%"
@@ -123,6 +80,7 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
             chart.tvValueY3.text = "1200"
             chart.tvValueY4.text = "1600"
             chart.tvValueY5.text = "2000"
+            tvTarget.text = dailyWater + "ml"
         }
     }
 
@@ -195,14 +153,6 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
             }
 
             appCompatButton.setOnClickListener {
-//                mainViewModel.createHistory(
-//                    idUser,
-//                    fullDateFormatter.format(today),
-//                    getCurrentTime(),
-//                    "Drink water",
-//                    "1",
-//                    drink.toString()
-//                )
                 val water = Water(
                     0,
                     fullDateFormatter.format(today),

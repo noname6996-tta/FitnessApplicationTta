@@ -15,7 +15,6 @@ import com.tta.fitnessapplication.databinding.ActivitySleepTrackerBinding
 class SleepTrackerActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySleepTrackerBinding
     private val viewModel = SleepTrackerViewModel()
-    private lateinit var chart: BarChart
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySleepTrackerBinding.inflate(layoutInflater)

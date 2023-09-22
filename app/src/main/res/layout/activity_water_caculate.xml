@@ -22,9 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Water Caculate"
+        android:text="@string/water_calculate"
         android:textColor="@color/black"
-        android:textSize="@dimen/size_16dp"
+        android:textSize="@dimen/text_size_16sp"
         app:layout_constraintBottom_toBottomOf="@+id/imgBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +41,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgBack" />
 
+    <TextView
+        android:id="@+id/tvTitleShouldDrink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="You Should drink "
+        android:textSize="@dimen/text_size_20sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/tvTitleCalculateWater"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_20dp"
+        android:layout_marginRight="@dimen/size_20dp"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:gravity="center"
+        android:text="@string/title_calculate_water"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleShouldDrink" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/spinnerGender"
@@ -50,39 +79,63 @@
         android:layout_margin="@dimen/size_16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleCalculateWater">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/tvGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:hint="Gender"
+            android:hint="@string/gender"
             android:imeOptions="actionNext"
             android:inputType="textNoSuggestions"
             android:maxLines="1"
             android:singleLine="true"
-            android:textSize="@dimen/size_14dp" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilinputWeight"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Weight"
-        style="@style/Theme.App"
-        app:endIconMode="clear_text"
         android:layout_margin="@dimen/size_16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/weight"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toStartOf="@+id/viewKg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerGender">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtWeight"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edt_login"
+            android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:id="@+id/viewKg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="@dimen/size_16dp"
+        android:background="@drawable/bg_radius_pink"
+        app:layout_constraintBottom_toBottomOf="@+id/tilinputWeight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tilinputWeight" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/kg"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewKg"
+        app:layout_constraintEnd_toEndOf="@+id/viewKg"
+        app:layout_constraintStart_toStartOf="@+id/viewKg"
+        app:layout_constraintTop_toTopOf="@+id/viewKg" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/spinnerWeather"
@@ -99,12 +152,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:hint="Weather"
+            android:hint="@string/weather"
             android:imeOptions="actionNext"
             android:inputType="textNoSuggestions"
             android:maxLines="1"
             android:singleLine="true"
-            android:textSize="@dimen/size_14dp" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -122,43 +176,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:hint="Fitness level"
+            android:hint="@string/fitness_level"
             android:imeOptions="actionNext"
             android:inputType="textNoSuggestions"
             android:maxLines="1"
             android:singleLine="true"
-            android:textSize="@dimen/size_14dp" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCaculate"
-        android:layout_width="0dp"
+        android:id="@+id/btnCalculate"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size_16dp"
         android:layout_marginEnd="@dimen/size_8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/bg_view_radius_blue"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Calculate"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSetTarget"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSetTarget"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size_8dp"
-        android:layout_marginEnd="@dimen/size_16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/bg_radius_pink"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Set as Daily Target"
+        android:text="@string/calculate"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnCaculate" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSaveDailyWater"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_8dp"
+        android:layout_marginBottom="@dimen/size_8dp"
+        android:background="@drawable/bg_radius_pink"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/set_it_as_a_daily_goal"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btnCalculate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

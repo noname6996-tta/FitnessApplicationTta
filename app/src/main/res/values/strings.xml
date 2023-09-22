@@ -50,6 +50,14 @@
     <string name="height">Height</string>
     <string name="weight">Weight</string>
     <string name="see_more">See more</string>
+    <string name="gender">Gender</string>
+    <string name="weather">Weather</string>
+    <string name="fitness_level">Fitness level</string>
+    <string name="water_calculate">Water Calculate</string>
+    <string name="calculate">Calculate</string>
+    <string name="kg">Kg</string>
+    <string name="title_calculate_water">We estimate the amount of water you use each day based on: your age, gender, weight, weather, sports activity level.</string>
+    <string name="set_it_as_a_daily_goal">Set it as a daily goal</string>
     //
     <string-array name="Gender">
         <item>MALE</item>

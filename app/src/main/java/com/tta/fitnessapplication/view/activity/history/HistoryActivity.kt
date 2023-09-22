@@ -17,6 +17,7 @@ import com.kizitonwose.calendar.view.MonthHeaderFooterBinder
 import com.kizitonwose.calendar.view.ViewContainer
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.History
+import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.PREF.IDUSER
 import com.tta.fitnessapplication.data.utils.getColorCompat
 import com.tta.fitnessapplication.data.utils.makeInVisible
@@ -87,7 +88,7 @@ class HistoryActivity : BaseFragment<ActivityHistoryBinding>() {
                 titleFormatter.format(it.yearMonth)
             }
             // Select the first day of the visible month.
-            selectDate(it.yearMonth.atDay(1))
+            selectDate(it.yearMonth.atDay(Constant.DATE.today.dayOfMonth))
         }
 
         val daysOfWeek = daysOfWeek()

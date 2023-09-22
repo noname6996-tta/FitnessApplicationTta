@@ -25,8 +25,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         binding.edtEmail.setText("theanh682001@gmail.com")
         binding.edtPassword.setText("123456")
         loginPreferences = this.getSharedPreferences(LOGIN_PREFS, MODE_PRIVATE)
-        loginPrefsEditor = loginPreferences.edit();
-        saveLogin = loginPreferences.getBoolean(SAVE_LOGIN, false);
+        loginPrefsEditor = loginPreferences.edit()
+        saveLogin = loginPreferences.getBoolean(SAVE_LOGIN, false)
         if (saveLogin) {
             binding.progessBarLogin.visibility = View.GONE
             this.finish()
@@ -59,9 +59,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     private fun saveUser() {
         // save data
-        loginPrefsEditor.putBoolean(SAVE_USER, true);
-        loginPrefsEditor.putString(WATER_INNEED, "2000");
-        loginPrefsEditor.commit();
+        loginPrefsEditor.putBoolean(SAVE_USER, true)
+        loginPrefsEditor.putString(WATER_INNEED, "2000")
+        loginPrefsEditor.commit()
         // go to home
         binding.progessBarLogin.visibility = View.GONE
         this.finish()
