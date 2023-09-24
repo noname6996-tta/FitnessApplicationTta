@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.children
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kizitonwose.calendar.core.CalendarDay
@@ -27,11 +28,12 @@ import com.tta.fitnessapplication.databinding.Example3CalendarHeaderBinding
 import com.tta.fitnessapplication.view.activity.WebViewActivity
 import com.tta.fitnessapplication.view.activity.history.HistoryAdapter
 import com.tta.fitnessapplication.view.base.BaseActivity
+import com.tta.fitnessapplication.view.base.BaseFragment
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
 
-class SleepScheduleActivity : BaseActivity<ActivitySleepScheduleBinding>() {
+class SleepScheduleActivity : BaseFragment<ActivitySleepScheduleBinding>() {
     private val eventsAdapter = HistoryAdapter()
     private var selectedDate: LocalDate? = null
     private val events = mutableMapOf<LocalDate, List<History>>()
@@ -44,7 +46,7 @@ class SleepScheduleActivity : BaseActivity<ActivitySleepScheduleBinding>() {
         super.initView()
         binding.exThreeRv.apply {
             layoutManager =
-                LinearLayoutManager(this@SleepScheduleActivity, RecyclerView.VERTICAL, false)
+                LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             adapter = eventsAdapter
         }
 
@@ -70,11 +72,10 @@ class SleepScheduleActivity : BaseActivity<ActivitySleepScheduleBinding>() {
 
     override fun addEvent() {
         binding.view13.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-            finish()
+            findNavController().popBackStack()
         }
         binding.view22.setOnClickListener {
-            var intent = Intent(this, WebViewActivity::class.java)
+            val intent = Intent(requireContext(), WebViewActivity::class.java)
             intent.putExtra("url", "")
             startActivity(intent)
         }

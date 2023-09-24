@@ -4,6 +4,7 @@ import com.tta.fitnessapplication.api.ApiClient
 import com.tta.fitnessapplication.data.model.BaseResponse
 import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.ResoinseArticle
+import com.tta.fitnessapplication.data.model.ResponseCategoryFood
 import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.ResponseVideo
 import com.tta.fitnessapplication.data.model.UserLoginResponse
@@ -58,5 +59,9 @@ class RepositoryApi {
     }
     suspend fun getVideo():  Response<ResponseVideo>{
         return ApiClient.API.getVideo()
+    }
+
+    suspend fun getCategoryFood():  Response<ResponseCategoryFood>{
+        return ApiClient.API.getAllCategory()
     }
 }

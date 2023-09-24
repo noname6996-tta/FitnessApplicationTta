@@ -58,6 +58,8 @@
     <string name="kg">Kg</string>
     <string name="title_calculate_water">We estimate the amount of water you use each day based on: your age, gender, weight, weather, sports activity level.</string>
     <string name="set_it_as_a_daily_goal">Set it as a daily goal</string>
+    <string name="bed_time">Bed Time ,</string>
+    <string name="wake_up">Wake Up,</string>
     //
     <string-array name="Gender">
         <item>MALE</item>

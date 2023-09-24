@@ -1,10 +1,14 @@
 package com.tta.fitnessapplication.api
 
 import com.tta.fitnessapplication.data.model.BaseResponse
+import com.tta.fitnessapplication.data.model.CategoryFood
 import com.tta.fitnessapplication.data.model.Exercise
+import com.tta.fitnessapplication.data.model.Food
 import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.ResoinseArticle
+import com.tta.fitnessapplication.data.model.ResponseCategoryFood
 import com.tta.fitnessapplication.data.model.ResponseExercise
+import com.tta.fitnessapplication.data.model.ResponseFood
 import com.tta.fitnessapplication.data.model.ResponseFullBody
 import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.ResponseTool
@@ -91,4 +95,17 @@ interface ApiService {
         @Query("type") type: String,
         @Query("value") value: String,
     ): Response<BaseResponse<String>>
+
+    @GET(ApiPath.CATEGORY_FOOD)
+    suspend fun getAllCategory(): Response<ResponseCategoryFood>
+
+    @POST(ApiPath.FOOD_BY_TYPE)
+    suspend fun getFoodByType(
+        @Query("type") type: String
+    ): Response<ResponseFood>
+
+    @POST(ApiPath.FOOD_BY_CATEGORY)
+    suspend fun getFoodByCategory(
+        @Query("id") id: String
+    ): Response<ResponseFood>
 }

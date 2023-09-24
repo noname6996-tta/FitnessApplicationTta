@@ -6,7 +6,7 @@ import android.graphics.Typeface
 import android.graphics.drawable.ClipDrawable
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,22 +17,32 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.fullDateFormatter
+import com.tta.fitnessapplication.data.utils.Constant.DATE.today
 import com.tta.fitnessapplication.databinding.FragmentHomeBinding
+import com.tta.fitnessapplication.view.activity.WebViewActivity
 import com.tta.fitnessapplication.view.activity.history.HistoryAdapter
-import com.tta.fitnessapplication.view.activity.tracker.SleepTracker.SleepTrackerActivity
-import com.tta.fitnessapplication.view.activity.tracker.calortracker.CalorieTrackerActivity
+import com.tta.fitnessapplication.view.activity.history.HistoryViewModel
+import com.tta.fitnessapplication.view.activity.tracker.calortracker.calculateBMI
 import com.tta.fitnessapplication.view.base.BaseFragment
-import java.time.LocalDate
 import java.util.Calendar
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+    private lateinit var historyViewModel: HistoryViewModel
     private lateinit var mImageDrawable: ClipDrawable
-    private val today = LocalDate.now()
     private val eventsAdapter = HistoryAdapter()
+    private val entries: ArrayList<PieEntry> = ArrayList()
+    private lateinit var dailyWater: String
     override fun getDataBinding(): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(layoutInflater)
+    }
+
+    override fun initViewModel() {
+        super.initViewModel()
+        historyViewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
+        historyViewModel.getWaterListByDate(Constant.DATE.fullDateFormatter.format(today))
     }
 
     override fun addObservers() {
@@ -66,64 +76,86 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         val emailUser = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
         val idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
-        if (emailUser != ""&&isConnect) {
-            mainViewModel.getUserData(emailUser)
-        }
+        mainViewModel.getUserData(emailUser)
         mainViewModel.dataExercise.observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
-                var dataProfile = mainViewModel.dataExercise.value?.body()?.data
-                Log.e("dataProfile", dataProfile.toString())
+                val dataProfile = mainViewModel.dataExercise.value?.body()?.data
                 binding.textView2.text =
                     "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
+                Log.e("aaa", dataProfile[0].toString())
+                var bmi =
+                    calculateBMI(dataProfile[0].weight.toDouble(), dataProfile[0].tall.toDouble())
+                val y = 100f - bmi.toFloat()
+                val x = bmi.toFloat()
+                entries.clear()
+                entries.add(PieEntry(y))
+                entries.add(PieEntry(x))
+                initPieChart()
             } else {
                 Log.e("tta", it.errorBody().toString())
             }
         }
-        if (isConnect){
+        if (isConnect) {
             mainViewModel.getHistoryByDate(idUser, fullDateFormatter.format(today))
         }
-        mainViewModel.listHistoryByDate.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                if (it.body()?.response == 0) {
-                    binding.tvNoDataRecycle.visibility = View.VISIBLE
-                    binding.tvNoDataRecycle.text = it.body()?.message
-                } else {
-                    if (!it.body()?.data.isNullOrEmpty()) {
-                        binding.tvNoDataRecycle.visibility = View.GONE
-                        eventsAdapter.events.clear()
-                        for (i in 0 until it.body()?.data!!.size) {
-                            if (i <= 2) {
-                                eventsAdapter.events.add(it.body()?.data!![i])
-                            }
-                        }
-                        eventsAdapter.notifyDataSetChanged()
-                    }
-                }
+//        mainViewModel.listHistoryByDate.observe(viewLifecycleOwner) {
+//            if (it.isSuccessful) {
+//                if (it.body()?.response == 0) {
+//                    binding.tvNoDataRecycle.visibility = View.VISIBLE
+//                } else {
+//                    if (!it.body()?.data.isNullOrEmpty()) {
+//                        binding.tvNoDataRecycle.visibility = View.GONE
+//                        eventsAdapter.events.clear()
+//                        for (i in 0 until it.body()?.data!!.size) {
+//                            if (i <= 2) {
+//                                eventsAdapter.events.add(it.body()?.data!![i])
+//                            }
+//                        }
+//                        eventsAdapter.notifyDataSetChanged()
+//                    }
+//                }
+//            }
+//        }
+        historyViewModel.historyList.observe(viewLifecycleOwner) {
+            val list = ArrayList<History>()
+            list.addAll(it.subList(0, 4))
+            if (list != null) {
+                binding.tvNoDataRecycle.visibility = View.GONE
+                eventsAdapter.events.clear()
+                eventsAdapter.events.addAll(list)
+                eventsAdapter.notifyDataSetChanged()
             }
         }
     }
 
     override fun addEvent() {
-        with(binding){
+        with(binding) {
             cardViewSleep.setOnClickListener {
-                startActivity(Intent(activity, SleepTrackerActivity::class.java))
+                findNavController().navigate(R.id.action_homeFragment_to_sleepTrackerActivity)
             }
             cardViewWater.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_waterTrackerActivity)
             }
             cardViewEat.setOnClickListener {
-                startActivity(Intent(activity, CalorieTrackerActivity::class.java))
+                findNavController().navigate(R.id.action_homeFragment_to_calorieTrackerActivity)
             }
 
             tvSeeMoreHistory.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_historyActivity)
             }
 
-            imgNotifiHome.setOnClickListener {
+            binding.imgNotifiHome.setOnClickListener {
                 // go to noti activity
+                findNavController().navigate(R.id.action_homeFragment_to_notificationActivity)
             }
             view6.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_todayTarget)
+            }
+            view4.setOnClickListener {
+                val url = "${Constant.BASE_URL}/fitnessweb/aboutUs"
+                val intent = Intent(requireActivity(), WebViewActivity::class.java)
+                intent.putExtra("url", url)
+                startActivity(intent)
             }
         }
 
@@ -136,9 +168,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         initCalender()
 
-        initPieChart()
+//        initPieChart()
 
         initRecycleViewHistory()
+        dailyWater = loginPreferences.getString(Constant.PREF.WATER_INNEED, "2000").toString()
+        binding.textView17.text = "$dailyWater ml"
+
     }
 
     private fun initRecycleViewHistory() {
@@ -192,9 +227,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         // on below line we are creating array list and
         // adding data to it to display in pie chart
-        val entries: ArrayList<PieEntry> = ArrayList()
-        entries.add(PieEntry(70f))
-        entries.add(PieEntry(30f))
+//        entries.add(PieEntry(70f))
+//        entries.add(PieEntry(30f))
 
         // on below line we are setting pie data set
         val dataSet = PieDataSet(entries, "Mobile OS")

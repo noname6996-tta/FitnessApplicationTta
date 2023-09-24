@@ -19,6 +19,15 @@
         <action
             android:id="@+id/action_homeFragment_to_todayTarget"
             app:destination="@id/todayTarget" />
+        <action
+            android:id="@+id/action_homeFragment_to_sleepTrackerActivity"
+            app:destination="@id/sleepTrackerActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_calorieTrackerActivity"
+            app:destination="@id/calorieTrackerActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationActivity"
+            app:destination="@id/notificationActivity" />
     </fragment>
     <fragment
         android:id="@+id/discoverFragment"
@@ -122,4 +131,30 @@
             android:id="@+id/action_todayTarget_to_historyActivity"
             app:destination="@id/historyActivity" />
     </fragment>
+    <fragment
+        android:id="@+id/sleepTrackerActivity"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.SleepTracker.SleepTrackerActivity"
+        android:label="activity_sleep_tracker"
+        tools:layout="@layout/activity_sleep_tracker" >
+        <action
+            android:id="@+id/action_sleepTrackerActivity_to_sleepScheduleActivity"
+            app:destination="@id/sleepScheduleActivity" />
+        <action
+            android:id="@+id/action_sleepTrackerActivity_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sleepScheduleActivity"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.SleepTracker.SleepScheduleActivity"
+        android:label="activity_sleep_schedule"
+        tools:layout="@layout/activity_sleep_schedule" >
+        <action
+            android:id="@+id/action_sleepScheduleActivity_to_sleepTrackerActivity"
+            app:destination="@id/sleepTrackerActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/calorieTrackerActivity"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.CalorieTrackerActivity"
+        android:label="activity_calor_tracker"
+        tools:layout="@layout/activity_calor_tracker" />
 </navigation>

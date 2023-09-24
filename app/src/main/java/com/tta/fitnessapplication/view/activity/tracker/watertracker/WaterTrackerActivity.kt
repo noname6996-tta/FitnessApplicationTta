@@ -8,6 +8,7 @@ import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.Water
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.fullDateFormatter
@@ -15,12 +16,15 @@ import com.tta.fitnessapplication.data.utils.Constant.DATE.today
 import com.tta.fitnessapplication.data.utils.getCurrentTime
 import com.tta.fitnessapplication.data.utils.showAnimatedAlertDialog
 import com.tta.fitnessapplication.databinding.ActivityWaterTrackerBinding
+import com.tta.fitnessapplication.view.activity.history.HistoryViewModel
+import com.tta.fitnessapplication.view.activity.tracker.calortracker.MealViewModel
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
 class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
     private lateinit var waterViewModel: WaterViewModel
+    private lateinit var historyViewModel: HistoryViewModel
     private lateinit var idUser: String
     private var drink = 0
     private lateinit var dailyWater: String
@@ -33,6 +37,7 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
         idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
         dailyWater = loginPreferences.getString(Constant.PREF.WATER_INNEED, "2000").toString()
         waterViewModel = ViewModelProvider(this)[WaterViewModel::class.java]
+        historyViewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
     }
 
     override fun addObservers() {
@@ -161,7 +166,17 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
                     "1",
                     drink.toString()
                 )
+                val history = History(
+                    null,
+                    null,
+                    fullDateFormatter.format(today),
+                    getCurrentTime(),
+                    "Drink water",
+                    1,
+                    drink.toString()
+                )
                 waterViewModel.addWater(water)
+                historyViewModel.addHistory(history)
                 showAnimatedAlertDialog(requireContext(), "Successful", "Good jobs my friend")
             }
 

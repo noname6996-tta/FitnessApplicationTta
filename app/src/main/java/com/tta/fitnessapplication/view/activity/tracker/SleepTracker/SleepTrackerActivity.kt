@@ -3,6 +3,7 @@ package com.tta.fitnessapplication.view.activity.tracker.SleepTracker
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.charts.BarChart
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.Balloon
@@ -10,43 +11,45 @@ import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.showAlignTop
 import com.skydoves.balloon.showAsDropDown
+import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.ActivitySleepTrackerBinding
+import com.tta.fitnessapplication.view.base.BaseFragment
 
-class SleepTrackerActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySleepTrackerBinding
+class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
     private val viewModel = SleepTrackerViewModel()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivitySleepTrackerBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        addObsever()
-        addEvent()
+
+    override fun getDataBinding(): ActivitySleepTrackerBinding {
+        return ActivitySleepTrackerBinding.inflate(layoutInflater)
     }
 
-    private fun addObsever() {
+    override fun initViewModel() {
+        super.initViewModel()
         viewModel.getData()
-        viewModel.listSleepTracker.observe(this) {
+    }
+
+    override fun addObservers() {
+        super.addObservers()
+        viewModel.listSleepTracker.observe(viewLifecycleOwner) {
             if (it.isEmpty()) {
                 binding.tvTimeSleep.text = "No data"
             } else {
 
             }
         }
-        viewModel.message.observe(this) {
+        viewModel.message.observe(viewLifecycleOwner) {
 
         }
     }
 
-    private fun addEvent() {
+     override fun addEvent() {
         binding.view13.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-            finish()
+            findNavController().popBackStack()
         }
 
         binding.view22.setOnClickListener {
-            startActivity(Intent(this, SleepScheduleActivity::class.java))
+            findNavController().navigate(R.id.action_sleepTrackerActivity_to_sleepScheduleActivity)
         }
-        val balloonSleep = Balloon.Builder(this)
+        val balloonSleep = Balloon.Builder(requireContext())
             .setWidthRatio(1.0f)
             .setHeight(BalloonSizeSpec.WRAP)
             .setText("Track your daily sleep history. Try to sleep enough every day!")
@@ -65,7 +68,7 @@ class SleepTrackerActivity : AppCompatActivity() {
             binding.viewInfo.showAsDropDown(balloonSleep)
         }
 
-        val balloonInfoColumnone = Balloon.Builder(this)
+        val balloonInfoColumnone = Balloon.Builder(requireContext())
             .setWidthRatio(1.0f)
             .setHeight(BalloonSizeSpec.WRAP)
             .setText("2h")

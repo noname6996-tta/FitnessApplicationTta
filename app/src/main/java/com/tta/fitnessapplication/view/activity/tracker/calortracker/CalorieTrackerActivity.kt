@@ -5,6 +5,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.Balloon
@@ -15,9 +16,10 @@ import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.ActivityCalorTrackerBinding
 import com.tta.fitnessapplication.view.HistoryViewModelGoogleData
 import com.tta.fitnessapplication.view.base.BaseActivity
+import com.tta.fitnessapplication.view.base.BaseFragment
 import java.util.Calendar
 
-class CalorieTrackerActivity : BaseActivity<ActivityCalorTrackerBinding>() {
+class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
     private var mealEnum = MealEnum.Breakfast
     private var typeMeal = 0
     private lateinit var viewModel: HistoryViewModelGoogleData
@@ -30,18 +32,18 @@ class CalorieTrackerActivity : BaseActivity<ActivityCalorTrackerBinding>() {
 
     override fun addObservers() {
         super.addObservers()
-        viewModel.listCaloriesExpended.observe(this) {
+        viewModel.listCaloriesExpended.observe(viewLifecycleOwner) {
             if (it.isNullOrEmpty()) {
                 binding.tvKcalBurn.text = "No data"
             } else {
                 binding.tvKcalBurn.text = it.last().value + "\nBURN"
             }
         }
-        mealViewModel.readAllData.observe(this) { meal ->
+        mealViewModel.readAllData.observe(viewLifecycleOwner) { meal ->
             if (meal.isNotEmpty()) {
                 binding.tvMeal.visibility = View.GONE
                 binding.recMeal.visibility = View.VISIBLE
-                mealAdapter.setListExercise(meal, this)
+                mealAdapter.setListExercise(meal, requireContext())
             }
         }
     }
@@ -57,8 +59,8 @@ class CalorieTrackerActivity : BaseActivity<ActivityCalorTrackerBinding>() {
         super.initView()
         val mealArray = resources.getStringArray(R.array.Meal)
         val adapterActivityLevel =
-            ArrayAdapter(this, android.R.layout.simple_list_item_1, mealArray)
-        val balloonProtein = Balloon.Builder(this)
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, mealArray)
+        val balloonProtein = Balloon.Builder(requireContext())
             .setWidthRatio(1.0f)
             .setHeight(BalloonSizeSpec.WRAP)
             .setText("balloonProtein!")
@@ -75,7 +77,7 @@ class CalorieTrackerActivity : BaseActivity<ActivityCalorTrackerBinding>() {
         binding.tvProtein.setOnClickListener {
             binding.tvProtein.showAsDropDown(balloonProtein)
         }
-        val balloonCarb = Balloon.Builder(this)
+        val balloonCarb = Balloon.Builder(requireContext())
             .setWidthRatio(1.0f)
             .setHeight(BalloonSizeSpec.WRAP)
             .setText("balloonCarb!")
@@ -93,7 +95,7 @@ class CalorieTrackerActivity : BaseActivity<ActivityCalorTrackerBinding>() {
             binding.tvCarbohydrate.showAsDropDown(balloonCarb)
         }
 
-        val balloonFat = Balloon.Builder(this)
+        val balloonFat = Balloon.Builder(requireContext())
             .setWidthRatio(1.0f)
             .setHeight(BalloonSizeSpec.WRAP)
             .setText("balloonFat!")
@@ -110,7 +112,7 @@ class CalorieTrackerActivity : BaseActivity<ActivityCalorTrackerBinding>() {
         binding.tvFat.setOnClickListener {
             binding.tvFat.showAsDropDown(balloonFat)
         }
-        val balloonCalorie = Balloon.Builder(this)
+        val balloonCalorie = Balloon.Builder(requireContext())
             .setWidthRatio(1.0f)
             .setHeight(BalloonSizeSpec.WRAP)
             .setText("Track your daily eating history. Try to eat healthy every day!")
@@ -129,12 +131,12 @@ class CalorieTrackerActivity : BaseActivity<ActivityCalorTrackerBinding>() {
             binding.viewInfo.showAsDropDown(balloonCalorie)
         }
         binding.recSuggestFood.adapter = somethingToEatAdapter
-        val linearLayoutManager = LinearLayoutManager(this)
+        val linearLayoutManager = LinearLayoutManager(requireContext())
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         binding.recSuggestFood.layoutManager = linearLayoutManager
 
         binding.recMeal.adapter = mealAdapter
-        val linearLayoutManagerVertical = LinearLayoutManager(this)
+        val linearLayoutManagerVertical = LinearLayoutManager(requireContext())
         linearLayoutManagerVertical.orientation = LinearLayoutManager.VERTICAL
         binding.recMeal.layoutManager = linearLayoutManagerVertical
         binding.tvBreakfast.setAdapter(adapterActivityLevel)
@@ -189,18 +191,21 @@ class CalorieTrackerActivity : BaseActivity<ActivityCalorTrackerBinding>() {
         listSomething.add(lunch)
         listSomething.add(dinner)
         listSomething.isNotEmpty().let {
-            somethingToEatAdapter.setListExercise(listSomething, this)
+            somethingToEatAdapter.setListExercise(listSomething, requireContext())
         }
     }
 
     override fun addEvent() {
         super.addEvent()
         binding.viewBack.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-            this.finish()
+            findNavController().popBackStack()
         }
 
         binding.view22.setOnClickListener {
+
+        }
+
+        binding.btnAddSomethingToEat.setOnClickListener {
 
         }
     }

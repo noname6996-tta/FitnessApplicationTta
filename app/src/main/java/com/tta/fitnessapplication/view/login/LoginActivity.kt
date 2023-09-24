@@ -11,6 +11,8 @@ import com.tta.fitnessapplication.data.utils.Constant.Companion.LOGIN_PREFS
 import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_LOGIN
 import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_USER
 import com.tta.fitnessapplication.data.utils.Constant.PREF.IDUSER
+import com.tta.fitnessapplication.data.utils.Constant.PREF.SLEEP_TIME
+import com.tta.fitnessapplication.data.utils.Constant.PREF.WAKEUP_TIME
 import com.tta.fitnessapplication.data.utils.Constant.PREF.WATER_INNEED
 import com.tta.fitnessapplication.databinding.ActivityLoginBinding
 import com.tta.fitnessapplication.view.MainActivity
@@ -61,6 +63,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         // save data
         loginPrefsEditor.putBoolean(SAVE_USER, true)
         loginPrefsEditor.putString(WATER_INNEED, "2000")
+        loginPrefsEditor.putString(SLEEP_TIME, "10:00:00")
+        loginPrefsEditor.putString(WAKEUP_TIME, "06:00:00")
         loginPrefsEditor.commit()
         // go to home
         binding.progessBarLogin.visibility = View.GONE

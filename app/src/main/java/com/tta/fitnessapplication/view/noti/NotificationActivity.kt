@@ -1,20 +1,28 @@
 package com.tta.fitnessapplication.view.noti
 
 import android.app.AlarmManager
+import android.app.Dialog
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.skydoves.balloon.ArrowPositionRules
@@ -25,40 +33,49 @@ import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.noti.CategoryInfo
 import com.tta.fitnessapplication.data.model.noti.TaskCategoryInfo
-import com.tta.fitnessapplication.data.model.noti.TaskInfo
 import com.tta.fitnessapplication.data.utils.DateToString
 import com.tta.fitnessapplication.databinding.ActivityNotificationBinding
-import com.tta.fitnessapplication.view.MainActivity
-import com.tta.fitnessapplication.view.base.BaseFragment
-import com.tta.fitnessapplication.view.br.AlarmReceiver
+import com.tta.fitnessapplication.view.base.BaseActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Date
+import java.util.Objects
 import java.util.Random
+import com.tta.fitnessapplication.data.model.noti.TaskInfo
+import com.tta.fitnessapplication.view.MainActivity
+import com.tta.fitnessapplication.view.base.BaseFragment
+import com.tta.fitnessapplication.view.br.AlarmReceiver
 
 class NotificationActivity() : BaseFragment<ActivityNotificationBinding>() {
-//    private lateinit var viewModelNoti: NotificationViewModel
     private var colorString = "#000000"
-    private lateinit var prevTaskCategory: TaskCategoryInfo
     private var isCategorySelected = false
-    private lateinit var colorView: View
+    private lateinit var colorView : View
+    private lateinit var viewModelNotificationViewModel: NotificationViewModel
     private var taskInfo = TaskInfo(
         0,
-        "",
+        "fuckkk",
         Date(8640000000000000),
         0,
         false,
-        ""
+        "aaaa"
     )
-    private var categoryInfo = CategoryInfo("", "#000000")
+    private var categoryInfo = CategoryInfo("aaaa","#000000")
     override fun getDataBinding(): ActivityNotificationBinding {
         return ActivityNotificationBinding.inflate(layoutInflater)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModelNotificationViewModel = (activity as MainActivity).viewModelNoti
+    }
+
     override fun initViewModel() {
         super.initViewModel()
+
+        createNotification()
+        setInitialValues()
     }
 
     override fun addEvent() {
@@ -89,119 +106,79 @@ class NotificationActivity() : BaseFragment<ActivityNotificationBinding>() {
 
     override fun initView() {
         super.initView()
-        createNotification()
+
     }
 
     private fun setInitialValues() {
         var str = DateToString.convertDateToString(taskInfo.date)
-        if (str == "N/A") str = "Due Date"
+        if(str=="N/A")str="Due Date"
 
         binding.apply {
-            tvContentTitle.text = taskInfo.description
+            tvContentTitle.setText(taskInfo.description)
             dateAndTimePicker.text = str
 
             //ClickListeners
-            dateAndTimePicker.setOnClickListener { showDateTimePicker() }
-            btnAddSchedule.setOnClickListener { addTask() }
+            dateAndTimePicker.setOnClickListener { showDateTimePicker()}
+            btnAddSchedule.setOnClickListener{ addTask()}
         }
     }
 
     private fun createNotification() {
         val importance = NotificationManager.IMPORTANCE_HIGH
-        val channel =
-            NotificationChannel("to_do_list", "Tasks Notification Channel", importance).apply {
-                description = "Notification for Tasks"
-            }
-        val notificationManager =
-            requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val channel = NotificationChannel("to_do_list", "Tasks Notification Channel", importance).apply {
+            description = "Notification for Tasks"
+        }
+        val notificationManager = activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
-    }
-
-    private fun generateRandomColor(): String {
-        val random = Random()
-        val color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256))
-        return "#" + Integer.toHexString(color)
-    }
-
-    private fun displayColorPickerDialog() {
-        ColorPickerDialogBuilder
-            .with(requireContext())
-            .setTitle("Choose color")
-            .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
-            .density(12)
-            .setOnColorSelectedListener { selectedColor ->
-                colorString = "#" + Integer.toHexString(selectedColor)
-            }
-            .setPositiveButton("Ok") { _, _, _ ->
-                colorView.setBackgroundColor(Color.parseColor(colorString))
-            }
-            .setNegativeButton("Cancel") { _, _ ->
-                colorString = "#000000"
-            }
-            .build()
-            .show()
     }
 
     private fun addTask() {
         val date = Date()
         Log.d("DATA", taskInfo.date.seconds.toString())
         taskInfo.description = binding.tvContentTitle.text.toString()
-        if (taskInfo.description.isNullOrBlank()) Snackbar.make(
-            binding.root,
-            "Please add description",
-            Snackbar.LENGTH_SHORT
-        ).setAction("Action", null).show()
-        else if (taskInfo.category.isNullOrBlank() || categoryInfo.categoryInformation.isNullOrBlank() || !isCategorySelected) Snackbar.make(
-            binding.root,
-            "Please select a category",
-            Snackbar.LENGTH_SHORT
-        ).setAction("Action", null).show()
+        if(taskInfo.description.isNullOrBlank())Snackbar.make(binding.root, "Please add description", Snackbar.LENGTH_SHORT).setAction("Action", null).show()
+//        else if(taskInfo.category.isNullOrBlank() || categoryInfo.categoryInformation.isNullOrBlank() || !isCategorySelected)Snackbar.make(binding.root, "Please select a category", Snackbar.LENGTH_SHORT).setAction("Action", null).show()
         else {
-            if (binding.btnAddSchedule.text.equals("Update")) {
-                updateTask()
-            } else {
-                val diff = (Date().time / 1000) - 1640908800
+            if(binding.btnAddSchedule.text.equals("Update")) {
+//                updateTask()
+            }else {
+                val diff = (Date().time/1000) - 1640908800
                 taskInfo.id = diff.toInt()
-//                viewModelNoti.insertTaskAndCategory(taskInfo, categoryInfo)
-                if (!taskInfo.status && taskInfo.date > date && taskInfo.date.seconds == 5)
+                viewModelNotificationViewModel.insertTaskAndCategory(taskInfo, categoryInfo)
+                if(!taskInfo.status && taskInfo.date>date && taskInfo.date.seconds == 5)
                     setAlarm(taskInfo)
             }
         }
     }
 
-    private fun updateTask() {
+    private fun updateTask(){
         val date = Date()
 //        if (taskInfo.category == prevTaskCategory.taskInfo.category)
-//            viewModelNoti.updateTaskAndAddCategory(taskInfo, categoryInfo)
+//            viewModel.updateTaskAndAddCategory(taskInfo, categoryInfo)
 //        else {
 //            CoroutineScope(Dispatchers.Main).launch {
-//                if (viewModelNoti.getCountOfCategory(prevTaskCategory.taskInfo.category) == 1) {
-//                    viewModelNoti.updateTaskAndAddDeleteCategory(
+//                if (viewModel.getCountOfCategory(prevTaskCategory.taskInfo.category) == 1) {
+//                    viewModel.updateTaskAndAddDeleteCategory(
 //                        taskInfo,
 //                        categoryInfo,
 //                        prevTaskCategory.categoryInfo[0]
 //                    )
 //                } else {
-//                    viewModelNoti.updateTaskAndAddCategory(taskInfo, categoryInfo)
+//                    viewModel.updateTaskAndAddCategory(taskInfo, categoryInfo)
 //                }
 //            }
 //        }
 
-        if (!taskInfo.status && taskInfo.date > date && taskInfo.date.seconds == 5)
+        if(!taskInfo.status && taskInfo.date>date && taskInfo.date.seconds == 5)
             setAlarm(taskInfo)
         else removeAlarm(taskInfo)
     }
 
-    private fun removeAlarm(taskInfo: TaskInfo) {
-        val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(requireActivity(), AlarmReceiver::class.java)
+    private fun removeAlarm(taskInfo: TaskInfo){
+        val alarmManager = activity?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(requireContext(), AlarmReceiver::class.java)
         intent.putExtra("task_info", taskInfo)
-        val pendingIntent = PendingIntent.getBroadcast(
-            requireActivity(),
-            taskInfo.id,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE
-        )
+        val pendingIntent = PendingIntent.getBroadcast(requireContext(), taskInfo.id, intent, PendingIntent.FLAG_IMMUTABLE)
         alarmManager.cancel(pendingIntent)
     }
 
@@ -216,10 +193,10 @@ class NotificationActivity() : BaseFragment<ActivityNotificationBinding>() {
             calendar.set(Calendar.SECOND, 0)
             taskInfo.date = calendar.time
             binding.dateAndTimePicker.text = DateToString.convertDateToString(taskInfo.date)
-//            timePicker.show()
+            timePicker.show(childFragmentManager, "TAG")
         }
 
-        timePicker.addOnPositiveButtonClickListener {
+        timePicker.addOnPositiveButtonClickListener{
             val cal = Calendar.getInstance()
             cal.time = taskInfo.date
             cal.set(Calendar.HOUR_OF_DAY, timePicker.hour)
@@ -228,28 +205,18 @@ class NotificationActivity() : BaseFragment<ActivityNotificationBinding>() {
             taskInfo.date = cal.time
             binding.dateAndTimePicker.text = DateToString.convertDateToString(taskInfo.date)
         }
-        datePicker.show(childFragmentManager, "TAG")
+        datePicker.show(childFragmentManager,"TAG")
     }
 
     private fun setAlarm(taskInfo: TaskInfo) {
-        val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(requireActivity(), AlarmReceiver::class.java)
+        val alarmManager = activity?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(requireContext(), AlarmReceiver::class.java)
         intent.putExtra("task_info", taskInfo)
-        val pendingIntent = PendingIntent.getBroadcast(
-            requireActivity(),
-            taskInfo.id,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE
-        )
-        val mainActivityIntent = Intent(requireActivity(), MainActivity::class.java)
-        val basicPendingIntent = PendingIntent.getActivity(
-            requireActivity(),
-            taskInfo.id,
-            mainActivityIntent,
-            PendingIntent.FLAG_IMMUTABLE
-        )
+        val pendingIntent = PendingIntent.getBroadcast(requireContext(), taskInfo.id, intent, PendingIntent.FLAG_IMMUTABLE)
+        val mainActivityIntent = Intent(requireContext(), MainActivity::class.java)
+        val basicPendingIntent = PendingIntent.getActivity(requireContext(), taskInfo.id, mainActivityIntent, PendingIntent.FLAG_IMMUTABLE)
         val clockInfo = AlarmManager.AlarmClockInfo(taskInfo.date.time, basicPendingIntent)
-//        alarmManager.setAlarmClock(clockInfo, pendingIntent)
+        alarmManager.setAlarmClock(clockInfo, pendingIntent)
     }
 
 }

@@ -1,16 +1,10 @@
 package com.tta.fitnessapplication.view.activity.tracker.calortracker.FindMeal
 
-import android.os.Bundle
-import com.tta.fitnessapplication.R
+import androidx.navigation.fragment.findNavController
 import com.tta.fitnessapplication.databinding.ActivityMealTrackerBinding
-import com.tta.fitnessapplication.view.base.BaseActivity
+import com.tta.fitnessapplication.view.base.BaseFragment
 
-class FindMealActivity : BaseActivity<ActivityMealTrackerBinding>() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_meal_tracker)
-    }
-
+class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
     override fun getDataBinding(): ActivityMealTrackerBinding {
         return ActivityMealTrackerBinding.inflate(layoutInflater)
     }
@@ -18,8 +12,7 @@ class FindMealActivity : BaseActivity<ActivityMealTrackerBinding>() {
     override fun addEvent() {
         super.addEvent()
         binding.viewback.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-            this.finish()
+            findNavController().popBackStack()
         }
     }
 }

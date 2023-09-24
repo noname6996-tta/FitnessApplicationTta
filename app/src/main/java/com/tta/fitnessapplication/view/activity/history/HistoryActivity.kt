@@ -4,10 +4,10 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.children
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition
@@ -33,6 +33,7 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
 class HistoryActivity : BaseFragment<ActivityHistoryBinding>() {
+    private lateinit var historyViewModel: HistoryViewModel
     private val eventsAdapter = HistoryAdapter()
     private var selectedDate: LocalDate? = null
     private val today = LocalDate.now()
@@ -46,6 +47,7 @@ class HistoryActivity : BaseFragment<ActivityHistoryBinding>() {
     override fun getDataBinding(): ActivityHistoryBinding {
         return ActivityHistoryBinding.inflate(layoutInflater)
     }
+
     override fun addEvent() {
         super.addEvent()
         binding.topAppBar.setNavigationOnClickListener {
@@ -56,16 +58,18 @@ class HistoryActivity : BaseFragment<ActivityHistoryBinding>() {
     override fun initViewModel() {
         super.initViewModel()
         idUser = loginPreferences.getString(IDUSER, "").toString()
-        mainViewModel.listHistoryByDate.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                var list = it.body()?.data
-                if (list != null) {
-                    eventsAdapter.events.clear()
-                    eventsAdapter.events.addAll(list)
-                    eventsAdapter.notifyDataSetChanged()
-                }
-            } else {
-                Snackbar.make(binding.root, it.errorBody().toString(), Snackbar.LENGTH_SHORT).show()
+        historyViewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
+    }
+
+    override fun addObservers() {
+        super.addObservers()
+        historyViewModel.historyList.observe(viewLifecycleOwner) {
+            val list = ArrayList<History>()
+            list.addAll(it)
+            if (list != null) {
+                eventsAdapter.events.clear()
+                eventsAdapter.events.addAll(list)
+                eventsAdapter.notifyDataSetChanged()
             }
         }
     }
@@ -124,7 +128,7 @@ class HistoryActivity : BaseFragment<ActivityHistoryBinding>() {
             notifyDataSetChanged()
         }
         binding.exThreeSelectedDateText.text = "Day: " + fullDateFormatter.format(date)
-        mainViewModel.getHistoryByDate(idUser, fullDateFormatter.format(date))
+        historyViewModel.getWaterListByDate(Constant.DATE.fullDateFormatter.format(date))
     }
 
     private fun configureBinders(daysOfWeek: List<DayOfWeek>) {

@@ -1,4 +1,4 @@
-package com.example.todolist.presentation.di
+package com.tta.fitnessapplication.view.di
 
 import android.app.Application
 import android.content.SharedPreferences
@@ -13,7 +13,7 @@ class ToDoListApplication : Application(){
     override fun onCreate() {
         super.onCreate()
         if(sharedPreferences.getBoolean("dark_theme", false))
-             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
     }

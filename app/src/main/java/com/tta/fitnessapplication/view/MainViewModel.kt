@@ -9,6 +9,7 @@ import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.UserLoginResponse
 import com.tta.fitnessapplication.data.model.Video
+import com.tta.fitnessapplication.data.model.CategoryFood
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -22,6 +23,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     val createHistoryStatus = MutableLiveData<Response<BaseResponse<String>>>()
     val listVideo = MutableLiveData<List<Video>>()
     val listArticle = MutableLiveData<List<Article>>()
+    val listCategory = MutableLiveData<MutableList<CategoryFood>>()
 
     fun getUserData(email: String) {
         viewModelScope.launch {
@@ -82,6 +84,12 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     fun getArticle() {
         viewModelScope.launch {
             listArticle.value = repositoryApi.getListArticle().body()?.data
+        }
+    }
+
+    fun getCategoryFood() {
+        viewModelScope.launch {
+            listCategory.value = repositoryApi.getCategoryFood().body()?.data
         }
     }
 }

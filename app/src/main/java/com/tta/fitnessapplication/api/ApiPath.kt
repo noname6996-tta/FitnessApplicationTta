@@ -27,5 +27,8 @@ object ApiPath {
     const val HISTORY_BY_DATE = "/history/getAllDataByDate.php"
     const val HISTORY_BY_DATE_AND_TYPE = "/history/getDataByDateAndType.php"
     const val INSERT_HISTORY = "/history/insertHistory.php"
+    const val CATEGORY_FOOD = "/meal/category/getAllCategory.php"
+    const val FOOD_BY_TYPE = "/meal/food/getFoodByType.php"
+    const val FOOD_BY_CATEGORY = "/meal/food/getFoodByIdCategory.php"
     //https://v1.nocodeapi.com/trantheanh/fit/XDjAzlDHSSsEEyxi/aggregatesDatasets?dataTypeName=steps_count
 }

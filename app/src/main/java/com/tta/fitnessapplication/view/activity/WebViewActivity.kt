@@ -1,44 +1,43 @@
 package com.tta.fitnessapplication.view.activity
 
-import android.os.Bundle
-import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.MaterialToolbar
-import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.databinding.ActivityWebViewBinding
+import com.tta.fitnessapplication.view.base.BaseActivity
 
-class WebViewActivity : AppCompatActivity() {
-    private lateinit var webView: WebView
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_web_view)
-        webView = findViewById(R.id.webView)
-        // WebViewClient allows you to handle
-        // onPageFinished and override Url loading.
-        webView.webViewClient = WebViewClient()
+class WebViewActivity : BaseActivity<ActivityWebViewBinding>() {
+    override fun getDataBinding(): ActivityWebViewBinding {
+        return ActivityWebViewBinding.inflate(layoutInflater)
+    }
 
-        // this will load the url of the website
-        var url = intent.getStringExtra("url")
-        if (url != null) {
-            webView.loadUrl(url.toString())
-        }
-        // this will enable the javascript settings, it can also allow xss vulnerabilities
-        webView.settings.javaScriptEnabled = true
+    override fun initView() {
+        super.initView()
+        with(binding){
+            // WebViewClient allows you to handle
+            // onPageFinished and override Url loading.
+            webView.webViewClient = WebViewClient()
 
-        // if you want to enable zoom feature
-        webView.settings.setSupportZoom(true)
+            // this will load the url of the website
+            val url = intent.getStringExtra("url")
+            if (url != null) {
+                webView.loadUrl(url.toString())
+            }
+            // this will enable the javascript settings, it can also allow xss vulnerabilities
+            webView.settings.javaScriptEnabled = true
 
-        var btn = findViewById<MaterialToolbar>(R.id.topAppBar)
-        btn.setOnClickListener {
-            onBackPressed()
+            // if you want to enable zoom feature
+            webView.settings.setSupportZoom(true)
+
+            topAppBar.setOnClickListener {
+                onBackPressed()
+            }
         }
 
     }
 
     override fun onBackPressed() {
         // if your webview can go back it will go back
-        if (webView.canGoBack())
-            webView.goBack()
+        if (binding.webView.canGoBack())
+            binding.webView.goBack()
         // if your webview cannot go back
         // it will exit the application
         else {
