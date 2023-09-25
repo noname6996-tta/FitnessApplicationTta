@@ -200,7 +200,10 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
             }
 
             clSettingNoti.setOnClickListener {
-                findNavController().navigate(R.id.action_waterTrackerActivity_to_notificationActivity)
+                // go to noti activity
+                // 0 type all, 1 water, 2 sleep, 3 eat
+                val action = WaterTrackerActivityDirections.actionWaterTrackerActivityToNotificationActivity(1)
+                findNavController().navigate(action)
             }
         }
     }

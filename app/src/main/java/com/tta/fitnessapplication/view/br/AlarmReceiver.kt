@@ -42,12 +42,19 @@ class AlarmReceiver : BroadcastReceiver() {
             val pendingIntent1: PendingIntent? =
                 taskInfo?.let { getBroadcast(p0, it.id,intent1,FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE) }
             val action1 : NotificationCompat.Action = NotificationCompat.Action.Builder(0,"Completed",pendingIntent1).build()
-
+            var icon = 0
+            when(taskInfo?.priority){
+                1-> icon = R.drawable.ic_cup
+                2-> icon = R.drawable.icon_bed
+                3-> icon = R.drawable.icon_bed
+                4-> icon = R.drawable.icon_bed
+                5-> icon = R.drawable.icon_bed
+            }
             val notification = p0?.let {
                 NotificationCompat.Builder(it, "to_do_list")
-                    .setContentTitle("Task Reminder")
+                    .setContentTitle("FitnessX Reminder")
                     .setContentText(taskInfo?.description)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(icon)
                     .setAutoCancel(true)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setContentIntent(pendingIntent)
@@ -56,21 +63,6 @@ class AlarmReceiver : BroadcastReceiver() {
             }
             notificationManager = p0?.let { NotificationManagerCompat.from(it) }
             notification?.let { taskInfo?.let { it1 -> notificationManager?.notify(it1.id, it) } }
-            Log.e("ttanext",taskInfo?.date.toString())
-
-            val calendar = Calendar.getInstance()
-            calendar.add(Calendar.DAY_OF_MONTH, 1)
-            calendar.set(Calendar.HOUR_OF_DAY, taskInfo?.date!!.hours)
-            calendar.set(Calendar.MINUTE, taskInfo.date.minutes)
-            calendar.set(Calendar.SECOND, taskInfo.date.seconds)
-            taskInfo.date = calendar.time
-            Log.e("ttanext",taskInfo.date.toString())
-
-            CoroutineScope(Dispatchers.IO).launch {
-                taskInfo?.let {
-                    repository.updateTaskStatus(it)
-                }
-            }
         }
     }
 }

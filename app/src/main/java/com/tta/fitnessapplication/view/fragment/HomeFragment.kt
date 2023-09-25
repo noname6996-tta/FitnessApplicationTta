@@ -117,13 +117,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 //            }
 //        }
         historyViewModel.historyList.observe(viewLifecycleOwner) {
-            val list = ArrayList<History>()
-            list.addAll(it.subList(0, 4))
-            if (list != null) {
-                binding.tvNoDataRecycle.visibility = View.GONE
-                eventsAdapter.events.clear()
-                eventsAdapter.events.addAll(list)
-                eventsAdapter.notifyDataSetChanged()
+            if (!it.isNullOrEmpty()) {
+                val list = ArrayList<History>()
+                for (item in 0..3) {
+                    if (it[item] != null) {
+                        list.add(it[item])
+                    }
+                }
+
+                if (list != null) {
+                    binding.tvNoDataRecycle.visibility = View.GONE
+                    eventsAdapter.events.clear()
+                    eventsAdapter.events.addAll(list)
+                    eventsAdapter.notifyDataSetChanged()
+                }
             }
         }
     }
@@ -146,7 +153,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
             binding.imgNotifiHome.setOnClickListener {
                 // go to noti activity
-                findNavController().navigate(R.id.action_homeFragment_to_notificationActivity)
+                // 0 type all, 1 water, 2 sleep, 3 eat
+                val action = HomeFragmentDirections.actionHomeFragmentToNotificationActivity(0)
+                findNavController().navigate(action)
             }
             view6.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_todayTarget)

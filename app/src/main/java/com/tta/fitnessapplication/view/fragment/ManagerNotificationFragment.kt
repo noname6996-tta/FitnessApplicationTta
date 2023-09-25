@@ -1,4 +1,4 @@
 package com.tta.fitnessapplication.view.fragment
 
-class NotificationFragment {
+class ManagerNotificationFragment {
 }

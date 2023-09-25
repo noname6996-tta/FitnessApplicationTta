@@ -1,28 +1,17 @@
 package com.tta.fitnessapplication.view.noti
 
 import android.app.AlarmManager
-import android.app.Dialog
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.flask.colorpicker.ColorPickerView
-import com.flask.colorpicker.builder.ColorPickerDialogBuilder
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.skydoves.balloon.ArrowPositionRules
@@ -32,23 +21,17 @@ import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.noti.CategoryInfo
-import com.tta.fitnessapplication.data.model.noti.TaskCategoryInfo
 import com.tta.fitnessapplication.data.utils.DateToString
 import com.tta.fitnessapplication.databinding.ActivityNotificationBinding
-import com.tta.fitnessapplication.view.base.BaseActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Date
-import java.util.Objects
-import java.util.Random
 import com.tta.fitnessapplication.data.model.noti.TaskInfo
+import com.tta.fitnessapplication.databinding.FragmentUpdateNotiBinding
 import com.tta.fitnessapplication.view.MainActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
 import com.tta.fitnessapplication.view.br.AlarmReceiver
 
-class NotificationActivity() : BaseFragment<ActivityNotificationBinding>() {
+class UpdateNotification() : BaseFragment<FragmentUpdateNotiBinding>() {
     private lateinit var viewModelNotificationViewModel: NotificationViewModel
     val args: NotificationActivityArgs by navArgs()
     // 0 type all, 1 water, 2 sleep, 3 eat
@@ -61,8 +44,8 @@ class NotificationActivity() : BaseFragment<ActivityNotificationBinding>() {
         "tta"
     )
     private var categoryInfo = CategoryInfo("tta","#000000")
-    override fun getDataBinding(): ActivityNotificationBinding {
-        return ActivityNotificationBinding.inflate(layoutInflater)
+    override fun getDataBinding(): FragmentUpdateNotiBinding {
+        return FragmentUpdateNotiBinding.inflate(layoutInflater)
     }
 
     override fun initView() {

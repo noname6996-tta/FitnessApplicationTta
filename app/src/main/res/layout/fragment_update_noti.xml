@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.noti.NotificationActivity">
+    >
 
     <View
         android:id="@+id/viewBack"
@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="@string/add_schedule"
+        android:text="@string/update_schedule"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/viewBack"
@@ -128,7 +128,7 @@
         android:layout_margin="@dimen/size_16dp"
         android:background="@drawable/bg_button_radius"
         android:fontFamily="@font/poppins"
-        android:text="@string/add_schedule"
+        android:text="@string/update_schedule"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

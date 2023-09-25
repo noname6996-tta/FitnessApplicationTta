@@ -1,5 +1,6 @@
 package com.tta.fitnessapplication.view.fragment
 
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,12 +31,19 @@ class TodayTarget : BaseFragment<FragmentTodayTargetBinding>() {
     override fun addObservers() {
         super.addObservers()
         historyViewModel.historyList.observe(viewLifecycleOwner) {
-            val list = ArrayList<History>()
-            list.addAll(it.subList(0, 4))
-            if (list != null) {
-                eventsAdapter.events.clear()
-                eventsAdapter.events.addAll(list)
-                eventsAdapter.notifyDataSetChanged()
+            if (!it.isNullOrEmpty()) {
+                val list = ArrayList<History>()
+                for (item in 0..3) {
+                    if (it[item] != null) {
+                        list.add(it[item])
+                    }
+                }
+
+                if (list != null) {
+                    eventsAdapter.events.clear()
+                    eventsAdapter.events.addAll(list)
+                    eventsAdapter.notifyDataSetChanged()
+                }
             }
         }
     }
