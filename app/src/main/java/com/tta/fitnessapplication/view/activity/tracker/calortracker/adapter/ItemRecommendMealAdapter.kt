@@ -8,14 +8,13 @@ import com.bumptech.glide.Glide
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.Meal
 import com.tta.fitnessapplication.databinding.ItemFoodRecommendBinding
-import com.tta.fitnessapplication.databinding.ItemMealPlannerBinding
 
 class ItemRecommendMealAdapter :
     RecyclerView.Adapter<ItemRecommendMealAdapter.ItemTodayMealViewHolder>() {
     private var listSomeThingToEat: List<Meal> = listOf()
     private lateinit var context: Context
 
-    fun setListExercise(listSomeThingToEat: List<Meal> , context: Context) {
+    fun setListExercise(listSomeThingToEat: List<Meal>, context: Context) {
         this.listSomeThingToEat = listSomeThingToEat
         this.context = context
         notifyDataSetChanged()
@@ -43,10 +42,10 @@ class ItemRecommendMealAdapter :
             Glide.with(context)
                 .load(someThingToEat.image)
                 .error(R.drawable.ic_breafast)
-                .into(holder.binding.imgFood);
-            holder.binding.tvNameMeal.text = someThingToEat.name
-            holder.binding.tvTimeMeal.text = someThingToEat.time
-            holder.binding.btnEat.setOnClickListener {
+                .into(holder.binding.imageView40);
+            holder.binding.tvNameFood.text = someThingToEat.name
+            holder.binding.tvInfoFood.text = someThingToEat.kcal
+            holder.binding.appCompatButton3.setOnClickListener {
                 onClickSendData?.let {
                     it(position)
                 }
