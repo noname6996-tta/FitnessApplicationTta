@@ -3,7 +3,6 @@ package com.tta.fitnessapplication.view.activity.tracker.calortracker
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,9 +14,9 @@ import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.ActivityCalorTrackerBinding
 import com.tta.fitnessapplication.view.HistoryViewModelGoogleData
-import com.tta.fitnessapplication.view.base.BaseActivity
+import com.tta.fitnessapplication.view.activity.tracker.calortracker.adapter.ItemFindSomethingToEatAdapter
+import com.tta.fitnessapplication.view.activity.tracker.calortracker.adapter.ItemTodayMealAdapter
 import com.tta.fitnessapplication.view.base.BaseFragment
-import java.util.Calendar
 
 class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
     private var mealEnum = MealEnum.Breakfast

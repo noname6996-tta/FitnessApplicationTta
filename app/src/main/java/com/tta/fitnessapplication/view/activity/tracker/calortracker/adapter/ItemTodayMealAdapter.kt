@@ -1,4 +1,4 @@
-package com.tta.fitnessapplication.view.activity.tracker.calortracker
+package com.tta.fitnessapplication.view.activity.tracker.calortracker.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
