@@ -166,10 +166,20 @@
         android:id="@+id/calorieTrackerActivity"
         android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.CalorieTrackerActivity"
         android:label="activity_calor_tracker"
-        tools:layout="@layout/activity_calor_tracker" />
+        tools:layout="@layout/activity_calor_tracker" >
+        <action
+            android:id="@+id/action_calorieTrackerActivity_to_findMealActivity"
+            app:destination="@id/findMealActivity" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_update_noti"
         android:id="@+id/updateNotification"
         android:name="com.tta.fitnessapplication.view.noti.UpdateNotification"
         android:label="UpdateNotification" />
+    <fragment
+        android:id="@+id/findMealActivity"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.FindMeal.FindMealActivity"
+        android:label="activity_meal_tracker"
+        tools:layout="@layout/activity_meal_tracker" >
+    </fragment>
 </navigation>

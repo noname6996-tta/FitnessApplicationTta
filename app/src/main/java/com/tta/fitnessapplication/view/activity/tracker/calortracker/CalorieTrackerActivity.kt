@@ -205,7 +205,12 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
         }
 
         binding.btnAddSomethingToEat.setOnClickListener {
-
+            val action = CalorieTrackerActivityDirections.actionCalorieTrackerActivityToFindMealActivity()
+            findNavController().navigate(action)
+        }
+        mealAdapter.findSomethingToEat {
+            val action = CalorieTrackerActivityDirections.actionCalorieTrackerActivityToFindMealActivity()
+            findNavController().navigate(action)
         }
     }
 

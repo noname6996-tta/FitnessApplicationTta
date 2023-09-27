@@ -17,6 +17,8 @@ import com.example.awesomedialog.body
 import com.example.awesomedialog.icon
 import com.example.awesomedialog.onPositive
 import com.example.awesomedialog.title
+import com.google.android.gms.fitness.FitnessOptions
+import com.google.android.gms.fitness.data.DataType
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import com.tta.fitnessapplication.data.utils.ConnectivityLiveData
@@ -35,6 +37,12 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     protected inline fun binding(block: T.() -> Unit): T {
         return binding.apply(block)
     }
+    val fitnessOptions = FitnessOptions.builder()
+        .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+        .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+        .addDataType(DataType.TYPE_HEART_RATE_BPM, FitnessOptions.ACCESS_READ)
+        .addDataType(DataType.AGGREGATE_HEART_RATE_SUMMARY, FitnessOptions.ACCESS_READ)
+        .build()
 
     protected lateinit var loginPreferences: SharedPreferences
     protected lateinit var loginPrefsEditor: SharedPreferences.Editor

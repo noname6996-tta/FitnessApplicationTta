@@ -95,7 +95,7 @@ dependencies {
 
     // step count
     implementation 'com.google.android.gms:play-services-fitness:21.1.0'
-    implementation("com.google.android.gms:play-services-auth:20.5.0")
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
 
     //lottie
     def lottieVersion = "6.0.0"

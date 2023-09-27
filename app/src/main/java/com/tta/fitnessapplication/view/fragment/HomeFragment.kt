@@ -16,6 +16,12 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.fitness.Fitness
+import com.google.android.gms.fitness.data.DataSource
+import com.google.android.gms.fitness.data.DataType
+import com.google.android.gms.fitness.data.Field
+import com.google.android.gms.fitness.request.DataReadRequest
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.utils.Constant
@@ -27,7 +33,11 @@ import com.tta.fitnessapplication.view.activity.history.HistoryAdapter
 import com.tta.fitnessapplication.view.activity.history.HistoryViewModel
 import com.tta.fitnessapplication.view.activity.tracker.calortracker.calculateBMI
 import com.tta.fitnessapplication.view.base.BaseFragment
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.Calendar
+import java.util.concurrent.TimeUnit
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private lateinit var historyViewModel: HistoryViewModel
@@ -43,6 +53,104 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         super.initViewModel()
         historyViewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
         historyViewModel.getWaterListByDate(Constant.DATE.fullDateFormatter.format(today))
+        Fitness.getRecordingClient(requireActivity(), GoogleSignIn.getAccountForExtension(requireContext(), fitnessOptions))
+            .subscribe(DataType.TYPE_STEP_COUNT_CUMULATIVE)
+            .addOnSuccessListener {
+                Log.i("TAG","Subscription was successful!")
+            }
+            .addOnFailureListener { e ->
+                Log.w("TAG", "There was a problem subscribing ", e)
+            }
+
+        Fitness.getHistoryClient(requireActivity(), GoogleSignIn.getAccountForExtension(requireContext(), fitnessOptions))
+            .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
+            .addOnSuccessListener { result ->
+                val totalSteps =
+                    result.dataPoints.firstOrNull()?.getValue(Field.FIELD_STEPS)?.asInt() ?: 0
+                // Do something with totalSteps
+                Log.i("TAG dataPoints", result.dataPoints.toString())
+                binding.tvHomeStep.text = totalSteps.toString()
+            }
+            .addOnFailureListener { e ->
+                Log.i("TAG", "There was a problem getting steps.", e)
+            }
+//        getHeartRate()
+//        getStepDataByDate()
+    }
+
+    private fun getHeartRate(){
+        val startTime = LocalDateTime.of(2023, 9, 1, 0, 0)
+        val endTime = LocalDateTime.of(2023, 9, 26, 0, 0).plusDays(1)
+
+        val startDateTime = startTime.atZone(ZoneId.systemDefault())
+        val endDateTime = endTime.atZone(ZoneId.systemDefault())
+        val request = DataReadRequest.Builder()
+            .read(DataType.TYPE_HEART_RATE_BPM)
+            .setTimeRange(startDateTime.toEpochSecond(), endDateTime.toEpochSecond(), TimeUnit.MILLISECONDS)
+            .build()
+
+        Fitness.getHistoryClient(requireActivity(), GoogleSignIn.getAccountForExtension(requireContext(), fitnessOptions))
+            .readData(request)
+            .addOnSuccessListener { response ->
+                val heartRateList = ArrayList<Int>()
+                val totalSteps = response.buckets
+                    .flatMap { it.dataSets }
+                    .flatMap { it.dataPoints }
+                    .fold("") { accumulator, dataPoint -> accumulator + dataPoint.getValue(Field.FIELD_BPM).asString() }
+//                for (bucket in response.buckets) {
+//                    for (dataSet in bucket.dataSets) {
+//                        for (dataPoint in dataSet.dataPoints) {
+//                            for (field in dataPoint.dataType.fields) {
+//                                if (field.name == Field.FIELD_BPM.name) {
+//                                    val heartRate = dataPoint.getValue(field).asInt()
+//                                    heartRateList.add(heartRate)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+
+                // Process the heart rate data as needed
+                Log.i("TAG", "Heart rate values: $totalSteps")
+            }
+            .addOnFailureListener { exception ->
+                Log.e("TAG", "There was a problem retrieving heart rate data.", exception)
+            }
+    }
+
+    private fun getStepDataByDate(){
+        val startTime = LocalDateTime.of(2023, 9, 1, 0, 0)
+        val endTime = LocalDateTime.of(2023, 9, 26, 0, 0).plusDays(1)
+
+        val startDateTime = startTime.atZone(ZoneId.systemDefault())
+        val endDateTime = endTime.atZone(ZoneId.systemDefault())
+
+//        val startTime = LocalDate.now().atStartOfDay(ZoneId.systemDefault())
+//        val endTime = LocalDateTime.now().atZone(ZoneId.systemDefault())
+
+        val datasource = DataSource.Builder()
+            .setAppPackageName("com.google.android.gms")
+            .setDataType(DataType.TYPE_STEP_COUNT_DELTA)
+            .setType(DataSource.TYPE_DERIVED)
+            .setStreamName("estimated_steps")
+            .build()
+
+        val request = DataReadRequest.Builder()
+            .aggregate(datasource)
+            .bucketByTime(1, TimeUnit.DAYS)
+            .setTimeRange(startDateTime.toEpochSecond(), endDateTime.toEpochSecond(), TimeUnit.SECONDS)
+            .build()
+
+        Fitness.getHistoryClient(requireActivity(), GoogleSignIn.getAccountForExtension(requireContext(), fitnessOptions))
+            .readData(request)
+            .addOnSuccessListener { response ->
+                val totalSteps = response.buckets
+                    .flatMap { it.dataSets }
+                    .flatMap { it.dataPoints }
+                    .sumBy { it.getValue(Field.FIELD_STEPS).asInt() }
+                Log.i("TAG", "Total steps: $totalSteps")
+                Log.i("TAG buckets", "Total buckets: ${response.buckets.flatMap { it.dataSets }.flatMap { it.dataPoints }.sumBy { it.getValue(Field.FIELD_STEPS).asInt() }}")
+            }
     }
 
     override fun addObservers() {
