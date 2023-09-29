@@ -5,5 +5,93 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.activity.tracker.calortracker.MealInfoActivity">
+    <?xml version="1.0" encoding="utf-8"?>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/view18"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="@drawable/bg_brand_gradient"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <View
+                android:id="@+id/view16"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:background="@drawable/bg_view_gray_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView99"
+                android:layout_width="24dp"
+                android:layout_height="@dimen/size_24dp"
+                android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+                app:layout_constraintBottom_toBottomOf="@+id/view16"
+                app:layout_constraintEnd_toEndOf="@+id/view16"
+                app:layout_constraintStart_toStartOf="@+id/view16"
+                app:layout_constraintTop_toTopOf="@+id/view16" />
+
+            <View
+                android:id="@+id/viewInfo"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="@dimen/size_16dp"
+                android:background="@drawable/bg_view_gray_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_more_horiz_24"
+                app:layout_constraintBottom_toBottomOf="@+id/viewInfo"
+                app:layout_constraintEnd_toEndOf="@+id/viewInfo"
+                app:layout_constraintStart_toStartOf="@+id/viewInfo"
+                app:layout_constraintTop_toTopOf="@+id/viewInfo" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:src="@drawable/ic_breafast"
+                app:layout_constraintBottom_toTopOf="@+id/view10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                 />
+
+            <View
+                android:id="@+id/view9"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="350dp"
+                android:background="@drawable/bg_white_14"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view10"
+                android:layout_width="60dp"
+                android:layout_height="6dp"
+                android:layout_marginTop="@dimen/size_6dp"
+                android:background="@drawable/bg_heart_reat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view9" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -74,20 +74,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             .addOnFailureListener { e ->
                 Log.i("TAG", "There was a problem getting steps.", e)
             }
-//        getHeartRate()
+        getHeartRate()
 //        getStepDataByDate()
     }
 
     private fun getHeartRate(){
-        val startTime = LocalDateTime.of(2023, 9, 1, 0, 0)
-        val endTime = LocalDateTime.of(2023, 9, 26, 0, 0).plusDays(1)
+        val startTime = LocalDateTime.of(2023, 9, 29, 0, 0)
+        val endTime = LocalDateTime.of(2023, 9, 29, 0, 0).plusDays(1)
 
         val startDateTime = startTime.atZone(ZoneId.systemDefault())
         val endDateTime = endTime.atZone(ZoneId.systemDefault())
+//        val request = DataReadRequest.Builder()
+//            .read(DataType.TYPE_HEART_RATE_BPM)
+//            .setTimeRange(startDateTime.toEpochSecond(), endDateTime.toEpochSecond(), TimeUnit.MILLISECONDS)
+//            .build()
+
         val request = DataReadRequest.Builder()
-            .read(DataType.TYPE_HEART_RATE_BPM)
-            .setTimeRange(startDateTime.toEpochSecond(), endDateTime.toEpochSecond(), TimeUnit.MILLISECONDS)
-            .build()
+            .aggregate(DataSource.Builder()
+                .setType(DataSource.TYPE_DERIVED)
+                .setDataType(DataType.TYPE_HEART_RATE_BPM)
+                .setAppPackageName("com.google.android.gms")
+                .setStreamName("resting_heart_rate<-merge_heart_rate_bpm")
+                .build()).read(DataType.TYPE_HEART_RATE_BPM)
+            .bucketByTime(1, TimeUnit.DAYS)
+            .setTimeRange(startDateTime.toEpochSecond(), endDateTime.toEpochSecond(), TimeUnit.SECONDS).build()
 
         Fitness.getHistoryClient(requireActivity(), GoogleSignIn.getAccountForExtension(requireContext(), fitnessOptions))
             .readData(request)
@@ -97,19 +107,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     .flatMap { it.dataSets }
                     .flatMap { it.dataPoints }
                     .fold("") { accumulator, dataPoint -> accumulator + dataPoint.getValue(Field.FIELD_BPM).asString() }
-//                for (bucket in response.buckets) {
-//                    for (dataSet in bucket.dataSets) {
-//                        for (dataPoint in dataSet.dataPoints) {
-//                            for (field in dataPoint.dataType.fields) {
-//                                if (field.name == Field.FIELD_BPM.name) {
-//                                    val heartRate = dataPoint.getValue(field).asInt()
-//                                    heartRateList.add(heartRate)
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-
+                for (bucket in response.buckets) {
+                    for (dataSet in bucket.dataSets) {
+                        for (dataPoint in dataSet.dataPoints) {
+                            for (field in dataPoint.dataType.fields) {
+                                if (field.name == Field.FIELD_BPM.name) {
+                                    val heartRate = dataPoint.getValue(field).asInt()
+                                    heartRateList.add(heartRate)
+                                }
+                            }
+                        }
+                    }
+                }
+                Log.i("TAG", "Heart rate values: $heartRateList")
                 // Process the heart rate data as needed
                 Log.i("TAG", "Heart rate values: $totalSteps")
             }
@@ -206,34 +216,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         if (isConnect) {
             mainViewModel.getHistoryByDate(idUser, fullDateFormatter.format(today))
         }
-//        mainViewModel.listHistoryByDate.observe(viewLifecycleOwner) {
-//            if (it.isSuccessful) {
-//                if (it.body()?.response == 0) {
-//                    binding.tvNoDataRecycle.visibility = View.VISIBLE
-//                } else {
-//                    if (!it.body()?.data.isNullOrEmpty()) {
-//                        binding.tvNoDataRecycle.visibility = View.GONE
-//                        eventsAdapter.events.clear()
-//                        for (i in 0 until it.body()?.data!!.size) {
-//                            if (i <= 2) {
-//                                eventsAdapter.events.add(it.body()?.data!![i])
-//                            }
-//                        }
-//                        eventsAdapter.notifyDataSetChanged()
-//                    }
-//                }
-//            }
-//        }
-        historyViewModel.historyList.observe(viewLifecycleOwner) {
-            if (!it.isNullOrEmpty()) {
-                val list = ArrayList<History>()
-                for (item in 0..3) {
-                    if (it[item] != null) {
-                        list.add(it[item])
-                    }
-                }
 
-                if (list != null) {
+        historyViewModel.historyList.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                val list = ArrayList<History>()
+                list.addAll(it)
+                if (list.size>0) {
                     binding.tvNoDataRecycle.visibility = View.GONE
                     eventsAdapter.events.clear()
                     eventsAdapter.events.addAll(list)
