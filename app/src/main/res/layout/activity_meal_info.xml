@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.tracker.calortracker.MealInfoActivity">
-    <?xml version="1.0" encoding="utf-8"?>
+    tools:context=".view.activity.workout.FullBodyWorkout.FullBodyWorkoutActivity">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <View
                 android:id="@+id/view18"
@@ -68,10 +68,10 @@
                 android:layout_width="250dp"
                 android:layout_height="250dp"
                 android:src="@drawable/ic_breafast"
-                app:layout_constraintBottom_toTopOf="@+id/view10"
+                app:layout_constraintBottom_toTopOf="@+id/view9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                 />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:id="@+id/view9"
@@ -86,12 +86,81 @@
                 android:layout_width="60dp"
                 android:layout_height="6dp"
                 android:layout_marginTop="@dimen/size_6dp"
-                android:background="@drawable/bg_heart_reat"
+                android:background="@drawable/bg_view_gray_black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/view9" />
 
+            <TextView
+                android:id="@+id/tvMealName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_16dp"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Blueberry Pancake"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view10" />
 
+            <TextView
+                android:id="@+id/textView72"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins"
+                android:text="by James Ruth"
+                android:textColor="@color/text"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintStart_toStartOf="@+id/tvMealName"
+                app:layout_constraintTop_toBottomOf="@+id/tvMealName" />
+
+            <TextView
+                android:id="@+id/textView76"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Nutrition"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16sp"
+                app:layout_constraintStart_toStartOf="@+id/textView72"
+                app:layout_constraintTop_toBottomOf="@+id/textView72" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recNutrition"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView76" />
+
+            <TextView
+                android:id="@+id/textView77"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Descriptions"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16sp"
+                app:layout_constraintStart_toStartOf="@+id/textView72"
+                app:layout_constraintTop_toBottomOf="@+id/recNutrition" />
+
+            <TextView
+                android:id="@+id/tvMealDescriptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView77" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
