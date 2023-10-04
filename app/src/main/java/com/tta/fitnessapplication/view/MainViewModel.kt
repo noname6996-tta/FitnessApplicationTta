@@ -5,14 +5,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tta.fitnessapplication.data.model.Article
 import com.tta.fitnessapplication.data.model.BaseResponse
+import com.tta.fitnessapplication.data.model.CategoryFood
 import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.UserLoginResponse
 import com.tta.fitnessapplication.data.model.Video
-import com.tta.fitnessapplication.data.model.CategoryFood
 import com.tta.fitnessapplication.data.repository.RepositoryApi
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
@@ -27,14 +29,33 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
 
     fun getUserData(email: String) {
         viewModelScope.launch {
-            val list = repositoryApi.getProfile(email)
-            dataExercise.value = list
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    repositoryApi.getProfile(email)
+                }
+            }
+                .onSuccess {
+                    dataExercise.value = repositoryApi.getProfile(email)
+                }
+                .onFailure {
+
+                }
         }
     }
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
-            login.value = repositoryApi.login(email, password)
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    repositoryApi.login(email, password)
+                }
+            }
+                .onSuccess {
+                    login.value = it
+                }
+                .onFailure {
+
+                }
         }
     }
 
