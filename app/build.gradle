@@ -134,7 +134,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
 
     //leak memory
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
+    //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
 }
 
 kapt {

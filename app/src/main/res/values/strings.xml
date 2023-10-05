@@ -66,6 +66,7 @@
     <string name="detail">Detail</string>
     <string name="add_schedule">Add Schedule</string>
     <string name="update_schedule">Update Schedule</string>
+    <string name="no_data">No data</string>
     //
     <string-array name="Gender">
         <item>MALE</item>

@@ -32,18 +32,9 @@ class TodayTarget : BaseFragment<FragmentTodayTargetBinding>() {
         super.addObservers()
         historyViewModel.historyList.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
-                val list = ArrayList<History>()
-                for (item in 0..3) {
-                    if (it[item] != null) {
-                        list.add(it[item])
-                    }
-                }
-
-                if (list != null) {
-                    eventsAdapter.events.clear()
-                    eventsAdapter.events.addAll(list)
-                    eventsAdapter.notifyDataSetChanged()
-                }
+                eventsAdapter.events.clear()
+                eventsAdapter.events.addAll(it.take(5))
+                eventsAdapter.notifyDataSetChanged()
             }
         }
     }

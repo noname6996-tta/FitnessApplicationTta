@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.BODY_SENSORS"/>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.health.READ_HEART_RATE"/>
@@ -37,7 +38,9 @@
             android:exported="false" />
 
         <receiver android:name=".view.br.AlarmReceiver" />
+        <receiver android:name=".view.br.ClockAlarmManager" />
         <receiver android:name=".view.br.OnCompletedBroadcastReceiver" />
+        <receiver android:name=".view.br.NewOnCompletedBroadcastReceiver" />
         <receiver
             android:name=".view.br.RebootBroadcastReceiver"
             android:enabled="true"

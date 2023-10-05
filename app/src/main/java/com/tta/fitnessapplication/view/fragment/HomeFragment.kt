@@ -69,7 +69,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     result.dataPoints.firstOrNull()?.getValue(Field.FIELD_STEPS)?.asInt() ?: 0
                 // Do something with totalSteps
                 Log.i("TAG dataPoints", result.dataPoints.toString())
-                binding.tvHomeStep.text = totalSteps.toString()
+                binding.tvHomeStep.text = "$totalSteps Steps"
             }
             .addOnFailureListener { e ->
                 Log.i("TAG", "There was a problem getting steps.", e)
@@ -218,15 +218,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         historyViewModel.historyList.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
-                val list = ArrayList<History>()
-                list.addAll(it)
-                if (list.size>0) {
-                    binding.tvNoDataRecycle.visibility = View.GONE
-                    eventsAdapter.events.clear()
-                    eventsAdapter.events.addAll(list)
-                    eventsAdapter.notifyDataSetChanged()
-                }
+            if (!it.isNullOrEmpty()) {
+                binding.tvNoDataRecycle.visibility = View.GONE
+                eventsAdapter.events.clear()
+                eventsAdapter.events.addAll(it.take(5))
+                eventsAdapter.notifyDataSetChanged()
             }
         }
     }
@@ -250,8 +246,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             binding.imgNotifiHome.setOnClickListener {
                 // go to noti activity
                 // 0 type all, 1 water, 2 sleep, 3 eat
-                val action = HomeFragmentDirections.actionHomeFragmentToNotificationActivity(0)
-                findNavController().navigate(action)
+                findNavController().navigate(R.id.action_homeFragment_to_newNotificationFragment)
             }
             view6.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_todayTarget)
@@ -267,13 +262,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initView() {
-
         mImageDrawable = binding.imgToScroll.drawable as ClipDrawable
         mImageDrawable.level = 5000
 
         initCalender()
-
-//        initPieChart()
 
         initRecycleViewHistory()
         dailyWater = loginPreferences.getString(Constant.PREF.WATER_INNEED, "2000").toString()
