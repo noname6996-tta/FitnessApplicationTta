@@ -29,8 +29,8 @@
             android:id="@+id/action_homeFragment_to_notificationActivity"
             app:destination="@id/notificationActivity" />
         <action
-            android:id="@+id/action_homeFragment_to_newNotificationFragment"
-            app:destination="@id/newNotificationFragment" />
+            android:id="@+id/action_homeFragment_to_managerNotification"
+            app:destination="@id/managerNotification" />
     </fragment>
     <fragment
         android:id="@+id/discoverFragment"
@@ -183,10 +183,44 @@
         android:id="@+id/findMealActivity"
         android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.FindMeal.FindMealActivity"
         android:label="activity_meal_tracker"
-        tools:layout="@layout/activity_meal_tracker"></fragment>
+        tools:layout="@layout/activity_meal_tracker">
+        <action
+            android:id="@+id/action_findMealActivity_to_mealInfoActivity"
+            app:destination="@id/mealInfoActivity" />
+        <action
+            android:id="@+id/action_findMealActivity_to_findMealByCategory"
+            app:destination="@id/findMealByCategory" />
+    </fragment>
     <fragment
         android:id="@+id/newNotificationFragment"
         android:name="com.tta.fitnessapplication.view.noti.NewNotificationFragment"
         android:label="NewNotificationFragment"
         tools:layout="@layout/activity_notification" />
+    <fragment
+        tools:layout="@layout/activity_meal_info"
+        android:id="@+id/mealInfoActivity"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.MealInfoActivity"
+        android:label="MealInfoActivity" >
+        <argument
+            android:name="meal"
+            app:argType="com.tta.fitnessapplication.data.model.Meal" />
+    </fragment>
+    <fragment
+        android:id="@+id/findMealByCategory"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.FindMeal.FindMealByCategory"
+        android:label="fragment_meal_bycategory"
+        tools:layout="@layout/fragment_meal_bycategory" >
+        <action
+            android:id="@+id/action_findMealByCategory_to_mealInfoActivity"
+            app:destination="@id/mealInfoActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/managerNotification"
+        tools:layout="@layout/fragment_manager_notification"
+        android:name="com.tta.fitnessapplication.view.noti.ManagerNotification"
+        android:label="ManagerNotification" >
+        <action
+            android:id="@+id/action_managerNotification_to_newNotificationFragment"
+            app:destination="@id/newNotificationFragment" />
+    </fragment>
 </navigation>

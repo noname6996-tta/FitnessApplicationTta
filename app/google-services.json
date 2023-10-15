@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1059117292326",
+    "project_id": "evocative-shore-381601",
+    "storage_bucket": "evocative-shore-381601.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059117292326:android:e1505b6a113bf20d1fbfe7",
+        "android_client_info": {
+          "package_name": "com.tta.fitnessapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059117292326-37n21qsjsl0oq8oai47ichp27kjttbb7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tta.fitnessapplication",
+            "certificate_hash": "97d0303a52f89454e43d44d1bab5a260607b40d5"
+          }
+        },
+        {
+          "client_id": "1059117292326-a6ib764itnu338kenoohnsgcfq62dejj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkG32CgQ2WhiFvaxp6KuzO1vwaIhfeJlI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059117292326-a6ib764itnu338kenoohnsgcfq62dejj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

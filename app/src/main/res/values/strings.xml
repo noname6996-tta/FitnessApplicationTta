@@ -67,6 +67,15 @@
     <string name="add_schedule">Add Schedule</string>
     <string name="update_schedule">Update Schedule</string>
     <string name="no_data">No data</string>
+    <string name="add_to_meal">Add to Meal</string>
+    <string name="step_by_step">Step by Step</string>
+    <string name="ingredients_that_you_nwill_need">Ingredients That You\nWill Need</string>
+    <string name="descriptions">Descriptions</string>
+    <string name="nutrition">Nutrition</string>
+    <string name="your_weight">Your Weight</string>
+    <string name="your_height">Your Height</string>
+    <string name="cm">Cm</string>
+    <string name="notification">Notification</string>
     //
     <string-array name="Gender">
         <item>MALE</item>
