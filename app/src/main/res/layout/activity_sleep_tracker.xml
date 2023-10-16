@@ -206,6 +206,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Switch
+                        android:id="@+id/switchWakeup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/size_8dp"
@@ -290,6 +291,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Switch
+                        android:id="@+id/switchBedTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/size_8dp"

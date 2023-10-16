@@ -41,6 +41,7 @@ class ManagerNotificationAdapter :
             .error(R.drawable.ic_breafast)
             .into(holder.binding.imgNoti)
         holder.binding.tvNameNotification.text = "${notification.hour}:${notification.min}"
+        holder.binding.textView78.text = notification.text
         holder.binding.layoutNoti.setOnClickListener {
             onClickSendData?.let {
                 it(position)

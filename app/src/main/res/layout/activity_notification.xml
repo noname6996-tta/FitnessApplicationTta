@@ -121,6 +121,33 @@
         app:layout_constraintStart_toEndOf="@+id/materialTextView2"
         app:layout_constraintTop_toTopOf="@+id/materialTextView2" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_16dp"
+        android:layout_marginTop="@dimen/size_24dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/Value"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvContentTitle" />
+
+    <EditText
+        android:id="@+id/tvContentTitle2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/size_16dp"
+        android:backgroundTint="@color/colorDekraYellow"
+        android:hint="@string/Value"
+        android:textSize="@dimen/text_size_16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/materialTextView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/materialTextView2"
+        app:layout_constraintTop_toTopOf="@+id/materialTextView3" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddSchedule"
         android:layout_width="match_parent"

@@ -89,7 +89,7 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
         }
     }
 
-    fun getWeekDates(): List<String> {
+    private fun getWeekDates(): List<String> {
         val calendar = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         val dates = mutableListOf<String>()
@@ -202,7 +202,7 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
             clSettingNoti.setOnClickListener {
                 // go to noti activity
                 // 0 type all, 1 water, 2 sleep, 3 eat
-                val action = WaterTrackerActivityDirections.actionWaterTrackerActivityToNotificationActivity(1)
+                val action = WaterTrackerActivityDirections.actionWaterTrackerActivityToManagerNotification(1)
                 findNavController().navigate(action)
             }
         }

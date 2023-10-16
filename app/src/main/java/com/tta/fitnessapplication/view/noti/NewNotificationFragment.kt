@@ -5,8 +5,11 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.skydoves.balloon.ArrowPositionRules
@@ -26,8 +29,9 @@ class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
     private lateinit var viewModel: NewNotificationViewModel
     private lateinit var alarmManager: AlarmManager
     private lateinit var pendingIntent: PendingIntent
+    val args :NewNotificationFragmentArgs by navArgs()
     private var noti = Notification(
-        0, "", "Drink water", R.drawable.icon_notif, "200", 3, 53, 1, true
+        0, "Drink water", "Drink water", R.drawable.icon_notif, "200", 0, 0, 1, true
     )
 
     override fun getDataBinding(): ActivityNotificationBinding {
@@ -41,6 +45,21 @@ class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
 
     override fun initView() {
         super.initView()
+        when (args.type) {
+            1 -> {
+                noti.text = "Drink water"
+                noti.title = "Water"
+                noti.icon = R.drawable.ic_cup_400ml
+                binding.tvContentTitle2.setText(noti.value.toString() + "ml")
+            }
+            2 -> {
+                noti.text = "Time to sleep"
+                noti.title = "Sleep"
+                noti.icon = R.drawable.alarm_clock
+                binding.tvContentTitle2.visibility = View.GONE
+                binding.materialTextView3.visibility = View.GONE
+            }
+        }
         val ballonInfo = Balloon.Builder(requireContext())
             .setWidthRatio(1.0f)
             .setHeight(BalloonSizeSpec.WRAP)
@@ -58,18 +77,25 @@ class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
         binding.viewInfo.setOnClickListener {
             binding.viewInfo.showAsDropDown(ballonInfo)
         }
-        binding.tvContentTitle.setText(noti.title.toString())
+        binding.tvContentTitle.setText(noti.text.toString())
     }
 
     override fun addEvent() {
         super.addEvent()
         binding.btnAddSchedule.setOnClickListener {
-            Log.e("aaaa",noti.toString())
-            viewModel.addNotification(noti)
-            setAlarm(noti)
-            findNavController().popBackStack()
+            if (noti.hour == 0 || noti.min == 0) {
+                Snackbar.make(binding.root, "You have to choose time", Snackbar.LENGTH_LONG)
+            } else {
+                Log.e("aaaa", noti.toString())
+                viewModel.addNotification(noti)
+                setAlarm(noti)
+                findNavController().popBackStack()
+            }
         }
         binding.dateAndTimePicker.setOnClickListener { showDateTimePicker() }
+        binding.viewBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun showDateTimePicker() {

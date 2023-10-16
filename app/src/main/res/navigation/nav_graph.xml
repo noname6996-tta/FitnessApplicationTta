@@ -26,9 +26,6 @@
             android:id="@+id/action_homeFragment_to_calorieTrackerActivity"
             app:destination="@id/calorieTrackerActivity" />
         <action
-            android:id="@+id/action_homeFragment_to_notificationActivity"
-            app:destination="@id/notificationActivity" />
-        <action
             android:id="@+id/action_homeFragment_to_managerNotification"
             app:destination="@id/managerNotification" />
     </fragment>
@@ -72,8 +69,8 @@
             android:id="@+id/action_waterTrackerActivity_to_waterCaculateActivity"
             app:destination="@id/waterCaculateActivity" />
         <action
-            android:id="@+id/action_waterTrackerActivity_to_notificationActivity"
-            app:destination="@id/notificationActivity" />
+            android:id="@+id/action_waterTrackerActivity_to_managerNotification"
+            app:destination="@id/managerNotification" />
     </fragment>
     <fragment
         android:id="@+id/historyActivity"
@@ -152,9 +149,6 @@
         <action
             android:id="@+id/action_sleepTrackerActivity_to_homeFragment"
             app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_sleepTrackerActivity_to_notificationActivity"
-            app:destination="@id/notificationActivity" />
     </fragment>
     <fragment
         android:id="@+id/sleepScheduleActivity"
@@ -195,7 +189,11 @@
         android:id="@+id/newNotificationFragment"
         android:name="com.tta.fitnessapplication.view.noti.NewNotificationFragment"
         android:label="NewNotificationFragment"
-        tools:layout="@layout/activity_notification" />
+        tools:layout="@layout/activity_notification" >
+        <argument
+            android:name="type"
+            app:argType="integer" />
+    </fragment>
     <fragment
         tools:layout="@layout/activity_meal_info"
         android:id="@+id/mealInfoActivity"
@@ -222,5 +220,8 @@
         <action
             android:id="@+id/action_managerNotification_to_newNotificationFragment"
             app:destination="@id/newNotificationFragment" />
+        <argument
+            android:name="noti_type"
+            app:argType="integer" />
     </fragment>
 </navigation>

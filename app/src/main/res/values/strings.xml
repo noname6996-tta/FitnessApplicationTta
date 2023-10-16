@@ -63,6 +63,7 @@
     <string name="start_date_of_notification_display">Start date of notification display</string>
     <string name="choose_time">Choose Time</string>
     <string name="title">Title</string>
+    <string name="Value">Value</string>
     <string name="detail">Detail</string>
     <string name="add_schedule">Add Schedule</string>
     <string name="update_schedule">Update Schedule</string>

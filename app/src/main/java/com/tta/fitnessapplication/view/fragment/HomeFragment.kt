@@ -246,7 +246,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             binding.imgNotifiHome.setOnClickListener {
                 // go to noti activity
                 // 0 type all, 1 water, 2 sleep, 3 eat
-                findNavController().navigate(R.id.action_homeFragment_to_managerNotification)
+                val action = HomeFragmentDirections.actionHomeFragmentToManagerNotification(0)
+                findNavController().navigate(action)
             }
             view6.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_todayTarget)
