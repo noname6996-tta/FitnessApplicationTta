@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.tta.fitnessapplication.data.model.Article
 import com.tta.fitnessapplication.data.model.BaseResponse
 import com.tta.fitnessapplication.data.model.CategoryFood
+import com.tta.fitnessapplication.data.model.Food
 import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.UserLoginResponse
@@ -26,6 +27,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     val listVideo = MutableLiveData<List<Video>>()
     val listArticle = MutableLiveData<List<Article>>()
     val listCategory = MutableLiveData<MutableList<CategoryFood>>()
+    val listFoodById = MutableLiveData<MutableList<Food>>()
 
     fun getUserData(email: String) {
         viewModelScope.launch {
@@ -111,6 +113,12 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     fun getCategoryFood() {
         viewModelScope.launch {
             listCategory.value = repositoryApi.getCategoryFood().body()?.data
+        }
+    }
+
+    fun getFoodById(id : String) {
+        viewModelScope.launch {
+            listFoodById.value = repositoryApi.getFoodById(id).body()?.data
         }
     }
 }

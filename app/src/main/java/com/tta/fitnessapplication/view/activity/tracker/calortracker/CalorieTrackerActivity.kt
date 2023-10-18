@@ -33,9 +33,9 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
         super.addObservers()
         viewModel.listCaloriesExpended.observe(viewLifecycleOwner) {
             if (it.isNullOrEmpty()) {
-                binding.tvKcalBurn.text = "No data"
+//                binding.tvKcalBurn.text = "No data"
             } else {
-                binding.tvKcalBurn.text = it.last().value + "\nBURN"
+//                binding.tvKcalBurn.text = it.last().value + "\nBURN"
             }
         }
         mealViewModel.readAllData.observe(viewLifecycleOwner) { meal ->
@@ -59,76 +59,6 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
         val mealArray = resources.getStringArray(R.array.Meal)
         val adapterActivityLevel =
             ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, mealArray)
-        val balloonProtein = Balloon.Builder(requireContext())
-            .setWidthRatio(1.0f)
-            .setHeight(BalloonSizeSpec.WRAP)
-            .setText("balloonProtein!")
-            .setTextColorResource(R.color.white)
-            .setTextSize(15f)
-            .setArrowPositionRules(ArrowPositionRules.ALIGN_BALLOON)
-            .setArrowSize(10)
-            .setArrowPosition(0.5f)
-            .setPadding(12)
-            .setCornerRadius(8f)
-            .setBackgroundColorResource(R.color.text)
-            .setBalloonAnimation(BalloonAnimation.ELASTIC)
-            .build()
-        binding.tvProtein.setOnClickListener {
-            binding.tvProtein.showAsDropDown(balloonProtein)
-        }
-        val balloonCarb = Balloon.Builder(requireContext())
-            .setWidthRatio(1.0f)
-            .setHeight(BalloonSizeSpec.WRAP)
-            .setText("balloonCarb!")
-            .setTextColorResource(R.color.white)
-            .setTextSize(15f)
-            .setArrowPositionRules(ArrowPositionRules.ALIGN_BALLOON)
-            .setArrowSize(10)
-            .setArrowPosition(0.5f)
-            .setPadding(12)
-            .setCornerRadius(8f)
-            .setBackgroundColorResource(R.color.text)
-            .setBalloonAnimation(BalloonAnimation.ELASTIC)
-            .build()
-        binding.tvCarbohydrate.setOnClickListener {
-            binding.tvCarbohydrate.showAsDropDown(balloonCarb)
-        }
-
-        val balloonFat = Balloon.Builder(requireContext())
-            .setWidthRatio(1.0f)
-            .setHeight(BalloonSizeSpec.WRAP)
-            .setText("balloonFat!")
-            .setTextColorResource(R.color.white)
-            .setTextSize(15f)
-            .setArrowPositionRules(ArrowPositionRules.ALIGN_BALLOON)
-            .setArrowSize(10)
-            .setArrowPosition(0.5f)
-            .setPadding(12)
-            .setCornerRadius(8f)
-            .setBackgroundColorResource(R.color.text)
-            .setBalloonAnimation(BalloonAnimation.ELASTIC)
-            .build()
-        binding.tvFat.setOnClickListener {
-            binding.tvFat.showAsDropDown(balloonFat)
-        }
-        val balloonCalorie = Balloon.Builder(requireContext())
-            .setWidthRatio(1.0f)
-            .setHeight(BalloonSizeSpec.WRAP)
-            .setText("Track your daily eating history. Try to eat healthy every day!")
-            .setTextColorResource(R.color.white)
-            .setTextSize(15f)
-            .setArrowPositionRules(ArrowPositionRules.ALIGN_BALLOON)
-            .setArrowSize(10)
-            .setArrowPosition(0.5f)
-            .setPadding(12)
-            .setCornerRadius(8f)
-            .setBackgroundColorResource(R.color.text)
-            .setBalloonAnimation(BalloonAnimation.ELASTIC)
-            .build()
-
-        binding.viewInfo.setOnClickListener {
-            binding.viewInfo.showAsDropDown(balloonCalorie)
-        }
         binding.recSuggestFood.adapter = somethingToEatAdapter
         val linearLayoutManager = LinearLayoutManager(requireContext())
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL

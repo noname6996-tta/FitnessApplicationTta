@@ -30,5 +30,6 @@ object ApiPath {
     const val CATEGORY_FOOD = "/meal/category/getAllCategory.php"
     const val FOOD_BY_TYPE = "/meal/food/getFoodByType.php"
     const val FOOD_BY_CATEGORY = "/meal/food/getFoodByIdCategory.php"
+    const val FOOD_BY_ID = "/meal/food/getFoodById.php"
     //https://v1.nocodeapi.com/trantheanh/fit/XDjAzlDHSSsEEyxi/aggregatesDatasets?dataTypeName=steps_count
 }

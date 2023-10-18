@@ -108,4 +108,9 @@ interface ApiService {
     suspend fun getFoodByCategory(
         @Query("id") id: String
     ): Response<ResponseFood>
+
+    @POST(ApiPath.FOOD_BY_ID)
+    suspend fun getFoodByID(
+        @Query("id") id: String
+    ): Response<ResponseFood>
 }

@@ -11,7 +11,7 @@ data class Food(
     var name: String,
     @SerializedName("author")
     var author: String,
-    @SerializedName("nutrition")
+    @SerializedName("nutriton")
     var nutrition: String,
     @SerializedName("descriptions")
     var descriptions: String,
