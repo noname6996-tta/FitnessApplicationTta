@@ -6,7 +6,6 @@ import com.tta.fitnessapplication.data.model.Article
 import com.tta.fitnessapplication.data.model.Video
 import com.tta.fitnessapplication.databinding.FragmentHistoryBinding
 import com.tta.fitnessapplication.view.activity.WebViewActivity
-import com.tta.fitnessapplication.view.activity.chat.ChatGPTActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
 
 class ArticleFragment : BaseFragment<FragmentHistoryBinding>() {
@@ -38,7 +37,7 @@ class ArticleFragment : BaseFragment<FragmentHistoryBinding>() {
             startActivity(intent)
         }
         binding.cardView5.setOnClickListener {
-            startActivity(Intent(requireContext(), ChatGPTActivity::class.java))
+
         }
     }
 

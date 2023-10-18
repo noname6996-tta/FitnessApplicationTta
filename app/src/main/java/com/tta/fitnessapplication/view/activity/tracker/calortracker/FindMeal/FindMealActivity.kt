@@ -27,6 +27,11 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
         binding.viewback.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        recommendMealAdapter.findSomethingToEat {
+            val action = FindMealActivityDirections.actionFindMealActivityToMealInfoActivity(it)
+            findNavController().navigate(action)
+        }
     }
 
     override fun initView() {
@@ -61,11 +66,11 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
             list.addAll(it)
             categoryAdapter.setListCategoryFood(it,requireContext())
         }
-        listRecommentMeal.add(Meal(0,"buger","10 mins","null","300","237","555","120", R.drawable.ic_breafast,1))
-        listRecommentMeal.add(Meal(0,"buger","10 mins","null","300","237","555","120", R.drawable.ic_breafast,1))
-        listRecommentMeal.add(Meal(0,"buger","10 mins","null","300","237","555","120", R.drawable.ic_breafast,1))
-        listRecommentMeal.add(Meal(0,"buger","10 mins","null","300","237","555","120", R.drawable.ic_breafast,1))
-        listRecommentMeal.add(Meal(0,"buger","10 mins","null","300","237","555","120", R.drawable.ic_breafast,1))
+        listRecommentMeal.add(Meal(1,"buger","10 mins","null","300","237","555","120", R.drawable.ic_breafast,1))
+        listRecommentMeal.add(Meal(1,"buger","10 mins","null","300","237","555","120", R.drawable.ic_breafast,1))
+        listRecommentMeal.add(Meal(1,"buger","10 mins","null","300","237","555","120", R.drawable.ic_breafast,1))
+        listRecommentMeal.add(Meal(1,"buger","10 mins","null","300","237","555","120", R.drawable.ic_breafast,1))
+        listRecommentMeal.add(Meal(1,"buger","10 mins","null","300","237","555","120", R.drawable.ic_breafast,1))
         recommendMealAdapter.setListExercise(listRecommentMeal,requireContext())
         mealPopular.setListExercise(listRecommentMeal,requireContext())
 

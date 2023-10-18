@@ -42,7 +42,7 @@ class CategoryMealAdapter :
             Glide.with(context)
                 .load(someThingToEat.icon)
                 .error(R.drawable.ic_breafast)
-                .into(holder.binding.imgCategory);
+                .into(holder.binding.imgCategory)
             holder.binding.tvNameCategory.text = someThingToEat.name
             holder.binding.clItemCategory.setOnClickListener {
                 onClickSendData?.let {

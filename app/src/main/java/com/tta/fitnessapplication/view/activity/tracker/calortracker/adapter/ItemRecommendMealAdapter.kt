@@ -47,7 +47,7 @@ class ItemRecommendMealAdapter :
             holder.binding.tvInfoFood.text = someThingToEat.kcal
             holder.binding.appCompatButton3.setOnClickListener {
                 onClickSendData?.let {
-                    it(position)
+                    it(someThingToEat.id)
                 }
             }
         }

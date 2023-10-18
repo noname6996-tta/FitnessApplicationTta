@@ -200,8 +200,8 @@
         android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.MealInfoActivity"
         android:label="MealInfoActivity" >
         <argument
-            android:name="meal"
-            app:argType="com.tta.fitnessapplication.data.model.Meal" />
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/findMealByCategory"
