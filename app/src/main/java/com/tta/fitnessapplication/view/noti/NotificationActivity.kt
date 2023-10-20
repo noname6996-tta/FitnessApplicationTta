@@ -68,7 +68,6 @@ class NotificationActivity() : BaseFragment<ActivityNotificationBinding>() {
     override fun initView() {
         super.initView()
         if (args.typeNoti==1){
-            binding.tvContentTitle.setText("Time to drink water")
             taskInfo.priority = 1
             taskInfo.description = "Drink water"
         }
@@ -117,12 +116,11 @@ class NotificationActivity() : BaseFragment<ActivityNotificationBinding>() {
         if(str=="N/A")str="Due Date"
 
         binding.apply {
-            tvContentTitle.setText(taskInfo.description)
             dateAndTimePicker.text = str
 
             //ClickListeners
             dateAndTimePicker.setOnClickListener { showDateTimePicker()}
-            btnAddSchedule.setOnClickListener{ addTask()}
+            btnAdd.setOnClickListener{ addTask()}
         }
     }
 
@@ -137,13 +135,12 @@ class NotificationActivity() : BaseFragment<ActivityNotificationBinding>() {
 
     private fun addTask() {
         val date = Date()
-        taskInfo.description = binding.tvContentTitle.text.toString()
         if(taskInfo.description.isNullOrBlank())
         {
             Snackbar.make(binding.root, "Please add description", Snackbar.LENGTH_SHORT).setAction("Action", null).show()
         }
         else {
-            if(binding.btnAddSchedule.text.equals("Update")) {
+            if(binding.btnAdd.text.equals("Update")) {
 //                updateTask()
             }else {
                 val diff = (Date().time/1000) - 1640908800

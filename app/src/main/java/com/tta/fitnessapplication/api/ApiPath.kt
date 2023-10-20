@@ -16,6 +16,7 @@ object ApiPath {
     const val LOGIN = "/user/login.php/"
     const val INSERT_USER = "/user/insertUser.php"
     const val USER_INFO = "/user/getAllData.php"
+    const val UPDATE_USER = "/user/update.php"
     const val FULLBODY = "/exercise/fullbody/getAllData.php"
     const val SELECT_FULLBODY = "/exercise/fullbody/selectDay.php"
     const val DEMO = "XDjAzlDHSSsEEyxi/aggregatesDatasets"
@@ -31,5 +32,6 @@ object ApiPath {
     const val FOOD_BY_TYPE = "/meal/food/getFoodByType.php"
     const val FOOD_BY_CATEGORY = "/meal/food/getFoodByIdCategory.php"
     const val FOOD_BY_ID = "/meal/food/getFoodById.php"
+    const val MAP_API = "maps/api/place/nearbysearch/json"
     //https://v1.nocodeapi.com/trantheanh/fit/XDjAzlDHSSsEEyxi/aggregatesDatasets?dataTypeName=steps_count
 }

@@ -62,9 +62,7 @@ class ManagerNotification : BaseFragment<FragmentManagerNotificationBinding>() {
             }
             addButton.setOnClickListener {
                 val action =
-                    ManagerNotificationDirections.actionManagerNotificationToNewNotificationFragment(
-                        0
-                    )
+                    ManagerNotificationDirections.actionManagerNotificationToNewNotificationFragment()
                 findNavController().navigate(action)
             }
         }

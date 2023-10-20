@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.skydoves.balloon.ArrowPositionRules
@@ -23,8 +24,6 @@ import java.util.Calendar
 class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
     private lateinit var viewModelNoti: NewNotificationViewModel
     private lateinit var viewModel : SleepViewModel
-    private lateinit var alarmManager: AlarmManager
-    private lateinit var pendingIntent: PendingIntent
 
     override fun getDataBinding(): ActivitySleepTrackerBinding {
         return ActivitySleepTrackerBinding.inflate(layoutInflater)
@@ -40,55 +39,43 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
     override fun addObservers() {
         super.addObservers()
         viewModelNoti.readAllData.observe(viewLifecycleOwner){
-            var count = 0
             for (item in it){
                 if (item.type == 2){
-                    count++
-                }
-            }
-            if (count==0){
-                var notiWakeUp = Notification(
-                    0, "Sleep", "Wake up", R.drawable.alarm_clock, "", 6, 0, 2, true
-                )
-                var notiSleep = Notification(
-                    0, "Sleep", "Sleep", R.drawable.icon_bed, "", 22, 0, 2, true
-                )
-                viewModelNoti.addNotification(notiWakeUp)
-                viewModelNoti.addNotification(notiSleep)
-                setAlarm(notiWakeUp)
-                setAlarm(notiSleep)
-            }
-            else {
-                for (item in it){
-                    if (item.icon == R.drawable.alarm_clock)
-                    {
-                        binding.textView55.text = "${item.hour}:${item.min} AM"
-                        val calendar = Calendar.getInstance()
-                        val currentTime = calendar.timeInMillis
-                        calendar.add(Calendar.DAY_OF_MONTH, 1)
-                        calendar.set(Calendar.HOUR_OF_DAY, item.hour)
-                        calendar.set(Calendar.MINUTE, 0)
-                        val targetTime = calendar.timeInMillis
-                        val timeDifference = targetTime - (currentTime + item.min * 60 * 1000) // Adding 5 minutes in milliseconds
-                        val remainingMinutes = (timeDifference / (1000 * 60)).toInt()
-                        val remainingHours = remainingMinutes / 60
-                        val remainingMinutesOnly = remainingMinutes % 60
-                        binding.textView56.text = "In $remainingHours hours $remainingMinutesOnly minutes"
-                        binding.switchWakeup.isChecked = item.enable
-                    }
-                    else if (item.icon == R.drawable.icon_bed){
-                        binding.textView53.text = "${item.hour}:${item.min} PM"
-                        val calendar = Calendar.getInstance()
-                        val currentTime = calendar.timeInMillis
-                        calendar.set(Calendar.HOUR_OF_DAY, item.hour)
-                        calendar.set(Calendar.MINUTE, 0)
-                        val targetTime = calendar.timeInMillis
-                        val timeDifference = targetTime - (currentTime + item.min * 60 * 1000) // Adding 5 minutes in milliseconds
-                        val remainingMinutes = (timeDifference / (1000 * 60)).toInt()
-                        val remainingHours = remainingMinutes / 60
-                        val remainingMinutesOnly = remainingMinutes % 60
-                        binding.textView54.text = "In $remainingHours hours $remainingMinutesOnly minutes"
-                        binding.switchBedTime.isChecked = item.enable
+                    binding.cardView2.visibility = View.VISIBLE
+                    binding.cardView.visibility = View.VISIBLE
+                    binding.textView79.visibility = View.GONE
+                    binding.btnAddNotification.visibility = View.GONE
+                    for (item in it){
+                        if (item.icon == R.drawable.alarm_clock)
+                        {
+                            binding.textView55.text = "${item.hour}:${item.min} AM"
+                            val calendar = Calendar.getInstance()
+                            val currentTime = calendar.timeInMillis
+                            calendar.add(Calendar.DAY_OF_MONTH, 1)
+                            calendar.set(Calendar.HOUR_OF_DAY, item.hour)
+                            calendar.set(Calendar.MINUTE, 0)
+                            val targetTime = calendar.timeInMillis
+                            val timeDifference = targetTime - (currentTime + item.min * 60 * 1000) // Adding 5 minutes in milliseconds
+                            val remainingMinutes = (timeDifference / (1000 * 60)).toInt()
+                            val remainingHours = remainingMinutes / 60
+                            val remainingMinutesOnly = remainingMinutes % 60
+                            binding.textView56.text = "In $remainingHours hours $remainingMinutesOnly minutes"
+                            binding.switchWakeup.isChecked = item.enable
+                        }
+                        else if (item.icon == R.drawable.icon_bed){
+                            binding.textView53.text = "${item.hour}:${item.min} PM"
+                            val calendar = Calendar.getInstance()
+                            val currentTime = calendar.timeInMillis
+                            calendar.set(Calendar.HOUR_OF_DAY, item.hour)
+                            calendar.set(Calendar.MINUTE, 0)
+                            val targetTime = calendar.timeInMillis
+                            val timeDifference = targetTime - (currentTime + item.min * 60 * 1000) // Adding 5 minutes in milliseconds
+                            val remainingMinutes = (timeDifference / (1000 * 60)).toInt()
+                            val remainingHours = remainingMinutes / 60
+                            val remainingMinutesOnly = remainingMinutes % 60
+                            binding.textView54.text = "In $remainingHours hours $remainingMinutesOnly minutes"
+                            binding.switchBedTime.isChecked = item.enable
+                        }
                     }
                 }
             }
@@ -142,43 +129,10 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
                 chart.viewColume1.showAlignTop(balloonInfoColumnone)
             }
 
-            imageView32.setOnClickListener {
-
+            btnAddNotification.setOnClickListener {
+                var action = SleepTrackerActivityDirections.actionSleepTrackerActivityToManagerNotification(2)
+                findNavController().navigate(action)
             }
-        }
-    }
-
-    private fun setAlarm(notification: Notification) {
-        // Initialize AlarmManager
-        alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-        // Create intent for your BroadcastReceiver
-        val intent = Intent(requireContext(), ClockAlarmManager::class.java)
-        intent.putExtra("noti_info", notification)
-        pendingIntent = PendingIntent.getBroadcast(
-            requireContext(), notification.id, intent,
-            PendingIntent.FLAG_IMMUTABLE
-        )
-
-        // Set the alarm to trigger at 8:00 AM (replace with your desired time)
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = System.currentTimeMillis()
-        calendar.set(Calendar.HOUR_OF_DAY, notification.hour)
-        calendar.set(Calendar.MINUTE, notification.min)
-
-        // Set the repeating interval to 24 hours
-        val interval = AlarmManager.INTERVAL_DAY
-        if (notification.enable) {
-            // Schedule the alarm
-            alarmManager.setRepeating(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                interval,
-                pendingIntent
-            )
-        } else {
-            // To cancel the alarm
-            alarmManager.cancel(pendingIntent)
         }
     }
 }

@@ -13,13 +13,13 @@ import com.tta.fitnessapplication.data.model.UserLoginResponse
 import com.tta.fitnessapplication.data.model.Video
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     val dataExercise = MutableLiveData<Response<ResponseProfile>>()
+    val updateUser = MutableLiveData<Response<BaseResponse<String>>>()
     val login = MutableLiveData<Response<UserLoginResponse>>()
     val listHistoryByDate = MutableLiveData<Response<BaseResponse<MutableList<History>>>>()
     val listHistoryByDateAndType = MutableLiveData<Response<BaseResponse<MutableList<History>>>>()
@@ -38,6 +38,30 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
             }
                 .onSuccess {
                     dataExercise.value = repositoryApi.getProfile(email)
+                }
+                .onFailure {
+
+                }
+        }
+    }
+
+    fun updateProfile(
+        email: String,
+        gender: String,
+        age: String,
+        tall: String,
+        weight: String,
+        firstname: String,
+        lastname: String
+    ) {
+        viewModelScope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    repositoryApi.updateProfile(email,gender, age, tall, weight, firstname, lastname)
+                }
+            }
+                .onSuccess {
+                    updateUser.value = repositoryApi.updateProfile(email,gender, age, tall, weight, firstname, lastname)
                 }
                 .onFailure {
 
@@ -116,7 +140,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
         }
     }
 
-    fun getFoodById(id : String) {
+    fun getFoodById(id: String) {
         viewModelScope.launch {
             listFoodById.value = repositoryApi.getFoodById(id).body()?.data
         }

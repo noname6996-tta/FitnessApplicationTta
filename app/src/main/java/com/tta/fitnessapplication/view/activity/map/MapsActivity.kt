@@ -1,4 +1,4 @@
-package com.tta.fitnessapplication.view.activity.chat
+package com.tta.fitnessapplication.view.activity.map
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

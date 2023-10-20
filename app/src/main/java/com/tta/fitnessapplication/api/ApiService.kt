@@ -46,6 +46,17 @@ interface ApiService {
         @Query("email") email: String,
     ): Response<ResponseProfile>
 
+    @POST(ApiPath.UPDATE_USER)
+    suspend fun updateUserInfo(
+        @Query("email") email: String,
+        @Query("gender") gender: String,
+        @Query("age") age: String,
+        @Query("tall") tall: String,
+        @Query("weight") weight: String,
+        @Query("firstname") firstname: String,
+        @Query("lastname") lastname: String
+    ): Response<BaseResponse<String>>
+
     @GET(ApiPath.FULLBODY)
     fun getFullBody(): Call<ResponseFullBody>
 

@@ -53,6 +53,12 @@
         <action
             android:id="@+id/action_settingFragment_to_todayTarget"
             app:destination="@id/todayTarget" />
+        <action
+            android:id="@+id/action_settingFragment_to_managerNotification"
+            app:destination="@id/managerNotification" />
+        <action
+            android:id="@+id/action_settingFragment_to_personDataActivity"
+            app:destination="@id/personDataActivity" />
     </fragment>
     <fragment
         android:id="@+id/waterTrackerActivity"
@@ -149,6 +155,9 @@
         <action
             android:id="@+id/action_sleepTrackerActivity_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_sleepTrackerActivity_to_managerNotification"
+            app:destination="@id/managerNotification" />
     </fragment>
     <fragment
         android:id="@+id/sleepScheduleActivity"
@@ -189,11 +198,7 @@
         android:id="@+id/newNotificationFragment"
         android:name="com.tta.fitnessapplication.view.noti.NewNotificationFragment"
         android:label="NewNotificationFragment"
-        tools:layout="@layout/activity_notification" >
-        <argument
-            android:name="type"
-            app:argType="integer" />
-    </fragment>
+        tools:layout="@layout/activity_notification" />
     <fragment
         tools:layout="@layout/activity_meal_info"
         android:id="@+id/mealInfoActivity"
@@ -224,4 +229,9 @@
             android:name="noti_type"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/personDataActivity"
+        android:name="com.tta.fitnessapplication.view.activity.user.PersonDataActivity"
+        android:label="activity_person_data"
+        tools:layout="@layout/activity_person_data" />
 </navigation>
