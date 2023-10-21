@@ -65,7 +65,7 @@
         android:layout_marginStart="@dimen/size_16dp"
         android:layout_marginTop="@dimen/size_24dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="@string/start_date_of_notification_display"
+        android:text="@string/set_up_daily_noti"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,6 +81,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView71" />
 
+    <TextView
+        android:id="@+id/titleChooseType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:fontFamily="@font/poppins"
+        android:text="Choose type of Notification"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/text_size_16sp"
+        app:layout_constraintStart_toStartOf="@+id/dateAndTimePicker"
+        app:layout_constraintTop_toBottomOf="@+id/dateAndTimePicker" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleChooseType">
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Drink Water" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wake up" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bed time" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do exercise" />
+
+    </RadioGroup>
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/materialTextView"
         android:layout_width="wrap_content"
@@ -91,35 +138,10 @@
         android:text="@string/detail"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateAndTimePicker" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size_16dp"
-        android:layout_marginTop="@dimen/size_24dp"
-        android:fontFamily="@font/poppins"
-        android:text="@string/title"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
-
-    <EditText
-        android:id="@+id/tvContentTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/size_16dp"
-        android:backgroundTint="@color/colorDekraYellow"
-        android:hint="@string/title"
-        android:textSize="@dimen/text_size_16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/materialTextView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/materialTextView2"
-        app:layout_constraintTop_toTopOf="@+id/materialTextView2" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/materialTextView3"
@@ -131,8 +153,9 @@
         android:text="@string/Value"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvContentTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
 
     <EditText
         android:id="@+id/tvContentTitle2"
@@ -142,14 +165,24 @@
         android:layout_margin="@dimen/size_16dp"
         android:backgroundTint="@color/colorDekraYellow"
         android:hint="@string/Value"
+        android:inputType="number"
+        android:maxLength="3"
         android:textSize="@dimen/text_size_16sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/materialTextView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/materialTextView2"
+        app:layout_constraintStart_toEndOf="@+id/materialTextView"
         app:layout_constraintTop_toTopOf="@+id/materialTextView3" />
 
+    <Button
+        android:id="@+id/btnDemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAddSchedule"
+        android:id="@+id/btnAdd"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="@dimen/size_16dp"

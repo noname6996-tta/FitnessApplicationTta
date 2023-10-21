@@ -16,6 +16,18 @@ class RepositoryApi {
         return ApiClient.API.getUserProfile(email)
     }
 
+    suspend fun updateProfile(
+        email: String,
+        gender: String,
+        age: String,
+        tall: String,
+        weight: String,
+        firstname: String,
+        lastname: String
+    ): Response<BaseResponse<String>> {
+        return ApiClient.API.updateUserInfo(email, gender, age, tall, weight, firstname, lastname)
+    }
+
     suspend fun login(email: String, password: String): Response<UserLoginResponse> {
         return ApiClient.API.login(email, password)
     }
@@ -55,18 +67,19 @@ class RepositoryApi {
         return ApiClient.API.createHistory(idUser, date, time, activity, type, value)
     }
 
-    suspend fun getListArticle():  Response<ResoinseArticle>{
+    suspend fun getListArticle(): Response<ResoinseArticle> {
         return ApiClient.API.getArticle()
     }
-    suspend fun getVideo():  Response<ResponseVideo>{
+
+    suspend fun getVideo(): Response<ResponseVideo> {
         return ApiClient.API.getVideo()
     }
 
-    suspend fun getCategoryFood():  Response<ResponseCategoryFood>{
+    suspend fun getCategoryFood(): Response<ResponseCategoryFood> {
         return ApiClient.API.getAllCategory()
     }
 
-    suspend fun getFoodById(id : String):  Response<ResponseFood>{
+    suspend fun getFoodById(id: String): Response<ResponseFood> {
         return ApiClient.API.getFoodByID(id)
     }
 }

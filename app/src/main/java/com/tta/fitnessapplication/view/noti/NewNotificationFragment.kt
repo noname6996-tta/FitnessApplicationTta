@@ -6,9 +6,9 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.widget.RadioButton
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -29,9 +29,12 @@ class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
     private lateinit var viewModel: NewNotificationViewModel
     private lateinit var alarmManager: AlarmManager
     private lateinit var pendingIntent: PendingIntent
-    val args :NewNotificationFragmentArgs by navArgs()
+    private var isHasBedTime = false
+    private var isHasWakeUp = false
+    private var canClick = true
+
     private var noti = Notification(
-        0, "Drink water", "Drink water", R.drawable.icon_notif, "200", 0, 0, 1, true
+        0, "", "", R.drawable.icon_notif, "200", 0, 0, 1, true
     )
 
     override fun getDataBinding(): ActivityNotificationBinding {
@@ -43,23 +46,22 @@ class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
         viewModel = ViewModelProvider(this)[NewNotificationViewModel::class.java]
     }
 
-    override fun initView() {
-        super.initView()
-        when (args.type) {
-            1 -> {
-                noti.text = "Drink water"
-                noti.title = "Water"
-                noti.icon = R.drawable.ic_cup_400ml
-                binding.tvContentTitle2.setText(noti.value.toString() + "ml")
-            }
-            2 -> {
-                noti.text = "Time to sleep"
-                noti.title = "Sleep"
-                noti.icon = R.drawable.alarm_clock
-                binding.tvContentTitle2.visibility = View.GONE
-                binding.materialTextView3.visibility = View.GONE
+    override fun addObservers() {
+        super.addObservers()
+        viewModel.readAllData.observe(viewLifecycleOwner) {
+            for (item in it) {
+                if (item.type == 2) {
+                    when (item.icon) {
+                        R.drawable.icon_bed -> isHasBedTime = true
+                        R.drawable.alarm_clock -> isHasWakeUp = true
+                    }
+                }
             }
         }
+    }
+
+    override fun initView() {
+        super.initView()
         val ballonInfo = Balloon.Builder(requireContext())
             .setWidthRatio(1.0f)
             .setHeight(BalloonSizeSpec.WRAP)
@@ -77,19 +79,116 @@ class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
         binding.viewInfo.setOnClickListener {
             binding.viewInfo.showAsDropDown(ballonInfo)
         }
-        binding.tvContentTitle.setText(noti.text.toString())
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            val selectedRadioButton = group.findViewById<RadioButton>(checkedId)
+            val selectedOption = selectedRadioButton.text.toString()
+            // Do something with the selected option
+            when (selectedOption) {
+                "Drink Water" -> {
+                    canClick = true
+                    binding.materialTextView3.visibility = View.VISIBLE
+                    binding.materialTextView.visibility = View.VISIBLE
+                    binding.tvContentTitle2.visibility = View.VISIBLE
+                    if (binding.tvContentTitle2.text.toString().trim() == "000") {
+
+                    } else {
+                        noti.value = binding.tvContentTitle2.text.toString().trim()
+                    }
+                    noti.title = "Drink water"
+                    noti.text = "Drink water"
+                    noti.icon = R.drawable.ic_cup_400ml
+                    noti.type = 1
+                }
+
+                "Wake up" -> {
+                    canClick = true
+                    binding.materialTextView3.visibility = View.GONE
+                    binding.materialTextView.visibility = View.GONE
+                    binding.tvContentTitle2.visibility = View.GONE
+                    if (isHasWakeUp) {
+                        Snackbar.make(
+                            binding.root,
+                            "You already set up time to wake up",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                        canClick = false
+                    } else {
+                        noti.title = "Wake up"
+                        noti.text = "Wake up"
+                        noti.icon = R.drawable.alarm_clock
+                        noti.type = 2
+                    }
+                }
+
+                "Bed time" -> {
+                    canClick = true
+                    binding.materialTextView3.visibility = View.GONE
+                    binding.materialTextView.visibility = View.GONE
+                    binding.tvContentTitle2.visibility = View.GONE
+                    if (isHasBedTime) {
+                        Snackbar.make(
+                            binding.root,
+                            "You already set up bed time",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                        canClick = false
+                    } else {
+                        noti.title = "Bed time"
+                        noti.text = "Bed time"
+                        noti.icon = R.drawable.icon_bed
+                        noti.type = 2
+                    }
+                }
+
+                "Do exercise" -> {
+                    canClick = true
+                    binding.materialTextView3.visibility = View.GONE
+                    binding.materialTextView.visibility = View.GONE
+                    binding.tvContentTitle2.visibility = View.GONE
+                    noti.title = "Do exercise"
+                    noti.text = "Do exercise"
+                    noti.icon = R.drawable.ic_logo
+                    noti.type = 3
+                }
+            }
+        }
     }
 
     override fun addEvent() {
         super.addEvent()
-        binding.btnAddSchedule.setOnClickListener {
+        binding.btnDemo.setOnClickListener {
             if (noti.hour == 0 || noti.min == 0) {
                 Snackbar.make(binding.root, "You have to choose time", Snackbar.LENGTH_LONG)
+            } else if (noti.text == "") {
+                Snackbar.make(
+                    binding.root,
+                    "You have to choose type notification",
+                    Snackbar.LENGTH_LONG
+                )
             } else {
-                Log.e("aaaa", noti.toString())
-                viewModel.addNotification(noti)
-                setAlarm(noti)
-                findNavController().popBackStack()
+                if (canClick) {
+                    Log.e("aaaa", noti.toString())
+                    viewModel.addNotification(noti)
+                    setAlarm(noti)
+                    Snackbar.make(binding.root, "Set up notification success", Snackbar.LENGTH_LONG)
+                    findNavController().popBackStack()
+                } else {
+                    if (isHasBedTime) {
+                        Snackbar.make(
+                            binding.root,
+                            "You already set up bed time",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+
+                    if (isHasWakeUp) {
+                        Snackbar.make(
+                            binding.root,
+                            "You already set up time to wake up",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                }
             }
         }
         binding.dateAndTimePicker.setOnClickListener { showDateTimePicker() }

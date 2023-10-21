@@ -110,7 +110,11 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
             }
 
             cardView4.setOnClickListener{
-                // go to notification fragment
+                findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToManagerNotification(0))
+            }
+
+            viewPersonData.setOnClickListener {
+                findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToPersonDataActivity())
             }
         }
     }
