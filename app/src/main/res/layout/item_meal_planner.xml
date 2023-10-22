@@ -24,6 +24,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginLeft="10dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/ic_breafast"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,16 +54,13 @@
                 app:layout_constraintStart_toStartOf="@+id/tvNameMeal"
                 app:layout_constraintTop_toBottomOf="@+id/tvNameMeal" />
 
-            <Button
-                android:id="@+id/btnEat"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/bg_button_radius"
-                android:fontFamily="@font/poppins"
-                android:text="Eat"
-                android:textAllCaps="false"
-                android:textSize="@dimen/size_14dp"
+            <ImageView
+                android:id="@+id/imgMoreDetails"
+                android:layout_width="50dp"
+                android:padding="@dimen/size_12dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/group_10300"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

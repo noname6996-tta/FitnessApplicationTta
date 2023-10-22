@@ -5,7 +5,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import android.view.View
 import android.widget.RadioButton
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -20,12 +19,16 @@ import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.noti.Notification
 import com.tta.fitnessapplication.data.utils.DateToString
-import com.tta.fitnessapplication.databinding.ActivityNotificationBinding
+import com.tta.fitnessapplication.databinding.FragmentFoodNotificationBinding
 import com.tta.fitnessapplication.view.base.BaseFragment
 import com.tta.fitnessapplication.view.br.ClockAlarmManager
 import java.util.Calendar
 
-class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
+class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
+    override fun getDataBinding(): FragmentFoodNotificationBinding {
+        return FragmentFoodNotificationBinding.inflate(layoutInflater)
+    }
+
     private lateinit var viewModel: NewNotificationViewModel
     private lateinit var alarmManager: AlarmManager
     private lateinit var pendingIntent: PendingIntent
@@ -37,10 +40,6 @@ class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
     private var noti = Notification(
         0, "", "", R.drawable.icon_notif, "200", 0, 0, 1, true
     )
-
-    override fun getDataBinding(): ActivityNotificationBinding {
-        return ActivityNotificationBinding.inflate(layoutInflater)
-    }
 
     override fun initViewModel() {
         super.initViewModel()
@@ -58,11 +57,12 @@ class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
                     }
                 }
             }
-            if (it.isNotEmpty()&&canAddNoti){
+            if (it.isNotEmpty() && canAddNoti) {
                 noti = it.last()
-                Log.e("addd",it.last().toString())
+                Log.e("addd", it.last().toString())
                 setAlarm(noti)
-                Snackbar.make(binding.root, "Set up notification success", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, "Set up notification success", Snackbar.LENGTH_LONG)
+                    .show()
                 findNavController().popBackStack()
             }
         }
@@ -94,15 +94,6 @@ class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
             when (selectedOption) {
                 "Drink Water" -> {
                     canClick = true
-                    binding.materialTextView3.visibility = View.VISIBLE
-                    binding.materialTextView.visibility = View.VISIBLE
-                    binding.tvContentTitle2.visibility = View.VISIBLE
-                    noti.value = "200"
-                    if (binding.tvContentTitle2.length()==0) {
-                        noti.value = "200"
-                    } else {
-                        noti.value = binding.tvContentTitle2.text.toString().trim()
-                    }
                     noti.title = "Drink water"
                     noti.text = "Drink water"
                     noti.icon = R.drawable.ic_cup_400ml
@@ -111,9 +102,7 @@ class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
 
                 "Wake up" -> {
                     canClick = true
-                    binding.materialTextView3.visibility = View.GONE
-                    binding.materialTextView.visibility = View.GONE
-                    binding.tvContentTitle2.visibility = View.GONE
+
                     if (isHasWakeUp) {
                         Snackbar.make(
                             binding.root,
@@ -131,9 +120,7 @@ class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
 
                 "Bed time" -> {
                     canClick = true
-                    binding.materialTextView3.visibility = View.GONE
-                    binding.materialTextView.visibility = View.GONE
-                    binding.tvContentTitle2.visibility = View.GONE
+
                     if (isHasBedTime) {
                         Snackbar.make(
                             binding.root,
@@ -151,9 +138,7 @@ class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
 
                 "Do exercise" -> {
                     canClick = true
-                    binding.materialTextView3.visibility = View.GONE
-                    binding.materialTextView.visibility = View.GONE
-                    binding.tvContentTitle2.visibility = View.GONE
+
                     noti.title = "Do exercise"
                     noti.text = "Do exercise"
                     noti.icon = R.drawable.ic_logo

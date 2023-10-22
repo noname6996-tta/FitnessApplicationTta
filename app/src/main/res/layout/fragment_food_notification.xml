@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.noti.NotificationActivity">
+    >
 
     <View
         android:id="@+id/viewBack"
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_16dp"
         android:fontFamily="@font/poppins"
-        android:text="Choose type of Notification"
+        android:text="When you eat?"
         android:textColor="@color/gray1"
         android:textSize="@dimen/text_size_16sp"
         app:layout_constraintStart_toStartOf="@+id/dateAndTimePicker"
@@ -106,74 +106,96 @@
             android:id="@+id/radioButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Drink Water" />
+            android:text="Breakfast" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wake up" />
+            android:text="Lunch" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bed time" />
-
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Do exercise" />
+            android:text="Dinner" />
 
     </RadioGroup>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/textView80"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/size_16dp"
-        android:layout_marginTop="@dimen/size_24dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="@string/detail"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:visibility="gone"
+        android:layout_margin="@dimen/size_16dp"
+        android:fontFamily="@font/poppins"
+        android:text="Food you eat"
+        android:textColor="@color/gray1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView3"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size_16dp"
-        android:layout_marginTop="@dimen/size_24dp"
-        android:fontFamily="@font/poppins"
-        android:text="@string/Value"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
-
-    <EditText
-        android:id="@+id/tvContentTitle2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/size_16dp"
-        android:backgroundTint="@color/colorDekraYellow"
-        android:hint="@string/Value"
-        android:inputType="number"
-        android:maxLength="3"
-        android:textSize="@dimen/text_size_16sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/materialTextView3"
+        android:layout_margin="@dimen/size_8dp"
+        app:cardCornerRadius="@dimen/size_16dp"
+        app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/materialTextView"
-        app:layout_constraintTop_toTopOf="@+id/materialTextView3" />
-    
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView80">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <ImageView
+                android:id="@+id/imgFood"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_breafast"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvNameMeal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:fontFamily="@font/poppins"
+                android:text="Salmon Nigiri"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_14dp"
+                app:layout_constraintBottom_toTopOf="@id/tvTimeMeal"
+                app:layout_constraintStart_toEndOf="@+id/imgFood"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTimeMeal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Today|8am"
+                android:textColor="@color/gray1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvNameMeal"
+                app:layout_constraintTop_toBottomOf="@+id/tvNameMeal" />
+
+            <ImageView
+                android:id="@+id/imgMoreDetails"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="24dp"
+                android:padding="@dimen/size_12dp"
+                android:src="@drawable/group_10300"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAdd"
         android:layout_width="match_parent"

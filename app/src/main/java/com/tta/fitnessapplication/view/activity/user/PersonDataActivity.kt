@@ -35,6 +35,9 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
                 Log.e("tta", it.errorBody().toString())
             }
         }
+        mainViewModel.error.observe(viewLifecycleOwner){
+            Log.e("dddddd", it.toString())
+        }
     }
 
     private fun setData(user: User) {
@@ -60,8 +63,8 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
     override fun addEvent() {
         super.addEvent()
         binding.view.setOnClickListener {
-            if (updateAccount) {
-                updateAccount = false
+//            if (updateAccount) {
+//                updateAccount = false
                 binding.textView10.text = "Edit Account"
                 binding.edtEmail.isEnabled = false
                 binding.edtUsernameLastname.isEnabled = false
@@ -71,32 +74,34 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
                 binding.edtEmail.isEnabled = false
                 binding.spinner.isEnabled = false
                 binding.spinner.visibility = View.GONE
-            } else {
-                updateAccount = true
-                binding.textView10.text = "Update Account"
-                binding.edtEmail.isEnabled = true
-                binding.edtUsernameLastname.isEnabled = true
-                binding.edtUsernameFirstname.isEnabled = true
-                binding.edtYourHeight.isEnabled = true
-                binding.edtYourWeight.isEnabled = true
-                binding.edtEmail.isEnabled = false
-                binding.spinner.isEnabled = true
-                binding.gender.visibility = View.GONE
-                binding.imageView3.visibility = View.GONE
-                binding.spinner.visibility = View.VISIBLE
-                val emailUser = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
-                mainViewModel.updateProfile(
-                    emailUser,
-                    gender,
-                    "",
-                    binding.edtYourHeight.text.toString().trim(),
-                    binding.edtYourWeight.text.toString().trim(),
-                    binding.edtUsernameFirstname.text.toString().trim(),
-                    binding.edtUsernameLastname.text.toString().trim()
-                )
-            }
-        }
+//            } else {
+//                updateAccount = true
 
+//            }
+            val emailUser = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
+            mainViewModel.updateProfile(
+                emailUser,
+                "Male",
+                "22",
+                binding.edtYourHeight.text.toString().trim(),
+                binding.edtYourWeight.text.toString().trim(),
+                binding.edtUsernameFirstname.text.toString().trim(),
+                binding.edtUsernameLastname.text.toString().trim()
+            )
+        }
+        binding.btnDemo.setOnClickListener {
+            binding.textView10.text = "Update Account"
+            binding.edtEmail.isEnabled = true
+            binding.edtUsernameLastname.isEnabled = true
+            binding.edtUsernameFirstname.isEnabled = true
+            binding.edtYourHeight.isEnabled = true
+            binding.edtYourWeight.isEnabled = true
+            binding.edtEmail.isEnabled = false
+            binding.spinner.isEnabled = true
+            binding.gender.visibility = View.GONE
+            binding.imageView3.visibility = View.GONE
+            binding.spinner.visibility = View.VISIBLE
+        }
         binding.viewChooseCalender.setOnClickListener {
             val datePicker = MaterialDatePicker.Builder.datePicker().build()
             datePicker.addOnPositiveButtonClickListener {

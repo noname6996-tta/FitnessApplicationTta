@@ -15,7 +15,7 @@ interface NotiDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addNoti(noti: Notification)
 
-    @Query("SELECT * FROM noti_table ORDER BY id ASC")
+    @Query("SELECT * FROM noti_table")
     fun readAllData(): LiveData<List<Notification>>
 
     @Update

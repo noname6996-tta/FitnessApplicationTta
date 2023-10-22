@@ -34,6 +34,15 @@ class MealInfoActivity : BaseFragment<ActivityMealInfoBinding>() {
         }
     }
 
+    override fun addEvent() {
+        super.addEvent()
+        binding.apply {
+            btnAddSchedule.setOnClickListener {
+
+            }
+        }
+    }
+
     private fun setData(food : Food){
         binding.apply {
             Glide.with(requireContext())

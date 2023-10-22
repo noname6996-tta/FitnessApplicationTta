@@ -1,5 +1,6 @@
 package com.tta.fitnessapplication.view.activity.tracker.watertracker
 
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.skydoves.balloon.ArrowPositionRules
@@ -47,7 +48,9 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
             var valueWater = 0
             for (item in it) {
                 if (item.date == fullDateFormatter.format(today)) {
-                    valueWater += item.value.toInt()
+                    if (item.value.toString().trim().toInt() is Int){
+                        valueWater += item.value.trim().toInt()
+                    }
                 }
                 for (i in 0 until getWeekDates().size) {
                     if (getWeekDates()[i].toString() == item.date) {
@@ -62,7 +65,6 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
                 binding.chart.viewColume5.setProgress((listDataChart[4] * 0.05).toInt())
                 binding.chart.viewColume6.setProgress((listDataChart[5] * 0.05).toInt())
                 binding.chart.viewColume7.setProgress((listDataChart[6] * 0.05).toInt())
-
             }
             binding.textView60.text = "$valueWater ml"
             val result =

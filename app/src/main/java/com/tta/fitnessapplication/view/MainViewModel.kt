@@ -18,6 +18,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
+    val error = MutableLiveData<String>()
     val dataExercise = MutableLiveData<Response<ResponseProfile>>()
     val updateUser = MutableLiveData<Response<BaseResponse<String>>>()
     val login = MutableLiveData<Response<UserLoginResponse>>()
@@ -64,7 +65,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
                     updateUser.value = repositoryApi.updateProfile(email,gender, age, tall, weight, firstname, lastname)
                 }
                 .onFailure {
-
+                    error.value  = it.toString()
                 }
         }
     }

@@ -1,5 +1,6 @@
 package com.tta.fitnessapplication.view.activity.workout.DayFullBody
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.tta.fitnessapplication.api.ApiClient
 import com.tta.fitnessapplication.data.model.Exercise
