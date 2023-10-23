@@ -11,6 +11,7 @@ import com.tta.fitnessapplication.data.model.ResponseExercise
 import com.tta.fitnessapplication.data.model.ResponseFood
 import com.tta.fitnessapplication.data.model.ResponseFullBody
 import com.tta.fitnessapplication.data.model.ResponseProfile
+import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.ResponseTool
 import com.tta.fitnessapplication.data.model.ResponseVideo
 import com.tta.fitnessapplication.data.model.UserLoginResponse
@@ -39,7 +40,7 @@ interface ApiService {
         @Query("password") password: String,
         @Query("firstname") firstname: String,
         @Query("lastname") lastname: String
-    ): Response<UserLoginResponse>
+    ): Response<ResponseRegister>
 
     @POST(ApiPath.USER_INFO)
     suspend fun getUserProfile(

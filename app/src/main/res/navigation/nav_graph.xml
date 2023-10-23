@@ -207,6 +207,9 @@
         <argument
             android:name="id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_mealInfoActivity_to_foodNotification"
+            app:destination="@id/foodNotification" />
     </fragment>
     <fragment
         android:id="@+id/findMealByCategory"
@@ -234,4 +237,13 @@
         android:name="com.tta.fitnessapplication.view.activity.user.PersonDataActivity"
         android:label="activity_person_data"
         tools:layout="@layout/activity_person_data" />
+    <fragment
+        tools:layout="@layout/fragment_food_notification"
+        android:id="@+id/foodNotification"
+        android:name="com.tta.fitnessapplication.view.noti.FoodNotification"
+        android:label="FoodNotification" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

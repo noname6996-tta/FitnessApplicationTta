@@ -1,6 +1,8 @@
 package com.tta.fitnessapplication.view.activity.register
 
 import android.content.Intent
+import android.util.Log
+import android.view.View
 import androidx.core.widget.doOnTextChanged
 import com.example.awesomedialog.AwesomeDialog
 import com.example.awesomedialog.body
@@ -24,21 +26,27 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     override fun initView() {
         super.initView()
         // Initialize Firebase Auth
-//        auth = Firebase.auth
+        auth = FirebaseAuth.getInstance()
     }
 
     override fun initViewModel() {
         super.initViewModel()
-        mainViewModel.login.observe(this) {
+        mainViewModel.register.observe(this) {
             if (it.isSuccessful) {
                 if (it.body()?.success == 1) {
+                    val email = binding.edtEmail.text.toString()
+                    val password = binding.edtPassword.text.toString()
+                    val firstName = binding.edtUsernameFirstname.text.toString()
+                    val lastName = binding.edtUsernameLastname.text.toString()
+                    registerByFirebase(email, password, firstName, lastName)
+                } else {
+                    binding.progessBarLogin.visibility = View.GONE
                     AwesomeDialog.build(this)
                         .title("Notification !")
-                        .body("Register success, but i need some information for your profiles")
-                        .icon(R.drawable.alarm_clock)
+                        .body(it.body()?.message.toString())
+                        .icon(R.drawable.baseline_info_24)
                         .onPositive("ok") {
-                            startActivity(Intent(this, AfterSigUpActivity::class.java))
-                            finish()
+
                         }
                 }
             }
@@ -97,8 +105,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
             if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
 
             } else {
-                registerByFirebase(email, password, firstName, lastName)
-
+                binding.progessBarLogin.visibility = View.VISIBLE
+                mainViewModel.register(email, password, firstName, lastName)
             }
         }
         binding.textView3.setOnClickListener {
@@ -117,11 +125,19 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    val user = auth.currentUser
-                    mainViewModel.register(email, password, firstName, lastName)
+//                    val user = auth.currentUser
+                    binding.progessBarLogin.visibility = View.GONE
+                    AwesomeDialog.build(this)
+                        .title("Notification !")
+                        .body("Register success, but i need some information for your profiles")
+                        .icon(R.drawable.alarm_clock)
+                        .onPositive("ok") {
+                            startActivity(Intent(this, AfterSigUpActivity::class.java))
+                            finish()
+                        }
                 } else {
                     // If sign in fails, display a message to the user.
-//                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                    Log.e("register", "createUserWithEmail:failure", task.exception)
                 }
             }
     }

@@ -7,6 +7,7 @@ import com.tta.fitnessapplication.data.model.ResoinseArticle
 import com.tta.fitnessapplication.data.model.ResponseCategoryFood
 import com.tta.fitnessapplication.data.model.ResponseFood
 import com.tta.fitnessapplication.data.model.ResponseProfile
+import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.ResponseVideo
 import com.tta.fitnessapplication.data.model.UserLoginResponse
 import retrofit2.Response
@@ -37,7 +38,7 @@ class RepositoryApi {
         password: String,
         firstname: String,
         lastname: String
-    ): Response<UserLoginResponse> {
+    ): Response<ResponseRegister> {
         return ApiClient.API.register(email, password, firstname, lastname)
     }
 

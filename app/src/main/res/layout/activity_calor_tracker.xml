@@ -160,7 +160,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_button_radius"
                     android:enabled="false"
-                    android:hint="Breakfast"
                     android:textColor="@color/white"
                     android:imeOptions="actionNext"
                     android:inputType="textNoSuggestions"

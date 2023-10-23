@@ -25,6 +25,7 @@ import com.tta.fitnessapplication.view.base.BaseActivity
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private var check = false
     private var saveLogin: Boolean = false
+    private var canClick = true
 
     // Initialize Firebase Auth
     private lateinit var auth: FirebaseAuth
@@ -73,8 +74,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         loginPrefsEditor.putString(SLEEP_TIME, "10:00:00")
         loginPrefsEditor.putString(WAKEUP_TIME, "06:00:00")
         loginPrefsEditor.commit()
-        // go to home
+        //
         binding.progessBarLogin.visibility = View.GONE
+        canClick = true
+        // go to home
         this.finish()
         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
     }
@@ -82,40 +85,47 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun addEvent() {
         binding.view.setOnClickListener {
-            val email = binding.edtEmail.text.toString()
-            val password = binding.edtPassword.text.toString()
-            if (email.isEmpty()) {
-                binding.tvEmail.error = "Vui lòng nhập"
-            }
-            if (password.isEmpty()) {
-                binding.tvPassword.error = "Vui lòng nhập"
-            }
-            binding.edtEmail.doOnTextChanged { text, start, before, count ->
-                if (text!!.isEmpty()) {
+            if (canClick) {
+                canClick = false
+                val email = binding.edtEmail.text.toString()
+                val password = binding.edtPassword.text.toString()
+                if (email.isEmpty()) {
                     binding.tvEmail.error = "Vui lòng nhập"
-                } else {
-                    binding.tvEmail.error = ""
                 }
-            }
-
-            binding.edtPassword.doOnTextChanged { text, start, before, count ->
-                if (text!!.isEmpty()) {
+                if (password.isEmpty()) {
                     binding.tvPassword.error = "Vui lòng nhập"
-                } else {
-                    binding.tvPassword.error = ""
                 }
-            }
-            if (email.isEmpty() || password.isEmpty()) {
+                binding.edtEmail.doOnTextChanged { text, start, before, count ->
+                    if (text!!.isEmpty()) {
+                        binding.tvEmail.error = "Vui lòng nhập"
+                    } else {
+                        binding.tvEmail.error = ""
+                    }
+                }
 
-            } else {
-                binding.progessBarLogin.visibility = View.VISIBLE
-                login(email, password)
+                binding.edtPassword.doOnTextChanged { text, start, before, count ->
+                    if (text!!.isEmpty()) {
+                        binding.tvPassword.error = "Vui lòng nhập"
+                    } else {
+                        binding.tvPassword.error = ""
+                    }
+                }
+                if (email.isEmpty() || password.isEmpty()) {
+
+                } else {
+                    binding.progessBarLogin.visibility = View.VISIBLE
+                    login(email, password)
+                }
             }
         }
 
         binding.textView3.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
             finish()
+        }
+        binding.tvForgotPassword.setOnClickListener {
+            this.finish()
+            startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
         }
     }
 
@@ -131,6 +141,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 } else {
                     // Login failed, display a message to the user
                     Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                    binding.progessBarLogin.visibility = View.GONE
+                    canClick = true
                 }
             }
     }

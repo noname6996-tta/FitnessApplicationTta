@@ -6,6 +6,9 @@ import android.content.Intent
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.Companion.BASE_URL
@@ -41,7 +44,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
                 } else {
                     binding.tvWeight.text = "${dataProfile!![0].weight} "
                 }
-                if (dataProfile!![0].age == 0) {
+                if (dataProfile!![0].age == 0 || dataProfile!![0].age == null) {
                     binding.tvAge.text = "_"
                 } else {
                     binding.tvAge.text = "${dataProfile!![0].age} "
@@ -68,6 +71,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
                             loginPrefsEditor = loginPreferences.edit()
                             loginPrefsEditor.clear()
                             loginPrefsEditor.commit()
+                            FirebaseAuth.getInstance().signOut()
                             val intent = Intent(requireContext(), LoginActivity::class.java)
                             startActivity(intent)
                             requireActivity().finish()

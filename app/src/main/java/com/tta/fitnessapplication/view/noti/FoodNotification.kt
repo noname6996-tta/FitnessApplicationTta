@@ -8,6 +8,8 @@ import android.util.Log
 import android.widget.RadioButton
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -17,6 +19,7 @@ import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.model.Food
 import com.tta.fitnessapplication.data.model.noti.Notification
 import com.tta.fitnessapplication.data.utils.DateToString
 import com.tta.fitnessapplication.databinding.FragmentFoodNotificationBinding
@@ -25,6 +28,8 @@ import com.tta.fitnessapplication.view.br.ClockAlarmManager
 import java.util.Calendar
 
 class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
+    val args: FoodNotificationArgs by navArgs()
+    var idMeal = 0
     override fun getDataBinding(): FragmentFoodNotificationBinding {
         return FragmentFoodNotificationBinding.inflate(layoutInflater)
     }
@@ -38,11 +43,13 @@ class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
     private var canAddNoti = false
 
     private var noti = Notification(
-        0, "", "", R.drawable.icon_notif, "200", 0, 0, 1, true
+        0, "Time to eat", "Time to eat", R.drawable.baseline_fastfood_24, "", 0, 0, 4, true
     )
 
     override fun initViewModel() {
         super.initViewModel()
+        idMeal = args.id
+        mainViewModel.getFoodById(idMeal.toString())
         viewModel = ViewModelProvider(this)[NewNotificationViewModel::class.java]
     }
 
@@ -65,6 +72,19 @@ class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
                     .show()
                 findNavController().popBackStack()
             }
+        }
+        mainViewModel.listFoodById.observe(viewLifecycleOwner) {
+            setData(it[0])
+        }
+    }
+
+    private fun setData(food: Food) {
+        binding.apply {
+            Glide.with(requireContext())
+                .load(food.image)
+                .error(R.drawable.ic_breafast)
+                .into(imgFood)
+            tvNameMeal.text = food.name
         }
     }
 
@@ -92,57 +112,16 @@ class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
             val selectedOption = selectedRadioButton.text.toString()
             // Do something with the selected option
             when (selectedOption) {
-                "Drink Water" -> {
-                    canClick = true
-                    noti.title = "Drink water"
-                    noti.text = "Drink water"
-                    noti.icon = R.drawable.ic_cup_400ml
-                    noti.type = 1
+                "Breakfast" -> {
+
                 }
 
-                "Wake up" -> {
-                    canClick = true
+                "Lunch" -> {
 
-                    if (isHasWakeUp) {
-                        Snackbar.make(
-                            binding.root,
-                            "You already set up time to wake up",
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        canClick = false
-                    } else {
-                        noti.title = "Wake up"
-                        noti.text = "Wake up"
-                        noti.icon = R.drawable.alarm_clock
-                        noti.type = 2
-                    }
                 }
 
-                "Bed time" -> {
-                    canClick = true
+                "Dinner" -> {
 
-                    if (isHasBedTime) {
-                        Snackbar.make(
-                            binding.root,
-                            "You already set up bed time",
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        canClick = false
-                    } else {
-                        noti.title = "Bed time"
-                        noti.text = "Bed time"
-                        noti.icon = R.drawable.icon_bed
-                        noti.type = 2
-                    }
-                }
-
-                "Do exercise" -> {
-                    canClick = true
-
-                    noti.title = "Do exercise"
-                    noti.text = "Do exercise"
-                    noti.icon = R.drawable.ic_logo
-                    noti.type = 3
                 }
             }
         }
@@ -151,34 +130,7 @@ class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
     override fun addEvent() {
         super.addEvent()
         binding.btnAdd.setOnClickListener {
-            if (noti.text == "") {
-                Snackbar.make(
-                    binding.root,
-                    "You have to choose type notification",
-                    Snackbar.LENGTH_LONG
-                ).show()
-            } else {
-                if (canClick) {
-                    canAddNoti = true
-                    viewModel.addNotification(noti)
-                } else {
-                    if (isHasBedTime) {
-                        Snackbar.make(
-                            binding.root,
-                            "You already set up bed time",
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                    }
-
-                    if (isHasWakeUp) {
-                        Snackbar.make(
-                            binding.root,
-                            "You already set up time to wake up",
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                    }
-                }
-            }
+            viewModel.addNotification(noti)
         }
         binding.dateAndTimePicker.setOnClickListener { showDateTimePicker() }
         binding.viewBack.setOnClickListener {

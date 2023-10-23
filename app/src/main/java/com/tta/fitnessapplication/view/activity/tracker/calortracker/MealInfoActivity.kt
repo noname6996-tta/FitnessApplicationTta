@@ -6,6 +6,7 @@ import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.tta.fitnessapplication.R
@@ -38,7 +39,8 @@ class MealInfoActivity : BaseFragment<ActivityMealInfoBinding>() {
         super.addEvent()
         binding.apply {
             btnAddSchedule.setOnClickListener {
-
+                var action = MealInfoActivityDirections.actionMealInfoActivityToFoodNotification(idMeal)
+                findNavController().navigate(action)
             }
         }
     }

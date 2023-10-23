@@ -41,7 +41,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCvp5FLhPWNUt5QuSl10eUymuZ9_0tpYdw" />
-
+        <activity
+            android:name=".view.login.ForgotPasswordActivity"
+            android:exported="false" />
         <activity
             android:name=".view.activity.map.MapsActivity"
             android:exported="false"

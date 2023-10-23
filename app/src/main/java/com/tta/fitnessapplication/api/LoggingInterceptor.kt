@@ -5,7 +5,6 @@ import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import okio.Buffer
-import timber.log.Timber
 import java.io.IOException
 
 class LoggingInterceptor : Interceptor {
@@ -31,8 +30,6 @@ class LoggingInterceptor : Interceptor {
 
         // Log the request
         // TODO: You can use any logging library of your choice here, for this example, we'll use Timber
-        Timber.d(requestLog)
-        Timber.tag("api").e(requestLog)
         Log.e("api", requestLog)
         // Proceed with the request
         val response = chain.proceed(request)

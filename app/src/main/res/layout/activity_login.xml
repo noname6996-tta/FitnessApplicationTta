@@ -102,9 +102,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/tvForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/size_8dp"
+        android:padding="@dimen/size_24dp"
         android:fontFamily="@font/poppins"
         android:text="@string/login_forgot_your_password"
         android:textColor="#ADA4A5"

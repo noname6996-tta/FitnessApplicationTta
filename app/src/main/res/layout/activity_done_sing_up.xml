@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_16dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Welcome, Stefani"
+        android:text="Good Jobs"
         android:textColor="@color/black"
         android:textSize="@dimen/size_20dp"
         app:layout_constraintEnd_toEndOf="parent"

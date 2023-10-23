@@ -5,6 +5,19 @@ fun calculateBMI(weight: Double, height: Double): Double {
     return weight / (heightInMeter * heightInMeter)
 }
 
+fun calculateBMIAndSetText(weight: Double, height: Double): String {
+    val heightInMeter = height / 100 // chuyển chiều cao từ cm sang mét
+    val bmi = weight / (heightInMeter * heightInMeter)
+    when {
+        bmi < 18.5 -> return "Underweight"
+        bmi > 18.5 && bmi < 24.9 -> return "Normal weight"
+        bmi > 25.0 && bmi < 29.9 -> return "Overweight"
+        bmi > 30.0 && bmi < 34.9 -> return "Obese class 1"
+        bmi > 35.0 && bmi < 39.9 -> return "Obese class 2"
+        else -> return "Obese class 3"
+    }
+}
+
 // Hàm tính lượng protein
 fun calculateProtein(calories: Double): Double {
     return calories * 0.15 / 4 // 1 gram protein cung cấp 4 calo

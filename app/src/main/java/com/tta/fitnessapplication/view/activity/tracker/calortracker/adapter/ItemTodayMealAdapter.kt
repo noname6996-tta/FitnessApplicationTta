@@ -45,7 +45,7 @@ class ItemTodayMealAdapter :
                 .into(holder.binding.imgFood);
             holder.binding.tvNameMeal.text = someThingToEat.name
             holder.binding.tvTimeMeal.text = someThingToEat.time
-            holder.binding.btnEat.setOnClickListener {
+            holder.binding.imgMoreDetails.setOnClickListener {
                 onClickSendData?.let {
                     it(position)
                 }

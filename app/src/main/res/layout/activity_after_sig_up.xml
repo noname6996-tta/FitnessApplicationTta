@@ -49,48 +49,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginLeft="@dimen/size_16dp"
-                android:layout_marginTop="@dimen/size_24dp"
-                android:layout_marginRight="@dimen/size_16dp"
-                android:background="@drawable/bg_edt_login"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/spinnerGender"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintTop_toBottomOf="@+id/textView7">
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:translationZ="@dimen/size_16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/view2"
-                app:layout_constraintEnd_toEndOf="@+id/view2"
-                app:layout_constraintStart_toStartOf="@+id/view2"
-                app:layout_constraintTop_toTopOf="@+id/view2" />
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_16dp"
-                android:src="@drawable/ic_gener"
-                app:layout_constraintBottom_toBottomOf="@+id/view2"
-                app:layout_constraintStart_toStartOf="@+id/view2"
-                app:layout_constraintTop_toTopOf="@+id/view2" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_16dp"
-                android:fontFamily="@font/poppins"
-                android:text="@string/after_signup_choose_gender"
-                android:textColor="@color/gray_hint"
-                android:textSize="@dimen/text_size_14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView3" />
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/tvGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:hint="@string/gender"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <View
                 android:id="@+id/viewChooseCalender"
@@ -100,7 +82,7 @@
                 android:background="@drawable/bg_edt_login"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view2" />
+                app:layout_constraintTop_toBottomOf="@+id/spinnerGender" />
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -113,6 +95,7 @@
                 app:layout_constraintTop_toTopOf="@+id/viewChooseCalender" />
 
             <TextView
+                android:id="@+id/tvAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_16dp"
@@ -144,6 +127,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edt_login"
                     android:hint="@string/your_weight"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -172,7 +156,7 @@
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:hintTextColor="@color/black"
-
+                android:singleLine="true"
                 app:layout_constraintEnd_toStartOf="@+id/textView8"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutYourWeight"
@@ -184,6 +168,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edt_login"
                     android:hint="@string/your_height"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>

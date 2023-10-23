@@ -32,6 +32,7 @@ import com.tta.fitnessapplication.view.activity.WebViewActivity
 import com.tta.fitnessapplication.view.activity.history.HistoryAdapter
 import com.tta.fitnessapplication.view.activity.history.HistoryViewModel
 import com.tta.fitnessapplication.view.activity.tracker.calortracker.calculateBMI
+import com.tta.fitnessapplication.view.activity.tracker.calortracker.calculateBMIAndSetText
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -201,14 +202,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.textView2.text =
                     "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
                 Log.e("aaa", dataProfile[0].toString())
-                var bmi =
-                    calculateBMI(dataProfile[0].weight.toDouble(), dataProfile[0].tall.toDouble())
-                val y = 100f - bmi.toFloat()
-                val x = bmi.toFloat()
-                entries.clear()
-                entries.add(PieEntry(y))
-                entries.add(PieEntry(x))
-                initPieChart()
+                if (dataProfile[0].weight.isNullOrEmpty()||dataProfile[0].tall.isNullOrEmpty()){
+                    binding.textView12.text = "Go to setting update your info to calculate BMI"
+                } else {
+                    var bmi =
+                        calculateBMI(dataProfile[0].weight.toDouble(), dataProfile[0].tall.toDouble())
+                    val y = 100f - bmi.toFloat()
+                    val x = bmi.toFloat()
+                    entries.clear()
+                    entries.add(PieEntry(y))
+                    entries.add(PieEntry(x))
+                    initPieChart()
+                    binding.textView12.text = "You have a "+calculateBMIAndSetText(dataProfile[0].weight.toDouble(),dataProfile[0].tall.toDouble())
+                }
             } else {
                 Log.e("tta", it.errorBody().toString())
             }
@@ -253,7 +259,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 findNavController().navigate(R.id.action_homeFragment_to_todayTarget)
             }
             view4.setOnClickListener {
-                val url = "${Constant.BASE_URL}/fitnessweb/aboutUs"
+                val url = "https://www.calculator.net/bmi-calculator.html"
                 val intent = Intent(requireActivity(), WebViewActivity::class.java)
                 intent.putExtra("url", url)
                 startActivity(intent)

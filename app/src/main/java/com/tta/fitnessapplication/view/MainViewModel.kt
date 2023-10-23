@@ -9,6 +9,7 @@ import com.tta.fitnessapplication.data.model.CategoryFood
 import com.tta.fitnessapplication.data.model.Food
 import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.ResponseProfile
+import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.UserLoginResponse
 import com.tta.fitnessapplication.data.model.Video
 import com.tta.fitnessapplication.data.repository.RepositoryApi
@@ -22,6 +23,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     val dataExercise = MutableLiveData<Response<ResponseProfile>>()
     val updateUser = MutableLiveData<Response<BaseResponse<String>>>()
     val login = MutableLiveData<Response<UserLoginResponse>>()
+    val register = MutableLiveData<Response<ResponseRegister>>()
     val listHistoryByDate = MutableLiveData<Response<BaseResponse<MutableList<History>>>>()
     val listHistoryByDateAndType = MutableLiveData<Response<BaseResponse<MutableList<History>>>>()
     val createHistoryStatus = MutableLiveData<Response<BaseResponse<String>>>()
@@ -88,7 +90,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
 
     fun register(email: String, password: String, firstname: String, lastname: String) {
         viewModelScope.launch {
-            login.value = repositoryApi.register(email, password, firstname, lastname)
+            register.value = repositoryApi.register(email, password, firstname, lastname)
         }
     }
 
