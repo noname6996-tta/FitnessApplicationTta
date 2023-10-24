@@ -27,6 +27,7 @@ import java.time.Month
 import java.time.YearMonth
 import java.time.format.TextStyle
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 fun View.makeVisible() {
@@ -149,4 +150,39 @@ fun getCurrentTime(): String {
     val calendar = Calendar.getInstance()
     val dateFormat = SimpleDateFormat("hh:mm:ss")
     return dateFormat.format(calendar.time)
+}
+
+fun formatDateToTimeString(date: Date): String {
+    val format = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+    return format.format(date)
+}
+
+fun formatDateToString(date: Date): String {
+    val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    return format.format(date)
+}
+
+fun getWeekDates(): List<String> {
+    val calendar = Calendar.getInstance()
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+    val dates = mutableListOf<String>()
+
+    // Set the calendar to the start of the week
+    calendar.set(Calendar.DAY_OF_WEEK, calendar.firstDayOfWeek)
+
+    for (i in 0 until 7) {
+        val date = calendar.time
+        val formattedDate = dateFormat.format(date)
+        dates.add(formattedDate)
+
+        // Increment the calendar to the next day
+        calendar.add(Calendar.DAY_OF_WEEK, 1)
+    }
+
+    return dates
+}
+
+
+fun convertToDecimalTime(hours: Int, minutes: Int): Double {
+    return hours + (minutes.toDouble() / 60)
 }

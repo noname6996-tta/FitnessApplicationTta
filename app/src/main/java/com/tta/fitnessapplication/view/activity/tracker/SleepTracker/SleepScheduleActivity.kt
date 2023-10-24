@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.children
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,11 +36,41 @@ import java.time.YearMonth
 
 class SleepScheduleActivity : BaseFragment<ActivitySleepScheduleBinding>() {
     private val eventsAdapter = HistoryAdapter()
+    private lateinit var viewModel : SleepViewModel
     private var selectedDate: LocalDate? = null
     private val events = mutableMapOf<LocalDate, List<History>>()
 
     override fun getDataBinding(): ActivitySleepScheduleBinding {
         return ActivitySleepScheduleBinding.inflate(layoutInflater)
+    }
+
+    override fun addObservers() {
+        super.addObservers()
+        viewModel.sleepList.observe(viewLifecycleOwner) {
+            val list = ArrayList<History>()
+            for (item in it) {
+                val history = History(
+                    null,
+                    null,
+                    item.date,
+                    item.time,
+                    item.activity,
+                    item.type.toInt(),
+                    item.value
+                )
+                list.add(history)
+            }
+            if (list != null) {
+                eventsAdapter.events.clear()
+                eventsAdapter.events.addAll(list)
+                eventsAdapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    override fun initViewModel() {
+        super.initViewModel()
+        viewModel = ViewModelProvider(this)[SleepViewModel::class.java]
     }
 
     override fun initView() {
@@ -99,7 +130,7 @@ class SleepScheduleActivity : BaseFragment<ActivitySleepScheduleBinding>() {
         }
         binding.exThreeSelectedDateText.text =
             "Day: " + Constant.DATE.fullDateFormatter.format(date)
-//        waterViewModel.getWaterListByDate(Constant.DATE.fullDateFormatter.format(date))
+        viewModel.getWaterListByDate(Constant.DATE.fullDateFormatter.format(date))
     }
 
     private fun configureBinders(daysOfWeek: List<DayOfWeek>) {

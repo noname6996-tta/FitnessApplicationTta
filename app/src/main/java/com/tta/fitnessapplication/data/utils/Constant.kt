@@ -29,6 +29,9 @@ class Constant {
 
     object DATE {
         val today: LocalDate = LocalDate.now()
+        fun getYesterdayDate(): LocalDate {
+            return LocalDate.now().minusDays(1)
+        }
         val titleSameYearFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("MMMM")
         val titleFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("MMM yyyy")
         val selectionFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")

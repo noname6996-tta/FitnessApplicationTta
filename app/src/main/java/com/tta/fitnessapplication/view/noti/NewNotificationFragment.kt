@@ -24,6 +24,7 @@ import com.tta.fitnessapplication.databinding.ActivityNotificationBinding
 import com.tta.fitnessapplication.view.base.BaseFragment
 import com.tta.fitnessapplication.view.br.ClockAlarmManager
 import java.util.Calendar
+import java.util.TimeZone
 
 class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
     private lateinit var viewModel: NewNotificationViewModel
@@ -220,6 +221,7 @@ class NewNotificationFragment : BaseFragment<ActivityNotificationBinding>() {
         alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         // Set the alarm to trigger at 8:00 AM (replace with your desired time)
         val calendar = Calendar.getInstance()
+        calendar.timeZone = TimeZone.getDefault()
         calendar.timeInMillis = System.currentTimeMillis()
         calendar.set(Calendar.HOUR_OF_DAY, notification.hour)
         calendar.set(Calendar.MINUTE, notification.min)

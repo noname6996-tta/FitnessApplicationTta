@@ -1,9 +1,6 @@
 package com.tta.fitnessapplication.view.activity.tracker.SleepTracker
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,16 +11,22 @@ import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.showAlignTop
 import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
-import com.tta.fitnessapplication.data.model.noti.Notification
+import com.tta.fitnessapplication.data.model.Hour
+import com.tta.fitnessapplication.data.utils.Constant
+import com.tta.fitnessapplication.data.utils.Constant.DATE.getYesterdayDate
+import com.tta.fitnessapplication.data.utils.convertToDecimalTime
+import com.tta.fitnessapplication.data.utils.getWeekDates
 import com.tta.fitnessapplication.databinding.ActivitySleepTrackerBinding
 import com.tta.fitnessapplication.view.base.BaseFragment
-import com.tta.fitnessapplication.view.br.ClockAlarmManager
 import com.tta.fitnessapplication.view.noti.NewNotificationViewModel
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
     private lateinit var viewModelNoti: NewNotificationViewModel
-    private lateinit var viewModel : SleepViewModel
+    private lateinit var viewModel: SleepViewModel
+    private lateinit var viewModelHour: HourViewModel
 
     override fun getDataBinding(): ActivitySleepTrackerBinding {
         return ActivitySleepTrackerBinding.inflate(layoutInflater)
@@ -34,20 +37,20 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
         super.initViewModel()
         viewModelNoti = ViewModelProvider(this)[NewNotificationViewModel::class.java]
         viewModel = ViewModelProvider(this)[SleepViewModel::class.java]
+        viewModelHour = ViewModelProvider(this)[HourViewModel::class.java]
     }
 
     override fun addObservers() {
         super.addObservers()
-        viewModelNoti.readAllData.observe(viewLifecycleOwner){
-            for (item in it){
-                if (item.type == 2){
+        viewModelNoti.readAllData.observe(viewLifecycleOwner) {
+            for (item in it) {
+                if (item.type == 2) {
                     binding.cardView2.visibility = View.VISIBLE
                     binding.cardView.visibility = View.VISIBLE
                     binding.textView79.visibility = View.GONE
                     binding.btnAddNotification.visibility = View.GONE
-                    for (item in it){
-                        if (item.icon == R.drawable.alarm_clock)
-                        {
+                    for (item in it) {
+                        if (item.icon == R.drawable.alarm_clock) {
                             binding.textView55.text = "${item.hour}:${item.min} AM"
                             val calendar = Calendar.getInstance()
                             val currentTime = calendar.timeInMillis
@@ -55,31 +58,122 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
                             calendar.set(Calendar.HOUR_OF_DAY, item.hour)
                             calendar.set(Calendar.MINUTE, 0)
                             val targetTime = calendar.timeInMillis
-                            val timeDifference = targetTime - (currentTime + item.min * 60 * 1000) // Adding 5 minutes in milliseconds
+                            val timeDifference =
+                                targetTime - (currentTime + item.min * 60 * 1000) // Adding 5 minutes in milliseconds
                             val remainingMinutes = (timeDifference / (1000 * 60)).toInt()
                             val remainingHours = remainingMinutes / 60
                             val remainingMinutesOnly = remainingMinutes % 60
-                            binding.textView56.text = "In $remainingHours hours $remainingMinutesOnly minutes"
+                            binding.textView56.text =
+                                "In $remainingHours hours $remainingMinutesOnly minutes"
                             binding.switchWakeup.isChecked = item.enable
-                        }
-                        else if (item.icon == R.drawable.icon_bed){
+                        } else if (item.icon == R.drawable.icon_bed) {
                             binding.textView53.text = "${item.hour}:${item.min} PM"
                             val calendar = Calendar.getInstance()
                             val currentTime = calendar.timeInMillis
                             calendar.set(Calendar.HOUR_OF_DAY, item.hour)
                             calendar.set(Calendar.MINUTE, 0)
                             val targetTime = calendar.timeInMillis
-                            val timeDifference = targetTime - (currentTime + item.min * 60 * 1000) // Adding 5 minutes in milliseconds
+                            val timeDifference =
+                                targetTime - (currentTime + item.min * 60 * 1000) // Adding 5 minutes in milliseconds
                             val remainingMinutes = (timeDifference / (1000 * 60)).toInt()
                             val remainingHours = remainingMinutes / 60
                             val remainingMinutesOnly = remainingMinutes % 60
-                            binding.textView54.text = "In $remainingHours hours $remainingMinutesOnly minutes"
+                            binding.textView54.text =
+                                "In $remainingHours hours $remainingMinutesOnly minutes"
                             binding.switchBedTime.isChecked = item.enable
                         }
                     }
                 }
             }
         }
+
+        viewModel.readAllData.observe(viewLifecycleOwner) {
+            if (!it.isNullOrEmpty()) {
+                var date = Constant.DATE.fullDateFormatter.format(Constant.DATE.today)
+                val yesterday = Constant.DATE.fullDateFormatter.format(getYesterdayDate())
+                var timeWake = ""
+                var timeSleep = ""
+                for (item in it) {
+                    if (item.date == date && item.value == "Wake") {
+                        timeWake = "${item.date} ${item.time}"
+                    }
+                    if (item.date == yesterday && item.value == "Bed") {
+                        timeSleep = "${item.date} ${item.time}"
+                    }
+                }
+                if (timeSleep.isNotEmpty() and timeWake.isNotEmpty()) {
+                    val sleepTime = calculateSleepTime(timeSleep, timeWake)
+                    binding.tvTimeSleep.text = "${sleepTime.hours}h ${sleepTime.minutes}m"
+                    binding.tvTimeSleep.isEnabled = false
+                    viewModelHour.sleepList.observe(viewLifecycleOwner) {list ->
+                        if (list.isNotEmpty()) {
+                            for (item in list) {
+                                if (item.date != date) {
+                                    viewModelHour.addSleep(
+                                        Hour(
+                                            0,
+                                            date,
+                                            convertToDecimalTime(
+                                                sleepTime.hours,
+                                                sleepTime.minutes
+                                            ).toString()
+                                        )
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        viewModelHour.readAllData.observe(viewLifecycleOwner) {
+            val listDataChart = arrayOf(0, 0, 0, 0, 0, 0, 0)
+            for (item in it) {
+                for (i in 0 until getWeekDates().size) {
+                    if (getWeekDates()[i] == item.date) {
+                        listDataChart[i] = item.time.toInt() + listDataChart[i]
+                        listDataChart[i] = listDataChart[i]
+                    }
+                    Log.e("tttt",listDataChart.toString())
+                }
+                binding.chart.viewColume1.setProgress((listDataChart[0] * 0.05).toInt())
+                binding.chart.viewColume2.setProgress((listDataChart[1] * 0.05).toInt())
+                binding.chart.viewColume3.setProgress((listDataChart[2] * 0.05).toInt())
+                binding.chart.viewColume4.setProgress((listDataChart[3] * 0.05).toInt())
+                binding.chart.viewColume5.setProgress((listDataChart[4] * 0.05).toInt())
+                binding.chart.viewColume6.setProgress((listDataChart[5] * 0.05).toInt())
+                binding.chart.viewColume7.setProgress((listDataChart[6] * 0.05).toInt())
+            }
+        }
+    }
+
+//    fun calculateSleepTime(startTime: String, endTime: String): String {
+//        val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+//        val startDate = inputFormat.parse(startTime)
+//        val endDate = inputFormat.parse(endTime)
+//
+//        val sleepTimeMillis = endDate.time - startDate.time
+//        val sleepTimeHours = sleepTimeMillis / (1000 * 60 * 60)
+//        val sleepTimeMinutes = (sleepTimeMillis % (1000 * 60 * 60)) / (1000 * 60)
+//
+//        val formattedTime = String.format("%d hour %02d minus", sleepTimeHours, sleepTimeMinutes)
+//
+//        return formattedTime
+//    }
+
+    data class SleepTime(val hours: Int, val minutes: Int)
+
+    fun calculateSleepTime(startTime: String, endTime: String): SleepTime {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val startDate = inputFormat.parse(startTime)
+        val endDate = inputFormat.parse(endTime)
+
+        val sleepTimeMillis = endDate.time - startDate.time
+        val sleepTimeHours = sleepTimeMillis / (1000 * 60 * 60)
+        val sleepTimeMinutes = (sleepTimeMillis % (1000 * 60 * 60)) / (1000 * 60)
+
+        return SleepTime(sleepTimeHours.toInt(), sleepTimeMinutes.toInt())
     }
 
     override fun addEvent() {
@@ -130,8 +224,13 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
             }
 
             btnAddNotification.setOnClickListener {
-                var action = SleepTrackerActivityDirections.actionSleepTrackerActivityToManagerNotification(2)
+                var action =
+                    SleepTrackerActivityDirections.actionSleepTrackerActivityToManagerNotification(2)
                 findNavController().navigate(action)
+            }
+
+            tvTimeSleep.setOnClickListener {
+                findNavController().navigate(SleepTrackerActivityDirections.actionSleepTrackerActivityToAddTimeSleepFragment())
             }
         }
     }

@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.tta.fitnessapplication.data.model.Sleep
+import com.tta.fitnessapplication.data.model.Water
 
 @Dao
 interface SleepDao {
@@ -15,4 +16,7 @@ interface SleepDao {
 
     @Query("SELECT * FROM sleep_planner ORDER BY id ASC")
     fun readAllData(): LiveData<List<Sleep>>
+
+    @Query("SELECT * FROM sleep_planner WHERE date = :inputDate")
+    fun getSleepListByDate(inputDate: String): List<Sleep>
 }

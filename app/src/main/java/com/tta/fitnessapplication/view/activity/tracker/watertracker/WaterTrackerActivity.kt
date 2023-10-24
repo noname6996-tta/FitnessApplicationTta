@@ -15,6 +15,7 @@ import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.fullDateFormatter
 import com.tta.fitnessapplication.data.utils.Constant.DATE.today
 import com.tta.fitnessapplication.data.utils.getCurrentTime
+import com.tta.fitnessapplication.data.utils.getWeekDates
 import com.tta.fitnessapplication.data.utils.showAnimatedAlertDialog
 import com.tta.fitnessapplication.databinding.ActivityWaterTrackerBinding
 import com.tta.fitnessapplication.view.activity.history.HistoryViewModel
@@ -89,26 +90,6 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
             chart.tvValueY5.text = "2000"
             tvTarget.text = dailyWater + "ml"
         }
-    }
-
-    private fun getWeekDates(): List<String> {
-        val calendar = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-        val dates = mutableListOf<String>()
-
-        // Set the calendar to the start of the week
-        calendar.set(Calendar.DAY_OF_WEEK, calendar.firstDayOfWeek)
-
-        for (i in 0 until 7) {
-            val date = calendar.time
-            val formattedDate = dateFormat.format(date)
-            dates.add(formattedDate)
-
-            // Increment the calendar to the next day
-            calendar.add(Calendar.DAY_OF_WEEK, 1)
-        }
-
-        return dates
     }
 
     override fun addEvent() {
