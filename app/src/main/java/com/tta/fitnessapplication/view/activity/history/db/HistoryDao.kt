@@ -19,4 +19,9 @@ interface HistoryDao {
 
     @Query("SELECT * FROM history_table WHERE date = :inputDate")
     fun getHistoryListByDate(inputDate: String): List<History>
+
+    @Query("UPDATE history_table " +
+            "SET date = :newDate, time = :newTime " +
+            "WHERE date = :existingDate AND value = :existingValue")
+    fun updateSleepTime(newDate: String,newTime : String, existingDate : String,existingValue: String)
 }

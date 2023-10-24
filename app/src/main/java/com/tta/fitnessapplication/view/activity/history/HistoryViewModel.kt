@@ -35,4 +35,10 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
             historyList.value = waterList
         }
     }
+
+    fun updateSleepTime(newDate: String,newTime : String, existingDate : String,existingValue: String) {
+        viewModelScope.launch {
+            repository.updateSleepTime(newDate, newTime, existingDate, existingValue)
+        }
+    }
 }

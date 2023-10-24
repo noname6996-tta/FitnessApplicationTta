@@ -113,13 +113,26 @@
                 android:id="@+id/tvTimeSleep"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins"
-                android:text="Click here to add data time sleep"
+                android:text="No data"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_16sp"
                 app:layout_constraintStart_toStartOf="@+id/textView32"
                 app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSetSchedule"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="@dimen/size_8dp"
+                android:background="@drawable/bg_radius_pink"
+                android:text="Add time sleep"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_size_12sp"
+                android:translationZ="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view20"
+                app:layout_constraintEnd_toEndOf="@+id/imageView13" />
 
             <ImageView
                 android:id="@+id/imageView13"

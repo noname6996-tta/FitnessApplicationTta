@@ -32,7 +32,6 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
         return ActivitySleepTrackerBinding.inflate(layoutInflater)
     }
 
-
     override fun initViewModel() {
         super.initViewModel()
         viewModelNoti = ViewModelProvider(this)[NewNotificationViewModel::class.java]
@@ -105,62 +104,28 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
                     val sleepTime = calculateSleepTime(timeSleep, timeWake)
                     binding.tvTimeSleep.text = "${sleepTime.hours}h ${sleepTime.minutes}m"
                     binding.tvTimeSleep.isEnabled = false
-                    viewModelHour.sleepList.observe(viewLifecycleOwner) {list ->
-                        if (list.isNotEmpty()) {
-                            for (item in list) {
-                                if (item.date != date) {
-                                    viewModelHour.addSleep(
-                                        Hour(
-                                            0,
-                                            date,
-                                            convertToDecimalTime(
-                                                sleepTime.hours,
-                                                sleepTime.minutes
-                                            ).toString()
-                                        )
-                                    )
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
 
         viewModelHour.readAllData.observe(viewLifecycleOwner) {
-            val listDataChart = arrayOf(0, 0, 0, 0, 0, 0, 0)
+            val listDataChart = arrayOf(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
             for (item in it) {
                 for (i in 0 until getWeekDates().size) {
                     if (getWeekDates()[i] == item.date) {
-                        listDataChart[i] = item.time.toInt() + listDataChart[i]
-                        listDataChart[i] = listDataChart[i]
+                        listDataChart[i] = item.time.toDouble() + listDataChart[i]
                     }
-                    Log.e("tttt",listDataChart.toString())
                 }
-                binding.chart.viewColume1.setProgress((listDataChart[0] * 0.05).toInt())
-                binding.chart.viewColume2.setProgress((listDataChart[1] * 0.05).toInt())
-                binding.chart.viewColume3.setProgress((listDataChart[2] * 0.05).toInt())
-                binding.chart.viewColume4.setProgress((listDataChart[3] * 0.05).toInt())
-                binding.chart.viewColume5.setProgress((listDataChart[4] * 0.05).toInt())
-                binding.chart.viewColume6.setProgress((listDataChart[5] * 0.05).toInt())
-                binding.chart.viewColume7.setProgress((listDataChart[6] * 0.05).toInt())
+                binding.chart.viewColume1.setProgress((listDataChart[0] * 10).toInt())
+                binding.chart.viewColume2.setProgress((listDataChart[1] * 10).toInt())
+                binding.chart.viewColume3.setProgress((listDataChart[2] * 10).toInt())
+                binding.chart.viewColume4.setProgress((listDataChart[3] * 10).toInt())
+                binding.chart.viewColume5.setProgress((listDataChart[4] * 10).toInt())
+                binding.chart.viewColume6.setProgress((listDataChart[5] * 10).toInt())
+                binding.chart.viewColume7.setProgress((listDataChart[6] * 10).toInt())
             }
         }
     }
-
-//    fun calculateSleepTime(startTime: String, endTime: String): String {
-//        val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-//        val startDate = inputFormat.parse(startTime)
-//        val endDate = inputFormat.parse(endTime)
-//
-//        val sleepTimeMillis = endDate.time - startDate.time
-//        val sleepTimeHours = sleepTimeMillis / (1000 * 60 * 60)
-//        val sleepTimeMinutes = (sleepTimeMillis % (1000 * 60 * 60)) / (1000 * 60)
-//
-//        val formattedTime = String.format("%d hour %02d minus", sleepTimeHours, sleepTimeMinutes)
-//
-//        return formattedTime
-//    }
 
     data class SleepTime(val hours: Int, val minutes: Int)
 
@@ -229,7 +194,7 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
                 findNavController().navigate(action)
             }
 
-            tvTimeSleep.setOnClickListener {
+            btnSetSchedule.setOnClickListener {
                 findNavController().navigate(SleepTrackerActivityDirections.actionSleepTrackerActivityToAddTimeSleepFragment())
             }
         }

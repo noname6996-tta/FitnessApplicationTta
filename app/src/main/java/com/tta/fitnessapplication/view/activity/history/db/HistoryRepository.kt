@@ -19,4 +19,10 @@ class HistoryRepository(private val historyDao: HistoryDao) {
             historyDao.getHistoryListByDate(date)
         }
     }
+
+    suspend fun updateSleepTime(newDate: String,newTime : String, existingDate : String,existingValue: String) {
+        return withContext(Dispatchers.IO) {
+            historyDao.updateSleepTime(newDate, newTime, existingDate, existingValue)
+        }
+    }
 }
