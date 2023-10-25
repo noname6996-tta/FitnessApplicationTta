@@ -13,6 +13,9 @@ interface HourSleepDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addSleep(sleep: Hour)
 
+    @Query("DELETE FROM hour_table")
+    suspend fun clearData()
+
     @Query("SELECT * FROM hour_table ORDER BY id ASC")
     fun readAllData(): LiveData<List<Hour>>
 

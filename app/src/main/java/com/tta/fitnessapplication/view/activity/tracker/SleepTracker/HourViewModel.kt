@@ -30,6 +30,12 @@ class HourViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun clearAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.clearAll()
+        }
+    }
+
     fun getWaterListByDate(date: String) {
         viewModelScope.launch {
             val waterList = repository.getSleepListByDate(date)

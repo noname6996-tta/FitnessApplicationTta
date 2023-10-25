@@ -30,6 +30,7 @@ import java.util.Calendar
 class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
     val args: FoodNotificationArgs by navArgs()
     var idMeal = 0
+    var foodName = ""
     override fun getDataBinding(): FragmentFoodNotificationBinding {
         return FragmentFoodNotificationBinding.inflate(layoutInflater)
     }
@@ -37,9 +38,6 @@ class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
     private lateinit var viewModel: NewNotificationViewModel
     private lateinit var alarmManager: AlarmManager
     private lateinit var pendingIntent: PendingIntent
-    private var isHasBedTime = false
-    private var isHasWakeUp = false
-    private var canClick = true
     private var canAddNoti = false
 
     private var noti = Notification(
@@ -56,14 +54,6 @@ class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
     override fun addObservers() {
         super.addObservers()
         viewModel.readAllData.observe(viewLifecycleOwner) {
-            for (item in it) {
-                if (item.type == 2) {
-                    when (item.icon) {
-                        R.drawable.icon_bed -> isHasBedTime = true
-                        R.drawable.alarm_clock -> isHasWakeUp = true
-                    }
-                }
-            }
             if (it.isNotEmpty() && canAddNoti) {
                 noti = it.last()
                 Log.e("addd", it.last().toString())
@@ -113,15 +103,18 @@ class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
             // Do something with the selected option
             when (selectedOption) {
                 "Breakfast" -> {
-
+                    noti.title = "Breakfast time! Time to eat ${foodName}"
+                    noti.text = "Breakfast time! Time to eat ${foodName}"
                 }
 
                 "Lunch" -> {
-
+                    noti.title = "Lunch time! Time to eat ${foodName}"
+                    noti.text = "Lunch time! Time to eat ${foodName}"
                 }
 
                 "Dinner" -> {
-
+                    noti.title = "Dinner time! Time to eat ${foodName}"
+                    noti.text = "Dinner time! Time to eat ${foodName}"
                 }
             }
         }
@@ -173,10 +166,9 @@ class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
+        alarmManager.set(
+            AlarmManager.ELAPSED_REALTIME,
             calendar.timeInMillis,
-            interval,
             pendingIntent
         )
 //        if (notification.enable) {

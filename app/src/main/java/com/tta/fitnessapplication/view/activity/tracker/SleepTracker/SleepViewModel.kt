@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tta.fitnessapplication.data.model.Sleep
+import com.tta.fitnessapplication.data.model.SleepPair
 import com.tta.fitnessapplication.data.model.Water
 import com.tta.fitnessapplication.view.activity.tracker.SleepTracker.db.SleepDatabase
 import com.tta.fitnessapplication.view.activity.tracker.SleepTracker.db.SleepRepository
@@ -17,10 +18,11 @@ class SleepViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: SleepRepository
 
     val _sleepList = MutableLiveData<List<Sleep>>()
+    val item = MutableLiveData<List<Sleep>>()
     val sleepList: LiveData<List<Sleep>> get() = _sleepList
 
-    val _sleepListA = MutableLiveData<List<Sleep>>()
-    val sleepListA: LiveData<List<Sleep>> get() = _sleepListA
+    val _sleepListA = MutableLiveData<List<SleepPair>>()
+    val sleepListA: LiveData<List<SleepPair>> get() = _sleepListA
     init {
         val sleepDao = SleepDatabase.getDatabase(application).sleepDao()
         repository = SleepRepository(sleepDao)
@@ -37,6 +39,12 @@ class SleepViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             val waterList = repository.getSleepListByDate(date)
             _sleepList.value = waterList
+        }
+    }
+
+    fun getItemById(id1: Int,id2: Int) {
+        viewModelScope.launch {
+            item.value = repository.getItemById(id1, id2)
         }
     }
 

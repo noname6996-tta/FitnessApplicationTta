@@ -7,9 +7,11 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.tta.fitnessapplication.data.model.History
+import com.tta.fitnessapplication.data.model.Hour
 import com.tta.fitnessapplication.data.model.Sleep
-import com.tta.fitnessapplication.data.utils.Constant
+import com.tta.fitnessapplication.data.model.SleepPair
 import com.tta.fitnessapplication.data.utils.DateToString
+import com.tta.fitnessapplication.data.utils.convertToDecimalTime
 import com.tta.fitnessapplication.data.utils.formatDateToString
 import com.tta.fitnessapplication.data.utils.formatDateToTimeString
 import com.tta.fitnessapplication.databinding.FragmentAddTimeSleepBinding
@@ -23,6 +25,7 @@ import java.util.Locale
 class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
     private lateinit var viewModel: SleepViewModel
     private lateinit var historyViewModel: HistoryViewModel
+    private lateinit var viewModelHour: HourViewModel
     private var timeSleep: Date = Date()
     private var timeWake: Date = Date()
     private var isSetSleep = false
@@ -36,19 +39,42 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
         super.initViewModel()
         viewModel = ViewModelProvider(this)[SleepViewModel::class.java]
         historyViewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
+        viewModelHour= ViewModelProvider(this)[HourViewModel::class.java]
+        viewModel.getAdjacentSleeps()
     }
 
     override fun addObservers() {
         super.addObservers()
+        viewModelHour.clearAll()
         viewModel.sleepList.observe(viewLifecycleOwner) { it ->
             list = it
         }
-        viewModel.sleepListA.observe(viewLifecycleOwner){
-            if (it.isNotEmpty()){
-                Log.e("yyyyyyyy",it[0].toString())
-                Log.e("yyyyyyyy",it[1].toString())
+        viewModel.sleepListA.observe(viewLifecycleOwner) {list->
+            val distinctList = HashSet<SleepPair>(list)
+            if (distinctList.isNotEmpty()) {
+                Log.e("aaaaa",distinctList.toString())
+                for (item in distinctList) {
+                    viewModel.getItemById(item.id1, item.id2)
+                }
             }
-            Log.e("yyyyyyyy","nuuu")
+        }
+        viewModel.item.observe(viewLifecycleOwner) {
+            Log.e("Aaaaa", it.toString())
+            var date = ""
+            var timeWake = ""
+            var timeSleep = ""
+            for (item in it){
+                if (item.value == "Wake"){
+                    date = item.date
+                    timeWake = "${item.date} ${item.time}"
+                } else {
+                    timeSleep = "${item.date} ${item.time}"
+                }
+            }
+            val sleepTime = calculateSleepTime(timeSleep, timeWake)
+            viewModelHour.addSleep(
+                Hour(0, date, convertToDecimalTime(sleepTime.hours, sleepTime.minutes).toString())
+            )
         }
     }
 
@@ -164,7 +190,7 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
                         historyViewModel.addHistory(history2)
                     }
                 }
-                viewModel.getAdjacentSleeps()
+
                 findNavController().popBackStack()
             }
         }
@@ -214,12 +240,3 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
         datePicker.show(childFragmentManager, "TAG")
     }
 }
-
-//viewModelHour.getWaterListByDate(date)
-//viewModelHour.sleepList.observe(viewLifecycleOwner) { list ->
-//    val itemExists = list.any { it.date == date }
-//    if (!itemExists)
-//        viewModelHour.addSleep(
-//            Hour(0, date, convertToDecimalTime(sleepTime.hours, sleepTime.minutes).toString())
-//        )
-//}

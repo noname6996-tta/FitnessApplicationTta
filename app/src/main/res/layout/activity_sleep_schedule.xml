@@ -179,8 +179,9 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/exThreeRv"
+                            android:scrollbars="vertical"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="500dp"
                             android:nestedScrollingEnabled="false" />
 
                     </LinearLayout>

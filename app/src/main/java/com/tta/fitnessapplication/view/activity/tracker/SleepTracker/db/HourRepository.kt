@@ -13,6 +13,10 @@ class HourRepository(private val sleepDao: HourSleepDao) {
         sleepDao.addSleep(sleep)
     }
 
+    suspend fun clearAll(){
+        sleepDao.clearData()
+    }
+
     suspend fun getSleepListByDate(date: String): List<Hour> {
         return withContext(Dispatchers.IO) {
             sleepDao.getSleepListByDate(date)
