@@ -41,7 +41,8 @@ class UpdateNotification() : BaseFragment<FragmentUpdateNotiBinding>() {
         Date(8640000000000000),
         1,
         false,
-        "tta"
+        "tta",
+        "",0,"",""
     )
     private var categoryInfo = CategoryInfo("tta","#000000")
     override fun getDataBinding(): FragmentUpdateNotiBinding {

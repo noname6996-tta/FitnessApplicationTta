@@ -34,6 +34,7 @@ class HistoryAdapter() : RecyclerView.Adapter<HistoryAdapter.Example3EventsViewH
                 1 -> binding.imgType.setImageResource(R.drawable.ic_cup)
                 2 -> binding.imgType.setImageResource(R.drawable.ic_sleep)
                 3 -> binding.imgType.setImageResource(R.drawable.ic_water_caculate)
+                4 -> binding.imgType.setImageResource(R.drawable.baseline_fastfood_24)
             }
         }
     }

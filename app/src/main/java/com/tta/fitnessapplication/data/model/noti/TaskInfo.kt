@@ -14,6 +14,10 @@ data class TaskInfo(
     var date : Date,
     var priority : Int,
     var status : Boolean,
-    var category: String
+    var category: String,
+    var foodName : String,
+    var time : Int,
+    var detail : String,
+    var image : String
 ) : Serializable
 

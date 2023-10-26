@@ -179,6 +179,9 @@
         <action
             android:id="@+id/action_calorieTrackerActivity_to_findMealActivity"
             app:destination="@id/findMealActivity" />
+        <action
+            android:id="@+id/action_calorieTrackerActivity_to_historyActivity"
+            app:destination="@id/historyActivity" />
     </fragment>
     <fragment
         android:id="@+id/updateNotification"
@@ -211,8 +214,8 @@
             android:name="id"
             app:argType="integer" />
         <action
-            android:id="@+id/action_mealInfoActivity_to_foodNotification"
-            app:destination="@id/foodNotification" />
+            android:id="@+id/action_mealInfoActivity_to_notificationActivity"
+            app:destination="@id/notificationActivity" />
     </fragment>
     <fragment
         android:id="@+id/findMealByCategory"
@@ -240,15 +243,6 @@
         android:name="com.tta.fitnessapplication.view.activity.user.PersonDataActivity"
         android:label="activity_person_data"
         tools:layout="@layout/activity_person_data" />
-    <fragment
-        tools:layout="@layout/fragment_food_notification"
-        android:id="@+id/foodNotification"
-        android:name="com.tta.fitnessapplication.view.noti.FoodNotification"
-        android:label="FoodNotification" >
-        <argument
-            android:name="id"
-            app:argType="integer" />
-    </fragment>
     <fragment
         tools:layout="@layout/fragment_add_time_sleep"
         android:id="@+id/addTimeSleepFragment"

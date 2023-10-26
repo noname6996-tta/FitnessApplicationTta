@@ -144,6 +144,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/spinnerDay"
+                android:visibility="gone"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
@@ -175,11 +176,11 @@
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Today Meal Planner"
+                android:layout_marginTop="40dp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/size_16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/spinnerDay"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/spinnerDay" />
+                app:layout_constraintTop_toBottomOf="@+id/view21" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recMeal"
@@ -195,12 +196,11 @@
                 android:id="@+id/tvMeal"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginTop="@dimen/size_16dp"
                 android:gravity="center"
                 android:text="No Data"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerDay" />
+                app:layout_constraintTop_toBottomOf="@+id/textView67" />
 
             <Button
                 android:id="@+id/btnAddSomethingToEat"

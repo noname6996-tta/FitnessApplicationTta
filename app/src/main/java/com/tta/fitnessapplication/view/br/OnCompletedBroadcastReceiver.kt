@@ -5,8 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationManagerCompat
+import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.noti.TaskInfo
 import com.tta.fitnessapplication.data.repository.TaskCategoryRepositoryImpl
+import com.tta.fitnessapplication.data.utils.Constant
+import com.tta.fitnessapplication.data.utils.getCurrentTime
+import com.tta.fitnessapplication.view.activity.history.db.HistoryDatabase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -22,19 +26,20 @@ class OnCompletedBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(p0: Context?, p1: Intent?) {
         val taskInfo = p1?.getSerializableExtra("task_info") as? TaskInfo
         if (taskInfo != null) {
-//            taskInfo.status = true
-            val calendar = Calendar.getInstance()
-            calendar.add(Calendar.DAY_OF_MONTH, 1)
-            calendar.set(Calendar.HOUR_OF_DAY, taskInfo?.date!!.hours)
-            calendar.set(Calendar.MINUTE, taskInfo.date.minutes)
-            calendar.set(Calendar.SECOND, taskInfo.date.seconds)
-            taskInfo.date = calendar.time
-            Log.e("ttanext",taskInfo.date.toString())
+            taskInfo.status = true
         }
         CoroutineScope(IO).launch {
-            taskInfo?.let {
-                repository.updateTaskStatus(it)
-            }
+            val historyDao = HistoryDatabase.getDatabase(p0!!).historyDao()
+            val history = History(
+                null,
+                null,
+                Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
+                getCurrentTime(),
+                taskInfo?.description,
+                4,
+                taskInfo?.category
+            )
+            historyDao.addHistory(history)
         }
         if (p0 != null && taskInfo != null) {
             NotificationManagerCompat.from(p0).cancel(null, taskInfo.id)

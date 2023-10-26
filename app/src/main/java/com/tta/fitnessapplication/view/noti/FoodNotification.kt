@@ -1,5 +1,6 @@
 package com.tta.fitnessapplication.view.noti
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -28,7 +30,6 @@ import com.tta.fitnessapplication.view.br.ClockAlarmManager
 import java.util.Calendar
 
 class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
-    val args: FoodNotificationArgs by navArgs()
     var idMeal = 0
     var foodName = ""
     override fun getDataBinding(): FragmentFoodNotificationBinding {
@@ -46,7 +47,6 @@ class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
 
     override fun initViewModel() {
         super.initViewModel()
-        idMeal = args.id
         mainViewModel.getFoodById(idMeal.toString())
         viewModel = ViewModelProvider(this)[NewNotificationViewModel::class.java]
     }
@@ -75,6 +75,7 @@ class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
                 .error(R.drawable.ic_breafast)
                 .into(imgFood)
             tvNameMeal.text = food.name
+            noti.value = food.calo + "Calo"
         }
     }
 
@@ -132,7 +133,17 @@ class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
     }
 
     private fun showDateTimePicker() {
+        val datePicker = MaterialDatePicker.Builder.datePicker().build()
         val timePicker = MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_24H).build()
+        datePicker.addOnPositiveButtonClickListener {
+            val calendar = Calendar.getInstance()
+            calendar.timeInMillis = it
+            calendar.set(Calendar.HOUR_OF_DAY, 0)
+            calendar.set(Calendar.MINUTE, 0)
+            calendar.set(Calendar.SECOND, 0)
+
+            timePicker.show(childFragmentManager, "TAG")
+        }
         timePicker.addOnPositiveButtonClickListener {
             val cal = Calendar.getInstance()
             cal.set(Calendar.HOUR_OF_DAY, timePicker.hour)
@@ -145,6 +156,7 @@ class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
     }
 
 
+    @SuppressLint("ScheduleExactAlarm")
     private fun setAlarm(notification: Notification) {
         // Initialize AlarmManager
         alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -166,8 +178,8 @@ class FoodNotification : BaseFragment<FragmentFoodNotificationBinding>() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        alarmManager.set(
-            AlarmManager.ELAPSED_REALTIME,
+        alarmManager.setExact(
+            AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
             pendingIntent
         )

@@ -44,7 +44,7 @@ class ItemTodayMealAdapter :
                 .error(R.drawable.ic_breafast)
                 .into(holder.binding.imgFood);
             holder.binding.tvNameMeal.text = someThingToEat.name
-            holder.binding.tvTimeMeal.text = someThingToEat.time
+            holder.binding.tvTimeMeal.text = someThingToEat.desc
             holder.binding.imgMoreDetails.setOnClickListener {
                 onClickSendData?.let {
                     it(position)

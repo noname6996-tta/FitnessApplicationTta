@@ -24,5 +24,9 @@ data class Food(
     @SerializedName("video")
     var video: String,
     @SerializedName("type")
-    var type: String
+    var type: String,
+    @SerializedName("desc")
+    var desc: String,
+    @SerializedName("calo")
+    var calo: String
 )

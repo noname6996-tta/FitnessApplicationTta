@@ -42,14 +42,7 @@ class AlarmReceiver : BroadcastReceiver() {
             val pendingIntent1: PendingIntent? =
                 taskInfo?.let { getBroadcast(p0, it.id,intent1,FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE) }
             val action1 : NotificationCompat.Action = NotificationCompat.Action.Builder(0,"Completed",pendingIntent1).build()
-            var icon = 0
-            when(taskInfo?.priority){
-                1-> icon = R.drawable.ic_cup
-                2-> icon = R.drawable.icon_bed
-                3-> icon = R.drawable.icon_bed
-                4-> icon = R.drawable.icon_bed
-                5-> icon = R.drawable.icon_bed
-            }
+            var icon = R.drawable.baseline_fastfood_24
             val notification = p0?.let {
                 NotificationCompat.Builder(it, "to_do_list")
                     .setContentTitle("FitnessX Reminder")

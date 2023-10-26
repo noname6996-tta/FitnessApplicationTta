@@ -1,5 +1,6 @@
 package com.tta.fitnessapplication.view.activity.tracker.calortracker
 
+import android.app.Activity
 import android.content.Intent
 import android.text.SpannableString
 import android.text.Spanned
@@ -9,6 +10,12 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.awesomedialog.AwesomeDialog
+import com.example.awesomedialog.body
+import com.example.awesomedialog.icon
+import com.example.awesomedialog.onNegative
+import com.example.awesomedialog.onPositive
+import com.example.awesomedialog.title
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.Food
 import com.tta.fitnessapplication.databinding.ActivityMealInfoBinding
@@ -39,8 +46,17 @@ class MealInfoActivity : BaseFragment<ActivityMealInfoBinding>() {
         super.addEvent()
         binding.apply {
             btnAddSchedule.setOnClickListener {
-                var action = MealInfoActivityDirections.actionMealInfoActivityToFoodNotification(idMeal)
-                findNavController().navigate(action)
+                AwesomeDialog.build(requireActivity())
+                    .title("Notification !")
+                    .body("Do you want to remind you to use the dish?")
+                    .icon(R.drawable.baseline_fastfood_24)
+                    .onPositive("Sure") {
+                        var action = MealInfoActivityDirections.actionMealInfoActivityToNotificationActivity(idMeal)
+                        findNavController().navigate(action)
+                    }
+                    .onNegative("No") {
+                        // add taskinfo but enable = false
+                    }
             }
         }
     }
