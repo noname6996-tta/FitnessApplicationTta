@@ -29,6 +29,9 @@ class OnCompletedBroadcastReceiver : BroadcastReceiver() {
             taskInfo.status = true
         }
         CoroutineScope(IO).launch {
+            taskInfo?.let {
+                repository.updateTaskStatus(it)
+            }
             val historyDao = HistoryDatabase.getDatabase(p0!!).historyDao()
             val history = History(
                 null,

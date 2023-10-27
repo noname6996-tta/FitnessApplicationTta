@@ -182,6 +182,9 @@
         <action
             android:id="@+id/action_calorieTrackerActivity_to_historyActivity"
             app:destination="@id/historyActivity" />
+        <action
+            android:id="@+id/action_calorieTrackerActivity_to_mealInfoActivity"
+            app:destination="@id/mealInfoActivity" />
     </fragment>
     <fragment
         android:id="@+id/updateNotification"
@@ -199,6 +202,10 @@
         <action
             android:id="@+id/action_findMealActivity_to_findMealByCategory"
             app:destination="@id/findMealByCategory" />
+        <argument
+            android:name="time"
+            app:argType="integer"
+            />
     </fragment>
     <fragment
         android:id="@+id/newNotificationFragment"

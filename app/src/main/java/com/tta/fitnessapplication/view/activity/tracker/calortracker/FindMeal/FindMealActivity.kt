@@ -1,6 +1,7 @@
 package com.tta.fitnessapplication.view.activity.tracker.calortracker.FindMeal
 
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.tta.fitnessapplication.R
@@ -14,6 +15,8 @@ import com.tta.fitnessapplication.view.base.BaseFragment
 
 
 class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
+    val args : FindMealActivityArgs by navArgs()
+    var time = 0
     val categoryAdapter = CategoryMealAdapter()
     val recommendMealAdapter = ItemRecommendMealAdapter()
     val mealPopular = ItemTodayMealAdapter()
@@ -37,6 +40,11 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
     override fun initView() {
         super.initView()
         with(binding){
+            when(time){
+                1-> textView25.text = "Breakfast"
+                2-> textView25.text = "Lunch"
+                3-> textView25.text = "Dinner"
+            }
             recCategory.adapter = categoryAdapter
             val layoutManagerCategory = LinearLayoutManager(requireContext())
             layoutManagerCategory.orientation = LinearLayoutManager.HORIZONTAL
@@ -56,6 +64,7 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
 
     override fun initViewModel() {
         super.initViewModel()
+        time = args.time
         mainViewModel.getCategoryFood()
     }
 
@@ -66,7 +75,7 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
             list.addAll(it)
             categoryAdapter.setListCategoryFood(it,requireContext())
         }
-        listRecommentMeal.add(Meal(1,"buger","350cal","ssss",1,""))
+        listRecommentMeal.add(Meal(1,"buger","350cal","ssss",1,"",false))
         recommendMealAdapter.setListExercise(listRecommentMeal,requireContext())
         mealPopular.setListExercise(listRecommentMeal,requireContext())
 

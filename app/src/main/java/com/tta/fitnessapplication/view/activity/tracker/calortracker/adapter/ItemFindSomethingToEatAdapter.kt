@@ -44,9 +44,15 @@ class ItemFindSomethingToEatAdapter :
                 .into(holder.binding.imgSomethingToEat);
             holder.binding.tvTimeSomethingToEat.text = someThingToEat.name
             holder.binding.tvNumberSomethingToEat.text = someThingToEat.number
+            var number  = 1
+            when(position){
+                0 -> number = 1
+                1 -> number = 2
+                2 -> number = 3
+            }
             holder.binding.appCompatButton3.setOnClickListener {
                 onClickSendData?.let {
-                    it(position)
+                    it(number)
                 }
             }
         }

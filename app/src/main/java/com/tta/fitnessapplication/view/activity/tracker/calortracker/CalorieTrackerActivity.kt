@@ -13,6 +13,7 @@ import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.Meal
+import com.tta.fitnessapplication.data.utils.getTimeValue
 import com.tta.fitnessapplication.data.utils.getWeekDates
 import com.tta.fitnessapplication.databinding.ActivityCalorTrackerBinding
 import com.tta.fitnessapplication.view.HistoryViewModelGoogleData
@@ -66,12 +67,13 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
             }
         }
         viewModelNotificationViewModel.getCompletedTask().observe(viewLifecycleOwner){
+            listMeal.clear()
             for (item in it){
-                listMeal.add(Meal(0,item.taskInfo.foodName,item.taskInfo.category,item.taskInfo.detail,item.taskInfo.time,item.taskInfo.image))
+                listMeal.add(Meal(item.taskInfo.priority,item.taskInfo.foodName,item.taskInfo.category,item.taskInfo.detail,item.taskInfo.time,item.taskInfo.image,item.taskInfo.status))
             }
             viewModelNotificationViewModel.getUncompletedTask().observe(viewLifecycleOwner){
                 for (item in it){
-                    listMeal.add(Meal(0,item.taskInfo.foodName,item.taskInfo.category,item.taskInfo.detail,item.taskInfo.time,item.taskInfo.image))
+                    listMeal.add(Meal(item.taskInfo.priority,item.taskInfo.foodName,item.taskInfo.category,item.taskInfo.detail,item.taskInfo.time,item.taskInfo.image,item.taskInfo.status))
                 }
                 listMealFinal.clear()
                 listMealFinal.addAll(listMeal)
@@ -165,12 +167,29 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
         }
 
         binding.btnAddSomethingToEat.setOnClickListener {
-            val action = CalorieTrackerActivityDirections.actionCalorieTrackerActivityToFindMealActivity()
+            val action = CalorieTrackerActivityDirections.actionCalorieTrackerActivityToFindMealActivity(getTimeValue())
             findNavController().navigate(action)
         }
         mealAdapter.findSomethingToEat {
-            val action = CalorieTrackerActivityDirections.actionCalorieTrackerActivityToFindMealActivity()
+            val action = CalorieTrackerActivityDirections.actionCalorieTrackerActivityToMealInfoActivity(it)
             findNavController().navigate(action)
+        }
+        mealAdapter.updateData {id ->
+            viewModelNotificationViewModel.getUncompletedTask().observe(viewLifecycleOwner){
+                for (item in it){
+                    if (item.taskInfo.id == id){
+                        item.taskInfo.status = true
+                        viewModelNotificationViewModel.updateTaskStatus(item.taskInfo)
+                    }
+                }
+            }
+        }
+        somethingToEatAdapter.findSomethingToEat{
+            val action = CalorieTrackerActivityDirections.actionCalorieTrackerActivityToFindMealActivity(it)
+            findNavController().navigate(action)
+        }
+        binding.cardViewHistoryWaterTracker.setOnClickListener {
+
         }
     }
 

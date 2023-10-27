@@ -214,6 +214,7 @@ class NotificationActivity() : BaseFragment<FragmentFoodNotificationBinding>() {
             taskInfo.priority = food.id
             taskInfo.foodName = food.name
             taskInfo.detail = food.desc
+            taskInfo.image = food.image
             taskInfo.time = food.type.toInt()
         }
     }

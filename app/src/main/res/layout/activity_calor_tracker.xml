@@ -96,6 +96,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <View
                 android:id="@+id/view21"
                 android:layout_width="match_parent"
@@ -144,7 +145,6 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/spinnerDay"
-                android:visibility="gone"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
@@ -152,6 +152,7 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="@dimen/size_8dp"
                 android:textColor="@color/white"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view21">
 
@@ -161,11 +162,11 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_button_radius"
                     android:enabled="false"
-                    android:textColor="@color/white"
                     android:imeOptions="actionNext"
                     android:inputType="textNoSuggestions"
                     android:maxLines="1"
                     android:singleLine="true"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/size_14dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -174,9 +175,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="40dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Today Meal Planner"
-                android:layout_marginTop="40dp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/size_16dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -187,10 +188,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_16dp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerDay" />
+                app:layout_constraintTop_toBottomOf="@+id/textView67" />
 
             <TextView
                 android:id="@+id/tvMeal"
@@ -198,31 +198,30 @@
                 android:layout_height="200dp"
                 android:gravity="center"
                 android:text="No Data"
+                app:layout_constraintBottom_toBottomOf="@+id/recMeal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView67" />
+                app:layout_constraintTop_toTopOf="@+id/recMeal" />
 
             <Button
                 android:id="@+id/btnAddSomethingToEat"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginTop="16dp"
-                android:textSize="@dimen/text_size_14sp"
+                android:layout_marginTop="@dimen/size_16dp"
                 android:background="@drawable/bg_radius_pink"
                 android:text="Add something in your meals"
                 android:textAllCaps="false"
+                android:textSize="@dimen/text_size_14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvMeal"
-
-                />
+                app:layout_constraintTop_toBottomOf="@+id/recMeal" />
 
             <TextView
                 android:id="@+id/textView68"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_24dp"
                 android:layout_marginStart="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_24dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Find some things to eat"
                 android:textColor="@color/black"
@@ -246,9 +245,9 @@
                 android:id="@+id/cardViewHistoryWaterTracker"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginLeft="16dp"
                 app:cardCornerRadius="@dimen/size_16dp"
                 app:cardElevation="2dp"
 
@@ -306,8 +305,8 @@
                 android:id="@+id/clSettingNoti"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

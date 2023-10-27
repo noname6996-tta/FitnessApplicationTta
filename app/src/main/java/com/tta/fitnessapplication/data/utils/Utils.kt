@@ -186,3 +186,14 @@ fun getWeekDates(): List<String> {
 fun convertToDecimalTime(hours: Int, minutes: Int): Double {
     return hours + (minutes.toDouble() / 60)
 }
+
+fun getTimeValue(): Int {
+    val calendar = Calendar.getInstance()
+    val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
+
+    return when {
+        currentHour in 6..11 -> 1 // Morning (6 am to 11 am)
+        currentHour in 12..17 -> 2 // Afternoon (12 pm to 5 pm)
+        else -> 3 // Night (6 pm to 5:59 am)
+    }
+}

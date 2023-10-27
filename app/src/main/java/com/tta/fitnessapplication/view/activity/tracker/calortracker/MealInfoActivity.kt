@@ -18,13 +18,32 @@ import com.example.awesomedialog.onPositive
 import com.example.awesomedialog.title
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.Food
+import com.tta.fitnessapplication.data.model.noti.CategoryInfo
+import com.tta.fitnessapplication.data.model.noti.TaskInfo
 import com.tta.fitnessapplication.databinding.ActivityMealInfoBinding
+import com.tta.fitnessapplication.view.MainActivity
 import com.tta.fitnessapplication.view.activity.WebViewActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
+import com.tta.fitnessapplication.view.noti.NotificationViewModel
+import java.util.Date
 
 class MealInfoActivity : BaseFragment<ActivityMealInfoBinding>() {
+    private lateinit var viewModelNotificationViewModel: NotificationViewModel
     val args: MealInfoActivityArgs by navArgs()
     var idMeal = 0
+    private var categoryInfo = CategoryInfo("tta","#000000")
+    private var taskInfo = TaskInfo(
+        0,
+        "Time to eat ",
+        Date(8640000000000000),
+        1,
+        false,
+        "tta",
+        "",
+        0,
+        "",
+        ""
+    )
     override fun getDataBinding(): ActivityMealInfoBinding {
         return ActivityMealInfoBinding.inflate(layoutInflater)
     }
@@ -33,6 +52,7 @@ class MealInfoActivity : BaseFragment<ActivityMealInfoBinding>() {
         super.initViewModel()
         idMeal = args.id
         mainViewModel.getFoodById(idMeal.toString())
+        viewModelNotificationViewModel = (activity as MainActivity).viewModelNoti
     }
 
     override fun addObservers() {
@@ -56,7 +76,12 @@ class MealInfoActivity : BaseFragment<ActivityMealInfoBinding>() {
                     }
                     .onNegative("No") {
                         // add taskinfo but enable = false
+                        viewModelNotificationViewModel.insertTaskAndCategory(taskInfo, categoryInfo)
+                        findNavController().popBackStack()
                     }
+            }
+            view16.setOnClickListener {
+                findNavController().popBackStack()
             }
         }
     }
@@ -79,6 +104,19 @@ class MealInfoActivity : BaseFragment<ActivityMealInfoBinding>() {
                 intent.putExtra("url", food.video)
                 startActivity(intent)
             }
+            val diff = (Date().time/1000) - 1640908800
+            taskInfo.id = diff.toInt()
+            taskInfo.description = "Eat " + food.name
+            // category == value
+            taskInfo.category = food.calo
+            // priority == id
+            taskInfo.priority = food.id
+            taskInfo.status = false
+            taskInfo.foodName = food.name
+            taskInfo.detail = food.desc
+            taskInfo.time = food.type.toInt()
+            taskInfo.image = food.image
+
         }
     }
 }

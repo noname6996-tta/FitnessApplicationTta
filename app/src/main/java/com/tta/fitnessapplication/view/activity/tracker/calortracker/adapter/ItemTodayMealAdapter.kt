@@ -2,6 +2,7 @@ package com.tta.fitnessapplication.view.activity.tracker.calortracker.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -25,6 +26,11 @@ class ItemTodayMealAdapter :
         onClickSendData = position
     }
 
+    private var onClickUpdateData: ((i: Int) -> Unit)? = null
+    fun updateData(position: ((i: Int) -> Unit)) {
+        onClickUpdateData = position
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -45,9 +51,22 @@ class ItemTodayMealAdapter :
                 .into(holder.binding.imgFood);
             holder.binding.tvNameMeal.text = someThingToEat.name
             holder.binding.tvTimeMeal.text = someThingToEat.desc
+            if (someThingToEat.enable == true)
+            {
+                holder.binding.imgMoreDetails.visibility = View.VISIBLE
+                holder.binding.btnEat.visibility = View.GONE
+            } else {
+                holder.binding.imgMoreDetails.visibility = View.GONE
+                holder.binding.btnEat.visibility = View.VISIBLE
+            }
             holder.binding.imgMoreDetails.setOnClickListener {
                 onClickSendData?.let {
-                    it(position)
+                    it(someThingToEat.id)
+                }
+            }
+            holder.binding.btnEat.setOnClickListener {
+                onClickUpdateData?.let {
+                    it(someThingToEat.id)
                 }
             }
         }
