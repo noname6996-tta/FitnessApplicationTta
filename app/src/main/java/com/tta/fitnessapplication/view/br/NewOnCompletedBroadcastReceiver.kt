@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.core.app.NotificationManagerCompat
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.History
+import com.tta.fitnessapplication.data.model.Meal
 import com.tta.fitnessapplication.data.model.Sleep
 import com.tta.fitnessapplication.data.model.Water
 import com.tta.fitnessapplication.data.model.noti.Notification
@@ -15,6 +16,7 @@ import com.tta.fitnessapplication.data.utils.formatDateToTimeString
 import com.tta.fitnessapplication.data.utils.getCurrentTime
 import com.tta.fitnessapplication.view.activity.history.db.HistoryDatabase
 import com.tta.fitnessapplication.view.activity.tracker.SleepTracker.db.SleepDatabase
+import com.tta.fitnessapplication.view.activity.tracker.calortracker.db.MealDatabase
 import com.tta.fitnessapplication.view.activity.tracker.watertracker.db.WaterDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -96,6 +98,19 @@ class NewOnCompletedBroadcastReceiver : BroadcastReceiver() {
                             )
                             historyDao.addHistory(history1)
                         }
+                    }
+
+                    4-> {
+                        val history1 = History(
+                            null,
+                            null,
+                            Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
+                            getCurrentTime(),
+                            noti.text.toString(),
+                            noti.type,
+                            noti.value.toString()
+                        )
+                        historyDao.addHistory(history1)
                     }
                 }
 

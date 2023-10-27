@@ -64,7 +64,7 @@
         android:fontFamily="@font/poppins"
         android:layout_marginTop="@dimen/size_16dp"
         android:gravity="center"
-        android:text="@string/title_calculate_water"
+        android:text="@string/tv_calo_caculate_info"
         android:textColor="@color/gray1"
         android:textSize="@dimen/text_size_14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,6 +96,30 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilinputAge"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:textColorHint="@color/gray_hint"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerGender"
+        app:startIconDrawable="@drawable/calendar">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edt_login"
+            android:hint="@string/your_age"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilinputWeight"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -106,7 +130,7 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerGender"
+        app:layout_constraintTop_toBottomOf="@+id/tilinputAge"
         app:startIconDrawable="@drawable/ic_weight">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -135,28 +159,43 @@
         app:layout_constraintTop_toTopOf="@+id/tilinputWeight" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/spinnerWeather"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:id="@+id/tilinpuHeight"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:textColorHint="@color/gray_hint"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilinputWeight">
+        app:layout_constraintTop_toBottomOf="@+id/tilinputWeight"
+        app:startIconDrawable="@drawable/ic_height">
 
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/tvWeather"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:hint="@string/weather"
-            android:imeOptions="actionNext"
-            android:inputType="textNoSuggestions"
-            android:maxLines="1"
-            android:singleLine="true"
+            android:background="@drawable/bg_edt_login"
+            android:hint="@string/your_height"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_14sp" />
+            android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvTitleCm"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="@dimen/size_16dp"
+        android:background="@drawable/bg_radius_pink"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center"
+        android:text="@string/cm"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tilinpuHeight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tilinpuHeight" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/spinnerFitness"
@@ -166,7 +205,7 @@
         android:layout_margin="@dimen/size_16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerWeather">
+        app:layout_constraintTop_toBottomOf="@+id/tilinpuHeight">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/tvFitness"

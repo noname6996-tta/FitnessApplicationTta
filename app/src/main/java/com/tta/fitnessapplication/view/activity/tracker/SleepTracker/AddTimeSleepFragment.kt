@@ -228,11 +228,13 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
             if (id == 0) {
                 timeSleep = cal.time
                 binding.dateAndTimePickerSleep.text = DateToString.convertDateToString(timeSleep)
+                Log.e("aaaa",DateToString.convertDateToString(timeSleep))
                 viewModel.getWaterListByDate(formatDateToString(timeSleep))
                 isSetSleep = true
             } else {
                 timeWake = cal.time
                 binding.dateAndTimePickerWakeup.text = DateToString.convertDateToString(timeWake)
+                Log.e("aaaa",DateToString.convertDateToString(timeWake))
                 viewModel.getWaterListByDate(formatDateToString(timeWake))
                 isSetWake = true
             }

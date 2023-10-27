@@ -13,6 +13,7 @@ import com.tta.fitnessapplication.data.utils.Constant.Companion.EMAIL_USER
 import com.tta.fitnessapplication.data.utils.Constant.Companion.LOGIN_PREFS
 import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_LOGIN
 import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_USER
+import com.tta.fitnessapplication.data.utils.Constant.PREF.CALO_INNEED
 import com.tta.fitnessapplication.data.utils.Constant.PREF.IDUSER
 import com.tta.fitnessapplication.data.utils.Constant.PREF.SLEEP_TIME
 import com.tta.fitnessapplication.data.utils.Constant.PREF.WAKEUP_TIME
@@ -71,6 +72,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         // save data
         loginPrefsEditor.putBoolean(SAVE_USER, true)
         loginPrefsEditor.putString(WATER_INNEED, "2000")
+        loginPrefsEditor.putString(CALO_INNEED, "2000")
         loginPrefsEditor.putString(SLEEP_TIME, "10:00:00")
         loginPrefsEditor.putString(WAKEUP_TIME, "06:00:00")
         loginPrefsEditor.commit()

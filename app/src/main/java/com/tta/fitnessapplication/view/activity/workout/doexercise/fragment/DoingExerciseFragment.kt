@@ -72,7 +72,7 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>() {
                             "What is your problem?",
                             color = ContextCompat.getColor(requireContext(), android.R.color.white)
                         )
-                        .icon(R.drawable.icon_bed)
+                        .icon(R.drawable.logo_title)
                         .background(R.drawable.bg_blue_linear_16)
                         .onPositive(
                             "I just take a look",

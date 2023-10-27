@@ -23,6 +23,7 @@ class Constant {
         const val PREF_TOKEN = "pref_token"
         const val IDUSER = "IDUSER"
         const val WATER_INNEED = "WATER_INNEED"
+        const val CALO_INNEED = "CALO_INNEED"
         const val SLEEP_TIME = "SLEEP_TIME"
         const val WAKEUP_TIME = "WAKEUP_TIME"
     }
