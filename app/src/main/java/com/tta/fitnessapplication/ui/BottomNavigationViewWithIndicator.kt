@@ -32,8 +32,8 @@ class BottomNavigationViewWithIndicator: BottomNavigationView, NavigationBarView
         color = ContextCompat.getColor(context, R.color.pink)
     }
 
-    private val bottomOffset = resources.getDimension(R.dimen.size_12dp)
-    private val defaultSize = resources.getDimension(R.dimen.size_1dp)
+    private val bottomOffset = resources.getDimension(R.dimen.size_8dp)
+    private val defaultSize = resources.getDimension(R.dimen.size_threedp)
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)

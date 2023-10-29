@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/colorDekraOrange" /> <!-- Replace with your desired color -->
+    <size android:width="8dp" android:height="8dp" /> <!-- Adjust the size as needed -->
+    <corners android:radius="4dp" /> <!-- Adjust the radius as needed -->
+</shape>
