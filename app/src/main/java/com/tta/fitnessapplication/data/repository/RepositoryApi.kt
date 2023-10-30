@@ -1,6 +1,7 @@
 package com.tta.fitnessapplication.data.repository
 
 import com.tta.fitnessapplication.api.ApiClient
+import com.tta.fitnessapplication.api.ApiMap
 import com.tta.fitnessapplication.data.model.BaseResponse
 import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.ResoinseArticle
@@ -10,6 +11,8 @@ import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.ResponseVideo
 import com.tta.fitnessapplication.data.model.UserLoginResponse
+import com.tta.fitnessapplication.data.model.map.Location
+import com.tta.fitnessapplication.data.model.map.ModelMap
 import retrofit2.Response
 
 class RepositoryApi {
@@ -82,5 +85,9 @@ class RepositoryApi {
 
     suspend fun getFoodById(id: String): Response<ResponseFood> {
         return ApiClient.API.getFoodByID(id)
+    }
+
+    suspend fun getDataMap(location : String,raduis : String,type : String,key : String) : Response<ModelMap> {
+        return ApiMap.API.mapApi(location,raduis,type,key)
     }
 }

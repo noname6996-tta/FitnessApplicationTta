@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
@@ -24,6 +25,10 @@ import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.databinding.ActivitySplashBinding
 import com.tta.fitnessapplication.view.MainActivity
 import com.tta.fitnessapplication.view.onboarding.OnBoardActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.concurrent.TimeUnit
@@ -40,6 +45,8 @@ class SplashActivity : AppCompatActivity() {
         .build()
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val account = GoogleSignIn.getAccountForExtension(this, fitnessOptions)
         if (!GoogleSignIn.hasPermissions(account, fitnessOptions)) {
             GoogleSignIn.requestPermissions(
@@ -56,14 +63,14 @@ class SplashActivity : AppCompatActivity() {
         loginPrefsEditor = loginPreferences.edit()
         saveLogin = loginPreferences.getBoolean(Constant.SAVE_USER, false)
         if (saveLogin) {
-            startActivity(Intent(this, MainActivity::class.java))
-            this.finish()
-        } else {
-
+            binding.view.visibility = View.GONE
+            val scope = CoroutineScope(Dispatchers.Main)
+            scope.launch {
+                delay(1500) // Delay in milliseconds (2 seconds = 2000 milliseconds)
+                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                this@SplashActivity.finish()
+            }
         }
-        binding = ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN

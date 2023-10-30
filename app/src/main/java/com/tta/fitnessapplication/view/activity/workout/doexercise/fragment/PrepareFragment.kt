@@ -1,8 +1,12 @@
 package com.tta.fitnessapplication.view.activity.workout.doexercise.fragment
 
+import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.awesomedialog.AwesomeDialog
@@ -15,19 +19,29 @@ import com.example.awesomedialog.title
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.FragmentPrepareBinding
 import com.tta.fitnessapplication.view.activity.workout.doexercise.DoExerciseActivity.Companion.listExercise
-import com.tta.fitnessapplication.view.base.BaseFragment
 
-class PrepareFragment : BaseFragment<FragmentPrepareBinding>() {
+class PrepareFragment : Fragment() {
+    private lateinit var binding: FragmentPrepareBinding
     private lateinit var countdownTimer: CountDownTimer
     private var totalTimeInMillis: Long = 20000 // 20 seconds
     private var timeRemainingInMillis: Long = totalTimeInMillis
     private var isTimerRunning: Boolean = false
-
-    override fun getDataBinding(): FragmentPrepareBinding {
-        return FragmentPrepareBinding.inflate(layoutInflater)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentPrepareBinding.inflate(inflater, container, false)
+        return binding.root
     }
-    override fun addEvent() {
-        super.addEvent()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        addEvent()
+    }
+
+    private fun addEvent() {
         binding.imgNext.setOnClickListener {
             stopTimer()
             findNavController().navigate(R.id.action_prepareFragment_to_doingExerciseFragment)
@@ -38,34 +52,39 @@ class PrepareFragment : BaseFragment<FragmentPrepareBinding>() {
             AwesomeDialog.build(requireActivity())
                 .title(
                     "Notification",
-                    titleColor = ContextCompat.getColor(requireContext(), android.R.color.white)
+                    titleColor = ContextCompat.getColor(requireContext(), android.R.color.black)
                 )
                 .body(
                     "What is your problem?",
-                    color = ContextCompat.getColor(requireContext(), android.R.color.white)
+                    color = ContextCompat.getColor(requireContext(), android.R.color.black)
                 )
-                .icon(R.drawable.icon_bed)
-                .background(R.drawable.bg_blue_linear_16)
+                .icon(R.drawable.logo_title)
+                .background(R.drawable.bg_raduis_white_12dp)
                 .onPositive(
                     "I just take a look",
-                    buttonBackgroundColor = R.drawable.bg_pink_linear_16,
-                    textColor = ContextCompat.getColor(requireContext(), android.R.color.black)
+                    buttonBackgroundColor = R.drawable.bg_raduis_white_12dp,
+                    textColor = ContextCompat.getColor(
+                        requireContext(),
+                        android.R.color.darker_gray
+                    )
                 ) {
                     requireActivity().onBackPressedDispatcher.onBackPressed()
                     requireActivity().finish()
                 }
                 .onNegative(
                     "Cancel",
-                    buttonBackgroundColor = R.drawable.bg_pink_linear_16,
-                    textColor = ContextCompat.getColor(requireContext(), android.R.color.black)
+                    buttonBackgroundColor = R.drawable.bg_raduis_white_12dp,
+                    textColor = ContextCompat.getColor(
+                        requireContext(),
+                        android.R.color.darker_gray
+                    )
                 ) {
                     resumeCountDown()
                 }
         }
     }
 
-    override fun initView() {
-        super.initView()
+    private fun initView() {
         val exercise = listExercise[0]
         if (exercise != null) {
             binding.tvNameExercise.text = exercise.name

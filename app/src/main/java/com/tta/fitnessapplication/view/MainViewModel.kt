@@ -12,6 +12,8 @@ import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.UserLoginResponse
 import com.tta.fitnessapplication.data.model.Video
+import com.tta.fitnessapplication.data.model.map.Location
+import com.tta.fitnessapplication.data.model.map.ModelMap
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,6 +33,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     val listArticle = MutableLiveData<List<Article>>()
     val listCategory = MutableLiveData<MutableList<CategoryFood>>()
     val listFoodById = MutableLiveData<MutableList<Food>>()
+    val mapList = MutableLiveData<ModelMap>()
 
     fun getUserData(email: String) {
         viewModelScope.launch {
@@ -146,6 +149,22 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     fun getFoodById(id: String) {
         viewModelScope.launch {
             listFoodById.value = repositoryApi.getFoodById(id).body()?.data
+        }
+    }
+
+    fun getDataMap(location: String,raduis : String,type : String,key: String){
+        viewModelScope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    repositoryApi.getDataMap(location, raduis, type, key)
+                }
+            }
+                .onSuccess {
+                    mapList.value = it.body()
+                }
+                .onFailure {
+
+                }
         }
     }
 }

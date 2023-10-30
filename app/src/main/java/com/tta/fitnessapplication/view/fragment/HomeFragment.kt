@@ -6,6 +6,7 @@ import android.graphics.Typeface
 import android.graphics.drawable.ClipDrawable
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,7 @@ import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.fullDateFormatter
 import com.tta.fitnessapplication.data.utils.Constant.DATE.today
+import com.tta.fitnessapplication.data.utils.getWeekDates
 import com.tta.fitnessapplication.databinding.FragmentHomeBinding
 import com.tta.fitnessapplication.view.activity.WebViewActivity
 import com.tta.fitnessapplication.view.activity.history.HistoryAdapter
@@ -46,6 +48,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val eventsAdapter = HistoryAdapter()
     private val entries: ArrayList<PieEntry> = ArrayList()
     private lateinit var dailyWater: String
+    private lateinit var dailyCalo: String
+    private var dailyCaloLeft: Int = 0
     override fun getDataBinding(): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(layoutInflater)
     }
@@ -54,16 +58,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         super.initViewModel()
         historyViewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
         historyViewModel.getWaterListByDate(Constant.DATE.fullDateFormatter.format(today))
-        Fitness.getRecordingClient(requireActivity(), GoogleSignIn.getAccountForExtension(requireContext(), fitnessOptions))
+        Fitness.getRecordingClient(
+            requireActivity(),
+            GoogleSignIn.getAccountForExtension(requireContext(), fitnessOptions)
+        )
             .subscribe(DataType.TYPE_STEP_COUNT_CUMULATIVE)
             .addOnSuccessListener {
-                Log.i("TAG","Subscription was successful!")
+                Log.i("TAG", "Subscription was successful!")
             }
             .addOnFailureListener { e ->
                 Log.w("TAG", "There was a problem subscribing ", e)
             }
 
-        Fitness.getHistoryClient(requireActivity(), GoogleSignIn.getAccountForExtension(requireContext(), fitnessOptions))
+        Fitness.getHistoryClient(
+            requireActivity(),
+            GoogleSignIn.getAccountForExtension(requireContext(), fitnessOptions)
+        )
             .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
             .addOnSuccessListener { result ->
                 val totalSteps =
@@ -79,7 +89,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 //        getStepDataByDate()
     }
 
-    private fun getHeartRate(){
+    private fun getHeartRate() {
         val startTime = LocalDateTime.of(2023, 9, 29, 0, 0)
         val endTime = LocalDateTime.of(2023, 9, 29, 0, 0).plusDays(1)
 
@@ -91,23 +101,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 //            .build()
 
         val request = DataReadRequest.Builder()
-            .aggregate(DataSource.Builder()
-                .setType(DataSource.TYPE_DERIVED)
-                .setDataType(DataType.TYPE_HEART_RATE_BPM)
-                .setAppPackageName("com.google.android.gms")
-                .setStreamName("resting_heart_rate<-merge_heart_rate_bpm")
-                .build()).read(DataType.TYPE_HEART_RATE_BPM)
+            .aggregate(
+                DataSource.Builder()
+                    .setType(DataSource.TYPE_DERIVED)
+                    .setDataType(DataType.TYPE_HEART_RATE_BPM)
+                    .setAppPackageName("com.google.android.gms")
+                    .setStreamName("resting_heart_rate<-merge_heart_rate_bpm")
+                    .build()
+            ).read(DataType.TYPE_HEART_RATE_BPM)
             .bucketByTime(1, TimeUnit.DAYS)
-            .setTimeRange(startDateTime.toEpochSecond(), endDateTime.toEpochSecond(), TimeUnit.SECONDS).build()
+            .setTimeRange(
+                startDateTime.toEpochSecond(),
+                endDateTime.toEpochSecond(),
+                TimeUnit.SECONDS
+            ).build()
 
-        Fitness.getHistoryClient(requireActivity(), GoogleSignIn.getAccountForExtension(requireContext(), fitnessOptions))
+        Fitness.getHistoryClient(
+            requireActivity(),
+            GoogleSignIn.getAccountForExtension(requireContext(), fitnessOptions)
+        )
             .readData(request)
             .addOnSuccessListener { response ->
                 val heartRateList = ArrayList<Int>()
                 val totalSteps = response.buckets
                     .flatMap { it.dataSets }
                     .flatMap { it.dataPoints }
-                    .fold("") { accumulator, dataPoint -> accumulator + dataPoint.getValue(Field.FIELD_BPM).asString() }
+                    .fold("") { accumulator, dataPoint ->
+                        accumulator + dataPoint.getValue(Field.FIELD_BPM).asString()
+                    }
                 for (bucket in response.buckets) {
                     for (dataSet in bucket.dataSets) {
                         for (dataPoint in dataSet.dataPoints) {
@@ -129,7 +150,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
     }
 
-    private fun getStepDataByDate(){
+    private fun getStepDataByDate() {
         val startTime = LocalDateTime.of(2023, 9, 1, 0, 0)
         val endTime = LocalDateTime.of(2023, 9, 26, 0, 0).plusDays(1)
 
@@ -149,10 +170,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         val request = DataReadRequest.Builder()
             .aggregate(datasource)
             .bucketByTime(1, TimeUnit.DAYS)
-            .setTimeRange(startDateTime.toEpochSecond(), endDateTime.toEpochSecond(), TimeUnit.SECONDS)
+            .setTimeRange(
+                startDateTime.toEpochSecond(),
+                endDateTime.toEpochSecond(),
+                TimeUnit.SECONDS
+            )
             .build()
 
-        Fitness.getHistoryClient(requireActivity(), GoogleSignIn.getAccountForExtension(requireContext(), fitnessOptions))
+        Fitness.getHistoryClient(
+            requireActivity(),
+            GoogleSignIn.getAccountForExtension(requireContext(), fitnessOptions)
+        )
             .readData(request)
             .addOnSuccessListener { response ->
                 val totalSteps = response.buckets
@@ -160,39 +188,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     .flatMap { it.dataPoints }
                     .sumBy { it.getValue(Field.FIELD_STEPS).asInt() }
                 Log.i("TAG", "Total steps: $totalSteps")
-                Log.i("TAG buckets", "Total buckets: ${response.buckets.flatMap { it.dataSets }.flatMap { it.dataPoints }.sumBy { it.getValue(Field.FIELD_STEPS).asInt() }}")
+                Log.i(
+                    "TAG buckets",
+                    "Total buckets: ${
+                        response.buckets.flatMap { it.dataSets }.flatMap { it.dataPoints }
+                            .sumBy { it.getValue(Field.FIELD_STEPS).asInt() }
+                    }"
+                )
             }
     }
 
     override fun addObservers() {
         super.addObservers()
-        //
-//        val viewModel = HistoryViewModelGoogleData()
-//        viewModel.getData()
-//        viewModel.listStepsCount.observe(viewLifecycleOwner) {
-//            binding.tvHomeStep.text = it.last().value + " steps"
-//        }
-//        viewModel.listWeight.observe(viewLifecycleOwner) {
-//
-//        }
-//        viewModel.listCaloriesExpended.observe(viewLifecycleOwner) {
-//            binding.tvCalor.text = it.last().value + "Calr"
-//        }
-//        viewModel.listHeartMinutes.observe(viewLifecycleOwner) {
-//            binding.tvHeartRate.text = it.last().value + " BPM"
-//        }
-//        viewModel.listSleepTracker.observe(viewLifecycleOwner) {
-//            if (it.isNotEmpty()) {
-//                binding.textView27.text = it.last().value + " h"
-//            } else {
-//                binding.textView27.text = "No data"
-//            }
-//        }
-//        viewModel.message.observe(viewLifecycleOwner) {
-//            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-//        }
-        //
-
         val emailUser = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
         val idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
         mainViewModel.getUserData(emailUser)
@@ -202,18 +209,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.textView2.text =
                     "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
                 Log.e("aaa", dataProfile[0].toString())
-                if (dataProfile[0].weight.isNullOrEmpty()||dataProfile[0].tall.isNullOrEmpty()){
+                if (dataProfile[0].weight.isNullOrEmpty() || dataProfile[0].tall.isNullOrEmpty()) {
                     binding.textView12.text = "Go to setting update your info to calculate BMI"
                 } else {
                     var bmi =
-                        calculateBMI(dataProfile[0].weight.toDouble(), dataProfile[0].tall.toDouble())
+                        calculateBMI(
+                            dataProfile[0].weight.toDouble(),
+                            dataProfile[0].tall.toDouble()
+                        )
                     val y = 100f - bmi.toFloat()
                     val x = bmi.toFloat()
                     entries.clear()
                     entries.add(PieEntry(y))
                     entries.add(PieEntry(x))
                     initPieChart()
-                    binding.textView12.text = "You have a "+calculateBMIAndSetText(dataProfile[0].weight.toDouble(),dataProfile[0].tall.toDouble())
+                    binding.textView12.text = "You have a " + calculateBMIAndSetText(
+                        dataProfile[0].weight.toDouble(),
+                        dataProfile[0].tall.toDouble()
+                    )
                 }
             } else {
                 Log.e("tta", it.errorBody().toString())
@@ -229,6 +242,42 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 eventsAdapter.events.clear()
                 eventsAdapter.events.addAll(it.take(5))
                 eventsAdapter.notifyDataSetChanged()
+            }
+        }
+
+        historyViewModel.readAllData.observe(viewLifecycleOwner) {
+            val daysDoExercise = ArrayList<String>()
+            if (it.isNotEmpty()){
+                for (item in it) {
+                    // calo
+                    if (item.type == 4) {
+                        dailyCaloLeft += item.value!!.toInt()
+                    }
+                    // exercise
+                    if (item.type == 0){
+                        daysDoExercise.add(item.date.toString())
+                        Log.e("daysDoExercise",daysDoExercise.toString())
+                    }
+                }
+                binding.tvCalor.text = dailyCaloLeft.toString() + "Cal\nLeft"
+                val days = ArrayList<String>()
+                for (i in 0 until getWeekDates().size) {
+                    val date = LocalDate.parse(getWeekDates()[i])
+                    val dayOfMonth = date.dayOfMonth
+                    days.add(dayOfMonth.toString())
+                    for (item in daysDoExercise){
+                        if (getWeekDates()[i]==item){
+                            days[i] = "✔"
+                        }
+                    }
+                }
+                binding.tvDay1.text = days[0]
+                binding.tvDay2.text = days[1]
+                binding.tvDay3.text = days[2]
+                binding.tvDay4.text = days[3]
+                binding.tvDay5.text = days[4]
+                binding.tvDay6.text = days[5]
+                binding.tvDay7.text = days[6]
             }
         }
     }
@@ -271,13 +320,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun initView() {
         mImageDrawable = binding.imgToScroll.drawable as ClipDrawable
         mImageDrawable.level = 5000
-
-        initCalender()
-
         initRecycleViewHistory()
         dailyWater = loginPreferences.getString(Constant.PREF.WATER_INNEED, "2000").toString()
+        dailyCalo = loginPreferences.getString(Constant.PREF.CALO_INNEED, "2000").toString()
         binding.textView17.text = "$dailyWater ml"
-
+        binding.tvDailyCalo.text = "$dailyCalo Calo"
+        val days = ArrayList<String>()
+        for (i in 0 until getWeekDates().size) {
+            val date = LocalDate.parse(getWeekDates()[i])
+            val dayOfMonth = date.dayOfMonth
+            days.add(dayOfMonth.toString())
+        }
+        binding.tvDay1.text = days[0]
+        binding.tvDay2.text = days[1]
+        binding.tvDay3.text = days[2]
+        binding.tvDay4.text = days[3]
+        binding.tvDay5.text = days[4]
+        binding.tvDay6.text = days[5]
+        binding.tvDay7.text = days[6]
     }
 
     private fun initRecycleViewHistory() {
@@ -366,55 +426,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         // loading chart
         binding.pieChart.invalidate()
-    }
-
-    private fun initCalender() {
-        val arrayDay = ArrayList<String>()
-        val calendar = Calendar.getInstance()
-        // Set the calendar to the current week
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
-        // Print each day number of the week
-        for (i in 1..7) {
-            println(calendar.get(Calendar.DAY_OF_MONTH))
-            arrayDay.add(calendar.get(Calendar.DAY_OF_MONTH).toString())
-            calendar.add(Calendar.DAY_OF_WEEK, 1) // Move to the next day
-        }
-        val dayNumber = calendar.get(Calendar.DAY_OF_MONTH).toString()
-        binding.tvDay1.text = arrayDay[0]
-        binding.tvDay2.text = arrayDay[1]
-        binding.tvDay3.text = arrayDay[2]
-        binding.tvDay4.text = arrayDay[3]
-        binding.tvDay5.text = arrayDay[4]
-        binding.tvDay6.text = arrayDay[5]
-        binding.tvDay7.text = arrayDay[6]
-        when (dayNumber) {
-            arrayDay[0] -> {
-                binding.tvDay1.setTextColor(Color.RED)
-            }
-
-            arrayDay[1] -> {
-                binding.tvDay2.setTextColor(Color.RED)
-            }
-
-            arrayDay[2] -> {
-                binding.tvDay3.setTextColor(Color.RED)
-            }
-
-            arrayDay[3] -> {
-                binding.tvDay4.setTextColor(Color.RED)
-            }
-
-            arrayDay[4] -> {
-                binding.tvDay5.setTextColor(Color.RED)
-            }
-
-            arrayDay[5] -> {
-                binding.tvDay6.setTextColor(Color.RED)
-            }
-
-            arrayDay[6] -> {
-                binding.tvDay7.setTextColor(Color.RED)
-            }
-        }
     }
 }

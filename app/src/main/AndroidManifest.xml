@@ -40,7 +40,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCvp5FLhPWNUt5QuSl10eUymuZ9_0tpYdw" />
+            android:value="AIzaSyA_69rHqhDSdTlmkWIjFoV3FvD7mefp3fA" />
         <activity
             android:name=".view.login.ForgotPasswordActivity"
             android:exported="false" />
@@ -53,9 +53,6 @@
             android:exported="false" />
         <activity
             android:name=".view.noti.NotificationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.activity.tracker.calortracker.MealScheduleActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.tracker.calortracker.MealInfoActivity"

@@ -14,6 +14,6 @@ object ApiMap {
         Retrofit.Builder().baseUrl(Constant.BASE_URL_MAP)
             .addConverterFactory(GsonConverterFactory.create(gson)).build()
     }
-    val API: ApiService by lazy { retrofit.create(ApiService::class.java) }
+    val API: ApiServiceMap by lazy { retrofit.create(ApiServiceMap::class.java) }
 
 }

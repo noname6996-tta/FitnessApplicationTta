@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="32dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Fitness"
+        android:text="FitnessX"
         android:textColor="@color/black"
         android:textFontWeight="700"
         android:textSize="36dp"

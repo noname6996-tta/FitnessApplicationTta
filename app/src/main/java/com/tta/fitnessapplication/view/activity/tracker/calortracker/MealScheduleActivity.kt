@@ -70,7 +70,6 @@ class MealScheduleActivity : BaseFragment<ActivityHistoryBinding>() {
                     list.add(item)
                 }
             }
-            list.addAll(it)
             if (list != null) {
                 eventsAdapter.events.clear()
                 eventsAdapter.events.addAll(list)

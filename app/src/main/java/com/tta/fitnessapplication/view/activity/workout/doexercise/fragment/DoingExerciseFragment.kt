@@ -3,6 +3,7 @@ package com.tta.fitnessapplication.view.activity.workout.doexercise.fragment
 import android.os.CountDownTimer
 import android.util.Log
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.awesomedialog.AwesomeDialog
@@ -14,14 +15,17 @@ import com.example.awesomedialog.onPositive
 import com.example.awesomedialog.title
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.Exercise
+import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.getCurrentTime
 import com.tta.fitnessapplication.databinding.FragmentDoingexerciseBinding
+import com.tta.fitnessapplication.view.activity.history.HistoryViewModel
 import com.tta.fitnessapplication.view.activity.workout.doexercise.DoExerciseActivity.Companion.listExercise
 import com.tta.fitnessapplication.view.activity.workout.doexercise.DoExerciseActivity.Companion.numberExercise
 import com.tta.fitnessapplication.view.base.BaseFragment
 
 class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>() {
+    private lateinit var historyViewModel: HistoryViewModel
     private lateinit var countdownTimer: CountDownTimer
     private var totalTimeInMillis: Long = 20000 // 20 seconds
     private var timeRemainingInMillis: Long = totalTimeInMillis
@@ -30,6 +34,11 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>() {
     private var idUser = ""
     override fun getDataBinding(): FragmentDoingexerciseBinding {
         return FragmentDoingexerciseBinding.inflate(layoutInflater)
+    }
+
+    override fun initViewModel() {
+        super.initViewModel()
+        historyViewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
     }
 
     override fun initView() {
@@ -65,21 +74,21 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>() {
                             "Notification",
                             titleColor = ContextCompat.getColor(
                                 requireContext(),
-                                android.R.color.white
+                                android.R.color.black
                             )
                         )
                         .body(
                             "What is your problem?",
-                            color = ContextCompat.getColor(requireContext(), android.R.color.white)
+                            color = ContextCompat.getColor(requireContext(), android.R.color.black)
                         )
                         .icon(R.drawable.logo_title)
-                        .background(R.drawable.bg_blue_linear_16)
+                        .background(R.drawable.bg_raduis_white_12dp)
                         .onPositive(
                             "I just take a look",
-                            buttonBackgroundColor = R.drawable.bg_pink_linear_16,
+                            buttonBackgroundColor = R.drawable.bg_raduis_white_12dp,
                             textColor = ContextCompat.getColor(
                                 requireContext(),
-                                android.R.color.black
+                                android.R.color.darker_gray
                             )
                         ) {
                             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -87,10 +96,10 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>() {
                         }
                         .onNegative(
                             "Cancel",
-                            buttonBackgroundColor = R.drawable.bg_pink_linear_16,
+                            buttonBackgroundColor = R.drawable.bg_raduis_white_12dp,
                             textColor = ContextCompat.getColor(
                                 requireContext(),
-                                android.R.color.black
+                                android.R.color.darker_gray
                             )
                         ) {
                             resumeCountDown()
@@ -115,7 +124,6 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>() {
 
     fun checkDone() {
         if (numberExercise == listExercise.size - 1) {
-            Log.e("Exercise", "Done")
             mainViewModel.createHistory(
                 idUser,
                 Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
@@ -124,21 +132,31 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>() {
                 "0",
                 ""
             )
+            historyViewModel.addHistory(
+                History(
+                    0, idUser.toInt(),
+                    Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
+                    getCurrentTime(),
+                    "Do exercise",
+                    0,
+                    ""
+                )
+            )
             AwesomeDialog.build(requireActivity())
                 .title(
                     "Notification",
-                    titleColor = ContextCompat.getColor(requireContext(), android.R.color.white)
+                    titleColor = ContextCompat.getColor(requireContext(), android.R.color.black)
                 )
                 .body(
                     "Good jobs my friend",
-                    color = ContextCompat.getColor(requireContext(), android.R.color.white)
+                    color = ContextCompat.getColor(requireContext(), android.R.color.black)
                 )
-                .icon(R.drawable.icon_bed)
-                .background(R.drawable.bg_blue_linear_16)
+                .icon(R.drawable.ic_logo)
+                .background(R.drawable.bg_raduis_white_12dp)
                 .onPositive(
-                    "Done",
-                    buttonBackgroundColor = R.drawable.bg_pink_linear_16,
-                    textColor = ContextCompat.getColor(requireContext(), android.R.color.black)
+                    "Go Back To Home",
+                    buttonBackgroundColor = R.drawable.bg_raduis_white_12dp,
+                    textColor = ContextCompat.getColor(requireContext(), android.R.color.darker_gray)
                 ) {
                     requireActivity().onBackPressedDispatcher.onBackPressed()
                     requireActivity().finish()
@@ -170,26 +188,26 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>() {
             AwesomeDialog.build(requireActivity())
                 .title(
                     "Notification",
-                    titleColor = ContextCompat.getColor(requireContext(), android.R.color.white)
+                    titleColor = ContextCompat.getColor(requireContext(), android.R.color.black)
                 )
                 .body(
                     "What is your problem?",
-                    color = ContextCompat.getColor(requireContext(), android.R.color.white)
+                    color = ContextCompat.getColor(requireContext(), android.R.color.black)
                 )
-                .icon(R.drawable.icon_bed)
-                .background(R.drawable.bg_blue_linear_16)
+                .icon(R.drawable.ic_logo)
+                .background(R.drawable.bg_raduis_white_12dp)
                 .onPositive(
                     "I just take a look",
-                    buttonBackgroundColor = R.drawable.bg_pink_linear_16,
-                    textColor = ContextCompat.getColor(requireContext(), android.R.color.black)
+                    buttonBackgroundColor = R.drawable.bg_raduis_white_12dp,
+                    textColor = ContextCompat.getColor(requireContext(), android.R.color.darker_gray)
                 ) {
                     requireActivity().onBackPressedDispatcher.onBackPressed()
                     requireActivity().finish()
                 }
                 .onNegative(
                     "Cancel",
-                    buttonBackgroundColor = R.drawable.bg_pink_linear_16,
-                    textColor = ContextCompat.getColor(requireContext(), android.R.color.black)
+                    buttonBackgroundColor = R.drawable.bg_raduis_white_12dp,
+                    textColor = ContextCompat.getColor(requireContext(), android.R.color.darker_gray)
                 ) {
                     resumeCountDown()
                 }
