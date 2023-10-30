@@ -15,6 +15,7 @@ import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.ResponseTool
 import com.tta.fitnessapplication.data.model.ResponseVideo
 import com.tta.fitnessapplication.data.model.UserLoginResponse
+import com.tta.fitnessapplication.data.model.map.ResponseMap
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -125,4 +126,11 @@ interface ApiService {
     suspend fun getFoodByID(
         @Query("id") id: String
     ): Response<ResponseFood>
+
+    @POST(ApiPath.MAP_API)
+    suspend fun getListMap(
+        @Query("lat") lat: Double,
+        @Query("lng") lng: Double,
+        @Query("radius") radius: String,
+    ): Response<ResponseMap>
 }

@@ -232,9 +232,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 Log.e("tta", it.errorBody().toString())
             }
         }
-        if (isConnect) {
-            mainViewModel.getHistoryByDate(idUser, fullDateFormatter.format(today))
-        }
 
         historyViewModel.historyList.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {

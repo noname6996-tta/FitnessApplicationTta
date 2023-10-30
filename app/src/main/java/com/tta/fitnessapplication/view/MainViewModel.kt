@@ -12,8 +12,8 @@ import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.UserLoginResponse
 import com.tta.fitnessapplication.data.model.Video
-import com.tta.fitnessapplication.data.model.map.Location
 import com.tta.fitnessapplication.data.model.map.ModelMap
+import com.tta.fitnessapplication.data.model.map.ResponseMap
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,7 +33,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     val listArticle = MutableLiveData<List<Article>>()
     val listCategory = MutableLiveData<MutableList<CategoryFood>>()
     val listFoodById = MutableLiveData<MutableList<Food>>()
-    val mapList = MutableLiveData<ModelMap>()
+    val mapList = MutableLiveData<Response<ResponseMap>>()
 
     fun getUserData(email: String) {
         viewModelScope.launch {
@@ -63,14 +63,30 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
         viewModelScope.launch {
             runCatching {
                 withContext(Dispatchers.IO) {
-                    repositoryApi.updateProfile(email,gender, age, tall, weight, firstname, lastname)
+                    repositoryApi.updateProfile(
+                        email,
+                        gender,
+                        age,
+                        tall,
+                        weight,
+                        firstname,
+                        lastname
+                    )
                 }
             }
                 .onSuccess {
-                    updateUser.value = repositoryApi.updateProfile(email,gender, age, tall, weight, firstname, lastname)
+                    updateUser.value = repositoryApi.updateProfile(
+                        email,
+                        gender,
+                        age,
+                        tall,
+                        weight,
+                        firstname,
+                        lastname
+                    )
                 }
                 .onFailure {
-                    error.value  = it.toString()
+                    error.value = it.toString()
                 }
         }
     }
@@ -152,18 +168,18 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
         }
     }
 
-    fun getDataMap(location: String,raduis : String,type : String,key: String){
+    fun getDataMap(lat: Double, lng: Double, raduis: String) {
         viewModelScope.launch {
             runCatching {
                 withContext(Dispatchers.IO) {
-                    repositoryApi.getDataMap(location, raduis, type, key)
+                    repositoryApi.getDataMap(lat, lng, raduis)
                 }
             }
                 .onSuccess {
-                    mapList.value = it.body()
+                    mapList.value = it
                 }
                 .onFailure {
-
+                    error.value = it.toString()
                 }
         }
     }
