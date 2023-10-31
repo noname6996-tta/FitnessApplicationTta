@@ -6,10 +6,13 @@ import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
 import android.provider.Settings
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -21,12 +24,16 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.ActivityMapsBinding
 import com.tta.fitnessapplication.view.base.BaseActivity
+import kotlin.math.ln
 
 class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
 
     private val PERMISSION_REQUEST_CODE = 123
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var googleMap: GoogleMap
+    private var lat : Double = 0.0
+    private var lng : Double = 0.0
+    private var raduis = "2"
 
     override fun getDataBinding(): ActivityMapsBinding {
         return ActivityMapsBinding.inflate(layoutInflater)
@@ -38,11 +45,19 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-    }
-
-    override fun initViewModel() {
-        super.initViewModel()
-        mainViewModel.getDataMap(21.010112441500187, 105.80591323169317, "2")
+        binding.topAppBar.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+            this@MapsActivity.finish()
+        }
+        binding.edtRadius.setText(raduis)
+        binding.button.setOnClickListener {
+            var range = binding.edtRadius.text.trim().toString()
+            if (range.isNullOrEmpty()){
+                mainViewModel.getDataMap(lat, lng, raduis)
+            } else {
+                mainViewModel.getDataMap(lat, lng, range)
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -73,6 +88,9 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                 if (location != null) {
                     val myLocation = LatLng(location.latitude, location.longitude)
+                    lat = location.latitude
+                    lng = location.longitude
+                    mainViewModel.getDataMap(location.latitude, location.longitude, raduis)
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 12f))
                 }
             }
