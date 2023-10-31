@@ -22,6 +22,7 @@ import com.tta.fitnessapplication.view.base.BaseFragment
 import com.tta.fitnessapplication.view.noti.NewNotificationViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
@@ -31,6 +32,17 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
 
     override fun getDataBinding(): ActivitySleepTrackerBinding {
         return ActivitySleepTrackerBinding.inflate(layoutInflater)
+    }
+
+    override fun initView() {
+        super.initView()
+        binding.chart.viewColume1.setProgress(0)
+        binding.chart.viewColume2.setProgress(0)
+        binding.chart.viewColume3.setProgress(0)
+        binding.chart.viewColume4.setProgress(0)
+        binding.chart.viewColume5.setProgress(0)
+        binding.chart.viewColume6.setProgress(0)
+        binding.chart.viewColume7.setProgress(0)
     }
 
     override fun initViewModel() {
@@ -119,14 +131,17 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
                         listDataChart[i] = item.time.toDouble() + listDataChart[i]
                     }
                 }
-                binding.chart.viewColume1.setProgress((listDataChart[0] * 10).toInt())
-                binding.chart.viewColume2.setProgress((listDataChart[1] * 10).toInt())
-                binding.chart.viewColume3.setProgress((listDataChart[2] * 10).toInt())
-                binding.chart.viewColume4.setProgress((listDataChart[3] * 10).toInt())
-                binding.chart.viewColume5.setProgress((listDataChart[4] * 10).toInt())
-                binding.chart.viewColume6.setProgress((listDataChart[5] * 10).toInt())
-                binding.chart.viewColume7.setProgress((listDataChart[6] * 10).toInt())
             }
+            for (item in listDataChart){
+                Log.e("dsdsss",item.toString())
+            }
+            binding.chart.viewColume1.setProgress((listDataChart[0] * 10).toInt())
+            binding.chart.viewColume2.setProgress((listDataChart[1] * 10).toInt())
+            binding.chart.viewColume3.setProgress((listDataChart[2] * 10).toInt())
+            binding.chart.viewColume4.setProgress((listDataChart[3] * 10).toInt())
+            binding.chart.viewColume5.setProgress((listDataChart[4] * 10).toInt())
+            binding.chart.viewColume6.setProgress((listDataChart[5] * 10).toInt())
+            binding.chart.viewColume7.setProgress((listDataChart[6] * 10).toInt())
         }
 
         viewModel.sleepListA.observe(viewLifecycleOwner) {list->

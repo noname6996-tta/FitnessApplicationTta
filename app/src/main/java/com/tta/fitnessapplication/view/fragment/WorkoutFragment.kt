@@ -48,6 +48,7 @@ class WorkoutFragment : BaseFragment<FragmentDiscoverBinding>() {
                         }
                     }
                 }
+                Log.e("daysDoExercise",days.toString())
                 binding.tvDay1.text = days[0]
                 binding.tvDay2.text = days[1]
                 binding.tvDay3.text = days[2]
@@ -61,7 +62,19 @@ class WorkoutFragment : BaseFragment<FragmentDiscoverBinding>() {
 
     override fun initView() {
         super.initView()
-
+        val days = ArrayList<String>()
+        for (i in 0 until getWeekDates().size) {
+            val date = LocalDate.parse(getWeekDates()[i])
+            val dayOfMonth = date.dayOfMonth
+            days.add(dayOfMonth.toString())
+        }
+        binding.tvDay1.text = days[0]
+        binding.tvDay2.text = days[1]
+        binding.tvDay3.text = days[2]
+        binding.tvDay4.text = days[3]
+        binding.tvDay5.text = days[4]
+        binding.tvDay6.text = days[5]
+        binding.tvDay7.text = days[6]
     }
 
     override fun addEvent() {

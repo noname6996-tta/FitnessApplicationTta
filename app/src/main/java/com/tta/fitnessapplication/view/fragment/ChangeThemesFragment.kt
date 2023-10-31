@@ -55,6 +55,10 @@ class ChangeThemesFragment : BaseFragment<FragmentChangeThemesBinding>() {
             viewInfo.setOnClickListener {
                 viewInfo.showAsDropDown(balloonWater)
             }
+
+            viewChangePassword.setOnClickListener {
+                findNavController().navigate(R.id.action_changeThemesFragment_to_changePasswordFragment)
+            }
         }
 
     }

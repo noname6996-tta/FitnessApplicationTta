@@ -116,6 +116,9 @@
         <action
             android:id="@+id/action_changeThemesFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_changeThemesFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/notificationActivity"
@@ -185,6 +188,9 @@
         <action
             android:id="@+id/action_calorieTrackerActivity_to_mealInfoActivity"
             app:destination="@id/mealInfoActivity" />
+        <action
+            android:id="@+id/action_calorieTrackerActivity_to_caloCalculateFragment"
+            app:destination="@id/caloCalculateFragment" />
     </fragment>
     <fragment
         android:id="@+id/updateNotification"
@@ -255,4 +261,14 @@
         android:id="@+id/addTimeSleepFragment"
         android:name="com.tta.fitnessapplication.view.activity.tracker.SleepTracker.AddTimeSleepFragment"
         android:label="AddTimeSleepFragment" />
+    <fragment
+        tools:layout="@layout/fragment_change_password"
+        android:id="@+id/changePasswordFragment"
+        android:name="com.tta.fitnessapplication.view.fragment.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" />
+    <fragment
+        tools:layout="@layout/calo_calculate_fragment"
+        android:id="@+id/caloCalculateFragment"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.CaloCalculateFragment"
+        android:label="CaloCalculateFragment" />
 </navigation>

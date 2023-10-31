@@ -189,7 +189,7 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
             findNavController().navigate(action)
         }
         binding.cardViewHistoryWaterTracker.setOnClickListener {
-
+            findNavController().navigate(R.id.action_calorieTrackerActivity_to_caloCalculateFragment)
         }
     }
 

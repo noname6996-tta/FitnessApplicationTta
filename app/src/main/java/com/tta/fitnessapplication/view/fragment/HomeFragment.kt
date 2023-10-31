@@ -268,6 +268,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                         }
                     }
                 }
+                Log.e("daysDoExercise",days.toString())
                 binding.tvDay1.text = days[0]
                 binding.tvDay2.text = days[1]
                 binding.tvDay3.text = days[2]
