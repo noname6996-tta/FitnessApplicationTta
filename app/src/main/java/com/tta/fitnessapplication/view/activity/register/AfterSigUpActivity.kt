@@ -113,7 +113,8 @@ class AfterSigUpActivity : BaseActivity<ActivityAfterSigUpBinding>() {
                         binding.edtYourHeight.text.toString().trim(),
                         binding.edtYourWeight.text.toString().trim(),
                         firstName,
-                        lastName
+                        lastName,
+                        0
                     )
                 }
             }

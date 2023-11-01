@@ -8,14 +8,13 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.tta.fitnessapplication.data.model.User
 import com.tta.fitnessapplication.data.utils.Constant
-import com.tta.fitnessapplication.data.utils.DateToString
 import com.tta.fitnessapplication.databinding.ActivityPersonDataBinding
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.util.Calendar
 
 class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
     AdapterView.OnItemSelectedListener {
-    private lateinit var adapter : ArrayAdapter<String>
+    private lateinit var adapter: ArrayAdapter<String>
     val spinnerData = arrayOf("Male", "Female")
     var gender = ""
     var updateAccount = false
@@ -35,7 +34,7 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
                 Log.e("tta", it.errorBody().toString())
             }
         }
-        mainViewModel.error.observe(viewLifecycleOwner){
+        mainViewModel.error.observe(viewLifecycleOwner) {
             Log.e("dddddd", it.toString())
         }
     }
@@ -62,22 +61,16 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
 
     override fun addEvent() {
         super.addEvent()
-        binding.view.setOnClickListener {
-//            if (updateAccount) {
-//                updateAccount = false
-                binding.textView10.text = "Edit Account"
-                binding.edtEmail.isEnabled = false
-                binding.edtUsernameLastname.isEnabled = false
-                binding.edtUsernameFirstname.isEnabled = false
-                binding.edtYourHeight.isEnabled = false
-                binding.edtYourWeight.isEnabled = false
-                binding.edtEmail.isEnabled = false
-                binding.spinner.isEnabled = false
-                binding.spinner.visibility = View.GONE
-//            } else {
-//                updateAccount = true
-
-//            }
+        binding.view2Update.setOnClickListener {
+            binding.textView10.text = "Edit Account"
+            binding.edtEmail.isEnabled = false
+            binding.edtUsernameLastname.isEnabled = false
+            binding.edtUsernameFirstname.isEnabled = false
+            binding.edtYourHeight.isEnabled = false
+            binding.edtYourWeight.isEnabled = false
+            binding.edtEmail.isEnabled = false
+            binding.spinner.isEnabled = false
+            binding.spinner.visibility = View.GONE
             val emailUser = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
             mainViewModel.updateProfile(
                 emailUser,
@@ -86,11 +79,16 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
                 binding.edtYourHeight.text.toString().trim(),
                 binding.edtYourWeight.text.toString().trim(),
                 binding.edtUsernameFirstname.text.toString().trim(),
-                binding.edtUsernameLastname.text.toString().trim()
+                binding.edtUsernameLastname.text.toString().trim(),
+                0
             )
+            binding.view2Update.visibility = View.GONE
+            binding.textView12.visibility = View.GONE
+            binding.view.visibility = View.VISIBLE
+            binding.textView10.visibility = View.VISIBLE
         }
-        binding.btnDemo.setOnClickListener {
-            binding.textView10.text = "Update Account"
+
+        binding.view.setOnClickListener {
             binding.edtEmail.isEnabled = true
             binding.edtUsernameLastname.isEnabled = true
             binding.edtUsernameFirstname.isEnabled = true
@@ -101,6 +99,10 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
             binding.gender.visibility = View.GONE
             binding.imageView3.visibility = View.GONE
             binding.spinner.visibility = View.VISIBLE
+            binding.view2Update.visibility = View.VISIBLE
+            binding.textView12.visibility = View.VISIBLE
+            binding.view.visibility = View.GONE
+            binding.textView10.visibility = View.GONE
         }
         binding.viewChooseCalender.setOnClickListener {
             val datePicker = MaterialDatePicker.Builder.datePicker().build()
@@ -110,7 +112,7 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
                 calendar.set(Calendar.HOUR_OF_DAY, 0)
                 calendar.set(Calendar.MINUTE, 0)
                 calendar.set(Calendar.SECOND, 0)
-                Log.e("aaaa",calendar.time.toString())
+                Log.e("aaaa", calendar.time.toString())
             }
         }
 

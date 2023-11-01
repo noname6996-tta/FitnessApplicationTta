@@ -34,12 +34,12 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
                 binding.tvUserName.text =
                     "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
                 binding.tvGenderUser.text = "${dataProfile!![0].gender} "
-                if (dataProfile!![0].tall == "" || dataProfile!![0].tall.isEmpty()) {
+                if (dataProfile!![0].tall == "" || dataProfile!![0].tall.isNullOrEmpty()) {
                     binding.tvHeight.text = "_"
                 } else {
                     binding.tvHeight.text = "${dataProfile!![0].tall} "
                 }
-                if (dataProfile!![0].weight == "" || dataProfile!![0].weight.isEmpty()) {
+                if (dataProfile!![0].weight == "" || dataProfile!![0].weight.isNullOrEmpty()) {
                     binding.tvWeight.text = "_"
                 } else {
                     binding.tvWeight.text = "${dataProfile!![0].weight} "

@@ -45,7 +45,7 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
 
     override fun addObservers() {
         super.addObservers()
-        viewModelHour.clearAll()
+//        viewModelHour.clearAll()
         viewModel.sleepList.observe(viewLifecycleOwner) { it ->
             list = it
         }
@@ -58,24 +58,24 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
                 }
             }
         }
-        viewModel.item.observe(viewLifecycleOwner) {
-            Log.e("Aaaaa", it.toString())
-            var date = ""
-            var timeWake = ""
-            var timeSleep = ""
-            for (item in it){
-                if (item.value == "Wake"){
-                    date = item.date
-                    timeWake = "${item.date} ${item.time}"
-                } else {
-                    timeSleep = "${item.date} ${item.time}"
-                }
-            }
-            val sleepTime = calculateSleepTime(timeSleep, timeWake)
-            viewModelHour.addSleep(
-                Hour(0, date, convertToDecimalTime(sleepTime.hours, sleepTime.minutes).toString())
-            )
-        }
+//        viewModel.item.observe(viewLifecycleOwner) {
+//            Log.e("Aaaaa", it.toString())
+//            var date = ""
+//            var timeWake = ""
+//            var timeSleep = ""
+//            for (item in it){
+//                if (item.value == "Wake"){
+//                    date = item.date
+//                    timeWake = "${item.date} ${item.time}"
+//                } else {
+//                    timeSleep = "${item.date} ${item.time}"
+//                }
+//            }
+//            val sleepTime = calculateSleepTime(timeSleep, timeWake)
+//            viewModelHour.addSleep(
+//                Hour(0, date, convertToDecimalTime(sleepTime.hours, sleepTime.minutes).toString())
+//            )
+//        }
     }
 
     fun calculateSleepTime(startTime: String, endTime: String): SleepTrackerActivity.SleepTime {

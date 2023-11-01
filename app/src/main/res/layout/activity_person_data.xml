@@ -143,49 +143,29 @@
             android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/spinnerGender"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_16dp"
-        android:background="@drawable/bg_edt_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_email">
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:translationZ="@dimen/size_16dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/view2"
-        app:layout_constraintEnd_toEndOf="@+id/view2"
-        app:layout_constraintStart_toStartOf="@+id/view2"
-        app:layout_constraintTop_toTopOf="@+id/view2" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size_16dp"
-        android:src="@drawable/ic_gener"
-        app:layout_constraintBottom_toBottomOf="@+id/view2"
-        app:layout_constraintStart_toStartOf="@+id/view2"
-        app:layout_constraintTop_toTopOf="@+id/view2" />
-
-    <TextView
-        android:id="@+id/gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size_16dp"
-        android:fontFamily="@font/poppins"
-        android:text="@string/after_signup_choose_gender"
-        android:textColor="@color/gray_hint"
-        android:textSize="@dimen/text_size_14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/tvGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="@string/gender"
+            android:imeOptions="actionNext"
+            android:inputType="textNoSuggestions"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <View
         android:id="@+id/viewChooseCalender"
@@ -195,7 +175,7 @@
         android:background="@drawable/bg_edt_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerGender" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -241,6 +221,7 @@
             android:background="@drawable/bg_edt_login"
             android:enabled="false"
             android:hint="@string/your_weight"
+            android:singleLine="true"
             android:inputType="number"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
@@ -283,6 +264,7 @@
             android:background="@drawable/bg_edt_login"
             android:enabled="false"
             android:hint="@string/your_height"
+            android:singleLine="true"
             android:inputType="number"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
@@ -303,13 +285,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/layoutYourHeight" />
 
-    <Button
-        android:id="@+id/btnDemo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/view"
@@ -337,4 +312,34 @@
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <View
+        android:id="@+id/view2Update"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
+        android:visibility="gone"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/bg_button_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutYourHeight" />
+
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Update Account"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view2Update"
+        app:layout_constraintEnd_toEndOf="@+id/view2Update"
+        app:layout_constraintStart_toStartOf="@+id/view2Update"
+        app:layout_constraintTop_toTopOf="@+id/view2Update" />
 </androidx.constraintlayout.widget.ConstraintLayout>

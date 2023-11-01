@@ -26,9 +26,10 @@ class RepositoryApi {
         tall: String,
         weight: String,
         firstname: String,
-        lastname: String
+        lastname: String,
+        progess : Int
     ): Response<BaseResponse<String>> {
-        return ApiClient.API.updateUserInfo(email, gender, age, tall, weight, firstname, lastname)
+        return ApiClient.API.updateUserInfo(email, gender, age, tall, weight, firstname, lastname,progess)
     }
 
     suspend fun login(email: String, password: String): Response<UserLoginResponse> {

@@ -1,6 +1,7 @@
 package com.tta.fitnessapplication.view.login
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
@@ -132,6 +133,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     private fun login(email: String, password: String) {
+        Log.e("email",email)
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -139,6 +141,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     val user: FirebaseUser? = auth.currentUser
                     // Proceed with the authenticated user
                     // ...
+                    Log.e("email",user!!.email.toString())
                     mainViewModel.getUserData(user!!.email.toString())
                 } else {
                     // Login failed, display a message to the user

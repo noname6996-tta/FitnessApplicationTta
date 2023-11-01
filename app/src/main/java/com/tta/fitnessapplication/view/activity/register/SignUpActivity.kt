@@ -130,7 +130,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
                     AwesomeDialog.build(this)
                         .title("Notification !")
                         .body("Register success, but i need some information for your profiles")
-                        .icon(R.drawable.alarm_clock)
+                        .icon(R.drawable.graph)
                         .onPositive("ok") {
                             startActivity(Intent(this, AfterSigUpActivity::class.java))
                             finish()

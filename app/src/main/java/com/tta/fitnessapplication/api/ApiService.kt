@@ -56,7 +56,8 @@ interface ApiService {
         @Query("tall") tall: String,
         @Query("weight") weight: String,
         @Query("firstname") firstname: String,
-        @Query("lastname") lastname: String
+        @Query("lastname") lastname: String,
+        @Query("progess") progess: Int
     ): Response<BaseResponse<String>>
 
     @GET(ApiPath.FULLBODY)

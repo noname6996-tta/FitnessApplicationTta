@@ -58,7 +58,8 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
         tall: String,
         weight: String,
         firstname: String,
-        lastname: String
+        lastname: String,
+        progess : Int
     ) {
         viewModelScope.launch {
             runCatching {
@@ -70,7 +71,8 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
                         tall,
                         weight,
                         firstname,
-                        lastname
+                        lastname,
+                        progess
                     )
                 }
             }
@@ -82,7 +84,8 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
                         tall,
                         weight,
                         firstname,
-                        lastname
+                        lastname,
+                        progess
                     )
                 }
                 .onFailure {

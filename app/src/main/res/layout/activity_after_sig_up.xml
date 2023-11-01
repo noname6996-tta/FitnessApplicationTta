@@ -127,6 +127,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edt_login"
                     android:hint="@string/your_weight"
+                    android:maxLength="3"
+                    android:inputType="number"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black" />
@@ -169,6 +171,8 @@
                     android:background="@drawable/bg_edt_login"
                     android:hint="@string/your_height"
                     android:singleLine="true"
+                    android:inputType="number"
+                    android:maxLength="3"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>

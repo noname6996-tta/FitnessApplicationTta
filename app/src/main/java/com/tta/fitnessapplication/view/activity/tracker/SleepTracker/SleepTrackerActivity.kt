@@ -34,17 +34,6 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
         return ActivitySleepTrackerBinding.inflate(layoutInflater)
     }
 
-    override fun initView() {
-        super.initView()
-        binding.chart.viewColume1.setProgress(0)
-        binding.chart.viewColume2.setProgress(0)
-        binding.chart.viewColume3.setProgress(0)
-        binding.chart.viewColume4.setProgress(0)
-        binding.chart.viewColume5.setProgress(0)
-        binding.chart.viewColume6.setProgress(0)
-        binding.chart.viewColume7.setProgress(0)
-    }
-
     override fun initViewModel() {
         super.initViewModel()
         viewModelNoti = ViewModelProvider(this)[NewNotificationViewModel::class.java]
@@ -55,7 +44,7 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
 
     override fun addObservers() {
         super.addObservers()
-        viewModelHour.clearAll()
+//        viewModelHour.clearAll()
         viewModelNoti.readAllData.observe(viewLifecycleOwner) {
             for (item in it) {
                 if (item.type == 2) {
@@ -124,6 +113,7 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
         }
 
         viewModelHour.readAllData.observe(viewLifecycleOwner) {
+            Log.e("ttttttt",it.toString())
             val listDataChart = arrayOf(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
             for (item in it) {
                 for (i in 0 until getWeekDates().size) {
@@ -131,9 +121,6 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
                         listDataChart[i] = item.time.toDouble() + listDataChart[i]
                     }
                 }
-            }
-            for (item in listDataChart){
-                Log.e("dsdsss",item.toString())
             }
             binding.chart.viewColume1.setProgress((listDataChart[0] * 10).toInt())
             binding.chart.viewColume2.setProgress((listDataChart[1] * 10).toInt())
@@ -167,6 +154,7 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
                 }
             }
             val sleepTime = calculateSleepTime(timeSleep, timeWake)
+            viewModelHour.clearAll()
             viewModelHour.addSleep(
                 Hour(0, date, convertToDecimalTime(sleepTime.hours, sleepTime.minutes).toString())
             )
