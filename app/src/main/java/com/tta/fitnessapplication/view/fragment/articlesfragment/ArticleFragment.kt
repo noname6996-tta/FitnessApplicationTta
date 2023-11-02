@@ -2,6 +2,7 @@ package com.tta.fitnessapplication.view.fragment.articlesfragment
 
 import android.content.Intent
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tta.fitnessapplication.data.model.Article
 import com.tta.fitnessapplication.data.model.Video
 import com.tta.fitnessapplication.databinding.FragmentHistoryBinding
@@ -20,9 +21,11 @@ class ArticleFragment : BaseFragment<FragmentHistoryBinding>() {
     override fun initView() {
         super.initView()
         binding.recyclerView.adapter = adapterVideo
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.recyclerView.layoutManager = layoutManager
         binding.recArticles.adapter = adapterArticle
-        binding.recArticles.layoutManager = GridLayoutManager(requireContext(), 2)
+        val layoutManager1 = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.recArticles.layoutManager = layoutManager1
     }
 
     override fun addEvent() {
@@ -41,6 +44,12 @@ class ArticleFragment : BaseFragment<FragmentHistoryBinding>() {
             var intent = Intent(requireContext(), MapsActivity::class.java)
             startActivity(intent)
         }
+        binding.tvSeeMoreArticle.setOnClickListener {
+
+        }
+        binding.tvSeeMoreVideo.setOnClickListener {
+
+        }
     }
 
     override fun initViewModel() {
@@ -53,12 +62,12 @@ class ArticleFragment : BaseFragment<FragmentHistoryBinding>() {
         super.addObservers()
         mainViewModel.listVideo.observe(viewLifecycleOwner) {
             arrayVideo.clear()
-            arrayVideo.addAll(it)
+            arrayVideo.addAll(it.take(5))
             adapterVideo.setImageList(arrayVideo, requireContext())
         }
         mainViewModel.listArticle.observe(viewLifecycleOwner) {
             arrayArticle.clear()
-            arrayArticle.addAll(it)
+            arrayArticle.addAll(it.take(5))
             adapterArticle.setImageList(arrayArticle, requireContext())
         }
     }

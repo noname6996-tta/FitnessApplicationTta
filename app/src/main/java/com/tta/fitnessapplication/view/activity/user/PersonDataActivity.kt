@@ -48,15 +48,15 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
         binding.edtEmail.setText(user.email)
         binding.tvAge.text = user.age.toString()
         val position = adapter.getPosition(user.gender)
-        binding.spinner.setSelection(position)
+//        binding.spinner.setSelection(position)
     }
 
     override fun initView() {
         super.initView()
-        adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerData)
-        binding.spinner.onItemSelectedListener = this
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinner.adapter = adapter
+//        adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerData)
+//        binding.spinner.onItemSelectedListener = this
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//        binding.spinner.adapter = adapter
     }
 
     override fun addEvent() {
@@ -69,8 +69,8 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
             binding.edtYourHeight.isEnabled = false
             binding.edtYourWeight.isEnabled = false
             binding.edtEmail.isEnabled = false
-            binding.spinner.isEnabled = false
-            binding.spinner.visibility = View.GONE
+//            binding.spinner.isEnabled = false
+//            binding.spinner.visibility = View.GONE
             val emailUser = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
             mainViewModel.updateProfile(
                 emailUser,
@@ -95,10 +95,10 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
             binding.edtYourHeight.isEnabled = true
             binding.edtYourWeight.isEnabled = true
             binding.edtEmail.isEnabled = false
-            binding.spinner.isEnabled = true
-            binding.gender.visibility = View.GONE
-            binding.imageView3.visibility = View.GONE
-            binding.spinner.visibility = View.VISIBLE
+//            binding.spinner.isEnabled = true
+//            binding.gender.visibility = View.GONE
+//            binding.imageView3.visibility = View.GONE
+//            binding.spinner.visibility = View.VISIBLE
             binding.view2Update.visibility = View.VISIBLE
             binding.textView12.visibility = View.VISIBLE
             binding.view.visibility = View.GONE

@@ -21,9 +21,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView6"
-                android:layout_width="160dp"
-                android:layout_height="140dp"
-                app:cardCornerRadius="@dimen/size_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -40,15 +39,13 @@
                 android:id="@+id/tvNameArticle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_16dp"
-                android:layout_marginTop="@dimen/size_8dp"
-                android:layout_marginRight="@dimen/size_16dp"
+                android:layout_margin="@dimen/size_16dp"
                 android:ellipsize="end"
-                android:fontFamily="@font/poppins"
-                android:singleLine="true"
-                android:text="ffafa"
+                android:fontFamily="@font/poppins_semibold"
+                android:maxLines="@integer/material_motion_duration_long_2"
+
                 android:textColor="@color/black"
-                android:textSize="@dimen/size_14dp"
+                android:textSize="@dimen/text_size_16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView6" />
@@ -57,32 +54,26 @@
                 android:id="@+id/tvDescArticle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_16dp"
-                android:layout_marginTop="@dimen/size_4dp"
-                android:layout_marginRight="@dimen/size_16dp"
+                android:layout_margin="@dimen/size_16dp"
                 android:fontFamily="@font/poppins"
                 android:text="5 mins read"
                 android:textColor="@color/gray1"
-                android:textSize="@dimen/size_12dp"
+                android:textSize="@dimen/text_size_14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvNameArticle" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <TextView
                 android:id="@+id/btnRead"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_8dp"
-                android:layout_marginRight="@dimen/size_8dp"
-                android:background="@drawable/bg_button_radius"
                 android:fontFamily="@font/poppins_bold"
+                android:padding="@dimen/size_16dp"
                 android:text="Read"
-                android:layout_marginTop="@dimen/size_16dp"
-                android:layout_marginBottom="@dimen/size_16dp"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
+                android:textColor="@color/colorDekraYellow"
+                android:textSize="@dimen/text_size_16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescArticle" />
         </androidx.constraintlayout.widget.ConstraintLayout>

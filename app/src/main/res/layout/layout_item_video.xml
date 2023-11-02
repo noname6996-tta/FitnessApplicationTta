@@ -22,7 +22,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardImage"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="180dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -49,13 +49,13 @@
                 android:id="@+id/tvVideoName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size_8dp"
+                android:layout_margin="@dimen/size_16dp"
                 android:ellipsize="end"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_semibold"
                 android:singleLine="true"
                 android:text="some video fun"
                 android:textColor="@color/black"
-                android:textSize="@dimen/size_14dp"
+                android:textSize="@dimen/text_size_16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardImage" />
@@ -64,17 +64,30 @@
                 android:id="@+id/tvVideoDesc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size_8dp"
+                android:layout_margin="@dimen/size_16dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/poppins"
                 android:singleLine="true"
                 android:text="some video fun"
                 android:textColor="@color/gray1"
-                android:textSize="@dimen/size_12dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="@dimen/text_size_14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvVideoName" />
+
+            <TextView
+                android:id="@+id/btnRead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:padding="@dimen/size_16dp"
+                android:text="Watch Video"
+                android:textAllCaps="false"
+                android:textColor="@color/colorDekraYellow"
+                android:textSize="@dimen/text_size_16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvVideoDesc" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
