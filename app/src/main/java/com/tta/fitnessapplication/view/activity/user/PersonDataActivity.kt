@@ -6,18 +6,17 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.User
 import com.tta.fitnessapplication.data.utils.Constant
+import com.tta.fitnessapplication.data.utils.hideKeyboard
 import com.tta.fitnessapplication.databinding.ActivityPersonDataBinding
+import com.tta.fitnessapplication.view.activity.tracker.watertracker.watercaculate.Gender
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.util.Calendar
 
-class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
-    AdapterView.OnItemSelectedListener {
-    private lateinit var adapter: ArrayAdapter<String>
-    val spinnerData = arrayOf("Male", "Female")
-    var gender = ""
-    var updateAccount = false
+class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>() {
+    private var gender: Gender = Gender.MALE
     override fun getDataBinding(): ActivityPersonDataBinding {
         return ActivityPersonDataBinding.inflate(layoutInflater)
     }
@@ -47,16 +46,17 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
         binding.edtYourWeight.setText(user.weight)
         binding.edtEmail.setText(user.email)
         binding.tvAge.text = user.age.toString()
-        val position = adapter.getPosition(user.gender)
-//        binding.spinner.setSelection(position)
     }
 
     override fun initView() {
         super.initView()
-//        adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerData)
-//        binding.spinner.onItemSelectedListener = this
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        binding.spinner.adapter = adapter
+        val gender = resources.getStringArray(R.array.Gender)
+        val adapterGender =
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, gender)
+        binding.tvGender.setOnClickListener {
+            this.hideKeyboard()
+        }
+        binding.tvGender.setAdapter(adapterGender)
     }
 
     override fun addEvent() {
@@ -69,23 +69,40 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
             binding.edtYourHeight.isEnabled = false
             binding.edtYourWeight.isEnabled = false
             binding.edtEmail.isEnabled = false
-//            binding.spinner.isEnabled = false
-//            binding.spinner.visibility = View.GONE
-            val emailUser = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
-            mainViewModel.updateProfile(
-                emailUser,
-                "Male",
-                "22",
-                binding.edtYourHeight.text.toString().trim(),
-                binding.edtYourWeight.text.toString().trim(),
-                binding.edtUsernameFirstname.text.toString().trim(),
-                binding.edtUsernameLastname.text.toString().trim(),
-                0
-            )
+//            val emailUser = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
+//            mainViewModel.updateProfile(
+//                emailUser,
+//                "Male",
+//                "22",
+//                binding.edtYourHeight.text.toString().trim(),
+//                binding.edtYourWeight.text.toString().trim(),
+//                binding.edtUsernameFirstname.text.toString().trim(),
+//                binding.edtUsernameLastname.text.toString().trim(),
+//                0
+//            )
             binding.view2Update.visibility = View.GONE
             binding.textView12.visibility = View.GONE
             binding.view.visibility = View.VISIBLE
             binding.textView10.visibility = View.VISIBLE
+            binding.tvGender.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    gender = if (position == 0) {
+                        Gender.MALE
+                    } else {
+                        Gender.FEMALE
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    gender = Gender.MALE
+                }
+            }
         }
 
         binding.view.setOnClickListener {
@@ -95,10 +112,6 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
             binding.edtYourHeight.isEnabled = true
             binding.edtYourWeight.isEnabled = true
             binding.edtEmail.isEnabled = false
-//            binding.spinner.isEnabled = true
-//            binding.gender.visibility = View.GONE
-//            binding.imageView3.visibility = View.GONE
-//            binding.spinner.visibility = View.VISIBLE
             binding.view2Update.visibility = View.VISIBLE
             binding.textView12.visibility = View.VISIBLE
             binding.view.visibility = View.GONE
@@ -120,13 +133,4 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>(),
             findNavController().popBackStack()
         }
     }
-
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        gender = p0?.getItemAtPosition(p2).toString()
-    }
-
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        gender = "Male"
-    }
-
 }

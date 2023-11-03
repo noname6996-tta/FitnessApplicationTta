@@ -1,7 +1,11 @@
 package com.tta.fitnessapplication.view.base
 
+import android.app.Dialog
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -17,6 +21,7 @@ import com.tta.fitnessapplication.view.MainViewModelFactory
 abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     private var _binding: T? = null
     private var isConnect = false
+    private lateinit var dialog: Dialog
     protected val binding: T
         get() = checkNotNull(_binding) {
             "Activity $this binding cannot be accessed before onCreateView() or after onDestroyView()"
@@ -30,6 +35,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = getDataBinding()
         setContentView(binding.root)
+        setupLoading()
         loginPreferences = getSharedPreferences(
             Constant.LOGIN_PREFS, AppCompatActivity.MODE_PRIVATE
         )
@@ -69,5 +75,20 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun setupLoading() {
+        dialog = Dialog(this)
+        dialog.setCancelable(false)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(ProgressBar(this))
+    }
+
+    fun showLoading() {
+        dialog.show() // to show this dialog
+    }
+
+    fun hideLoading() {
+        dialog.dismiss() // to hide this dialog
     }
 }

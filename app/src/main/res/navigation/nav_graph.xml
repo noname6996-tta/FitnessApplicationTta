@@ -38,7 +38,14 @@
         android:id="@+id/historyFragment"
         android:name="com.tta.fitnessapplication.view.fragment.articlesfragment.ArticleFragment"
         android:label="HistoryFragment"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_fragmentMoreArticle"
+            app:destination="@id/fragmentMoreArticle" />
+        <action
+            android:id="@+id/action_historyFragment_to_fragmentMoreVideo"
+            app:destination="@id/fragmentMoreVideo" />
+    </fragment>
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.tta.fitnessapplication.view.fragment.SettingFragment"
@@ -271,4 +278,14 @@
         android:id="@+id/caloCalculateFragment"
         android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.CaloCalculateFragment"
         android:label="CaloCalculateFragment" />
+    <fragment
+        tools:layout="@layout/fragment_more_article"
+        android:id="@+id/fragmentMoreArticle"
+        android:name="com.tta.fitnessapplication.view.fragment.articlesfragment.FragmentMoreArticle"
+        android:label="FragmentMoreArticle" />
+    <fragment
+        tools:layout="@layout/fragment_more_video"
+        android:id="@+id/fragmentMoreVideo"
+        android:name="com.tta.fitnessapplication.view.fragment.articlesfragment.FragmentMoreVideo"
+        android:label="FragmentMoreVideo" />
 </navigation>

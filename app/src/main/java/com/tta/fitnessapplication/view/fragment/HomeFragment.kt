@@ -56,6 +56,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initViewModel() {
         super.initViewModel()
+        showLoading()
+        val emailUser = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
+        val idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
+        mainViewModel.getUserData(emailUser)
         historyViewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
         historyViewModel.getWaterListByDate(Constant.DATE.fullDateFormatter.format(today))
         Fitness.getRecordingClient(
@@ -200,9 +204,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun addObservers() {
         super.addObservers()
-        val emailUser = loginPreferences.getString(Constant.EMAIL_USER, "").toString()
-        val idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
-        mainViewModel.getUserData(emailUser)
         mainViewModel.dataExercise.observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
                 val dataProfile = mainViewModel.dataExercise.value?.body()?.data
@@ -231,6 +232,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             } else {
                 Log.e("tta", it.errorBody().toString())
             }
+            hideLoading()
         }
 
         historyViewModel.historyList.observe(viewLifecycleOwner) {

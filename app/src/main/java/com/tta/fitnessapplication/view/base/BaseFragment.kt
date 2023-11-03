@@ -1,10 +1,14 @@
 package com.tta.fitnessapplication.view.base
 
+import android.app.Dialog
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -28,6 +32,7 @@ import com.tta.fitnessapplication.view.MainViewModelFactory
 
 abstract class BaseFragment<T : ViewBinding> : Fragment() {
     private var _binding: T? = null
+    private lateinit var dialog: Dialog
     protected var isConnect = false
     protected val binding: T
         get() = checkNotNull(_binding) {
@@ -60,6 +65,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupLoading()
         loginPreferences = requireActivity().getSharedPreferences(
             Constant.LOGIN_PREFS, AppCompatActivity.MODE_PRIVATE
         )
@@ -104,5 +110,20 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
                 }
             }
         })
+    }
+
+    private fun setupLoading() {
+        dialog = Dialog(requireContext())
+        dialog.setCancelable(false)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(ProgressBar(requireContext()))
+    }
+
+    fun showLoading() {
+        dialog.show() // to show this dialog
+    }
+
+    fun hideLoading() {
+        dialog.dismiss() // to hide this dialog
     }
 }
