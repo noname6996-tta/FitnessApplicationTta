@@ -1,8 +1,9 @@
 package com.tta.fitnessapplication.view.fragment.articlesfragment
 
 import android.content.Intent
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.Article
 import com.tta.fitnessapplication.data.model.Video
 import com.tta.fitnessapplication.databinding.FragmentHistoryBinding
@@ -18,13 +19,16 @@ class ArticleFragment : BaseFragment<FragmentHistoryBinding>() {
     override fun getDataBinding(): FragmentHistoryBinding {
         return FragmentHistoryBinding.inflate(layoutInflater)
     }
+
     override fun initView() {
         super.initView()
         binding.recyclerView.adapter = adapterVideo
-        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.layoutManager = layoutManager
         binding.recArticles.adapter = adapterArticle
-        val layoutManager1 = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val layoutManager1 =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.recArticles.layoutManager = layoutManager1
     }
 
@@ -45,10 +49,10 @@ class ArticleFragment : BaseFragment<FragmentHistoryBinding>() {
             startActivity(intent)
         }
         binding.tvSeeMoreArticle.setOnClickListener {
-
+            findNavController().navigate(R.id.action_historyFragment_to_fragmentMoreArticle)
         }
         binding.tvSeeMoreVideo.setOnClickListener {
-
+            findNavController().navigate(R.id.action_historyFragment_to_fragmentMoreVideo)
         }
     }
 

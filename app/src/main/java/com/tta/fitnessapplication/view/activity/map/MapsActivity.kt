@@ -123,6 +123,7 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
                     MarkerOptions()
                         .position(location)
                         .title(item.name)
+                        .snippet(item.address)
                 )
             }
         }
