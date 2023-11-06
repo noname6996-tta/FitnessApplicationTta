@@ -2,20 +2,14 @@ package com.tta.fitnessapplication.view
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.navigateUp
@@ -46,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var navHostFragment: NavHostFragment
     private lateinit var binding: ActivityMainBinding
-    val viewModelNoti : NotificationViewModel by viewModels()
+    val viewModelNoti: NotificationViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -58,20 +52,27 @@ class MainActivity : AppCompatActivity() {
                 this, // your activity
                 1, // e.g. 1
                 account,
-                fitnessOptions)
+                fitnessOptions
+            )
         } else {
             accessGoogleFit()
         }
 
-        if (GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(this), fitnessOptions)) {
+        if (GoogleSignIn.hasPermissions(
+                GoogleSignIn.getLastSignedInAccount(this),
+                fitnessOptions
+            )
+        ) {
             // The user has granted permission, make the API request
 
         } else {
             // The user has not granted permission, request it
-            val signInClient = GoogleSignIn.getClient(this,
+            val signInClient = GoogleSignIn.getClient(
+                this,
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .addExtension(fitnessOptions)
-                    .build())
+                    .build()
+            )
             startActivityForResult(signInClient.signInIntent, 1)
         }
     }
@@ -155,6 +156,7 @@ class MainActivity : AppCompatActivity() {
                     // Result wasn't from Google Fit
                 }
             }
+
             else -> {
                 // Permission not granted
             }

@@ -19,10 +19,12 @@ import com.google.android.gms.fitness.Fitness
 import com.google.android.gms.fitness.FitnessOptions
 import com.google.android.gms.fitness.data.DataType
 import com.google.android.gms.fitness.request.DataReadRequest
+import com.google.firebase.auth.FirebaseAuth
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.databinding.ActivitySplashBinding
 import com.tta.fitnessapplication.view.MainActivity
+import com.tta.fitnessapplication.view.login.LoginActivity
 import com.tta.fitnessapplication.view.onboarding.OnBoardActivity
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -57,8 +59,32 @@ class SplashActivity : AppCompatActivity() {
         loginPrefsEditor = loginPreferences.edit()
         saveLogin = loginPreferences.getBoolean(Constant.SAVE_USER, false)
         if (saveLogin) {
-            startActivity(Intent(this, MainActivity::class.java))
-            this.finish()
+            val auth = FirebaseAuth.getInstance()
+            val currentUser = auth.currentUser
+
+            if (currentUser != null) {
+                // User is logged in
+                // Perform any necessary actions for a logged-in user
+                startActivity(Intent(this, MainActivity::class.java))
+                this.finish()
+            } else {
+                // User is not logged in
+                // Perform any necessary actions for a non-logged-in user
+                loginPreferences =
+                    this.getSharedPreferences(
+                        Constant.LOGIN_PREFS,
+                        AppCompatActivity.MODE_PRIVATE
+                    )
+                loginPrefsEditor = loginPreferences.edit()
+                loginPrefsEditor.remove(Constant.SAVE_USER)
+                loginPrefsEditor.remove(Constant.PREF.IDUSER)
+                loginPrefsEditor.remove(Constant.EMAIL_USER)
+                loginPrefsEditor.commit()
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,

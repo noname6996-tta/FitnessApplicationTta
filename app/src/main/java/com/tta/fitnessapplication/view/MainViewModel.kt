@@ -12,7 +12,6 @@ import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.UserLoginResponse
 import com.tta.fitnessapplication.data.model.Video
-import com.tta.fitnessapplication.data.model.map.ModelMap
 import com.tta.fitnessapplication.data.model.map.ResponseMap
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import kotlinx.coroutines.Dispatchers
@@ -59,7 +58,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
         weight: String,
         firstname: String,
         lastname: String,
-        progess : Int
+        progess: Int
     ) {
         viewModelScope.launch {
             runCatching {
@@ -85,6 +84,31 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
                         weight,
                         firstname,
                         lastname,
+                        progess
+                    )
+                }
+                .onFailure {
+                    error.value = it.toString()
+                }
+        }
+    }
+
+    fun updateUserProgess(
+        email: String,
+        progess: Int
+    ) {
+        viewModelScope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    repositoryApi.updateUserProgess(
+                        email,
+                        progess
+                    )
+                }
+            }
+                .onSuccess {
+                    updateUser.value = repositoryApi.updateUserProgess(
+                        email,
                         progess
                     )
                 }

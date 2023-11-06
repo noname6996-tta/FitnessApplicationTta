@@ -81,8 +81,8 @@
     <string name="notification">Notification</string>
     //
     <string-array name="Gender">
-        <item>MALE</item>
-        <item>FEMALE</item>
+        <item>Male</item>
+        <item>Female</item>
     </string-array>
     <string-array name="ActivityLevel">
         <item>SEDENTARY</item>

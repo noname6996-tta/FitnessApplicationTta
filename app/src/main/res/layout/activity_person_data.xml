@@ -149,6 +149,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_16dp"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_email">
@@ -221,8 +222,8 @@
             android:background="@drawable/bg_edt_login"
             android:enabled="false"
             android:hint="@string/your_weight"
-            android:singleLine="true"
             android:inputType="number"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -264,8 +265,8 @@
             android:background="@drawable/bg_edt_login"
             android:enabled="false"
             android:hint="@string/your_height"
-            android:singleLine="true"
             android:inputType="number"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -319,10 +320,10 @@
         android:layout_height="60dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="40dp"
-        android:visibility="gone"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/bg_button_radius"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -335,9 +336,9 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
         android:text="Update Account"
-        android:visibility="gone"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_16sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/view2Update"
         app:layout_constraintEnd_toEndOf="@+id/view2Update"
         app:layout_constraintStart_toStartOf="@+id/view2Update"

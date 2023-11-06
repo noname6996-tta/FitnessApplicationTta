@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.databinding.ActivitySignUpBinding
 import com.tta.fitnessapplication.view.base.BaseActivity
 import com.tta.fitnessapplication.view.login.LoginActivity
@@ -107,6 +108,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
             } else {
                 binding.progessBarLogin.visibility = View.VISIBLE
                 mainViewModel.register(email, password, firstName, lastName)
+                loginPrefsEditor.putString(Constant.EMAIL_USER, email)
+                loginPrefsEditor.commit()
             }
         }
         binding.textView3.setOnClickListener {

@@ -12,8 +12,10 @@ import com.google.firebase.ktx.Firebase
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.Companion.BASE_URL
+import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_USER
 import com.tta.fitnessapplication.databinding.FragmentSettingBinding
 import com.tta.fitnessapplication.view.activity.WebViewActivity
+import com.tta.fitnessapplication.view.activity.chooseprogess.ChooseProgessActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
 import com.tta.fitnessapplication.view.login.LoginActivity
 
@@ -33,7 +35,15 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
                 var dataProfile = mainViewModel.dataExercise.value?.body()?.data
                 binding.tvUserName.text =
                     "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
-                binding.tvGenderUser.text = "${dataProfile!![0].gender} "
+                when(dataProfile!![0].progess){
+                    // 0 : Improve Shape
+                    // 1 : Lean & Tone
+                    // 2 : Lose a Fat
+                    0 -> binding.tvGenderUser.text = "Improve Shape Program"
+                    1 -> binding.tvGenderUser.text = "Lean & Tone Program"
+                    2 -> binding.tvGenderUser.text = "Lose a Fat Program"
+                }
+//                binding.tvGenderUser.text = "${dataProfile!![0].gender} "
                 if (dataProfile!![0].tall == "" || dataProfile!![0].tall.isNullOrEmpty()) {
                     binding.tvHeight.text = "_"
                 } else {
@@ -63,13 +73,9 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
                     .setMessage("Bạn có muốn đăng xuất không ?")
                     .setPositiveButton("Có",
                         DialogInterface.OnClickListener { _, _ ->
-                            loginPreferences =
-                                requireActivity().getSharedPreferences(
-                                    Constant.LOGIN_PREFS,
-                                    AppCompatActivity.MODE_PRIVATE
-                                )
-                            loginPrefsEditor = loginPreferences.edit()
-                            loginPrefsEditor.clear()
+                            loginPrefsEditor.remove(SAVE_USER)
+                            loginPrefsEditor.remove(Constant.PREF.IDUSER)
+                            loginPrefsEditor.remove(Constant.EMAIL_USER)
                             loginPrefsEditor.commit()
                             FirebaseAuth.getInstance().signOut()
                             val intent = Intent(requireContext(), LoginActivity::class.java)
@@ -119,6 +125,12 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
             viewPersonData.setOnClickListener {
                 findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToPersonDataActivity())
+            }
+
+            view15.setOnClickListener {
+                val intent = Intent(requireActivity(),ChooseProgessActivity::class.java)
+                intent.putExtra("CHOOSE_PROCESS", 0)
+                startActivity(intent)
             }
         }
     }

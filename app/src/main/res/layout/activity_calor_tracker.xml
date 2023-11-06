@@ -188,6 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_16dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView67" />
@@ -196,10 +197,9 @@
                 android:id="@+id/tvMeal"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="No Data"
-                android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/recMeal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView67" />
@@ -215,7 +215,7 @@
                 android:textSize="@dimen/text_size_14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recMeal" />
+                app:layout_constraintTop_toBottomOf="@+id/tvMeal" />
 
             <TextView
                 android:id="@+id/textView68"
@@ -242,6 +242,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView68" />
 
+            <TextView
+                android:id="@+id/textView69"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Calculate calories"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recSuggestFood" />
+
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewHistoryWaterTracker"
                 android:layout_width="match_parent"
@@ -249,13 +262,13 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="16dp"
+                android:layout_marginBottom="@dimen/size_24dp"
                 app:cardCornerRadius="@dimen/size_16dp"
                 app:cardElevation="2dp"
-                android:layout_marginBottom="@dimen/size_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recSuggestFood">
+                app:layout_constraintTop_toBottomOf="@+id/textView69">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

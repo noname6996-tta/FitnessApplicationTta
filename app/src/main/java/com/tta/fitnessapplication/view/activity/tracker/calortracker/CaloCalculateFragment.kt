@@ -14,17 +14,12 @@ import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.hideKeyboard
 import com.tta.fitnessapplication.databinding.CaloCalculateFragmentBinding
 import com.tta.fitnessapplication.view.activity.tracker.watertracker.watercaculate.ActivityLevel
-import com.tta.fitnessapplication.view.activity.tracker.watertracker.watercaculate.Climate
 import com.tta.fitnessapplication.view.activity.tracker.watertracker.watercaculate.Gender
-import com.tta.fitnessapplication.view.activity.tracker.watertracker.watercaculate.HealthInformation
-import com.tta.fitnessapplication.view.activity.tracker.watertracker.watercaculate.calculateWaterIntake
 import com.tta.fitnessapplication.view.base.BaseFragment
 
 class CaloCalculateFragment : BaseFragment<CaloCalculateFragmentBinding>() {
     private var gender: Gender = Gender.MALE
-    private var isGender = true
     private var activityLevel: ActivityLevel = ActivityLevel.SEDENTARY
-    private var climate: Climate = Climate.COLD
     var value = ""
 
     override fun getDataBinding(): CaloCalculateFragmentBinding {
@@ -37,18 +32,21 @@ class CaloCalculateFragment : BaseFragment<CaloCalculateFragmentBinding>() {
             btnCalculate.setOnClickListener {
                 var weight = edtWeight.text.toString().trim()
                 if (weight.isNotEmpty()) {
-                    var healthInformation: HealthInformation = HealthInformation(
-                        age = 22,
-                        gender = gender,
-                        weight = edtWeight.text.toString().trim().toDouble(),
-                        climate = climate,
-                        activityLevel = activityLevel
-                    )
-                    value = (calculateWaterIntake(healthInformation) * 10).toInt().toString()
-                    if (!value.isNullOrEmpty()) {
+                    var a = when (activityLevel) {
+                        ActivityLevel.SEDENTARY -> 1.0
+                        ActivityLevel.MODERATE -> 1.2
+                        ActivityLevel.ACTIVE -> 1.5
+                    }
+                    var isMale = true
+                    isMale = gender != Gender.FEMALE
+                    var weight = edtWeight.text.toString().trim().toDouble()
+                    var height = edtHeight.text.toString().trim().toDouble()
+                    var result = calculateDailyCalories(weight, height, 22, isMale, a)
+
+                    if (result != 0.0){
                         btnSaveDailyWater.visibility = View.VISIBLE
                         tvTitleShouldDrink.visibility = View.VISIBLE
-                        tvTitleShouldDrink.text = "You should dink: $value ml"
+                        tvTitleShouldDrink.text = "You should eat: $result calo"
                         btnCalculate.visibility = View.GONE
                     }
                 } else {
@@ -121,14 +119,11 @@ class CaloCalculateFragment : BaseFragment<CaloCalculateFragmentBinding>() {
         super.initView()
         val gender = resources.getStringArray(R.array.Gender)
         val activityLevel = resources.getStringArray(R.array.ActivityLevel)
-        val climate = resources.getStringArray(R.array.Climate)
 
         val adapterGender =
             ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, gender)
         val adapterActivityLevel =
             ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, activityLevel)
-        val adapterClimate =
-            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, climate)
         binding.spinnerFitness.setOnClickListener {
             this.hideKeyboard()
         }

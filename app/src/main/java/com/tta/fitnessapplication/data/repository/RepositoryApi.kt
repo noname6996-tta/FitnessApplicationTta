@@ -10,7 +10,6 @@ import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.ResponseVideo
 import com.tta.fitnessapplication.data.model.UserLoginResponse
-import com.tta.fitnessapplication.data.model.map.ModelMap
 import com.tta.fitnessapplication.data.model.map.ResponseMap
 import retrofit2.Response
 
@@ -27,9 +26,25 @@ class RepositoryApi {
         weight: String,
         firstname: String,
         lastname: String,
-        progess : Int
+        progess: Int
     ): Response<BaseResponse<String>> {
-        return ApiClient.API.updateUserInfo(email, gender, age, tall, weight, firstname, lastname,progess)
+        return ApiClient.API.updateUserInfo(
+            email,
+            gender,
+            age,
+            tall,
+            weight,
+            firstname,
+            lastname,
+            progess
+        )
+    }
+
+    suspend fun updateUserProgess(
+        email: String,
+        progess: Int
+    ): Response<BaseResponse<String>> {
+        return ApiClient.API.updateUserProgess(email, progess)
     }
 
     suspend fun login(email: String, password: String): Response<UserLoginResponse> {
@@ -87,7 +102,7 @@ class RepositoryApi {
         return ApiClient.API.getFoodByID(id)
     }
 
-    suspend fun getDataMap(lat: Double,lng : Double,radius : String) : Response<ResponseMap> {
+    suspend fun getDataMap(lat: Double, lng: Double, radius: String): Response<ResponseMap> {
         return ApiClient.API.getListMap(lat, lng, radius)
     }
 }

@@ -60,6 +60,12 @@ interface ApiService {
         @Query("progess") progess: Int
     ): Response<BaseResponse<String>>
 
+    @POST(ApiPath.UPDATE_USER_PROGESS)
+    suspend fun updateUserProgess(
+        @Query("email") email: String,
+        @Query("progess") progess: Int
+    ): Response<BaseResponse<String>>
+
     @GET(ApiPath.FULLBODY)
     fun getFullBody(): Call<ResponseFullBody>
 

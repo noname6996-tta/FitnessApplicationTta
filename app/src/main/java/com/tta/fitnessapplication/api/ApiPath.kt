@@ -17,6 +17,7 @@ object ApiPath {
     const val INSERT_USER = "/user/insertUser.php"
     const val USER_INFO = "/user/getAllData.php"
     const val UPDATE_USER = "/user/update.php"
+    const val UPDATE_USER_PROGESS = "user/update_progess.php"
     const val FULLBODY = "/exercise/fullbody/getAllData.php"
     const val SELECT_FULLBODY = "/exercise/fullbody/selectDay.php"
     const val DEMO = "XDjAzlDHSSsEEyxi/aggregatesDatasets"
