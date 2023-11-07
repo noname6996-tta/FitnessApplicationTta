@@ -15,7 +15,7 @@ class ItemTodayMealAdapter :
     private var listSomeThingToEat: List<Meal> = listOf()
     private lateinit var context: Context
 
-    fun setListExercise(listSomeThingToEat: List<Meal> , context: Context) {
+    fun setListMeal(listSomeThingToEat: List<Meal> , context: Context) {
         this.listSomeThingToEat = listSomeThingToEat
         this.context = context
         notifyDataSetChanged()
@@ -66,7 +66,7 @@ class ItemTodayMealAdapter :
             }
             holder.binding.btnEat.setOnClickListener {
                 onClickUpdateData?.let {
-                    it(someThingToEat.id)
+                    it(someThingToEat.id_task)
                 }
             }
         }

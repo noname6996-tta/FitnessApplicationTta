@@ -69,7 +69,7 @@ class CaloCalculateFragment : BaseFragment<CaloCalculateFragmentBinding>() {
                     .title("Notification")
                     .body("Done")
                     .onPositive("ok") {
-
+                        findNavController().popBackStack()
                     }
                     .position(AwesomeDialog.POSITIONS.CENTER)
             }

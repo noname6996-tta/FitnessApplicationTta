@@ -135,9 +135,6 @@
         <argument
             android:name="typeNoti"
             app:argType="integer" />
-        <action
-            android:id="@+id/action_notificationActivity_to_updateNotification"
-            app:destination="@id/updateNotification" />
     </fragment>
     <fragment
         android:id="@+id/todayTarget"

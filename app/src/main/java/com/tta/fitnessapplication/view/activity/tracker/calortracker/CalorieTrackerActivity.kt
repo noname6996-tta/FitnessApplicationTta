@@ -1,5 +1,6 @@
 package com.tta.fitnessapplication.view.activity.tracker.calortracker
 
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -12,7 +13,10 @@ import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.Meal
+import com.tta.fitnessapplication.data.utils.Constant
+import com.tta.fitnessapplication.data.utils.getCurrentTime
 import com.tta.fitnessapplication.data.utils.getTimeValue
 import com.tta.fitnessapplication.data.utils.getWeekDates
 import com.tta.fitnessapplication.databinding.ActivityCalorTrackerBinding
@@ -39,13 +43,6 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
 
     override fun addObservers() {
         super.addObservers()
-        mealViewModel.readAllData.observe(viewLifecycleOwner) { meal ->
-            if (meal.isNotEmpty()) {
-                binding.tvMeal.visibility = View.GONE
-                binding.recMeal.visibility = View.VISIBLE
-                mealAdapter.setListExercise(meal, requireContext())
-            }
-        }
         viewModel.readAllData.observe(viewLifecycleOwner){
             val listDataChart = arrayOf(0, 0, 0, 0, 0, 0, 0)
             for (item in it){
@@ -69,18 +66,17 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
         viewModelNotificationViewModel.getCompletedTask().observe(viewLifecycleOwner){
             listMeal.clear()
             for (item in it){
-                listMeal.add(Meal(item.taskInfo.priority,item.taskInfo.foodName,item.taskInfo.category,item.taskInfo.detail,item.taskInfo.time,item.taskInfo.image,item.taskInfo.status))
+                listMeal.add(Meal(item.taskInfo.priority,item.taskInfo.foodName,item.taskInfo.category,item.taskInfo.detail,item.taskInfo.time,item.taskInfo.image,item.taskInfo.status,item.taskInfo.id))
             }
             viewModelNotificationViewModel.getUncompletedTask().observe(viewLifecycleOwner){
                 for (item in it){
-                    listMeal.add(Meal(item.taskInfo.priority,item.taskInfo.foodName,item.taskInfo.category,item.taskInfo.detail,item.taskInfo.time,item.taskInfo.image,item.taskInfo.status))
+                    listMeal.add(Meal(item.taskInfo.priority,item.taskInfo.foodName,item.taskInfo.category,item.taskInfo.detail,item.taskInfo.time,item.taskInfo.image,item.taskInfo.status,item.taskInfo.id))
                 }
                 listMealFinal.clear()
                 listMealFinal.addAll(listMeal)
                 if (listMealFinal.isNotEmpty()){
-                    binding.tvMeal.visibility = View.GONE
                     binding.recMeal.visibility = View.VISIBLE
-                    mealAdapter.setListExercise(listMealFinal,requireContext())
+                    mealAdapter.setListMeal(listMealFinal,requireContext())
                 }
             }
         }
@@ -180,6 +176,18 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
                     if (item.taskInfo.id == id){
                         item.taskInfo.status = true
                         viewModelNotificationViewModel.updateTaskStatus(item.taskInfo)
+                        mealAdapter.notifyDataSetChanged()
+                        // add to history
+                        val history = History(
+                            null,
+                            null,
+                            Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
+                            getCurrentTime(),
+                            item.taskInfo?.description,
+                            4,
+                            item.taskInfo?.category
+                        )
+                        viewModel.addHistory(history)
                     }
                 }
             }

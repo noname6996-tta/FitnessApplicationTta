@@ -16,18 +16,6 @@
             android:background="#FEFEFF">
 
             <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="40dp"
-                android:background="@drawable/bg_brand_gradient"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="@+id/cardView7"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
                 android:id="@+id/viewBack"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
@@ -79,16 +67,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/viewBack" />
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/waterAnimation"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_marginTop="@dimen/size_24dp"
+                android:foregroundGravity="bottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView25"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/food_eat" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/chart1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="@dimen/size_24dp"
                 android:layout_marginRight="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView25">
+                app:layout_constraintTop_toBottomOf="@+id/waterAnimation">
 
                 <include
                     android:id="@+id/chart"
@@ -188,21 +188,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_16dp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView67" />
 
-            <TextView
-                android:id="@+id/tvMeal"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:text="No Data"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView67" />
 
             <Button
                 android:id="@+id/btnAddSomethingToEat"
@@ -215,7 +204,7 @@
                 android:textSize="@dimen/text_size_14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvMeal" />
+                app:layout_constraintTop_toBottomOf="@+id/recMeal" />
 
             <TextView
                 android:id="@+id/textView68"

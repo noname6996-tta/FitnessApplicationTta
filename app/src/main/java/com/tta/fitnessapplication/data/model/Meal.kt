@@ -13,5 +13,6 @@ data class Meal(
     val desc: String,
     var type: Int,
     var image: String? = null,
-    var enable : Boolean
+    var enable : Boolean,
+    var id_task : Int,
 ) : Serializable

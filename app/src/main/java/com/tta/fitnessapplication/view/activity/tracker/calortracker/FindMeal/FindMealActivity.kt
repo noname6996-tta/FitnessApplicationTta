@@ -75,9 +75,9 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
             list.addAll(it)
             categoryAdapter.setListCategoryFood(it,requireContext())
         }
-        listRecommentMeal.add(Meal(1,"buger","350cal","ssss",1,"",false))
+        listRecommentMeal.add(Meal(1,"buger","350cal","ssss",1,"",false,99))
         recommendMealAdapter.setListExercise(listRecommentMeal,requireContext())
-        mealPopular.setListExercise(listRecommentMeal,requireContext())
+        mealPopular.setListMeal(listRecommentMeal,requireContext())
 
     }
 }
