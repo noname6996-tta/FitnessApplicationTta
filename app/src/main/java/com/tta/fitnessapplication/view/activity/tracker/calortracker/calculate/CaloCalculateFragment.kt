@@ -1,8 +1,10 @@
-package com.tta.fitnessapplication.view.activity.tracker.calortracker
+package com.tta.fitnessapplication.view.activity.tracker.calortracker.calculate
 
+import android.app.DatePickerDialog
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.awesomedialog.AwesomeDialog
 import com.example.awesomedialog.body
@@ -16,11 +18,14 @@ import com.tta.fitnessapplication.databinding.CaloCalculateFragmentBinding
 import com.tta.fitnessapplication.view.activity.tracker.watertracker.watercaculate.ActivityLevel
 import com.tta.fitnessapplication.view.activity.tracker.watertracker.watercaculate.Gender
 import com.tta.fitnessapplication.view.base.BaseFragment
+import java.util.Calendar
 
 class CaloCalculateFragment : BaseFragment<CaloCalculateFragmentBinding>() {
     private var gender: Gender = Gender.MALE
     private var activityLevel: ActivityLevel = ActivityLevel.SEDENTARY
     var value = ""
+    var age = 0
+    var result = 0.0
 
     override fun getDataBinding(): CaloCalculateFragmentBinding {
         return CaloCalculateFragmentBinding.inflate(layoutInflater)
@@ -41,9 +46,15 @@ class CaloCalculateFragment : BaseFragment<CaloCalculateFragmentBinding>() {
                     isMale = gender != Gender.FEMALE
                     var weight = edtWeight.text.toString().trim().toDouble()
                     var height = edtHeight.text.toString().trim().toDouble()
-                    var result = calculateDailyCalories(weight, height, 22, isMale, a)
+                    if (age != 0) {
+                        result = calculateDailyCalories(weight, height, age, isMale, a)
+                    } else Toast.makeText(
+                        requireContext(),
+                        "You have to type your age",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-                    if (result != 0.0){
+                    if (result != 0.0) {
                         btnSaveDailyWater.visibility = View.VISIBLE
                         tvTitleShouldDrink.visibility = View.VISIBLE
                         tvTitleShouldDrink.text = "You should eat: $result calo"
@@ -138,5 +149,35 @@ class CaloCalculateFragment : BaseFragment<CaloCalculateFragmentBinding>() {
         }
         binding.tvGender.setAdapter(adapterGender)
         binding.tvFitness.setAdapter(adapterActivityLevel)
+
+        binding.tilinputAge.setOnClickListener {
+            // Get the current date
+            val currentDate = Calendar.getInstance()
+
+            // Create a DatePickerDialog
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
+                DatePickerDialog.OnDateSetListener { _, selectedYear, selectedMonth, selectedDay ->
+                    // Create a calendar instance for the selected date
+                    val selectedDate = Calendar.getInstance().apply {
+                        set(selectedYear, selectedMonth, selectedDay)
+                    }
+
+                    // Calculate the age
+                    age = currentDate.get(Calendar.YEAR) - selectedDate.get(Calendar.YEAR)
+                    binding.edtHeight.setText(age.toString())
+                    // Adjust the age if the current date is before the selected date
+                    if (currentDate.get(Calendar.DAY_OF_YEAR) < selectedDate.get(Calendar.DAY_OF_YEAR)) {
+                        age--
+                    }
+                },
+                currentDate.get(Calendar.YEAR),
+                currentDate.get(Calendar.MONTH),
+                currentDate.get(Calendar.DAY_OF_MONTH)
+            )
+
+            // Show the DatePickerDialog
+            datePickerDialog.show()
+        }
     }
 }

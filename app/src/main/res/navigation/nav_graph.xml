@@ -195,6 +195,9 @@
         <action
             android:id="@+id/action_calorieTrackerActivity_to_caloCalculateFragment"
             app:destination="@id/caloCalculateFragment" />
+        <action
+            android:id="@+id/action_calorieTrackerActivity_to_mealScheduleActivity"
+            app:destination="@id/mealScheduleActivity" />
     </fragment>
     <fragment
         android:id="@+id/updateNotification"
@@ -273,7 +276,7 @@
     <fragment
         tools:layout="@layout/calo_calculate_fragment"
         android:id="@+id/caloCalculateFragment"
-        android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.CaloCalculateFragment"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.calculate.CaloCalculateFragment"
         android:label="CaloCalculateFragment" />
     <fragment
         tools:layout="@layout/fragment_more_article"
@@ -285,4 +288,9 @@
         android:id="@+id/fragmentMoreVideo"
         android:name="com.tta.fitnessapplication.view.fragment.articlesfragment.FragmentMoreVideo"
         android:label="FragmentMoreVideo" />
+    <fragment
+        tools:layout="@layout/activity_meal_schedule"
+        android:id="@+id/mealScheduleActivity"
+        android:name="com.tta.fitnessapplication.view.activity.history.MealScheduleActivity"
+        android:label="MealScheduleActivity" />
 </navigation>

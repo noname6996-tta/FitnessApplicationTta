@@ -6,7 +6,6 @@ import android.graphics.Typeface
 import android.graphics.drawable.ClipDrawable
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,22 +23,19 @@ import com.google.android.gms.fitness.data.DataType
 import com.google.android.gms.fitness.data.Field
 import com.google.android.gms.fitness.request.DataReadRequest
 import com.tta.fitnessapplication.R
-import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.utils.Constant
-import com.tta.fitnessapplication.data.utils.Constant.DATE.fullDateFormatter
 import com.tta.fitnessapplication.data.utils.Constant.DATE.today
 import com.tta.fitnessapplication.data.utils.getWeekDates
 import com.tta.fitnessapplication.databinding.FragmentHomeBinding
 import com.tta.fitnessapplication.view.activity.WebViewActivity
 import com.tta.fitnessapplication.view.activity.history.HistoryAdapter
 import com.tta.fitnessapplication.view.activity.history.HistoryViewModel
-import com.tta.fitnessapplication.view.activity.tracker.calortracker.calculateBMI
-import com.tta.fitnessapplication.view.activity.tracker.calortracker.calculateBMIAndSetText
+import com.tta.fitnessapplication.view.activity.tracker.calortracker.calculate.calculateBMI
+import com.tta.fitnessapplication.view.activity.tracker.calortracker.calculate.calculateBMIAndSetText
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {

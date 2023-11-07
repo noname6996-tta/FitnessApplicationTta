@@ -1,4 +1,4 @@
-package com.tta.fitnessapplication.view.activity.tracker.calortracker
+package com.tta.fitnessapplication.view.activity.tracker.calortracker.calculate
 
 fun calculateBMI(weight: Double, height: Double): Double {
     val heightInMeter = height / 100 // chuyển chiều cao từ cm sang mét

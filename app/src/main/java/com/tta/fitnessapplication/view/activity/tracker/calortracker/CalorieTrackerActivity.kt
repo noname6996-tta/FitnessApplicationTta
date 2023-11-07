@@ -37,6 +37,7 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
     private lateinit var viewModelNotificationViewModel: NotificationViewModel
     private val listMeal = ArrayList<Meal>()
     private val listMealFinal = ArrayList<Meal>()
+    var today = 0
     override fun getDataBinding(): ActivityCalorTrackerBinding {
         return ActivityCalorTrackerBinding.inflate(layoutInflater)
     }
@@ -47,6 +48,7 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
             val listDataChart = arrayOf(0, 0, 0, 0, 0, 0, 0)
             for (item in it){
                 if (item.type==4){
+                    today += item.value!!.toInt()
                     for (i in 0 until getWeekDates().size) {
                         if (getWeekDates()[i]== item.date) {
                             listDataChart[i] = item.value!!.toInt() + listDataChart[i]
@@ -62,6 +64,7 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
                     binding.chart.viewColume7.setProgress((listDataChart[6] / 26).toInt())
                 }
             }
+            binding.tvYourHaveEat.text = "and you have eat ${today} calo"
         }
         viewModelNotificationViewModel.getCompletedTask().observe(viewLifecycleOwner){
             listMeal.clear()
@@ -92,6 +95,8 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
     override fun initView() {
         super.initView()
         binding.apply {
+            var caloDaily = loginPreferences.getString(Constant.PREF.CALO_INNEED, "2000").toString()
+            tvYourDailyTarget.text = "Your daily target is $caloDaily calo"
             val mealArray = resources.getStringArray(R.array.Meal)
             val adapterActivityLevel =
                 ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, mealArray)

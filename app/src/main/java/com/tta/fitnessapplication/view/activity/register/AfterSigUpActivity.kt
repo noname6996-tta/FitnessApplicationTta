@@ -7,18 +7,13 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.DatePicker
 import android.widget.Toast
-import com.github.mikephil.charting.data.PieEntry
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.databinding.ActivityAfterSigUpBinding
 import com.tta.fitnessapplication.view.activity.chooseprogess.ChooseProgessActivity
-import com.tta.fitnessapplication.view.activity.tracker.calortracker.calculateBMI
 import com.tta.fitnessapplication.view.activity.tracker.watertracker.watercaculate.Gender
 import com.tta.fitnessapplication.view.base.BaseActivity
-import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Locale
 
 class AfterSigUpActivity : BaseActivity<ActivityAfterSigUpBinding>() {
     private var gender: Gender = Gender.MALE

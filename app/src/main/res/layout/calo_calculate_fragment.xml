@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/imgBack"
                 android:layout_width="40dp"
@@ -65,9 +66,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_20dp"
+                android:layout_marginTop="@dimen/size_16dp"
                 android:layout_marginRight="@dimen/size_20dp"
                 android:fontFamily="@font/poppins"
-                android:layout_marginTop="@dimen/size_16dp"
                 android:gravity="center"
                 android:text="@string/tv_calo_caculate_info"
                 android:textColor="@color/gray1"
@@ -107,6 +108,7 @@
                 android:layout_margin="16dp"
                 android:textColorHint="@color/gray_hint"
                 app:boxStrokeWidth="0dp"
+                android:enabled="false"
                 app:boxStrokeWidthFocused="0dp"
                 app:hintTextColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -120,6 +122,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edt_login"
                     android:hint="@string/your_age"
+                    android:enabled="false"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -144,6 +147,10 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edt_login"
                     android:hint="@string/your_weight"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:maxLength="3"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -183,6 +190,10 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edt_login"
                     android:hint="@string/your_height"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:maxLength="3"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -230,6 +241,7 @@
                 android:id="@+id/btnCalculate"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="@dimen/size_8dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_view_radius_blue"
@@ -237,7 +249,6 @@
                 android:text="@string/calculate"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:layout_marginTop="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -247,6 +258,7 @@
                 android:id="@+id/btnSaveDailyWater"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="@dimen/size_8dp"
                 android:layout_marginBottom="@dimen/size_8dp"
                 android:background="@drawable/bg_radius_pink"
@@ -255,7 +267,6 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:visibility="gone"
-                android:layout_marginTop="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
