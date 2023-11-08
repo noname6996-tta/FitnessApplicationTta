@@ -49,15 +49,15 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
             onBackPressedDispatcher.onBackPressed()
             this@MapsActivity.finish()
         }
-        binding.edtRadius.setText(raduis)
-        binding.button.setOnClickListener {
-            var range = binding.edtRadius.text.trim().toString()
-            if (range.isNullOrEmpty()){
-                mainViewModel.getDataMap(lat, lng, raduis)
-            } else {
-                mainViewModel.getDataMap(lat, lng, range)
-            }
-        }
+//        binding.edtRadius.setText(raduis)
+//        binding.button.setOnClickListener {
+//            var range = binding.edtRadius.text.trim().toString()
+//            if (range.isNullOrEmpty()){
+//                mainViewModel.getDataMap(lat, lng, raduis)
+//            } else {
+//                mainViewModel.getDataMap(lat, lng, range)
+//            }
+//        }
     }
 
     override fun onRequestPermissionsResult(
