@@ -73,7 +73,7 @@ class CaloCalculateFragment : BaseFragment<CaloCalculateFragmentBinding>() {
 
             btnSaveDailyWater.setOnClickListener {
                 if (!value.isNullOrEmpty()) {
-                    loginPrefsEditor.putString(Constant.PREF.CALO_INNEED, value)
+                    loginPrefsEditor.putString(Constant.PREF.CALO_INNEED, result.toInt().toString())
                     loginPrefsEditor.commit()
                 }
                 AwesomeDialog.build(requireActivity())
@@ -150,7 +150,7 @@ class CaloCalculateFragment : BaseFragment<CaloCalculateFragmentBinding>() {
         binding.tvGender.setAdapter(adapterGender)
         binding.tvFitness.setAdapter(adapterActivityLevel)
 
-        binding.tilinputAge.setOnClickListener {
+        binding.edtAge.setOnClickListener {
             // Get the current date
             val currentDate = Calendar.getInstance()
 
@@ -165,7 +165,7 @@ class CaloCalculateFragment : BaseFragment<CaloCalculateFragmentBinding>() {
 
                     // Calculate the age
                     age = currentDate.get(Calendar.YEAR) - selectedDate.get(Calendar.YEAR)
-                    binding.edtHeight.setText(age.toString())
+                    binding.edtAge.setText(age.toString())
                     // Adjust the age if the current date is before the selected date
                     if (currentDate.get(Calendar.DAY_OF_YEAR) < selectedDate.get(Calendar.DAY_OF_YEAR)) {
                         age--

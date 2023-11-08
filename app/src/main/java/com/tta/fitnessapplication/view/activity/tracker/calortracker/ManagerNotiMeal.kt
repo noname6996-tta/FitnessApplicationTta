@@ -20,6 +20,7 @@ import com.tta.fitnessapplication.data.model.Meal
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.formatDateToString
 import com.tta.fitnessapplication.data.utils.getColorCompat
+import com.tta.fitnessapplication.data.utils.getCurrentDate
 import com.tta.fitnessapplication.data.utils.makeInVisible
 import com.tta.fitnessapplication.data.utils.makeVisible
 import com.tta.fitnessapplication.data.utils.setTextColorRes
@@ -35,7 +36,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
-class HistoryMeal : BaseFragment<FragmentManagerNotiMealBinding>() {
+class ManagerNotiMeal : BaseFragment<FragmentManagerNotiMealBinding>() {
     private lateinit var viewModelNotificationViewModel: NotificationViewModel
     private var selectedDate: LocalDate? = null
     private val today = LocalDate.now()
@@ -115,11 +116,12 @@ class HistoryMeal : BaseFragment<FragmentManagerNotiMealBinding>() {
     private fun updateAdapterForDate(date: LocalDate) {
         binding.exThreeSelectedDateText.text = "Day: " + fullDateFormatter.format(date)
         mealAdapter.clearList()
-        viewModelNotificationViewModel.getCompletedTask().observe(viewLifecycleOwner) {
+        viewModelNotificationViewModel.getUncompletedTask().observe(viewLifecycleOwner) {
+
             listMeal.clear()
             for (item in it) {
-                Log.e("oooooo", formatDateToString(item.taskInfo.date))
-                Log.e("oooooo", fullDateFormatter.format(date))
+                Log.e("oooooo",formatDateToString(item.taskInfo.date))
+                Log.e("oooooo",fullDateFormatter.format(date))
                 if (formatDateToString(item.taskInfo.date) == fullDateFormatter.format(date)) {
                     listMeal.add(
                         Meal(
@@ -148,6 +150,7 @@ class HistoryMeal : BaseFragment<FragmentManagerNotiMealBinding>() {
         class DayViewContainer(view: View) : ViewContainer(view) {
             lateinit var day: CalendarDay // Will be set when this container is bound.
             val binding = Example3CalendarDayBinding.bind(view)
+
             init {
                 view.setOnClickListener {
                     if (day.position == DayPosition.MonthDate) {

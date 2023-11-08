@@ -108,7 +108,7 @@
                 android:layout_margin="16dp"
                 android:textColorHint="@color/gray_hint"
                 app:boxStrokeWidth="0dp"
-                android:enabled="false"
+                android:translationZ="10sp"
                 app:boxStrokeWidthFocused="0dp"
                 app:hintTextColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -122,7 +122,9 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edt_login"
                     android:hint="@string/your_age"
-                    android:enabled="false"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -190,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edt_login"
                     android:hint="@string/your_height"
-                    android:imeOptions="actionNext"
+                    android:imeOptions="actionDone"
                     android:inputType="numberDecimal"
                     android:maxLength="3"
                     android:singleLine="true"

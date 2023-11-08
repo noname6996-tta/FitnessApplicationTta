@@ -198,6 +198,12 @@
         <action
             android:id="@+id/action_calorieTrackerActivity_to_mealScheduleActivity"
             app:destination="@id/mealScheduleActivity" />
+        <action
+            android:id="@+id/action_calorieTrackerActivity_to_historyMeal"
+            app:destination="@id/historyMeal" />
+        <action
+            android:id="@+id/action_calorieTrackerActivity_to_managerNotiMeal"
+            app:destination="@id/managerNotiMeal" />
     </fragment>
     <fragment
         android:id="@+id/updateNotification"
@@ -293,4 +299,14 @@
         android:id="@+id/mealScheduleActivity"
         android:name="com.tta.fitnessapplication.view.activity.history.MealScheduleActivity"
         android:label="MealScheduleActivity" />
+    <fragment
+        tools:layout="@layout/fragment_meal_history"
+        android:id="@+id/historyMeal"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.HistoryMeal"
+        android:label="HistoryMeal" />
+    <fragment
+        tools:layout="@layout/fragment_manager_noti_meal"
+        android:id="@+id/managerNotiMeal"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.ManagerNotiMeal"
+        android:label="ManagerNotiMeal" />
 </navigation>

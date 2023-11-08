@@ -35,7 +35,7 @@ class MealInfoActivity : BaseFragment<ActivityMealInfoBinding>() {
     private var taskInfo = TaskInfo(
         0,
         "Time to eat ",
-        Date(8640000000000000),
+        Date(),
         1,
         false,
         "tta",

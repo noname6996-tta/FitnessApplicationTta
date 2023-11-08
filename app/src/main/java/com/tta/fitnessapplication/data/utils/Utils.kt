@@ -23,8 +23,10 @@ import com.kizitonwose.calendar.core.yearMonth
 import com.tta.fitnessapplication.R
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
+import java.time.LocalDate
 import java.time.Month
 import java.time.YearMonth
+import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Calendar
 import java.util.Date
@@ -150,6 +152,17 @@ fun getCurrentTime(): String {
     val calendar = Calendar.getInstance()
     val dateFormat = SimpleDateFormat("hh:mm:ss")
     return dateFormat.format(calendar.time)
+}
+
+fun getCurrentDate(): String {
+    val currentDate = LocalDate.now()
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    return currentDate.format(formatter)
+}
+
+fun formatLocalDate(localDate: LocalDate): String {
+    val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    return localDate.format(formatter)
 }
 
 fun formatDateToTimeString(date: Date): String {

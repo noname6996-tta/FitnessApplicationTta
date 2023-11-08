@@ -30,6 +30,10 @@ class ItemTodayMealAdapter :
     fun updateData(position: ((i: Int) -> Unit)) {
         onClickUpdateData = position
     }
+    fun clearList() {
+        listSomeThingToEat = emptyList()
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

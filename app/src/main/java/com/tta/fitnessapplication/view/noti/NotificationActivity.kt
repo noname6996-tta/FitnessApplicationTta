@@ -61,7 +61,7 @@ class NotificationActivity() : BaseFragment<FragmentFoodNotificationBinding>() {
     private var taskInfo = TaskInfo(
         0,
         "",
-        Date(8640000000000000),
+        Date(),
         1,
         false,
         "tta",

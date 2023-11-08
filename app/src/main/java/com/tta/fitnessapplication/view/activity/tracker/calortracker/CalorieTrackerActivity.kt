@@ -204,6 +204,12 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
         binding.cardViewHistoryWaterTracker.setOnClickListener {
             findNavController().navigate(R.id.action_calorieTrackerActivity_to_caloCalculateFragment)
         }
+        binding.cardViewHistoryMeal.setOnClickListener {
+            findNavController().navigate(R.id.action_calorieTrackerActivity_to_historyMeal)
+        }
+        binding.cardViewManagerNotification.setOnClickListener {
+            findNavController().navigate(R.id.action_calorieTrackerActivity_to_managerNotiMeal)
+        }
     }
 
     enum class MealEnum {
