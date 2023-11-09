@@ -100,6 +100,22 @@
         <item>Lunch</item>
         <item>Dinner</item>
     </string-array>
+    <string-array name="Radius">
+        <item>1 km</item>
+        <item>2 km</item>
+        <item>3 km</item>
+        <item>4 km</item>
+        <item>5 km</item>
+        <item>6 km</item>
+        <item>7 km</item>
+        <item>8 km</item>
+        <item>9 km</item>
+        <item>10 km</item>
+    </string-array>
+    <string-array name="Location">
+        <item>gym</item>
+        <item>restaurant</item>
+    </string-array>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="tv_calo_caculate_info">We calculate based on your age, gender, weight, height and activity level to estimate the number of calories you should eat.</string>
     <string name="your_age">Your Age</string>

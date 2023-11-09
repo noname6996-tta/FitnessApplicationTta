@@ -1,26 +1,21 @@
 package com.tta.fitnessapplication.view.activity.tracker.calortracker
 
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.skydoves.balloon.ArrowPositionRules
-import com.skydoves.balloon.Balloon
-import com.skydoves.balloon.BalloonAnimation
-import com.skydoves.balloon.BalloonSizeSpec
-import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.Meal
 import com.tta.fitnessapplication.data.utils.Constant
+import com.tta.fitnessapplication.data.utils.formatDateToString
+import com.tta.fitnessapplication.data.utils.getCurrentDate
 import com.tta.fitnessapplication.data.utils.getCurrentTime
 import com.tta.fitnessapplication.data.utils.getTimeValue
 import com.tta.fitnessapplication.data.utils.getWeekDates
 import com.tta.fitnessapplication.databinding.ActivityCalorTrackerBinding
-import com.tta.fitnessapplication.view.HistoryViewModelGoogleData
 import com.tta.fitnessapplication.view.MainActivity
 import com.tta.fitnessapplication.view.activity.history.HistoryViewModel
 import com.tta.fitnessapplication.view.activity.tracker.calortracker.adapter.ItemFindSomethingToEatAdapter
@@ -44,13 +39,13 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
 
     override fun addObservers() {
         super.addObservers()
-        viewModel.readAllData.observe(viewLifecycleOwner){
+        viewModel.readAllData.observe(viewLifecycleOwner) {
             val listDataChart = arrayOf(0, 0, 0, 0, 0, 0, 0)
-            for (item in it){
-                if (item.type==4){
+            for (item in it) {
+                if (item.type == 4) {
                     today += item.value!!.toInt()
                     for (i in 0 until getWeekDates().size) {
-                        if (getWeekDates()[i]== item.date) {
+                        if (getWeekDates()[i] == item.date) {
                             listDataChart[i] = item.value!!.toInt() + listDataChart[i]
                             listDataChart[i] = listDataChart[i]
                         }
@@ -66,23 +61,45 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
             }
             binding.tvYourHaveEat.text = "and you have eat ${today} calo"
         }
-        viewModelNotificationViewModel.getCompletedTask().observe(viewLifecycleOwner){
-            listMeal.clear()
-            for (item in it){
-                listMeal.add(Meal(item.taskInfo.priority,item.taskInfo.foodName,item.taskInfo.category,item.taskInfo.detail,item.taskInfo.time,item.taskInfo.image,item.taskInfo.status,item.taskInfo.id))
-            }
-            viewModelNotificationViewModel.getUncompletedTask().observe(viewLifecycleOwner){
-                for (item in it){
-                    listMeal.add(Meal(item.taskInfo.priority,item.taskInfo.foodName,item.taskInfo.category,item.taskInfo.detail,item.taskInfo.time,item.taskInfo.image,item.taskInfo.status,item.taskInfo.id))
+        viewModelNotificationViewModel.getCompletedTask()
+            .observe(viewLifecycleOwner) { listCompletedTask ->
+                listMeal.clear()
+                for (item in listCompletedTask) { listMeal.add(
+                    Meal(item.taskInfo.priority,
+                            item.taskInfo.foodName,
+                            item.taskInfo.category,
+                            item.taskInfo.detail,
+                            item.taskInfo.time,
+                            item.taskInfo.image,
+                            item.taskInfo.status,
+                            item.taskInfo.id
+                        )
+                    )
                 }
-                listMealFinal.clear()
-                listMealFinal.addAll(listMeal)
-                if (listMealFinal.isNotEmpty()){
-                    binding.recMeal.visibility = View.VISIBLE
-                    mealAdapter.setListMeal(listMealFinal,requireContext())
+                viewModelNotificationViewModel.getUncompletedTask().observe(viewLifecycleOwner) {
+                    for (item in it) {
+                        if (formatDateToString(item.taskInfo.date) == getCurrentDate())
+                            listMeal.add(
+                                Meal(
+                                    item.taskInfo.priority,
+                                    item.taskInfo.foodName,
+                                    item.taskInfo.category,
+                                    item.taskInfo.detail,
+                                    item.taskInfo.time,
+                                    item.taskInfo.image,
+                                    item.taskInfo.status,
+                                    item.taskInfo.id
+                                )
+                            )
+                    }
+                    listMealFinal.clear()
+                    listMealFinal.addAll(listMeal)
+                    if (listMealFinal.isNotEmpty()) {
+                        binding.recMeal.visibility = View.VISIBLE
+                        mealAdapter.setListMeal(listMealFinal, requireContext())
+                    }
                 }
             }
-        }
     }
 
     override fun initViewModel() {
@@ -163,22 +180,27 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
         }
 
         binding.view22.setOnClickListener {
-            val action = CalorieTrackerActivityDirections.actionCalorieTrackerActivityToHistoryActivity()
+            val action =
+                CalorieTrackerActivityDirections.actionCalorieTrackerActivityToHistoryActivity()
             findNavController().navigate(action)
         }
 
         binding.btnAddSomethingToEat.setOnClickListener {
-            val action = CalorieTrackerActivityDirections.actionCalorieTrackerActivityToFindMealActivity(getTimeValue())
+            val action =
+                CalorieTrackerActivityDirections.actionCalorieTrackerActivityToFindMealActivity(
+                    getTimeValue()
+                )
             findNavController().navigate(action)
         }
         mealAdapter.findSomethingToEat {
-            val action = CalorieTrackerActivityDirections.actionCalorieTrackerActivityToMealInfoActivity(it)
+            val action =
+                CalorieTrackerActivityDirections.actionCalorieTrackerActivityToMealInfoActivity(it)
             findNavController().navigate(action)
         }
-        mealAdapter.updateData {id ->
-            viewModelNotificationViewModel.getUncompletedTask().observe(viewLifecycleOwner){
-                for (item in it){
-                    if (item.taskInfo.id == id){
+        mealAdapter.updateData { id ->
+            viewModelNotificationViewModel.getUncompletedTask().observe(viewLifecycleOwner) {
+                for (item in it) {
+                    if (item.taskInfo.id == id) {
                         item.taskInfo.status = true
                         viewModelNotificationViewModel.updateTaskStatus(item.taskInfo)
                         mealAdapter.notifyDataSetChanged()
@@ -197,8 +219,9 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
                 }
             }
         }
-        somethingToEatAdapter.findSomethingToEat{
-            val action = CalorieTrackerActivityDirections.actionCalorieTrackerActivityToFindMealActivity(it)
+        somethingToEatAdapter.findSomethingToEat {
+            val action =
+                CalorieTrackerActivityDirections.actionCalorieTrackerActivityToFindMealActivity(it)
             findNavController().navigate(action)
         }
         binding.cardViewHistoryWaterTracker.setOnClickListener {

@@ -6,13 +6,13 @@ import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
 import android.provider.Settings
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.navigation.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -22,42 +22,88 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.utils.hideKeyboard
 import com.tta.fitnessapplication.databinding.ActivityMapsBinding
 import com.tta.fitnessapplication.view.base.BaseActivity
-import kotlin.math.ln
 
 class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
 
     private val PERMISSION_REQUEST_CODE = 123
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var googleMap: GoogleMap
-    private var lat : Double = 0.0
-    private var lng : Double = 0.0
-    private var raduis = "2"
+    private var lat: Double = 0.0
+    private var lng: Double = 0.0
+    private var raduis = "1"
+    private var location = "gym"
+    private var locationType = 0
 
     override fun getDataBinding(): ActivityMapsBinding {
         return ActivityMapsBinding.inflate(layoutInflater)
     }
 
+    override fun addEvent() {
+        super.addEvent()
+        binding.button.setOnClickListener {
+            showLoading()
+            mainViewModel.getDataMap(lat, lng, raduis)
+        }
+    }
+
     override fun initView() {
         super.initView()
+        mainViewModel.getDataMap(lat, lng, raduis)
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
+        val radiusList = resources.getStringArray(R.array.Radius)
+        val locationList = resources.getStringArray(R.array.Location)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         binding.topAppBar.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
             this@MapsActivity.finish()
         }
-//        binding.edtRadius.setText(raduis)
-//        binding.button.setOnClickListener {
-//            var range = binding.edtRadius.text.trim().toString()
-//            if (range.isNullOrEmpty()){
-//                mainViewModel.getDataMap(lat, lng, raduis)
-//            } else {
-//                mainViewModel.getDataMap(lat, lng, range)
-//            }
-//        }
+        binding.tvRaduis.setOnClickListener {
+            this.hideKeyboard()
+        }
+        binding.tvGender.setOnClickListener {
+            this.hideKeyboard()
+        }
+        val adapterRadiusList =
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, radiusList)
+        val adapterLocationList =
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, locationList)
+        binding.tvRaduis.setAdapter(adapterRadiusList)
+        binding.tvGender.setAdapter(adapterLocationList)
+        binding.tvRaduis.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                raduis = "${position + 1}"
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+        binding.tvGender.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                location = locationList[position]
+                locationType = position
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -115,19 +161,22 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
     override fun addObservers() {
         super.addObservers()
         mainViewModel.mapList.observe(this) {
+            hideLoading()
             googleMap.clear()
             for (item in it.body()!!.data) {
-                Log.e("ssss", item.toString())
-                val location = LatLng(item.lat, item.lng)
-                googleMap.addMarker(
-                    MarkerOptions()
-                        .position(location)
-                        .title(item.name)
-                        .snippet(item.address)
-                )
+                if (locationType == item.type) {
+                    val location = LatLng(item.lat, item.lng)
+                    googleMap.addMarker(
+                        MarkerOptions()
+                            .position(location)
+                            .title(item.name)
+                            .snippet(item.address)
+                    )
+                }
             }
         }
-        mainViewModel.error.observe(this){
+        mainViewModel.error.observe(this) {
+            hideLoading()
             Log.e("ssss", it.toString())
         }
     }

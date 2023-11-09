@@ -148,6 +148,16 @@ fun Fragment.hideKeyboard() {
     }
 }
 
+fun Activity.hideKeyboard() {
+    if (currentFocus != null) {
+        val inputMethodManager = getSystemService(
+            Context
+                .INPUT_METHOD_SERVICE
+        ) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+    }
+}
+
 fun getCurrentTime(): String {
     val calendar = Calendar.getInstance()
     val dateFormat = SimpleDateFormat("hh:mm:ss")
