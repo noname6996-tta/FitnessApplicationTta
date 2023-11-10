@@ -148,11 +148,11 @@ dependencies {
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth-ktx")
-    //
+    // timber
     implementation 'com.jakewharton.timber:timber:5.0.1'
+    // viewpager
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'me.relex:circleindicator:2.1.6'
-
 }
 
 kapt {
