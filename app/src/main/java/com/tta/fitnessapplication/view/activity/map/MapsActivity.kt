@@ -124,8 +124,6 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
                     )
                 }
             }
-            mainViewModel.getDataMap(lat, lng, "$raduis")
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat,lng), 12f))
         }
         mainViewModel.error.observe(this) {
             hideLoading()
@@ -135,6 +133,7 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
+        googleMap.isMyLocationEnabled = true
         checkLocationPermission()
     }
 
