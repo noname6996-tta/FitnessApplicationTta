@@ -53,6 +53,7 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
 
     override fun initView() {
         super.initView()
+        checkLocationPermission()
         mainViewModel.getDataMap(lat, lng, "$raduis")
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -133,8 +134,27 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
-        googleMap.isMyLocationEnabled = true
-        checkLocationPermission()
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Request the missing permissions.
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ),
+                PERMISSION_REQUEST_CODE
+            )
+        } else {
+            // The permissions are already granted, so enable the "My Location" feature.
+            googleMap.isMyLocationEnabled = true
+        }
     }
 
     private fun checkLocationPermission() {
@@ -171,6 +191,7 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
                             lat = location.latitude
                             lng = location.longitude
                             // Sử dụng latitude và longitude cho mục đích của bạn
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat,lng), 15f))
                         } else {
                             // Không thể lấy được vị trí hiện tại
                             // Xử lý khi không thể lấy được vị trí
@@ -215,11 +236,11 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                checkGPSStatus()
+//                checkGPSStatus()
             } else {
                 // Hiển thị dialog thông báo cần quyền truy cập vị trí
                 // Ví dụ:
-                showLocationPermissionDialog()
+//                showLocationPermissionDialog()
             }
         }
     }
