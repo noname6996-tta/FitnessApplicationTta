@@ -1,19 +1,13 @@
 package com.tta.fitnessapplication.view.fragment
 
-import android.content.Intent
 import android.util.Log
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.getWeekDates
 import com.tta.fitnessapplication.databinding.FragmentDiscoverBinding
-import com.tta.fitnessapplication.databinding.FragmentSettingBinding
 import com.tta.fitnessapplication.view.activity.history.HistoryViewModel
-import com.tta.fitnessapplication.view.activity.workout.FullBodyWorkout.FullBodyWorkoutActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.time.LocalDate
-import java.util.Calendar
 
 class WorkoutFragment : BaseFragment<FragmentDiscoverBinding>() {
     private lateinit var historyViewModel: HistoryViewModel
@@ -30,12 +24,12 @@ class WorkoutFragment : BaseFragment<FragmentDiscoverBinding>() {
         super.addObservers()
         historyViewModel.readAllData.observe(viewLifecycleOwner) {
             val daysDoExercise = ArrayList<String>()
-            if (it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 for (item in it) {
                     // exercise
-                    if (item.type == 0){
+                    if (item.type == 0) {
                         daysDoExercise.add(item.date.toString())
-                        Log.e("daysDoExercise",daysDoExercise.toString())
+                        Log.e("daysDoExercise", daysDoExercise.toString())
                     }
                 }
                 val days = ArrayList<String>()
@@ -43,13 +37,13 @@ class WorkoutFragment : BaseFragment<FragmentDiscoverBinding>() {
                     val date = LocalDate.parse(getWeekDates()[i])
                     val dayOfMonth = date.dayOfMonth
                     days.add(dayOfMonth.toString())
-                    for (item in daysDoExercise){
-                        if (getWeekDates()[i]==item){
+                    for (item in daysDoExercise) {
+                        if (getWeekDates()[i] == item) {
                             days[i] = "✔"
                         }
                     }
                 }
-                Log.e("daysDoExercise",days.toString())
+                Log.e("daysDoExercise", days.toString())
                 binding.tvDay1.text = days[0]
                 binding.tvDay2.text = days[1]
                 binding.tvDay3.text = days[2]
@@ -80,7 +74,25 @@ class WorkoutFragment : BaseFragment<FragmentDiscoverBinding>() {
 
     override fun addEvent() {
         binding.view12.setOnClickListener {
-            findNavController().navigate(R.id.action_discoverFragment_to_fullBodyWorkoutActivity)
+            findNavController().navigate(
+                WorkoutFragmentDirections.actionDiscoverFragmentToFullBodyWorkoutActivity(
+                    0
+                )
+            )
+        }
+        binding.view13.setOnClickListener {
+            findNavController().navigate(
+                WorkoutFragmentDirections.actionDiscoverFragmentToFullBodyWorkoutActivity(
+                    1
+                )
+            )
+        }
+        binding.view14.setOnClickListener {
+            findNavController().navigate(
+                WorkoutFragmentDirections.actionDiscoverFragmentToFullBodyWorkoutActivity(
+                    2
+                )
+            )
         }
     }
 }

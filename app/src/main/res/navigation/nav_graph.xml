@@ -317,5 +317,9 @@
         tools:layout="@layout/activity_full_body_workout"
         android:id="@+id/fullBodyWorkoutActivity"
         android:name="com.tta.fitnessapplication.view.activity.workout.FullBodyWorkout.FullBodyWorkoutActivity"
-        android:label="FullBodyWorkoutActivity" />
+        android:label="FullBodyWorkoutActivity" >
+        <argument
+            android:name="type"
+            app:argType="integer" />
+    </fragment>
 </navigation>

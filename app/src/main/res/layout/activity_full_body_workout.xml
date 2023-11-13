@@ -110,7 +110,7 @@
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:layout_marginTop="@dimen/size_4dp"
                 android:fontFamily="@font/poppins"
-                android:text="11 Exercises | 32mins | 320 Calories Burn"
+                android:text="68 Exercises | 10hours 32mins | 20k Calories Burn"
                 android:textColor="@color/gray1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView29" />
@@ -138,11 +138,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/view9" />
 
             <TextView
+                android:id="@+id/tvTimeWorkout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:fontFamily="@font/poppins"
-                android:text="Set Time "
+                android:text="Train for 32 days and have 4 days off"
                 android:textColor="@color/gray1"
                 app:layout_constraintBottom_toBottomOf="@+id/view19"
                 app:layout_constraintStart_toEndOf="@+id/imageView10"
@@ -976,7 +977,7 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
                         android:layout_height="124dp"
-                        android:layout_marginBottom="@dimen/size_4dp"
+                        android:layout_marginBottom="@dimen/size_8dp"
                         app:cardCornerRadius="@dimen/size_8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
