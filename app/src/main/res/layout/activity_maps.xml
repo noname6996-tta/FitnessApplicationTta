@@ -45,53 +45,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <Spinner
             android:id="@+id/spinnerTypeLocation"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/map"
             app:layout_constraintEnd_toStartOf="@+id/spinnerRaduis"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+        </Spinner>
 
-            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/tvGender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:hint="Location"
-                android:imeOptions="actionNext"
-                android:inputType="textNoSuggestions"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_14sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
+        <Spinner
             android:id="@+id/spinnerRaduis"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/map"
             app:layout_constraintEnd_toStartOf="@+id/button"
             app:layout_constraintStart_toEndOf="@+id/spinnerTypeLocation"
             app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/tvRaduis"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:hint="Raduis"
-                android:imeOptions="actionNext"
-                android:inputType="textNoSuggestions"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_14sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+        </Spinner>
 
         <ImageView
             android:id="@+id/button"

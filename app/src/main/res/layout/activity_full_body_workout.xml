@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.workout.FullBodyWorkout.FullBodyWorkoutActivity">
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -142,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:fontFamily="@font/poppins"
-                android:text="Schedule Workout"
+                android:text="Set Time "
                 android:textColor="@color/gray1"
                 app:layout_constraintBottom_toBottomOf="@+id/view19"
                 app:layout_constraintStart_toEndOf="@+id/imageView10"
@@ -158,16 +158,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/view19"
                 app:layout_constraintTop_toBottomOf="@+id/view9" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="5/27, 09:00 AM"
-                android:textColor="@color/gray1"
-                android:textSize="@dimen/size_12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/view19"
-                app:layout_constraintEnd_toStartOf="@+id/imageView11"
-                app:layout_constraintTop_toBottomOf="@+id/view9" />
 
             <View
                 android:id="@+id/view17"

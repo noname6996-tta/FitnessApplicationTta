@@ -4,6 +4,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.getWeekDates
 import com.tta.fitnessapplication.databinding.FragmentDiscoverBinding
@@ -79,8 +80,7 @@ class WorkoutFragment : BaseFragment<FragmentDiscoverBinding>() {
 
     override fun addEvent() {
         binding.view12.setOnClickListener {
-            startActivity(Intent(activity, FullBodyWorkoutActivity::class.java))
-            requireActivity().finish()
+            findNavController().navigate(R.id.action_discoverFragment_to_fullBodyWorkoutActivity)
         }
     }
 }

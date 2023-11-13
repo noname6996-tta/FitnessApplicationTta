@@ -33,7 +33,11 @@
         android:id="@+id/discoverFragment"
         android:name="com.tta.fitnessapplication.view.fragment.WorkoutFragment"
         android:label="DiscoverFragment"
-        tools:layout="@layout/fragment_discover" />
+        tools:layout="@layout/fragment_discover" >
+        <action
+            android:id="@+id/action_discoverFragment_to_fullBodyWorkoutActivity"
+            app:destination="@id/fullBodyWorkoutActivity" />
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.tta.fitnessapplication.view.fragment.articlesfragment.ArticleFragment"
@@ -309,4 +313,9 @@
         android:id="@+id/managerNotiMeal"
         android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.ManagerNotiMeal"
         android:label="ManagerNotiMeal" />
+    <fragment
+        tools:layout="@layout/activity_full_body_workout"
+        android:id="@+id/fullBodyWorkoutActivity"
+        android:name="com.tta.fitnessapplication.view.activity.workout.FullBodyWorkout.FullBodyWorkoutActivity"
+        android:label="FullBodyWorkoutActivity" />
 </navigation>

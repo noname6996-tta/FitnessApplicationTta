@@ -22,6 +22,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.hideKeyboard
@@ -38,6 +39,7 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
     private var raduis = 1
     private var location = "gym"
     private var locationType = 0
+    private val pinList = LatLngBounds.builder()
 
     override fun getDataBinding(): ActivityMapsBinding {
         return ActivityMapsBinding.inflate(layoutInflater)
@@ -54,7 +56,6 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
     override fun initView() {
         super.initView()
         checkLocationPermission()
-        mainViewModel.getDataMap(lat, lng, "$raduis")
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         val radiusList = resources.getStringArray(R.array.Radius)
@@ -64,34 +65,23 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
             onBackPressedDispatcher.onBackPressed()
             this@MapsActivity.finish()
         }
-        binding.tvRaduis.setOnClickListener {
-            this.hideKeyboard()
-        }
-        binding.tvGender.setOnClickListener {
-            this.hideKeyboard()
-        }
         val adapterRadiusList =
             ArrayAdapter(this, android.R.layout.simple_list_item_1, radiusList)
         val adapterLocationList =
             ArrayAdapter(this, android.R.layout.simple_list_item_1, locationList)
-        binding.tvRaduis.setAdapter(adapterRadiusList)
-        binding.tvGender.setAdapter(adapterLocationList)
-        binding.tvRaduis.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
-            ) {
+        binding.spinnerRaduis.adapter = adapterRadiusList
+        binding.spinnerTypeLocation.adapter = adapterLocationList
+        binding.spinnerRaduis.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                // Handle item selection here
                 raduis = position + 1
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Handle case where nothing is selected
             }
         }
-        binding.tvGender.onItemSelectedListener = object :
+        binding.spinnerTypeLocation.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -120,11 +110,13 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
                     googleMap.addMarker(
                         MarkerOptions()
                             .position(location)
-                            .title(item.name)
+                            .title("${item.id}-${item.name}")
                             .snippet(item.address)
                     )
+                    pinList.include(location)
                 }
             }
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(pinList.build(), 50))
         }
         mainViewModel.error.observe(this) {
             hideLoading()
@@ -154,6 +146,19 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
         } else {
             // The permissions are already granted, so enable the "My Location" feature.
             googleMap.isMyLocationEnabled = true
+        }
+        setMapMarkers()
+    }
+
+    private fun setMapMarkers() {
+        googleMap.let { googleMap ->
+            googleMap.setOnInfoWindowClickListener { marker ->
+                val intent = Intent(this, LocationInfoActivity::class.java)
+                val firstDigit = marker.title?.substring(0, 1)
+                val intValue: Int = firstDigit.toString().toInt()  // Replace 42 with your actual integer value
+                intent.putExtra("id_location", intValue)
+                startActivity(intent)
+            }
         }
     }
 
@@ -191,6 +196,7 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
                             lat = location.latitude
                             lng = location.longitude
                             // Sử dụng latitude và longitude cho mục đích của bạn
+                            pinList.include(LatLng(lat,lng))
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat,lng), 15f))
                         } else {
                             // Không thể lấy được vị trí hiện tại
