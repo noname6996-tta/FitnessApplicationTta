@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tta.fitnessapplication.data.model.History
+import com.tta.fitnessapplication.data.model.Sleep
 import com.tta.fitnessapplication.data.model.Water
 import com.tta.fitnessapplication.view.activity.history.db.HistoryDatabase
 import com.tta.fitnessapplication.view.activity.history.db.HistoryRepository
@@ -26,6 +27,12 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     fun addHistory(sleep: History) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addHistory(sleep)
+        }
+    }
+
+    fun updateHistory(history: History) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateSleep(history)
         }
     }
 

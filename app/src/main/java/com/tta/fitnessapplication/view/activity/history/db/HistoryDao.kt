@@ -5,7 +5,9 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.tta.fitnessapplication.data.model.History
+import com.tta.fitnessapplication.data.model.Sleep
 import com.tta.fitnessapplication.data.model.Water
 
 @Dao
@@ -13,6 +15,9 @@ interface HistoryDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addHistory(history: History)
+
+    @Update
+    suspend fun updateHistory(history: History)
 
     @Query("SELECT * FROM history_table ORDER BY id ASC")
     fun readAllData(): LiveData<List<History>>

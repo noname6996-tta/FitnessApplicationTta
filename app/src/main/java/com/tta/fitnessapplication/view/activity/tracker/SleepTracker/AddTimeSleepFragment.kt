@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import java.util.concurrent.CountDownLatch
 
 class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
     private lateinit var viewModel: SleepViewModel
@@ -31,6 +32,7 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
     private var isSetSleep = false
     private var isSetWake = false
     private var list = listOf<Sleep>()
+    val latch = CountDownLatch(2)
     override fun getDataBinding(): FragmentAddTimeSleepBinding {
         return FragmentAddTimeSleepBinding.inflate(layoutInflater)
     }
@@ -39,43 +41,157 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
         super.initViewModel()
         viewModel = ViewModelProvider(this)[SleepViewModel::class.java]
         historyViewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
-        viewModelHour= ViewModelProvider(this)[HourViewModel::class.java]
+        viewModelHour = ViewModelProvider(this)[HourViewModel::class.java]
         viewModel.getAdjacentSleeps()
     }
 
     override fun addObservers() {
         super.addObservers()
-//        viewModelHour.clearAll()
         viewModel.sleepList.observe(viewLifecycleOwner) { it ->
             list = it
         }
-        viewModel.sleepListA.observe(viewLifecycleOwner) {list->
+        viewModel.sleepListA.observe(viewLifecycleOwner) { list ->
             val distinctList = HashSet<SleepPair>(list)
             if (distinctList.isNotEmpty()) {
-                Log.e("aaaaa",distinctList.toString())
+                Log.e("aaaaa", distinctList.toString())
                 for (item in distinctList) {
                     viewModel.getItemById(item.id1, item.id2)
                 }
             }
         }
-//        viewModel.item.observe(viewLifecycleOwner) {
-//            Log.e("Aaaaa", it.toString())
-//            var date = ""
-//            var timeWake = ""
-//            var timeSleep = ""
-//            for (item in it){
-//                if (item.value == "Wake"){
-//                    date = item.date
-//                    timeWake = "${item.date} ${item.time}"
-//                } else {
-//                    timeSleep = "${item.date} ${item.time}"
-//                }
-//            }
-//            val sleepTime = calculateSleepTime(timeSleep, timeWake)
-//            viewModelHour.addSleep(
-//                Hour(0, date, convertToDecimalTime(sleepTime.hours, sleepTime.minutes).toString())
-//            )
-//        }
+        viewModel.item.observe(viewLifecycleOwner) {
+            Log.e("Aaaaa", it.toString())
+            var date = ""
+            var timeWake = ""
+            var timeSleep = ""
+            var idWake = 0
+            var idBed = 0
+            for (item in it) {
+                if (item.value == "Wake") {
+                    idWake = item.id
+                    date = item.date
+                    timeWake = "${item.date} ${item.time}"
+                } else {
+                    idBed = item.id
+                    timeSleep = "${item.date} ${item.time}"
+                }
+            }
+            val sleepTime = calculateSleepTime(timeSleep, timeWake)
+            viewModelHour.addSleep(
+                Hour(
+                    0,
+                    date,
+                    convertToDecimalTime(sleepTime.hours, sleepTime.minutes).toString(),
+                    idBed,
+                    idWake
+                )
+            )
+        }
+
+        viewModel.sleepCheck.observe(viewLifecycleOwner) { item ->
+            if (item != null) {
+                // trung bien thuc hien update
+                viewModel.updateSleep(
+                    Sleep(
+                        item.id,
+                        formatDateToString(timeSleep),
+                        formatDateToTimeString(timeSleep),
+                        item.activity,
+                        item.type,
+                        item.value
+                    )
+                )
+                historyViewModel.updateSleepTime(
+                    formatDateToString(timeWake),
+                    formatDateToTimeString(timeSleep),
+                    item.date,
+                    "Bed"
+                )
+            } else {
+                // chua co thuc hien add
+                viewModel.addSleep(
+                    Sleep(
+                        0,
+                        date = formatDateToString(timeSleep),
+                        time = formatDateToTimeString(timeSleep),
+                        "Bed Time",
+                        "2",
+                        "Bed"
+                    )
+                )
+                val history1 = History(
+                    null,
+                    null,
+                    date = formatDateToString(timeSleep),
+                    time = formatDateToTimeString(timeSleep),
+                    "Bed Time",
+                    2,
+                    "Bed"
+                )
+                historyViewModel.addHistory(history1)
+            }
+            if (isSetSleep && !isSetWake) {
+                hideLoading()
+                findNavController().popBackStack()
+            } else {
+                latch.countDown() // Giảm cờ đếm khi hoàn thành
+                tryPopBackStack(latch) // Thử popBackStack
+            }
+        }
+        viewModel.sleepCheckWake.observe(viewLifecycleOwner) { item ->
+            if (item != null) {
+                // trung bien thuc hien update
+                viewModel.updateSleepTime(
+                    formatDateToString(timeWake),
+                    formatDateToTimeString(timeSleep),
+                    item.date,
+                    "Wake"
+                )
+                historyViewModel.updateSleepTime(
+                    formatDateToString(timeWake),
+                    formatDateToTimeString(timeSleep),
+                    item.date,
+                    "Wake"
+                )
+            } else {
+                // chua co thuc hien add
+                viewModel.addSleep(
+                    Sleep(
+                        0,
+                        date = formatDateToString(timeWake),
+                        time = formatDateToTimeString(timeWake),
+                        "Wake up Time",
+                        "2",
+                        "Wake"
+                    )
+                )
+                val history2 = History(
+                    null,
+                    null,
+                    date = formatDateToString(timeWake),
+                    time = formatDateToTimeString(timeWake),
+                    "Wake up Time",
+                    2,
+                    "Wake"
+                )
+                historyViewModel.addHistory(history2)
+            }
+            if (isSetWake && !isSetSleep) {
+                hideLoading()
+                findNavController().popBackStack()
+            } else {
+                latch.countDown() // Giảm cờ đếm khi hoàn thành
+                tryPopBackStack(latch) // Thử popBackStack
+            }
+        }
+    }
+
+    private fun tryPopBackStack(latch: CountDownLatch) {
+        if (latch.count.toInt() == 0) {
+            // Nếu cả hai observe đã hoàn thành, thực hiện popBackStack
+            hideLoading()
+            findNavController().popBackStack()
+        }
     }
 
     fun calculateSleepTime(startTime: String, endTime: String): SleepTrackerActivity.SleepTime {
@@ -101,97 +217,60 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
             dateAndTimePickerWakeup.setOnClickListener { showDateTimePicker(1) }
 
             btnDone.setOnClickListener {
-                val itemExists = list.any { it.value == "Bed" }
-                if (itemExists) {
-                    // nếu đã tồn tại
-                    for (item in list) {
-                        if (item.value == "Bed") {
-                            viewModel.updateSleepTime(
-                                formatDateToString(timeWake),
-                                formatDateToTimeString(timeSleep),
-                                item.date,
-                                "Bed"
-                            )
-                            historyViewModel.updateSleepTime(
-                                formatDateToString(timeWake),
-                                formatDateToTimeString(timeSleep),
-                                item.date,
-                                "Bed"
-                            )
-                        }
-                    }
-                } else {
-                    // nếu chưa tồn tại
-                    if (isSetSleep) {
-                        viewModel.addSleep(
-                            Sleep(
-                                0,
-                                date = formatDateToString(timeSleep),
-                                time = formatDateToTimeString(timeSleep),
-                                "Bed Time",
-                                "2",
-                                "Bed"
-                            )
-                        )
-                        val history1 = History(
-                            null,
-                            null,
-                            date = formatDateToString(timeSleep),
-                            time = formatDateToTimeString(timeSleep),
-                            "Bed Time",
-                            2,
-                            "Bed"
-                        )
-                        historyViewModel.addHistory(history1)
-                    }
+//                val itemExists = list.any { it.value == "Bed" }
+//                if (itemExists) {
+//                    // nếu đã tồn tại
+//                    for (item in list) {
+//                        if (item.value == "Bed") { viewModel.updateSleepTime(formatDateToString(timeWake), formatDateToTimeString(timeSleep), item.date, "Bed")
+//                            historyViewModel.updateSleepTime(formatDateToString(timeWake), formatDateToTimeString(timeSleep), item.date, "Bed") }
+//                    }
+//                } else {
+//                    // nếu chưa tồn tại
+//                    if (isSetSleep) {
+//                        viewModel.addSleep(Sleep(0, date = formatDateToString(timeSleep), time = formatDateToTimeString(timeSleep), "Bed Time", "2", "Bed"))
+//                        val history1 = History(null, null, date = formatDateToString(timeSleep), time = formatDateToTimeString(timeSleep), "Bed Time", 2, "Bed")
+//                        historyViewModel.addHistory(history1)
+//                    }
+//                }
+//
+//                val itemExists2 = list.any { it.value == "Wake" }
+//                if (itemExists2) {
+//                    // nếu đã tồn tại
+//                    for (item in list) {
+//                        if (item.value == "Wake") {
+//                            viewModel.updateSleepTime(formatDateToString(timeWake), formatDateToTimeString(timeSleep), item.date, "Wake")
+//                            historyViewModel.updateSleepTime(formatDateToString(timeWake), formatDateToTimeString(timeSleep), item.date, "Wake") }
+//                    }
+//                } else {
+//                    // nếu chưa tồn tại
+//                    if (isSetWake) { viewModel.addSleep(Sleep(0, date = formatDateToString(timeWake), time = formatDateToTimeString(timeWake), "Wake up Time", "2", "Wake"))
+//                        val history2 = History(null, null, date = formatDateToString(timeWake), time = formatDateToTimeString(timeWake), "Wake up Time", 2, "Wake")
+//                        historyViewModel.addHistory(history2)
+//                    }
+//                }
+                val bedTime = Sleep(
+                    0,
+                    date = formatDateToString(timeSleep),
+                    time = formatDateToTimeString(timeSleep),
+                    "Bed Time",
+                    "2",
+                    "Bed"
+                )
+                val wakeTime = Sleep(
+                    0,
+                    date = formatDateToString(timeWake),
+                    time = formatDateToTimeString(timeWake),
+                    "Wake up Time",
+                    "2",
+                    "Wake"
+                )
+                if (isSetSleep) {
+                    viewModel.getSleepByDateAndValue(bedTime.date, bedTime.value)
                 }
-
-                val itemExists2 = list.any { it.value == "Wake" }
-                if (itemExists2) {
-                    // nếu đã tồn tại
-                    for (item in list) {
-                        if (item.value == "Wake") {
-                            viewModel.updateSleepTime(
-                                formatDateToString(timeWake),
-                                formatDateToTimeString(timeSleep),
-                                item.date,
-                                "Wake"
-                            )
-                            historyViewModel.updateSleepTime(
-                                formatDateToString(timeWake),
-                                formatDateToTimeString(timeSleep),
-                                item.date,
-                                "Wake"
-                            )
-                        }
-                    }
-                } else {
-                    // nếu chưa tồn tại
-                    if (isSetWake) {
-                        viewModel.addSleep(
-                            Sleep(
-                                0,
-                                date = formatDateToString(timeWake),
-                                time = formatDateToTimeString(timeWake),
-                                "Wake up Time",
-                                "2",
-                                "Wake"
-                            )
-                        )
-                        val history2 = History(
-                            null,
-                            null,
-                            date = formatDateToString(timeWake),
-                            time = formatDateToTimeString(timeWake),
-                            "Wake up Time",
-                            2,
-                            "Wake"
-                        )
-                        historyViewModel.addHistory(history2)
-                    }
+                if (isSetWake) {
+                    viewModel.getSleepByDateAndValueWake(wakeTime.date, wakeTime.value)
                 }
-
-                findNavController().popBackStack()
+                showLoading()
             }
         }
     }
@@ -228,13 +307,11 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
             if (id == 0) {
                 timeSleep = cal.time
                 binding.dateAndTimePickerSleep.text = DateToString.convertDateToString(timeSleep)
-                Log.e("aaaa",DateToString.convertDateToString(timeSleep))
                 viewModel.getWaterListByDate(formatDateToString(timeSleep))
                 isSetSleep = true
             } else {
                 timeWake = cal.time
                 binding.dateAndTimePickerWakeup.text = DateToString.convertDateToString(timeWake)
-                Log.e("aaaa",DateToString.convertDateToString(timeWake))
                 viewModel.getWaterListByDate(formatDateToString(timeWake))
                 isSetWake = true
             }

@@ -14,6 +14,10 @@ class SleepRepository(private val sleepDao: SleepDao) {
         sleepDao.addSleep(sleep)
     }
 
+    suspend fun updateSleep(sleep: Sleep) {
+        sleepDao.updateSleep(sleep)
+    }
+
     suspend fun getAdjacentSleeps(): List<SleepPair> {
         return withContext(Dispatchers.IO) {
             sleepDao.getSleepPairs()
@@ -29,6 +33,12 @@ class SleepRepository(private val sleepDao: SleepDao) {
     suspend fun getSleepListByDate(date: String): List<Sleep> {
         return withContext(Dispatchers.IO) {
             sleepDao.getSleepListByDate(date)
+        }
+    }
+
+    suspend fun getSleepByDateAndValue(date: String,value: String): Sleep? {
+        return withContext(Dispatchers.IO) {
+            sleepDao.getSleepByDateAndValue(date, value)
         }
     }
 

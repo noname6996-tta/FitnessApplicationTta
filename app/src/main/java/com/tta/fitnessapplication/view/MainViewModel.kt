@@ -12,6 +12,7 @@ import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.UserLoginResponse
 import com.tta.fitnessapplication.data.model.Video
+import com.tta.fitnessapplication.data.model.map.ModelMap
 import com.tta.fitnessapplication.data.model.map.ResponseMap
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +34,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     val listCategory = MutableLiveData<MutableList<CategoryFood>>()
     val listFoodById = MutableLiveData<MutableList<Food>>()
     val mapList = MutableLiveData<Response<ResponseMap>>()
+    val location = MutableLiveData<Response<ModelMap>>()
 
     fun getUserData(email: String) {
         viewModelScope.launch {
@@ -204,6 +206,22 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
             }
                 .onSuccess {
                     mapList.value = it
+                }
+                .onFailure {
+                    error.value = it.toString()
+                }
+        }
+    }
+
+    fun getLocation(id: Int) {
+        viewModelScope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    repositoryApi.getLocation(id)
+                }
+            }
+                .onSuccess {
+                    location.value = it
                 }
                 .onFailure {
                     error.value = it.toString()

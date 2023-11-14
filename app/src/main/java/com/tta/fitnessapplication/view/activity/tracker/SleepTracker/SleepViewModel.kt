@@ -23,6 +23,10 @@ class SleepViewModel(application: Application) : AndroidViewModel(application) {
 
     val _sleepListA = MutableLiveData<List<SleepPair>>()
     val sleepListA: LiveData<List<SleepPair>> get() = _sleepListA
+    // item check
+    val sleepCheck = MutableLiveData<Sleep?>()
+    val sleepCheckWake = MutableLiveData<Sleep?>()
+
     init {
         val sleepDao = SleepDatabase.getDatabase(application).sleepDao()
         repository = SleepRepository(sleepDao)
@@ -35,10 +39,30 @@ class SleepViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun updateSleep(sleep: Sleep) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateSleep(sleep)
+        }
+    }
+
     fun getWaterListByDate(date: String) {
         viewModelScope.launch {
             val waterList = repository.getSleepListByDate(date)
             _sleepList.value = waterList
+        }
+    }
+
+    fun getSleepByDateAndValue(date: String,value: String) {
+        viewModelScope.launch {
+            val waterList = repository.getSleepByDateAndValue(date,value)
+            sleepCheck.value = waterList
+        }
+    }
+
+    fun getSleepByDateAndValueWake(date: String,value: String) {
+        viewModelScope.launch {
+            val waterList = repository.getSleepByDateAndValue(date,value)
+            sleepCheck.value = waterList
         }
     }
 

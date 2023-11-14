@@ -10,6 +10,7 @@ import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.ResponseVideo
 import com.tta.fitnessapplication.data.model.UserLoginResponse
+import com.tta.fitnessapplication.data.model.map.ModelMap
 import com.tta.fitnessapplication.data.model.map.ResponseMap
 import retrofit2.Response
 
@@ -104,5 +105,9 @@ class RepositoryApi {
 
     suspend fun getDataMap(lat: Double, lng: Double, radius: String): Response<ResponseMap> {
         return ApiClient.API.getListMap(lat, lng, radius)
+    }
+
+    suspend fun getLocation(id: Int): Response<ModelMap> {
+        return ApiClient.API.getLocationInfo(id)
     }
 }

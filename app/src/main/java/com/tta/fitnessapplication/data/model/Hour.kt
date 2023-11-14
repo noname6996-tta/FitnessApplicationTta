@@ -8,5 +8,7 @@ data class Hour(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     var date: String,
-    var time: String
+    var time: String,
+    var idBed: Int,
+    var idWake: Int
 )

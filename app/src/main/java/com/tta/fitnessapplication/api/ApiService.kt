@@ -15,6 +15,7 @@ import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.ResponseTool
 import com.tta.fitnessapplication.data.model.ResponseVideo
 import com.tta.fitnessapplication.data.model.UserLoginResponse
+import com.tta.fitnessapplication.data.model.map.ModelMap
 import com.tta.fitnessapplication.data.model.map.ResponseMap
 import retrofit2.Call
 import retrofit2.Response
@@ -140,4 +141,9 @@ interface ApiService {
         @Query("lng") lng: Double,
         @Query("radius") radius: String,
     ): Response<ResponseMap>
+
+    @POST(ApiPath.LOCATION)
+    suspend fun getLocationInfo(
+        @Query("id") id: Int,
+    ): Response<ModelMap>
 }

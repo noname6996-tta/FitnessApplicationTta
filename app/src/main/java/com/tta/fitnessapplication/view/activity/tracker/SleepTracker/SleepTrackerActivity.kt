@@ -113,7 +113,6 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
         }
 
         viewModelHour.readAllData.observe(viewLifecycleOwner) {
-            Log.e("ttttttt",it.toString())
             val listDataChart = arrayOf(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
             for (item in it) {
                 for (i in 0 until getWeekDates().size) {
@@ -131,34 +130,32 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
             binding.chart.viewColume7.setProgress((listDataChart[6] * 10).toInt())
         }
 
-        viewModel.sleepListA.observe(viewLifecycleOwner) {list->
-            val distinctList = HashSet<SleepPair>(list)
-            if (distinctList.isNotEmpty()) {
-                Log.e("aaaaa",distinctList.toString())
-                for (item in distinctList) {
-                    viewModel.getItemById(item.id1, item.id2)
-                }
-            }
-        }
-        viewModel.item.observe(viewLifecycleOwner) {
-            Log.e("Aaaaa", it.toString())
-            var date = ""
-            var timeWake = ""
-            var timeSleep = ""
-            for (item in it){
-                if (item.value == "Wake"){
-                    date = item.date
-                    timeWake = "${item.date} ${item.time}"
-                } else {
-                    timeSleep = "${item.date} ${item.time}"
-                }
-            }
-            val sleepTime = calculateSleepTime(timeSleep, timeWake)
-            viewModelHour.clearAll()
-            viewModelHour.addSleep(
-                Hour(0, date, convertToDecimalTime(sleepTime.hours, sleepTime.minutes).toString())
-            )
-        }
+//        viewModel.sleepListA.observe(viewLifecycleOwner) {list->
+//            val distinctList = HashSet<SleepPair>(list)
+//            if (distinctList.isNotEmpty()) {
+//                Log.e("distinctList",distinctList.toString())
+//                for (item in distinctList) {
+//                    viewModel.getItemById(item.id1, item.id2)
+//                }
+//            }
+//        }
+//        viewModel.item.observe(viewLifecycleOwner) {
+//            var date = ""
+//            var timeWake = ""
+//            var timeSleep = ""
+//            for (item in it){
+//                if (item.value == "Wake"){
+//                    date = item.date
+//                    timeWake = "${item.date} ${item.time}"
+//                } else {
+//                    timeSleep = "${item.date} ${item.time}"
+//                }
+//            }
+//            val sleepTime = calculateSleepTime(timeSleep, timeWake)
+//            viewModelHour.addSleep(
+//                Hour(0, date, convertToDecimalTime(sleepTime.hours, sleepTime.minutes).toString())
+//            )
+//        }
     }
 
     data class SleepTime(val hours: Int, val minutes: Int)
