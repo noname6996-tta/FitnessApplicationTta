@@ -103,6 +103,10 @@ class RepositoryApi {
         return ApiClient.API.getFoodByID(id)
     }
 
+    suspend fun getFoodByIdCategory(id: Int): Response<ResponseFood> {
+        return ApiClient.API.getFoodByCategory(id)
+    }
+
     suspend fun getDataMap(lat: Double, lng: Double, radius: String): Response<ResponseMap> {
         return ApiClient.API.getListMap(lat, lng, radius)
     }

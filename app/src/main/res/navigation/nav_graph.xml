@@ -255,6 +255,9 @@
         <action
             android:id="@+id/action_findMealByCategory_to_mealInfoActivity"
             app:destination="@id/mealInfoActivity" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/managerNotification"

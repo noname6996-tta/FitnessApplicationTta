@@ -46,7 +46,7 @@ class CategoryMealAdapter :
             holder.binding.tvNameCategory.text = someThingToEat.name
             holder.binding.clItemCategory.setOnClickListener {
                 onClickSendData?.let {
-                    it(position)
+                    it(someThingToEat.id)
                 }
             }
         }

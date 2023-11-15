@@ -35,6 +35,10 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
             val action = FindMealActivityDirections.actionFindMealActivityToMealInfoActivity(it)
             findNavController().navigate(action)
         }
+        categoryAdapter.findSomethingToEat {
+            val action = FindMealActivityDirections.actionFindMealActivityToFindMealByCategory(it)
+            findNavController().navigate(action)
+        }
     }
 
     override fun initView() {

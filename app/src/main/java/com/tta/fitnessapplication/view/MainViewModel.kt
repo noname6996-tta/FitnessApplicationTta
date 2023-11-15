@@ -197,6 +197,12 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
         }
     }
 
+    fun getFoodByIdCategory(id: Int) {
+        viewModelScope.launch {
+            listFoodById.value = repositoryApi.getFoodByIdCategory(id).body()?.data
+        }
+    }
+
     fun getDataMap(lat: Double, lng: Double, raduis: String) {
         viewModelScope.launch {
             runCatching {
