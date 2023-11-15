@@ -72,7 +72,7 @@ class CaloCalculateFragment : BaseFragment<CaloCalculateFragmentBinding>() {
             }
 
             btnSaveDailyWater.setOnClickListener {
-                if (!value.isNullOrEmpty()) {
+                if (result != 0.0) {
                     loginPrefsEditor.putString(Constant.PREF.CALO_INNEED, result.toInt().toString())
                     loginPrefsEditor.commit()
                 }

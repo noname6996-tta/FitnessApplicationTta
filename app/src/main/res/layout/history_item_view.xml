@@ -21,16 +21,6 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imgUpdate"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="@dimen/size_6dp"
-                android:padding="10dp"
-                android:src="@drawable/icon_more"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <ImageView
                 android:id="@+id/imgType"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -51,7 +41,7 @@
                 android:textSize="@dimen/size_16dp"
                 app:layout_constraintBottom_toTopOf="@+id/tvValue"
 
-                app:layout_constraintEnd_toStartOf="@+id/imgUpdate"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imgType"
                 app:layout_constraintTop_toTopOf="parent" />
 

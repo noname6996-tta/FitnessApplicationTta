@@ -9,8 +9,17 @@
     <View
         android:id="@+id/view23"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="120dp"
         android:background="@drawable/bg_brand_gradient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:src="@drawable/mask_group"
+        app:layout_constraintBottom_toBottomOf="@+id/view23"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,29 +34,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView38"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/size_16dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Full body"
-        android:textColor="@color/white"
-        android:textSize="@dimen/size_16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view23"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
         android:id="@+id/tvDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/size_16dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Day 1"
+        android:text="Day __"
         android:textColor="@color/white"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView38"
-        app:layout_constraintStart_toStartOf="@+id/textView38" />
+        android:layout_marginStart="@dimen/size_24dp"
+        android:textSize="@dimen/text_size_16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgBack" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
