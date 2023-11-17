@@ -69,6 +69,7 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
     override fun initViewModel() {
         super.initViewModel()
         time = args.time
+        showLoading()
         mainViewModel.getCategoryFood()
     }
 
@@ -78,6 +79,7 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
             val list = ArrayList<CategoryFood>()
             list.addAll(it)
             categoryAdapter.setListCategoryFood(it,requireContext())
+            hideLoading()
         }
         listRecommentMeal.add(Meal(1,"buger","350cal","ssss",1,"",false,99))
         recommendMealAdapter.setListExercise(listRecommentMeal,requireContext())

@@ -98,6 +98,9 @@ class RepositoryApi {
     suspend fun getCategoryFood(): Response<ResponseCategoryFood> {
         return ApiClient.API.getAllCategory()
     }
+    suspend fun getSuggestFood(progess: Int): Response<ResponseFood> {
+        return ApiClient.API.getSuggestFood(progess)
+    }
 
     suspend fun getFoodById(id: String): Response<ResponseFood> {
         return ApiClient.API.getFoodByID(id)

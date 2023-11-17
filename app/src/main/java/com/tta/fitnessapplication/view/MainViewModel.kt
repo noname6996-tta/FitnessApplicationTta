@@ -191,6 +191,12 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
         }
     }
 
+    fun getSuggestFood(progess: Int) {
+        viewModelScope.launch {
+            listFoodById.value = repositoryApi.getSuggestFood(progess).body()?.data
+        }
+    }
+
     fun getFoodById(id: String) {
         viewModelScope.launch {
             listFoodById.value = repositoryApi.getFoodById(id).body()?.data

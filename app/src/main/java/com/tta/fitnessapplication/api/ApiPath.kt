@@ -30,6 +30,7 @@ object ApiPath {
     const val HISTORY_BY_DATE_AND_TYPE = "/history/getDataByDateAndType.php"
     const val INSERT_HISTORY = "/history/insertHistory.php"
     const val CATEGORY_FOOD = "/meal/category/getAllCategory.php"
+    const val SUGGEST_FOOD = "/meal/food/getSuggestFood.php"
     const val FOOD_BY_TYPE = "/meal/food/getFoodByType.php"
     const val FOOD_BY_CATEGORY = "/meal/food/getFoodByIdCategory.php"
     const val FOOD_BY_ID = "/meal/food/getFoodById.php"

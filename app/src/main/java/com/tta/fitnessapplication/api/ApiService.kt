@@ -120,6 +120,11 @@ interface ApiService {
     @GET(ApiPath.CATEGORY_FOOD)
     suspend fun getAllCategory(): Response<ResponseCategoryFood>
 
+    @POST(ApiPath.SUGGEST_FOOD)
+    suspend fun getSuggestFood(
+        @Query("progress") progress: Int
+    ): Response<ResponseFood>
+
     @POST(ApiPath.FOOD_BY_TYPE)
     suspend fun getFoodByType(
         @Query("type") type: String
