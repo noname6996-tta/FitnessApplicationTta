@@ -1,9 +1,7 @@
 package com.tta.fitnessapplication.api
 
 import com.tta.fitnessapplication.data.model.BaseResponse
-import com.tta.fitnessapplication.data.model.CategoryFood
 import com.tta.fitnessapplication.data.model.Exercise
-import com.tta.fitnessapplication.data.model.Food
 import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.ResoinseArticle
 import com.tta.fitnessapplication.data.model.ResponseCategoryFood
@@ -92,18 +90,20 @@ interface ApiService {
     @GET(ApiPath.TOOL)
     fun getTool(): Call<ResponseTool>
 
-    @POST(ApiPath.HISTORY_BY_DATE)
-    suspend fun getHistoryByDate(
+    @POST(ApiPath.HISTORY_DOWNLOAD)
+    suspend fun getHistoryById(
         @Query("id_user") id_user: String,
-        @Query("date") date: String
     ): Response<BaseResponse<MutableList<History>>>
 
-    @POST(ApiPath.HISTORY_BY_DATE_AND_TYPE)
-    suspend fun getHistoryByDateAndType(
+    @POST(ApiPath.HISTORY_UPLOAD)
+    suspend fun uploadHistoryUser(
         @Query("id_user") id_user: String,
         @Query("date") date: String,
-        @Query("type") type: String
-    ): Response<BaseResponse<MutableList<History>>>
+        @Query("time") time: String,
+        @Query("activity") activity: String,
+        @Query("type") type: String,
+        @Query("value") value: String
+    ): Response<BaseResponse<String>>
 
     @POST(ApiPath.INSERT_HISTORY)
     suspend fun createHistory(

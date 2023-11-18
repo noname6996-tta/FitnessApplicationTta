@@ -41,7 +41,6 @@ class WaterHistoryActivity : BaseFragment<ActivityWaterHistoryBinding>() {
     private val eventsAdapter = HistoryAdapter()
     private var selectedDate: LocalDate? = null
     private val events = mutableMapOf<LocalDate, List<History>>()
-    private lateinit var idUser: String
     override fun getDataBinding(): ActivityWaterHistoryBinding {
         return ActivityWaterHistoryBinding.inflate(layoutInflater)
     }

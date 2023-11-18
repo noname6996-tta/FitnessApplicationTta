@@ -5,53 +5,64 @@
     android:layout_width="200dp"
     android:layout_height="240dp"
     android:layout_margin="@dimen/size_8dp"
-    android:background="@drawable/bg_blue_light">
+    >
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_blue_light">
+            <ImageView
+                android:id="@+id/imageView40"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@+id/tvNameFood"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_breafast" />
 
-    <ImageView
-        android:id="@+id/imageView40"
-        android:layout_width="116dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_breafast" />
+            <TextView
+                android:id="@+id/tvNameFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Honey pancake" />
 
-    <TextView
-        android:id="@+id/tvNameFood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/poppins"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvInfoFood"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView40"
-        tools:text="Honey pancake" />
+            <TextView
+                android:id="@+id/tvInfoFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Easy | 30mins | 180kCal"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvNameFood" />
 
-    <TextView
-        android:id="@+id/tvInfoFood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Easy | 30mins | 180kCal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameFood" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/appCompatButton3"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_margin="@dimen/size_16dp"
-        android:background="@drawable/bg_button_radius"
-        android:fontFamily="@font/poppins"
-        android:text="Select"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/size_12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/appCompatButton3"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_margin="@dimen/size_16dp"
+                android:background="@drawable/bg_button_radius"
+                android:fontFamily="@font/poppins"
+                android:text="Select"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

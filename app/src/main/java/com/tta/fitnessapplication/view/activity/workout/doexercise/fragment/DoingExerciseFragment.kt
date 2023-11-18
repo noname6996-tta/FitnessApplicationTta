@@ -31,7 +31,6 @@ class DoingExerciseFragment : BaseFragment<FragmentDoingexerciseBinding>() {
     private var timeRemainingInMillis: Long = totalTimeInMillis
     private var isTimerRunning: Boolean = false
     private lateinit var exercise: Exercise
-    private var idUser = ""
     override fun getDataBinding(): FragmentDoingexerciseBinding {
         return FragmentDoingexerciseBinding.inflate(layoutInflater)
     }

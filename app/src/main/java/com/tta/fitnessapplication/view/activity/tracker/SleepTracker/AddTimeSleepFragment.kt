@@ -121,7 +121,7 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
                 )
                 val history1 = History(
                     null,
-                    null,
+                    idUser.toInt(),
                     date = formatDateToString(timeSleep),
                     time = formatDateToTimeString(timeSleep),
                     "Bed Time",
@@ -167,7 +167,7 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
                 )
                 val history2 = History(
                     null,
-                    null,
+                    idUser.toInt(),
                     date = formatDateToString(timeWake),
                     time = formatDateToTimeString(timeWake),
                     "Wake up Time",

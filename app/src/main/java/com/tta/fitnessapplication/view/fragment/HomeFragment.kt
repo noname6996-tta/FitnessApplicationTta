@@ -205,6 +205,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 val dataProfile = mainViewModel.dataExercise.value?.body()?.data
                 binding.textView2.text =
                     "${dataProfile!![0].firstname} ${dataProfile!![0].lastname}"
+                loginPrefsEditor.putString(
+                    Constant.PREF.PROCESS_USER,
+                    dataProfile[0].progess.toString()
+                )
                 Log.e("aaa", dataProfile[0].toString())
                 if (dataProfile[0].weight.isNullOrEmpty() || dataProfile[0].tall.isNullOrEmpty()) {
                     binding.textView12.text = "Go to setting update your info to calculate BMI"
@@ -242,16 +246,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         historyViewModel.readAllData.observe(viewLifecycleOwner) {
             val daysDoExercise = ArrayList<String>()
-            if (it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 for (item in it) {
                     // calo
                     if (item.type == 4) {
                         dailyCaloLeft += item.value!!.toInt()
                     }
                     // exercise
-                    if (item.type == 0){
+                    if (item.type == 0) {
                         daysDoExercise.add(item.date.toString())
-                        Log.e("daysDoExercise",daysDoExercise.toString())
+                        Log.e("daysDoExercise", daysDoExercise.toString())
                     }
                 }
                 binding.tvCalor.text = dailyCaloLeft.toString() + "Cal\nLeft"
@@ -260,13 +264,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     val date = LocalDate.parse(getWeekDates()[i])
                     val dayOfMonth = date.dayOfMonth
                     days.add(dayOfMonth.toString())
-                    for (item in daysDoExercise){
-                        if (getWeekDates()[i]==item){
+                    for (item in daysDoExercise) {
+                        if (getWeekDates()[i] == item) {
                             days[i] = "✔"
                         }
                     }
                 }
-                Log.e("daysDoExercise",days.toString())
+                Log.e("daysDoExercise", days.toString())
                 binding.tvDay1.text = days[0]
                 binding.tvDay2.text = days[1]
                 binding.tvDay3.text = days[2]

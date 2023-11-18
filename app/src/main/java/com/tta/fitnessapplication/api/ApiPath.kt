@@ -28,6 +28,8 @@ object ApiPath {
     const val TOOL = "/tool/getAllData.php"
     const val HISTORY_BY_DATE = "/history/getAllDataByDate.php"
     const val HISTORY_BY_DATE_AND_TYPE = "/history/getDataByDateAndType.php"
+    const val HISTORY_DOWNLOAD = "/history/getAllData.php"
+    const val HISTORY_UPLOAD = "/history/insertHistory.php"
     const val INSERT_HISTORY = "/history/insertHistory.php"
     const val CATEGORY_FOOD = "/meal/category/getAllCategory.php"
     const val SUGGEST_FOOD = "/meal/food/getSuggestFood.php"

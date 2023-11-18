@@ -27,7 +27,6 @@ import java.util.Calendar
 class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
     private lateinit var waterViewModel: WaterViewModel
     private lateinit var historyViewModel: HistoryViewModel
-    private lateinit var idUser: String
     private var drink = 0
     private lateinit var dailyWater: String
     override fun getDataBinding(): ActivityWaterTrackerBinding {
@@ -151,7 +150,7 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
                 )
                 val history = History(
                     null,
-                    null,
+                    idUser.toInt(),
                     fullDateFormatter.format(today),
                     getCurrentTime(),
                     "Drink water",

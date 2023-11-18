@@ -61,19 +61,21 @@ class RepositoryApi {
         return ApiClient.API.register(email, password, firstname, lastname)
     }
 
-    suspend fun getHistoryByDate(
+    suspend fun getHistoryById(
         idUser: String,
-        date: String
     ): Response<BaseResponse<MutableList<History>>> {
-        return ApiClient.API.getHistoryByDate(idUser, date)
+        return ApiClient.API.getHistoryById(idUser)
     }
 
-    suspend fun getListHistoryByDateAndType(
-        idUser: String,
+    suspend fun uploadHistoryUser(
+        id_user: String,
         date: String,
-        type: String
-    ): Response<BaseResponse<MutableList<History>>> {
-        return ApiClient.API.getHistoryByDateAndType(idUser, date, type)
+        time: String,
+        activity: String,
+        type: String,
+        value: String
+    ): Response<BaseResponse<String>> {
+        return ApiClient.API.uploadHistoryUser(id_user, date, time, activity, type, value)
     }
 
     suspend fun createHistory(
@@ -98,6 +100,7 @@ class RepositoryApi {
     suspend fun getCategoryFood(): Response<ResponseCategoryFood> {
         return ApiClient.API.getAllCategory()
     }
+
     suspend fun getSuggestFood(progess: Int): Response<ResponseFood> {
         return ApiClient.API.getSuggestFood(progess)
     }

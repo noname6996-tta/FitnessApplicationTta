@@ -43,7 +43,6 @@ class MealScheduleActivity : BaseFragment<ActivityHistoryBinding>() {
     private val fullDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     private val events = mutableMapOf<LocalDate, List<History>>()
 
-    private lateinit var idUser: String
     override fun getDataBinding(): ActivityHistoryBinding {
         return ActivityHistoryBinding.inflate(layoutInflater)
     }

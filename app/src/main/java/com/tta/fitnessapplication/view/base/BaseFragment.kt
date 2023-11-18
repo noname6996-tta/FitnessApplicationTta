@@ -34,6 +34,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     private var _binding: T? = null
     private lateinit var dialog: Dialog
     protected var isConnect = false
+    var idUser = ""
     protected val binding: T
         get() = checkNotNull(_binding) {
             "Fragment $this binding cannot be accessed before onCreateView() or after onDestroyView()"
@@ -70,6 +71,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
             Constant.LOGIN_PREFS, AppCompatActivity.MODE_PRIVATE
         )
         loginPrefsEditor = loginPreferences.edit()
+        idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
         val repositoryApi = RepositoryApi()
         val viewModelFactory = MainViewModelFactory(repositoryApi)
         mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]

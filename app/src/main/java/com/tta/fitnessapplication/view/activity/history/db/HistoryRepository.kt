@@ -2,8 +2,6 @@ package com.tta.fitnessapplication.view.activity.history.db
 
 import androidx.lifecycle.LiveData
 import com.tta.fitnessapplication.data.model.History
-import com.tta.fitnessapplication.data.model.Sleep
-import com.tta.fitnessapplication.data.model.Water
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

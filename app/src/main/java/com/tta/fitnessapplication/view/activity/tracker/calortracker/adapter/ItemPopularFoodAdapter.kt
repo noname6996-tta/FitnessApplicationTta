@@ -7,14 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.Food
-import com.tta.fitnessapplication.databinding.ItemFoodRecommendBinding
+import com.tta.fitnessapplication.data.model.Meal
+import com.tta.fitnessapplication.databinding.ItemMealRecommendBinding
 
-class ItemRecommendFoodAdapter :
-    RecyclerView.Adapter<ItemRecommendFoodAdapter.ItemTodayFoodViewHolder>() {
+class ItemPopularFoodAdapter :
+    RecyclerView.Adapter<ItemPopularFoodAdapter.ItemTodayMealViewHolder>() {
     private var listSomeThingToEat: List<Food> = listOf()
     private lateinit var context: Context
 
-    fun setListExercise(listSomeThingToEat: List<Food>, context: Context) {
+    fun setListMeal(listSomeThingToEat: List<Food>, context: Context) {
         this.listSomeThingToEat = listSomeThingToEat
         this.context = context
         notifyDataSetChanged()
@@ -25,16 +26,26 @@ class ItemRecommendFoodAdapter :
         onClickSendData = position
     }
 
+    private var onClickUpdateData: ((i: Int) -> Unit)? = null
+    fun updateData(position: ((i: Int) -> Unit)) {
+        onClickUpdateData = position
+    }
+
+    fun clearList() {
+        listSomeThingToEat = emptyList()
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ItemTodayFoodViewHolder {
+    ): ItemTodayMealViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemFoodRecommendBinding.inflate(inflater, parent, false)
-        return ItemTodayFoodViewHolder(binding)
+        val binding = ItemMealRecommendBinding.inflate(inflater, parent, false)
+        return ItemTodayMealViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ItemTodayFoodViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemTodayMealViewHolder, position: Int) {
         var someThingToEat = listSomeThingToEat[position]
         if (someThingToEat == null) {
 
@@ -42,23 +53,22 @@ class ItemRecommendFoodAdapter :
             Glide.with(context)
                 .load(someThingToEat.image)
                 .error(R.drawable.ic_breafast)
-                .into(holder.binding.imageView40);
-            holder.binding.tvNameFood.text = someThingToEat.name
-            holder.binding.tvInfoFood.text = someThingToEat.desc
-            holder.binding.appCompatButton3.setOnClickListener {
+                .into(holder.binding.imgFood);
+            holder.binding.tvNameMeal.text = someThingToEat.name
+            holder.binding.tvMealDesc.text = someThingToEat.desc
+            holder.binding.imgMoreDetails.setOnClickListener {
                 onClickSendData?.let {
                     it(someThingToEat.id)
                 }
             }
         }
-
     }
 
     override fun getItemCount(): Int {
         return listSomeThingToEat.size
     }
 
-    class ItemTodayFoodViewHolder(
-        val binding: ItemFoodRecommendBinding
+    class ItemTodayMealViewHolder(
+        val binding: ItemMealRecommendBinding
     ) : RecyclerView.ViewHolder(binding.root)
 }

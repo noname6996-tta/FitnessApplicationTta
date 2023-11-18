@@ -26,13 +26,14 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     val updateUser = MutableLiveData<Response<BaseResponse<String>>>()
     val login = MutableLiveData<Response<UserLoginResponse>>()
     val register = MutableLiveData<Response<ResponseRegister>>()
-    val listHistoryByDate = MutableLiveData<Response<BaseResponse<MutableList<History>>>>()
-    val listHistoryByDateAndType = MutableLiveData<Response<BaseResponse<MutableList<History>>>>()
+    val downloadHistory = MutableLiveData<Response<BaseResponse<MutableList<History>>>>()
+    val uploadHistory = MutableLiveData<Response<BaseResponse<String>>>()
     val createHistoryStatus = MutableLiveData<Response<BaseResponse<String>>>()
     val listVideo = MutableLiveData<List<Video>>()
     val listArticle = MutableLiveData<List<Article>>()
     val listCategory = MutableLiveData<MutableList<CategoryFood>>()
     val listFoodById = MutableLiveData<MutableList<Food>>()
+    val listFoodSuggest = MutableLiveData<MutableList<Food>>()
     val mapList = MutableLiveData<Response<ResponseMap>>()
     val location = MutableLiveData<Response<ModelMap>>()
 
@@ -142,20 +143,23 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
         }
     }
 
-    fun getHistoryByDate(idUser: String, date: String) {
+    fun getHistoryById(idUser: String) {
         viewModelScope.launch {
-            listHistoryByDate.value = repositoryApi.getHistoryByDate(idUser, date)
+            downloadHistory.value = repositoryApi.getHistoryById(idUser)
         }
     }
 
-    fun getListHistoryByDateAndType(
-        idUser: String,
+    fun uploadHistoryUser(
+        id_user: String,
         date: String,
-        type: String
+        time: String,
+        activity: String,
+        type: String,
+        value: String
     ) {
         viewModelScope.launch {
-            listHistoryByDateAndType.value =
-                repositoryApi.getListHistoryByDateAndType(idUser, date, type)
+            uploadHistory.value =
+                repositoryApi.uploadHistoryUser(id_user, date, time, activity, type, value)
         }
     }
 
@@ -193,7 +197,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
 
     fun getSuggestFood(progess: Int) {
         viewModelScope.launch {
-            listFoodById.value = repositoryApi.getSuggestFood(progess).body()?.data
+            listFoodSuggest.value = repositoryApi.getSuggestFood(progess).body()?.data
         }
     }
 

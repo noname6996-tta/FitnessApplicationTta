@@ -16,6 +16,7 @@ import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_LOGIN
 import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_USER
 import com.tta.fitnessapplication.data.utils.Constant.PREF.CALO_INNEED
 import com.tta.fitnessapplication.data.utils.Constant.PREF.IDUSER
+import com.tta.fitnessapplication.data.utils.Constant.PREF.PROCESS_USER
 import com.tta.fitnessapplication.data.utils.Constant.PREF.SLEEP_TIME
 import com.tta.fitnessapplication.data.utils.Constant.PREF.WAKEUP_TIME
 import com.tta.fitnessapplication.data.utils.Constant.PREF.WATER_INNEED
@@ -133,7 +134,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     private fun login(email: String, password: String) {
-        Log.e("email",email)
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -141,7 +141,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     val user: FirebaseUser? = auth.currentUser
                     // Proceed with the authenticated user
                     // ...
-                    Log.e("email",user!!.email.toString())
                     mainViewModel.getUserData(user!!.email.toString())
                 } else {
                     // Login failed, display a message to the user
@@ -149,6 +148,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     binding.progessBarLogin.visibility = View.GONE
                     canClick = true
                 }
+            }
+            .addOnFailureListener {
+                Toast.makeText(baseContext, it.localizedMessage.toString(), Toast.LENGTH_SHORT).show()
             }
     }
 }

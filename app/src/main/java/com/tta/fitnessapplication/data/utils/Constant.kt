@@ -26,6 +26,7 @@ class Constant {
         const val CALO_INNEED = "CALO_INNEED"
         const val SLEEP_TIME = "SLEEP_TIME"
         const val WAKEUP_TIME = "WAKEUP_TIME"
+        const val PROCESS_USER = "PROCESS_USER"
     }
 
     object DATE {

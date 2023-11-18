@@ -22,6 +22,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     private var _binding: T? = null
     private var isConnect = false
     private lateinit var dialog: Dialog
+    private var idUser = ""
     protected val binding: T
         get() = checkNotNull(_binding) {
             "Activity $this binding cannot be accessed before onCreateView() or after onDestroyView()"
@@ -40,6 +41,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
             Constant.LOGIN_PREFS, AppCompatActivity.MODE_PRIVATE
         )
         loginPrefsEditor = loginPreferences.edit()
+        idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
         val repositoryApi = RepositoryApi()
         val viewModelFactory = MainViewModelFactory(repositoryApi)
         mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
@@ -64,7 +66,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
 
     private fun checkConnectInternet(){
         connectivityLiveData= ConnectivityLiveData(application)
-        connectivityLiveData.observe(this, Observer {isAvailable->
+        connectivityLiveData.observe(this) {isAvailable->
             isConnect = when(isAvailable) {
                 true-> {
                     true
@@ -74,7 +76,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
                     false
                 }
             }
-        })
+        }
     }
 
     private fun setupLoading() {

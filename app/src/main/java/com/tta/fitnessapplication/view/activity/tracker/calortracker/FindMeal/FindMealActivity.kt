@@ -3,23 +3,22 @@ package com.tta.fitnessapplication.view.activity.tracker.calortracker.FindMeal
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.CategoryFood
 import com.tta.fitnessapplication.data.model.Meal
+import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.databinding.ActivityMealTrackerBinding
 import com.tta.fitnessapplication.view.activity.tracker.calortracker.adapter.CategoryMealAdapter
-import com.tta.fitnessapplication.view.activity.tracker.calortracker.adapter.ItemRecommendMealAdapter
-import com.tta.fitnessapplication.view.activity.tracker.calortracker.adapter.ItemTodayMealAdapter
+import com.tta.fitnessapplication.view.activity.tracker.calortracker.adapter.ItemPopularFoodAdapter
+import com.tta.fitnessapplication.view.activity.tracker.calortracker.adapter.ItemRecommendFoodAdapter
 import com.tta.fitnessapplication.view.base.BaseFragment
 
 
 class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
-    val args : FindMealActivityArgs by navArgs()
+    val args: FindMealActivityArgs by navArgs()
     var time = 0
     val categoryAdapter = CategoryMealAdapter()
-    val recommendMealAdapter = ItemRecommendMealAdapter()
-    val mealPopular = ItemTodayMealAdapter()
+    val recommendMealAdapter = ItemRecommendFoodAdapter()
+    val mealPopular = ItemPopularFoodAdapter()
     val listRecommentMeal = ArrayList<Meal>()
     override fun getDataBinding(): ActivityMealTrackerBinding {
         return ActivityMealTrackerBinding.inflate(layoutInflater)
@@ -35,6 +34,12 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
             val action = FindMealActivityDirections.actionFindMealActivityToMealInfoActivity(it)
             findNavController().navigate(action)
         }
+
+        mealPopular.findSomethingToEat {
+            val action = FindMealActivityDirections.actionFindMealActivityToMealInfoActivity(it)
+            findNavController().navigate(action)
+        }
+
         categoryAdapter.findSomethingToEat {
             val action = FindMealActivityDirections.actionFindMealActivityToFindMealByCategory(it)
             findNavController().navigate(action)
@@ -43,11 +48,11 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
 
     override fun initView() {
         super.initView()
-        with(binding){
-            when(time){
-                1-> textView25.text = "Breakfast"
-                2-> textView25.text = "Lunch"
-                3-> textView25.text = "Dinner"
+        with(binding) {
+            when (time) {
+                1 -> textView25.text = "Breakfast"
+                2 -> textView25.text = "Lunch"
+                3 -> textView25.text = "Dinner"
             }
             recCategory.adapter = categoryAdapter
             val layoutManagerCategory = LinearLayoutManager(requireContext())
@@ -69,21 +74,27 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
     override fun initViewModel() {
         super.initViewModel()
         time = args.time
+        var progess = loginPreferences.getString(Constant.PREF.PROCESS_USER, "0").toString()
+        if (progess != "0") {
+            mainViewModel.getSuggestFood(progess.toInt())
+        }
         showLoading()
         mainViewModel.getCategoryFood()
+        mainViewModel.getSuggestFood(1)
     }
 
     override fun addObservers() {
         super.addObservers()
-        mainViewModel.listCategory.observe(viewLifecycleOwner){
+        mainViewModel.listCategory.observe(viewLifecycleOwner) {
             val list = ArrayList<CategoryFood>()
             list.addAll(it)
-            categoryAdapter.setListCategoryFood(it,requireContext())
+            categoryAdapter.setListCategoryFood(it, requireContext())
             hideLoading()
         }
-        listRecommentMeal.add(Meal(1,"buger","350cal","ssss",1,"",false,99))
-        recommendMealAdapter.setListExercise(listRecommentMeal,requireContext())
-        mealPopular.setListMeal(listRecommentMeal,requireContext())
 
+        mainViewModel.listFoodSuggest.observe(viewLifecycleOwner) {
+            recommendMealAdapter.setListExercise(it.take(5), requireContext())
+            mealPopular.setListMeal(it.takeLast(5), requireContext())
+        }
     }
 }

@@ -44,7 +44,6 @@ class HistoryMeal : BaseFragment<FragmentManagerNotiMealBinding>() {
     private val titleFormatter = DateTimeFormatter.ofPattern("MMM yyyy")
     private val fullDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
-    private lateinit var idUser: String
     private val listMeal = ArrayList<Meal>()
     private val listMealFinal = ArrayList<Meal>()
     private val mealAdapter = ItemTodayMealAdapter()

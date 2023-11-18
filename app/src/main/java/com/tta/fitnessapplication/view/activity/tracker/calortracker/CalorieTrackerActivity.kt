@@ -207,7 +207,7 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
                         // add to history
                         val history = History(
                             null,
-                            null,
+                            idUser.toInt(),
                             Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
                             getCurrentTime(),
                             item.taskInfo?.description,

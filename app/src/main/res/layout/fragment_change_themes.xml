@@ -116,4 +116,52 @@
         app:layout_constraintBottom_toBottomOf="@+id/viewChangePassword"
         app:layout_constraintStart_toStartOf="@id/viewChangePassword"
         app:layout_constraintTop_toTopOf="@+id/viewChangePassword" />
+
+    <View
+        android:id="@+id/viewUploadHistory"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_view_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewChangePassword" />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_24dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Upload History to Clound"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewUploadHistory"
+        app:layout_constraintStart_toStartOf="@id/viewUploadHistory"
+        app:layout_constraintTop_toTopOf="@+id/viewUploadHistory" />
+
+    <View
+        android:id="@+id/viewDownloadHistory"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_view_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewUploadHistory" />
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_24dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Download History to Clound"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewDownloadHistory"
+        app:layout_constraintStart_toStartOf="@id/viewDownloadHistory"
+        app:layout_constraintTop_toTopOf="@+id/viewDownloadHistory" />
 </androidx.constraintlayout.widget.ConstraintLayout>
