@@ -54,9 +54,9 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
             val distinctList = HashSet<SleepPair>(list)
             if (distinctList.isNotEmpty()) {
                 Log.e("aaaaa", distinctList.toString())
-                for (item in distinctList) {
-                    viewModel.getItemById(item.id1, item.id2)
-                }
+//                for (item in distinctList) {
+//                    viewModel.getItemById(item.id1, item.id2)
+//                }
             }
         }
         viewModel.item.observe(viewLifecycleOwner) {
