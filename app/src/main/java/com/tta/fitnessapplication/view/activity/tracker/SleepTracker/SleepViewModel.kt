@@ -62,7 +62,7 @@ class SleepViewModel(application: Application) : AndroidViewModel(application) {
     fun getSleepByDateAndValueWake(date: String,value: String) {
         viewModelScope.launch {
             val waterList = repository.getSleepByDateAndValue(date,value)
-            sleepCheck.value = waterList
+            sleepCheckWake.value = waterList
         }
     }
 

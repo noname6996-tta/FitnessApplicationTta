@@ -130,15 +130,15 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
             binding.chart.viewColume7.setProgress((listDataChart[6] * 10).toInt())
         }
 
-//        viewModel.sleepListA.observe(viewLifecycleOwner) {list->
-//            val distinctList = HashSet<SleepPair>(list)
-//            if (distinctList.isNotEmpty()) {
-//                Log.e("distinctList",distinctList.toString())
+        viewModel.sleepListA.observe(viewLifecycleOwner) {list->
+            val distinctList = HashSet<SleepPair>(list)
+            if (distinctList.isNotEmpty()) {
+                Log.e("distinctList",distinctList.distinct().toString())
 //                for (item in distinctList) {
 //                    viewModel.getItemById(item.id1, item.id2)
 //                }
-//            }
-//        }
+            }
+        }
 //        viewModel.item.observe(viewLifecycleOwner) {
 //            var date = ""
 //            var timeWake = ""
@@ -227,6 +227,10 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
 
             btnSetSchedule.setOnClickListener {
                 findNavController().navigate(SleepTrackerActivityDirections.actionSleepTrackerActivityToAddTimeSleepFragment())
+            }
+
+            btnSetScheduleWake.setOnClickListener {
+                findNavController().navigate(SleepTrackerActivityDirections.actionSleepTrackerActivityToAddTimeWakeFragment())
             }
         }
     }

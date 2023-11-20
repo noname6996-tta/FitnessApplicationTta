@@ -7,29 +7,24 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.tta.fitnessapplication.data.model.History
-import com.tta.fitnessapplication.data.model.Hour
 import com.tta.fitnessapplication.data.model.Sleep
 import com.tta.fitnessapplication.data.model.SleepPair
 import com.tta.fitnessapplication.data.utils.DateToString
-import com.tta.fitnessapplication.data.utils.convertToDecimalTime
 import com.tta.fitnessapplication.data.utils.formatDateToString
 import com.tta.fitnessapplication.data.utils.formatDateToTimeString
-import com.tta.fitnessapplication.databinding.FragmentAddTimeSleepBinding
+import com.tta.fitnessapplication.databinding.FragmentAddTimeWakeBinding
 import com.tta.fitnessapplication.view.activity.history.HistoryViewModel
 import com.tta.fitnessapplication.view.base.BaseFragment
-import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
-import java.util.Locale
-import java.util.concurrent.CountDownLatch
 
-class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
+class AddTimeWakeFragment : BaseFragment<FragmentAddTimeWakeBinding>() {
     private lateinit var viewModel: SleepViewModel
     private lateinit var historyViewModel: HistoryViewModel
-    private var timeSleep: Date = Date()
-    private var isSetSleep = false
-    override fun getDataBinding(): FragmentAddTimeSleepBinding {
-        return FragmentAddTimeSleepBinding.inflate(layoutInflater)
+    private var timeWake: Date = Date()
+    private var isSetWake = false
+    override fun getDataBinding(): FragmentAddTimeWakeBinding {
+        return FragmentAddTimeWakeBinding.inflate(layoutInflater)
     }
 
     override fun initViewModel() {
@@ -40,18 +35,17 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
 
     override fun addObservers() {
         super.addObservers()
-        viewModel.sleepCheck.observe(viewLifecycleOwner) { item ->
+        viewModel.sleepCheckWake.observe(viewLifecycleOwner) { item ->
             if (item != null) {
                 // trung bien thuc hien update
-                viewModel.updateSleep(Sleep(item.id, formatDateToString(timeSleep), formatDateToTimeString(timeSleep), item.activity, item.type, item.value))
-                val history1 = History(null, idUser.toInt(), date = formatDateToString(timeSleep), time = formatDateToTimeString(timeSleep), "Bed Time", 2, "Bed")
-                historyViewModel.updateHistory(history1)
+                viewModel.updateSleep(item)
+                historyViewModel.updateHistory(History(null, idUser.toInt(), date = formatDateToString(timeWake), time = formatDateToTimeString(timeWake), "Wake up Time", 2, "Wake"))
                 findNavController().popBackStack()
             } else {
                 // chua co thuc hien add
-                viewModel.addSleep(Sleep(0, date = formatDateToString(timeSleep), time = formatDateToTimeString(timeSleep), "Bed Time", "2", "Bed"))
-                val history1 = History(null, idUser.toInt(), date = formatDateToString(timeSleep), time = formatDateToTimeString(timeSleep), "Bed Time", 2, "Bed")
-                historyViewModel.addHistory(history1)
+                viewModel.addSleep(Sleep(0, date = formatDateToString(timeWake), time = formatDateToTimeString(timeWake), "Wake up Time", "2", "Wake"))
+                val history2 = History(null, idUser.toInt(), date = formatDateToString(timeWake), time = formatDateToTimeString(timeWake), "Wake up Time", 2, "Wake")
+                historyViewModel.addHistory(history2)
                 findNavController().popBackStack()
             }
         }
@@ -64,20 +58,18 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
                 findNavController().popBackStack()
             }
 
-            dateAndTimePickerSleep.setOnClickListener { showDateTimePicker() }
+            dateAndTimePickerWakeup.setOnClickListener { showDateTimePicker() }
 
             btnDone.setOnClickListener {
-                val bedTime = Sleep(
+                val wakeTime = Sleep(
                     0,
-                    date = formatDateToString(timeSleep),
-                    time = formatDateToTimeString(timeSleep),
-                    "Bed Time",
+                    date = formatDateToString(timeWake),
+                    time = formatDateToTimeString(timeWake),
+                    "Wake up Time",
                     "2",
-                    "Bed"
+                    "Wake"
                 )
-                if (isSetSleep) {
-                    viewModel.getSleepByDateAndValue(bedTime.date, bedTime.value)
-                }
+                viewModel.getSleepByDateAndValueWake(wakeTime.date, wakeTime.value)
             }
         }
     }
@@ -91,21 +83,21 @@ class AddTimeSleepFragment : BaseFragment<FragmentAddTimeSleepBinding>() {
             calendar.set(Calendar.HOUR_OF_DAY, 0)
             calendar.set(Calendar.MINUTE, 0)
             calendar.set(Calendar.SECOND, 0)
-            timeSleep = calendar.time
-            binding.dateAndTimePickerSleep.text = DateToString.convertDateToString(timeSleep)
+            timeWake = calendar.time
+            binding.dateAndTimePickerWakeup.text = DateToString.convertDateToString(timeWake)
             timePicker.show(childFragmentManager, "TAG")
         }
 
         timePicker.addOnPositiveButtonClickListener {
             val cal = Calendar.getInstance()
-            cal.time = timeSleep
+            cal.time = timeWake
             cal.set(Calendar.HOUR_OF_DAY, timePicker.hour)
             cal.set(Calendar.MINUTE, timePicker.minute)
             cal.set(Calendar.SECOND, 0)
-            timeSleep = cal.time
-            binding.dateAndTimePickerSleep.text = DateToString.convertDateToString(timeSleep)
-            viewModel.getWaterListByDate(formatDateToString(timeSleep))
-            isSetSleep = true
+            timeWake = cal.time
+            binding.dateAndTimePickerWakeup.text = DateToString.convertDateToString(timeWake)
+            viewModel.getWaterListByDate(formatDateToString(timeWake))
+            isSetWake = true
         }
         datePicker.show(childFragmentManager, "TAG")
     }

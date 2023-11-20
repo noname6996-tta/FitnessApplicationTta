@@ -172,6 +172,9 @@
         <action
             android:id="@+id/action_sleepTrackerActivity_to_addTimeSleepFragment"
             app:destination="@id/addTimeSleepFragment" />
+        <action
+            android:id="@+id/action_sleepTrackerActivity_to_addTimeWakeFragment"
+            app:destination="@id/addTimeWakeFragment" />
     </fragment>
     <fragment
         android:id="@+id/sleepScheduleActivity"
@@ -325,4 +328,9 @@
             android:name="type"
             app:argType="integer" />
     </fragment>
+    <fragment
+        tools:layout="@layout/fragment_add_time_wake"
+        android:id="@+id/addTimeWakeFragment"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.SleepTracker.AddTimeWakeFragment"
+        android:label="AddTimeWakeFragment" />
 </navigation>

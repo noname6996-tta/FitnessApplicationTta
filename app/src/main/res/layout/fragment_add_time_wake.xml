@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Add time Sleep"
+        android:text="Add time Wake"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_16sp"
         app:layout_constraintBottom_toBottomOf="@+id/view13"
@@ -56,28 +56,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view13" />
 
+
     <TextView
-        android:id="@+id/textView81"
+        android:id="@+id/textView82"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_16dp"
-        android:layout_marginTop="@dimen/size_24dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Bedtime yesterday"
+        android:text="Time to wake up today"
         android:textColor="@color/gray1"
         android:textSize="@dimen/text_size_16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view13" />
+        app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
     <com.google.android.material.chip.Chip
-        android:id="@+id/dateAndTimePickerSleep"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/dateAndTimePickerWakeup"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         android:layout_margin="@dimen/size_16dp"
         android:text="@string/choose_time"
         app:chipIcon="@drawable/ic_baseline_date_range_24"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView81" />
+        app:layout_constraintTop_toBottomOf="@+id/textView82" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnDone"

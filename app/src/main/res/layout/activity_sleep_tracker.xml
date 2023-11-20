@@ -121,18 +121,42 @@
                 app:layout_constraintStart_toStartOf="@+id/textView32"
                 app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
-            <com.google.android.material.button.MaterialButton
+            <TextView
                 android:id="@+id/btnSetSchedule"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_margin="@dimen/size_8dp"
+                android:layout_margin="@dimen/size_16dp"
                 android:background="@drawable/bg_radius_pink"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:paddingStart="@dimen/size_16dp"
+                android:paddingEnd="@dimen/size_16dp"
                 android:text="Add time sleep"
                 android:textAllCaps="false"
-                android:textSize="@dimen/text_size_12sp"
-                android:translationZ="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/view20"
-                app:layout_constraintEnd_toEndOf="@+id/imageView13" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnSetScheduleWake"
+                app:layout_constraintTop_toBottomOf="@+id/view20" />
+
+
+            <TextView
+                android:id="@+id/btnSetScheduleWake"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="@dimen/size_16dp"
+                android:background="@drawable/bg_radius_pink"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:paddingStart="@dimen/size_16dp"
+                android:paddingEnd="@dimen/size_16dp"
+                android:text="Add time wake"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintEnd_toStartOf="@+id/btnSetSchedule"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view20" />
 
             <ImageView
                 android:id="@+id/imageView13"
@@ -334,9 +358,9 @@
                 android:id="@+id/textView79"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="@dimen/size_24dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/size_24dp"
                 android:text="Lets set time to sleep and wake up"
                 android:textColor="@color/gray1"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -347,12 +371,12 @@
                 android:id="@+id/btnAddNotification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cornerRadius="@dimen/size_24dp"
                 android:layout_marginTop="@dimen/size_24dp"
                 android:layout_marginBottom="@dimen/size_24dp"
                 android:text="Add Notifications"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
+                app:cornerRadius="@dimen/size_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -368,7 +392,7 @@
                 android:background="@drawable/bg_blue_linear_16"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view20" />
+                app:layout_constraintTop_toBottomOf="@+id/btnSetSchedule" />
 
             <TextView
                 android:layout_width="wrap_content"
