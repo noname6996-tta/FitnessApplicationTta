@@ -13,6 +13,10 @@ class HourRepository(private val sleepDao: HourSleepDao) {
         sleepDao.addSleep(sleep)
     }
 
+    suspend fun insertOrUpdateHour(sleep: Hour) {
+        sleepDao.insertOrUpdateHour(sleep)
+    }
+
     suspend fun clearAll(){
         sleepDao.clearData()
     }

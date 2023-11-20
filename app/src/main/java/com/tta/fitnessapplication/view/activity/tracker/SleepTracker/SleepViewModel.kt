@@ -22,7 +22,7 @@ class SleepViewModel(application: Application) : AndroidViewModel(application) {
     val sleepList: LiveData<List<Sleep>> get() = _sleepList
 
     val _sleepListA = MutableLiveData<List<SleepPair>>()
-    val sleepListA: LiveData<List<SleepPair>> get() = _sleepListA
+    val sleepListA: MutableLiveData<List<SleepPair>> get() = _sleepListA
     // item check
     val sleepCheck = MutableLiveData<Sleep?>()
     val sleepCheckWake = MutableLiveData<Sleep?>()

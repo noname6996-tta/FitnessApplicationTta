@@ -1,12 +1,16 @@
 package com.tta.fitnessapplication.view.splash
 
+import android.Manifest
 import android.Manifest.permission.ACTIVITY_RECOGNITION
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
@@ -35,6 +39,8 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var loginPreferences: SharedPreferences
     private lateinit var loginPrefsEditor: SharedPreferences.Editor
     private var saveLogin: Boolean = false
+    private val PERMISSION_REQUEST_CODE = 200
+    private val MAPS_PERMISSION_REQUEST_CODE = 300
     val fitnessOptions = FitnessOptions.builder()
         .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
         .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
@@ -45,6 +51,8 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        requestNotificationPermission()
+        requestMapsPermission()
         val account = GoogleSignIn.getAccountForExtension(this, fitnessOptions)
         if (!GoogleSignIn.hasPermissions(account, fitnessOptions)) {
             GoogleSignIn.requestPermissions(
@@ -112,8 +120,55 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Notification permission granted, handle accordingly
+            } else {
+                // Notification permission not granted, handle accordingly
+                showPermissionDeniedAlert()
+            }
+        } else if (requestCode == MAPS_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Maps permission granted, handle accordingly
+            } else {
+                // Maps permission not granted, handle accordingly
+                showPermissionDeniedAlert()
+            }
+        }
+    }
 
+    private fun showPermissionDeniedAlert() {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.apply {
+            setTitle("Permissions Required")
+            setMessage("Some features of the app require location and notification access. Please grant the necessary permissions to continue.")
+            setPositiveButton("Go to Settings") { _, _ ->
+                val settingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val uri = Uri.fromParts("package", packageName, null)
+                settingsIntent.data = uri
+                startActivity(settingsIntent)
+            }
+            setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+                // Handle app behavior when permission is denied
+            }
+            setCancelable(false)
+        }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+    }
+
+    private fun requestMapsPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                MAPS_PERMISSION_REQUEST_CODE)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -151,5 +206,16 @@ class SplashActivity : AppCompatActivity() {
                 Log.i("TAG", response.dataSets.toString())
             }
             .addOnFailureListener({ e -> Log.d("TAG", "OnFailure()", e) })
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY)
+                != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.ACCESS_NOTIFICATION_POLICY),
+                    PERMISSION_REQUEST_CODE)
+            }
+        }
     }
 }

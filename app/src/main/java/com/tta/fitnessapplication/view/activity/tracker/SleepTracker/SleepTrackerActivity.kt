@@ -18,8 +18,13 @@ import com.tta.fitnessapplication.data.utils.Constant.DATE.getYesterdayDate
 import com.tta.fitnessapplication.data.utils.convertToDecimalTime
 import com.tta.fitnessapplication.data.utils.getWeekDates
 import com.tta.fitnessapplication.databinding.ActivitySleepTrackerBinding
+import com.tta.fitnessapplication.view.activity.tracker.SleepTracker.db.SleepDatabase
 import com.tta.fitnessapplication.view.base.BaseFragment
 import com.tta.fitnessapplication.view.noti.NewNotificationViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -29,6 +34,7 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
     private lateinit var viewModelNoti: NewNotificationViewModel
     private lateinit var viewModel: SleepViewModel
     private lateinit var viewModelHour: HourViewModel
+    private var distinctList =  ArrayList<SleepPair>()
 
     override fun getDataBinding(): ActivitySleepTrackerBinding {
         return ActivitySleepTrackerBinding.inflate(layoutInflater)
@@ -39,7 +45,7 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
         viewModelNoti = ViewModelProvider(this)[NewNotificationViewModel::class.java]
         viewModel = ViewModelProvider(this)[SleepViewModel::class.java]
         viewModelHour = ViewModelProvider(this)[HourViewModel::class.java]
-        viewModel.getAdjacentSleeps()
+//        viewModel.getAdjacentSleeps()
     }
 
     override fun addObservers() {
@@ -129,33 +135,38 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
             binding.chart.viewColume6.setProgress((listDataChart[5] * 10).toInt())
             binding.chart.viewColume7.setProgress((listDataChart[6] * 10).toInt())
         }
-
-        viewModel.sleepListA.observe(viewLifecycleOwner) {list->
-            val distinctList = HashSet<SleepPair>(list)
-            if (distinctList.isNotEmpty()) {
-                Log.e("distinctList",distinctList.distinct().toString())
-//                for (item in distinctList) {
-//                    viewModel.getItemById(item.id1, item.id2)
-//                }
+        CoroutineScope(Dispatchers.IO).launch {
+            val sleepDao = SleepDatabase.getDatabase(requireActivity()).sleepDao().getSleepPairs()
+            val distinctList = sleepDao.distinct()
+            withContext(Dispatchers.Main) {
+                Log.e("distinctList", distinctList.toString())
+                // Update UI or perform any operations with the distinctList on the main thread
+                for (item in distinctList) {
+                    viewModel.getItemById(item.id1, item.id2)
+                }
             }
         }
-//        viewModel.item.observe(viewLifecycleOwner) {
-//            var date = ""
-//            var timeWake = ""
-//            var timeSleep = ""
-//            for (item in it){
-//                if (item.value == "Wake"){
-//                    date = item.date
-//                    timeWake = "${item.date} ${item.time}"
-//                } else {
-//                    timeSleep = "${item.date} ${item.time}"
-//                }
-//            }
-//            val sleepTime = calculateSleepTime(timeSleep, timeWake)
-//            viewModelHour.addSleep(
-//                Hour(0, date, convertToDecimalTime(sleepTime.hours, sleepTime.minutes).toString())
-//            )
-//        }
+        viewModel.item.observe(viewLifecycleOwner) {
+            var date = ""
+            var timeWake = ""
+            var timeSleep = ""
+            var idWake = 0
+            var idBed = 0
+            for (item in it){
+                if (item.value == "Wake"){
+                    date = item.date
+                    idWake = item.id
+                    timeWake = "${item.date} ${item.time}"
+                } else {
+                    idBed = item.id
+                    timeSleep = "${item.date} ${item.time}"
+                }
+            }
+            val sleepTime = calculateSleepTime(timeSleep, timeWake)
+            viewModelHour.insertOrUpdateHour(
+                Hour(0, date, convertToDecimalTime(sleepTime.hours, sleepTime.minutes).toString(),idBed,idWake)
+            )
+        }
     }
 
     data class SleepTime(val hours: Int, val minutes: Int)

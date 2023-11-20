@@ -30,6 +30,12 @@ class HourViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun insertOrUpdateHour(sleep: Hour) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertOrUpdateHour(sleep)
+        }
+    }
+
     fun clearAll() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.clearAll()
