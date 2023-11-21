@@ -41,6 +41,7 @@ class FindMealByCategory : BaseFragment<FragmentMealBycategoryBinding>() {
         }
 
         mealPopular.findSomethingToEat {
+            TODO()
             val action = FindMealActivityDirections.actionFindMealActivityToMealInfoActivity(it)
             findNavController().navigate(action)
         }

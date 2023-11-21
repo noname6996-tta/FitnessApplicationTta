@@ -1,6 +1,7 @@
 package com.tta.fitnessapplication.view.activity.map
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -12,6 +13,8 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -25,13 +28,13 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.utils.GpsStatusListener
+import com.tta.fitnessapplication.data.utils.TurnOnGps
 import com.tta.fitnessapplication.data.utils.hideKeyboard
 import com.tta.fitnessapplication.databinding.ActivityMapsBinding
 import com.tta.fitnessapplication.view.base.BaseActivity
 
 class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
-
-    private val PERMISSION_REQUEST_CODE = 123
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var googleMap: GoogleMap
     private var lat: Double = 0.0
@@ -55,16 +58,41 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
 
     override fun initView() {
         super.initView()
-        checkLocationPermission()
+        val gpsStatusListener = GpsStatusListener(this)
+        val turnOnGps = TurnOnGps(this)
+        var isGpsStatusChanged: Boolean? = null
+        gpsStatusListener.observe(this) { isGpsOn ->
+
+            if (isGpsStatusChanged == null) {
+
+                if (!isGpsOn) {
+                    //turn on the gps
+                    turnOnGps.startGps(resultLauncher)
+                }
+                isGpsStatusChanged = isGpsOn
+
+            } else {
+                if (isGpsStatusChanged != isGpsOn) {
+                    if (!isGpsOn) {
+                        //turn on gps
+                        turnOnGps.startGps(resultLauncher)
+                    }
+                    isGpsStatusChanged = isGpsOn
+                }
+            }
+        }
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
         val radiusList = resources.getStringArray(R.array.Radius)
         val locationList = resources.getStringArray(R.array.Location)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
         binding.topAppBar.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
             this@MapsActivity.finish()
         }
+
         val adapterRadiusList =
             ArrayAdapter(this, android.R.layout.simple_list_item_1, radiusList)
         val adapterLocationList =
@@ -72,7 +100,12 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
         binding.spinnerRaduis.adapter = adapterRadiusList
         binding.spinnerTypeLocation.adapter = adapterLocationList
         binding.spinnerRaduis.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 // Handle item selection here
                 raduis = position + 1
             }
@@ -129,25 +162,23 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+            ) != PackageManager.PERMISSION_GRANTED ||
+            ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // Request the missing permissions.
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ),
-                PERMISSION_REQUEST_CODE
+                1
             )
         } else {
-            // The permissions are already granted, so enable the "My Location" feature.
             googleMap.isMyLocationEnabled = true
         }
-        setMapMarkers()
     }
 
     private fun setMapMarkers() {
@@ -155,120 +186,50 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
             googleMap.setOnInfoWindowClickListener { marker ->
                 val intent = Intent(this, LocationInfoActivity::class.java)
                 val firstDigit = marker.title?.substring(0, 1)
-                val intValue: Int = firstDigit.toString().toInt()  // Replace 42 with your actual integer value
+                val intValue: Int =
+                    firstDigit.toString().toInt()  // Replace 42 with your actual integer value
                 intent.putExtra("id_location", intValue)
                 startActivity(intent)
             }
         }
     }
 
-    private fun checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                PERMISSION_REQUEST_CODE
-            )
-        } else {
-            checkGPSStatus()
-        }
-    }
+    @SuppressLint("MissingPermission")
+    private val resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartIntentSenderForResult()
+    ) { activityResult ->
 
-    private fun checkGPSStatus() {
-        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-        if (isGPSEnabled) {
-            // Xác định quyền truy cập vị trí đã được cấp chưa
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-                fusedLocationClient.lastLocation
-                    .addOnSuccessListener { location: Location? ->
-                        // Xử lý vị trí trả về ở đây
+        if (activityResult.resultCode == RESULT_OK) {
+            Toast.makeText(this, "Gps is on", Toast.LENGTH_SHORT).show()
+            // Kiểm tra quyền truy cập vị trí
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                // Lấy vị trí hiện tại
+                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                        // Xử lý vị trí hiện tại ở đây
                         if (location != null) {
+                            val latitude = location.latitude
+                            val longitude = location.longitude
+                            // Sử dụng latitude và longitude theo ý của bạn
                             lat = location.latitude
                             lng = location.longitude
-                            // Sử dụng latitude và longitude cho mục đích của bạn
-                            pinList.include(LatLng(lat,lng))
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat,lng), 15f))
-                        } else {
-                            // Không thể lấy được vị trí hiện tại
-                            // Xử lý khi không thể lấy được vị trí
-                            showGPSDisabledDialog()
+                            hideLoading()
+                            // Sử dụng currentLatitude và currentLongitude cho mục đích của bạn
+                            pinList.include(LatLng(lat, lng))
+                            googleMap.animateCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(lat, lng),
+                                    15f
+                                )
+                            )
                         }
                     }
-                    .addOnFailureListener { e ->
-                        // Xử lý khi có lỗi xảy ra khi cố gắng lấy vị trí
-                    }
-            } else {
-                // Nếu quyền truy cật vị trí chưa được cấp, hiển thị thông báo hoặc yêu cầu cấp quyền
-                // Ví dụ:
-                showLocationPermissionDialog()
             }
-        } else {
-            // Hiển thị dialog thông báo cần bật GPS
-            // Ví dụ:
-            showGPSDisabledDialog()
+
+            setMapMarkers()
+
+        } else if (activityResult.resultCode == RESULT_CANCELED) {
+            Toast.makeText(this, "Request is Canceled", Toast.LENGTH_SHORT).show()
         }
-    }
 
-    private fun showGPSDisabledDialog() {
-    // Hiển thị dialog thông báo cần bật GPS
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage("Vui lòng bật GPS để sử dụng tính năng này")
-            .setPositiveButton("OK") { dialog, which ->
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                startActivity(intent)
-            }
-            .setNegativeButton("Hủy") { dialog, which ->
-                dialog.dismiss()
-            }
-            .create()
-            .show()
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                checkGPSStatus()
-            } else {
-                // Hiển thị dialog thông báo cần quyền truy cập vị trí
-                // Ví dụ:
-//                showLocationPermissionDialog()
-            }
-        }
-    }
-
-    private fun showLocationPermissionDialog() {
-        // Hiển thị dialog thông báo cần quyền truy cập vị trí
-        // Sử dụng AlertDialog.Builder để tạo dialog và thông báo cho người dùng
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage("Ứng dụng cần quyền truy cập vị trí để tiếp tục sử dụng")
-            .setPositiveButton("OK") { dialog, which ->
-                // Mở cài đặt để người dùng cấp quyền truy cập vị trí
-                val intent = Intent(
-                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                    Uri.fromParts("package", packageName, null)
-                )
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-            }
-            .setNegativeButton("Hủy") { dialog, which ->
-                dialog.dismiss()
-            }
-            .create()
-            .show()
     }
 }

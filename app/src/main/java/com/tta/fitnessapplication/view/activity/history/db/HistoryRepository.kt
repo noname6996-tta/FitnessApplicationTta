@@ -5,9 +5,8 @@ import com.tta.fitnessapplication.data.model.History
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class HistoryRepository(private val historyDao: HistoryDao) {
-
-    val readAllData: LiveData<List<History>> = historyDao.readAllData()
+class HistoryRepository(private val historyDao: HistoryDao,id_user : Int) {
+    val readAllData: LiveData<List<History>> = historyDao.readAllData(id_user)
 
     suspend fun addHistory(history: History) {
         historyDao.addHistory(history)

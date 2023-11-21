@@ -19,8 +19,8 @@ interface HistoryDao {
     @Update
     suspend fun updateHistory(history: History)
 
-    @Query("SELECT * FROM history_table ORDER BY id ASC")
-    fun readAllData(): LiveData<List<History>>
+    @Query("SELECT * FROM history_table WHERE id_user = :id_user ORDER BY id ASC")
+    fun readAllData(id_user: Int): LiveData<List<History>>
 
     @Query("SELECT * FROM history_table WHERE date = :inputDate")
     fun getHistoryListByDate(inputDate: String): List<History>

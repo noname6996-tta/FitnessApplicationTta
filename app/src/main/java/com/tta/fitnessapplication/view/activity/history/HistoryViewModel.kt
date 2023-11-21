@@ -1,6 +1,8 @@
 package com.tta.fitnessapplication.view.activity.history
 
 import android.app.Application
+import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.Sleep
 import com.tta.fitnessapplication.data.model.Water
+import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.view.activity.history.db.HistoryDatabase
 import com.tta.fitnessapplication.view.activity.history.db.HistoryRepository
 import kotlinx.coroutines.Dispatchers
@@ -17,10 +20,17 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     val readAllData: LiveData<List<History>>
     private val repository: HistoryRepository
     val historyList = MutableLiveData<List<History>>()
+    var loginPreferences: SharedPreferences
+    var loginPrefsEditor: SharedPreferences.Editor
 
     init {
+        loginPreferences = application.getSharedPreferences(
+            Constant.LOGIN_PREFS, AppCompatActivity.MODE_PRIVATE
+        )
+        loginPrefsEditor = loginPreferences.edit()
+        val idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
         val sleepDao = HistoryDatabase.getDatabase(application).historyDao()
-        repository = HistoryRepository(sleepDao)
+        repository = HistoryRepository(sleepDao,idUser.toInt())
         readAllData = repository.readAllData
     }
 

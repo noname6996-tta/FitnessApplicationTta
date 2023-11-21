@@ -34,7 +34,6 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
     private lateinit var viewModelNoti: NewNotificationViewModel
     private lateinit var viewModel: SleepViewModel
     private lateinit var viewModelHour: HourViewModel
-    private var distinctList =  ArrayList<SleepPair>()
 
     override fun getDataBinding(): ActivitySleepTrackerBinding {
         return ActivitySleepTrackerBinding.inflate(layoutInflater)
@@ -45,12 +44,10 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
         viewModelNoti = ViewModelProvider(this)[NewNotificationViewModel::class.java]
         viewModel = ViewModelProvider(this)[SleepViewModel::class.java]
         viewModelHour = ViewModelProvider(this)[HourViewModel::class.java]
-//        viewModel.getAdjacentSleeps()
     }
 
     override fun addObservers() {
         super.addObservers()
-//        viewModelHour.clearAll()
         viewModelNoti.readAllData.observe(viewLifecycleOwner) {
             for (item in it) {
                 if (item.type == 2) {
@@ -139,7 +136,6 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
             val sleepDao = SleepDatabase.getDatabase(requireActivity()).sleepDao().getSleepPairs()
             val distinctList = sleepDao.distinct()
             withContext(Dispatchers.Main) {
-                Log.e("distinctList", distinctList.toString())
                 // Update UI or perform any operations with the distinctList on the main thread
                 for (item in distinctList) {
                     viewModel.getItemById(item.id1, item.id2)
@@ -171,7 +167,7 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
 
     data class SleepTime(val hours: Int, val minutes: Int)
 
-    fun calculateSleepTime(startTime: String, endTime: String): SleepTime {
+    private fun calculateSleepTime(startTime: String, endTime: String): SleepTime {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val startDate = inputFormat.parse(startTime)
         val endDate = inputFormat.parse(endTime)

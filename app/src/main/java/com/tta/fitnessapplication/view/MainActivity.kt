@@ -1,11 +1,13 @@
 package com.tta.fitnessapplication.view
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -21,6 +23,7 @@ import com.google.android.gms.fitness.FitnessOptions
 import com.google.android.gms.fitness.data.DataType
 import com.google.android.gms.fitness.request.DataReadRequest
 import com.google.android.material.navigation.NavigationBarView
+import com.permissionx.guolindev.PermissionX
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.ActivityMainBinding
 import com.tta.fitnessapplication.view.noti.NotificationViewModel
@@ -75,6 +78,53 @@ class MainActivity : AppCompatActivity() {
             )
             startActivityForResult(signInClient.signInIntent, 1)
         }
+
+        PermissionX.init(this)
+            .permissions(
+                Manifest.permission.ACTIVITY_RECOGNITION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_NOTIFICATION_POLICY,
+                Manifest.permission.BODY_SENSORS,
+            )
+            .explainReasonBeforeRequest()
+            .onExplainRequestReason { scope, deniedList ->
+                scope.showRequestReasonDialog(
+                    deniedList,
+                    "Core fundamental are based on these permissions",
+                    "OK",
+                    "Cancel"
+                )
+            }
+            .onForwardToSettings { scope, deniedList ->
+                scope.showForwardToSettingsDialog(
+                    deniedList,
+                    "You need to allow necessary permissions in Settings manually",
+                    "OK",
+                    "Cancel"
+                )
+            }
+            .request { allGranted, grantedList, deniedList ->
+                if (allGranted) {
+                    val account = GoogleSignIn.getAccountForExtension(this, fitnessOptions)
+                    if (!GoogleSignIn.hasPermissions(account, fitnessOptions)) {
+                        GoogleSignIn.requestPermissions(
+                            this, // your activity
+                            1, // e.g. 1
+                            account,
+                            fitnessOptions
+                        )
+                    } else {
+                        accessGoogleFit()
+                    }
+                } else {
+                    Toast.makeText(
+                        this,
+                        "These permissions are denied: $deniedList",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
     }
 
     private fun initUi() {

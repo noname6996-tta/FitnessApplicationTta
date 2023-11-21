@@ -153,6 +153,8 @@ dependencies {
     // viewpager
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'me.relex:circleindicator:2.1.6'
+    // permission X
+    implementation 'com.guolindev.permissionx:permissionx:1.7.1'
 }
 
 kapt {

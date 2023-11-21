@@ -58,7 +58,7 @@ class WaterHistoryActivity : BaseFragment<ActivityWaterHistoryBinding>() {
             for (item in it) {
                 val history = History(
                     null,
-                    null,
+                    idUser.toInt(),
                     item.date,
                     item.time,
                     item.activity,
