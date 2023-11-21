@@ -16,6 +16,9 @@ import com.tta.fitnessapplication.view.base.BaseFragment
 
 class TodayTarget : BaseFragment<FragmentTodayTargetBinding>() {
     private lateinit var dailyWater: String
+    private lateinit var sleepDaily: String
+    private lateinit var doExercise: String
+    private lateinit var calorEat: String
     private val eventsAdapter = HistoryAdapter()
     private lateinit var historyViewModel: HistoryViewModel
     override fun getDataBinding(): FragmentTodayTargetBinding {
@@ -54,8 +57,12 @@ class TodayTarget : BaseFragment<FragmentTodayTargetBinding>() {
     override fun initView() {
         super.initView()
         dailyWater = loginPreferences.getString(Constant.PREF.WATER_INNEED, "2000").toString()
+        calorEat = loginPreferences.getString(Constant.PREF.CALO_INNEED, "2000").toString()
         with(binding) {
             tvWaterValue.text = dailyWater + "ml"
+            tvFoodValue.text = calorEat + " calo"
+            tvExerciseValue.text = "Not done"
+            tvSleepValue.text = "7h30m"
 
             recHistory.apply {
                 layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)

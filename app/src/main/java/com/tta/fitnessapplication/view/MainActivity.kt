@@ -49,35 +49,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUi()
-        val account = GoogleSignIn.getAccountForExtension(this, fitnessOptions)
-        if (!GoogleSignIn.hasPermissions(account, fitnessOptions)) {
-            GoogleSignIn.requestPermissions(
-                this, // your activity
-                1, // e.g. 1
-                account,
-                fitnessOptions
-            )
-        } else {
-            accessGoogleFit()
-        }
-
-        if (GoogleSignIn.hasPermissions(
-                GoogleSignIn.getLastSignedInAccount(this),
-                fitnessOptions
-            )
-        ) {
-            // The user has granted permission, make the API request
-
-        } else {
-            // The user has not granted permission, request it
-            val signInClient = GoogleSignIn.getClient(
-                this,
-                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .addExtension(fitnessOptions)
-                    .build()
-            )
-            startActivityForResult(signInClient.signInIntent, 1)
-        }
 
         PermissionX.init(this)
             .permissions(
@@ -195,22 +166,6 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return (navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp())
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (resultCode) {
-            Activity.RESULT_OK -> when (requestCode) {
-                1 -> accessGoogleFit()
-                else -> {
-                    // Result wasn't from Google Fit
-                }
-            }
-
-            else -> {
-                // Permission not granted
-            }
-        }
     }
 
     private fun accessGoogleFit() {

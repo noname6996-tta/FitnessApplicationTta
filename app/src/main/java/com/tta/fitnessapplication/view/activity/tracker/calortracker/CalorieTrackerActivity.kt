@@ -40,6 +40,7 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
     override fun addObservers() {
         super.addObservers()
         viewModel.readAllData.observe(viewLifecycleOwner) {
+            today = 0
             val listDataChart = arrayOf(0, 0, 0, 0, 0, 0, 0)
             for (item in it) {
                 if (item.type == 4) {
