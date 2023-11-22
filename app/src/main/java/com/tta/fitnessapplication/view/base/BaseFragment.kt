@@ -10,20 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
-import com.example.awesomedialog.AwesomeDialog
-import com.example.awesomedialog.background
-import com.example.awesomedialog.body
-import com.example.awesomedialog.icon
-import com.example.awesomedialog.onPositive
-import com.example.awesomedialog.title
 import com.google.android.gms.fitness.FitnessOptions
 import com.google.android.gms.fitness.data.DataType
-import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import com.tta.fitnessapplication.data.utils.ConnectivityLiveData
 import com.tta.fitnessapplication.data.utils.Constant
@@ -43,6 +35,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     protected inline fun binding(block: T.() -> Unit): T {
         return binding.apply(block)
     }
+
     val fitnessOptions = FitnessOptions.builder()
         .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
         .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
@@ -107,6 +100,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
                 true -> {
                     true
                 }
+
                 false -> {
                     false
                 }

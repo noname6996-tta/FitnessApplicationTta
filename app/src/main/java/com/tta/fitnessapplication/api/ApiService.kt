@@ -105,6 +105,16 @@ interface ApiService {
         @Query("value") value: String
     ): Response<BaseResponse<String>>
 
+    @POST(ApiPath.HISTORY_UPLOAD)
+     fun uploadHistoryUserVer2(
+        @Query("id_user") id_user: String,
+        @Query("date") date: String,
+        @Query("time") time: String,
+        @Query("activity") activity: String,
+        @Query("type") type: String,
+        @Query("value") value: String
+    ): Call<BaseResponse<String>>
+
     @POST(ApiPath.INSERT_HISTORY)
     suspend fun createHistory(
         @Query("id_user") id_user: String,

@@ -1,6 +1,7 @@
 package com.tta.fitnessapplication.view.splash
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +14,7 @@ import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.databinding.ActivitySplashBinding
 import com.tta.fitnessapplication.view.MainActivity
+import com.tta.fitnessapplication.view.br.UninstallReceiver
 import com.tta.fitnessapplication.view.login.LoginActivity
 import com.tta.fitnessapplication.view.onboarding.OnBoardActivity
 
@@ -27,6 +29,9 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val intentFilter = IntentFilter(Intent.ACTION_PACKAGE_FULLY_REMOVED)
+        intentFilter.addDataScheme("package")
+        registerReceiver(UninstallReceiver(), intentFilter)
         loginPreferences = getSharedPreferences(Constant.LOGIN_PREFS, MODE_PRIVATE)
         loginPrefsEditor = loginPreferences.edit()
         saveLogin = loginPreferences.getBoolean(Constant.SAVE_USER, false)
