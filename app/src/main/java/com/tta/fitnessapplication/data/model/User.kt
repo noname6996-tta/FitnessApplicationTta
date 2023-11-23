@@ -13,5 +13,6 @@ data class User(
     var password: String,
     var firstname: String,
     var lastname: String,
-    var progess: Int? = null
+    var progess: Int? = null,
+    var backuptime : String? = null
 )
