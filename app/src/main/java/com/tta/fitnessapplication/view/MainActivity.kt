@@ -1,9 +1,6 @@
 package com.tta.fitnessapplication.view
 
 import android.Manifest
-import android.app.Activity
-import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -12,14 +9,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.fitness.Fitness
 import com.google.android.gms.fitness.FitnessOptions
 import com.google.android.gms.fitness.data.DataType
@@ -28,10 +23,6 @@ import com.google.android.material.navigation.NavigationBarView
 import com.permissionx.guolindev.PermissionX
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.databinding.ActivityMainBinding
-import com.tta.fitnessapplication.view.br.UninstallListener
-import com.tta.fitnessapplication.view.br.UninstallReceiver
-import com.tta.fitnessapplication.view.fragment.ChangeThemesFragment
-import com.tta.fitnessapplication.view.fragment.HomeFragmentDirections
 import com.tta.fitnessapplication.view.noti.NotificationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
@@ -39,7 +30,7 @@ import java.time.ZoneId
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(),UninstallListener {
+class MainActivity : AppCompatActivity() {
     val fitnessOptions = FitnessOptions.builder()
         .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
         .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
@@ -102,12 +93,6 @@ class MainActivity : AppCompatActivity(),UninstallListener {
                     ).show()
                 }
             }
-
-        val uninstallReceiver = UninstallReceiver()
-        uninstallReceiver.uninstallListener = this
-        val filter = IntentFilter()
-        filter.addAction(Intent.ACTION_PACKAGE_REMOVED)
-        registerReceiver(uninstallReceiver, filter)
     }
 
     private fun initUi() {
@@ -200,9 +185,5 @@ class MainActivity : AppCompatActivity(),UninstallListener {
                 Log.i("TAG", response.dataSets.toString())
             }
             .addOnFailureListener({ e -> Log.d("TAG", "OnFailure()", e) })
-    }
-
-    override fun onUninstallConfirmed() {
-        supportFragmentManager.beginTransaction().replace(R.id.frameMain, ChangeThemesFragment()).commit()
     }
 }

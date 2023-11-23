@@ -65,7 +65,6 @@
 
         <receiver android:name=".view.br.AlarmReceiver" />
         <receiver android:name=".view.br.ClockAlarmManager" />
-        <receiver android:name=".view.br.UninstallReceiver" />
         <receiver android:name=".view.br.OnCompletedBroadcastReceiver" />
         <receiver android:name=".view.br.NewOnCompletedBroadcastReceiver" />
         <receiver

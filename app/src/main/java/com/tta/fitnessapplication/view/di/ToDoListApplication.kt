@@ -7,12 +7,12 @@ import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 @HiltAndroidApp
-class ToDoListApplication : Application(){
+class ToDoListApplication : Application() {
     @Inject
     lateinit var sharedPreferences: SharedPreferences
     override fun onCreate() {
         super.onCreate()
-        if(sharedPreferences.getBoolean("dark_theme", false))
+        if (sharedPreferences.getBoolean("dark_theme", false))
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
