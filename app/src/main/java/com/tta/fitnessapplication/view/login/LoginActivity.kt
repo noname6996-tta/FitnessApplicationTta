@@ -14,6 +14,7 @@ import com.tta.fitnessapplication.data.utils.Constant.Companion.EMAIL_USER
 import com.tta.fitnessapplication.data.utils.Constant.Companion.LOGIN_PREFS
 import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_LOGIN
 import com.tta.fitnessapplication.data.utils.Constant.Companion.SAVE_USER
+import com.tta.fitnessapplication.data.utils.Constant.PREF.AUTO_BACKUP
 import com.tta.fitnessapplication.data.utils.Constant.PREF.CALO_INNEED
 import com.tta.fitnessapplication.data.utils.Constant.PREF.IDUSER
 import com.tta.fitnessapplication.data.utils.Constant.PREF.PROCESS_USER
@@ -77,6 +78,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         loginPrefsEditor.putString(CALO_INNEED, "2000")
         loginPrefsEditor.putString(SLEEP_TIME, "10:00:00")
         loginPrefsEditor.putString(WAKEUP_TIME, "06:00:00")
+        loginPrefsEditor.putBoolean(AUTO_BACKUP, false)
         loginPrefsEditor.commit()
         //
         binding.progessBarLogin.visibility = View.GONE

@@ -27,6 +27,7 @@ class Constant {
         const val SLEEP_TIME = "SLEEP_TIME"
         const val WAKEUP_TIME = "WAKEUP_TIME"
         const val PROCESS_USER = "PROCESS_USER"
+        const val AUTO_BACKUP = "AUTO_BACKUP"
     }
 
     object DATE {

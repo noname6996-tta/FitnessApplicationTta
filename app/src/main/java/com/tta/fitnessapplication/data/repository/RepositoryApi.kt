@@ -120,4 +120,19 @@ class RepositoryApi {
     suspend fun getLocation(id: Int): Response<ModelMap> {
         return ApiClient.API.getLocationInfo(id)
     }
+
+    suspend fun getBackUpFile(email: String): Response<BaseResponse<MutableList<String>>> {
+        return ApiClient.API.getBackUpFile(email)
+    }
+
+    suspend fun deleteHistory(id_user: Int): Response<BaseResponse<String>> {
+        return ApiClient.API.deleteHistory(id_user)
+    }
+
+    suspend fun updateUserBackUp(
+        email: String,
+        backuptime: String
+    ): Response<BaseResponse<String>> {
+        return ApiClient.API.updateUserBackUp(email, backuptime)
+    }
 }

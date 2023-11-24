@@ -161,4 +161,19 @@ interface ApiService {
     suspend fun getLocationInfo(
         @Query("id") id: Int,
     ): Response<ModelMap>
+
+    @POST(ApiPath.BACK_UP)
+    suspend fun getBackUpFile(
+        @Query("email") email: String,
+    ): Response<BaseResponse<MutableList<String>>>
+
+    @POST(ApiPath.DELETE_HISTORY)
+    suspend fun deleteHistory(
+        @Query("id_user") id_user: Int,
+    ): Response<BaseResponse<String>>
+    @POST(ApiPath.USER_BACK_UP)
+    suspend fun updateUserBackUp(
+        @Query("email") email: String,
+        @Query("backuptime") backuptime: String,
+    ): Response<BaseResponse<String>>
 }

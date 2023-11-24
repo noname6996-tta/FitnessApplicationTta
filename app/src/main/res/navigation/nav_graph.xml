@@ -130,6 +130,9 @@
         <action
             android:id="@+id/action_changeThemesFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_changeThemesFragment_to_backupAndRestore"
+            app:destination="@id/backupAndRestore" />
     </fragment>
     <fragment
         android:id="@+id/notificationActivity"
@@ -333,4 +336,9 @@
         android:id="@+id/addTimeWakeFragment"
         android:name="com.tta.fitnessapplication.view.activity.tracker.SleepTracker.AddTimeWakeFragment"
         android:label="AddTimeWakeFragment" />
+    <fragment
+        tools:layout="@layout/fragment_backup_and_restore"
+        android:id="@+id/backupAndRestore"
+        android:name="com.tta.fitnessapplication.view.fragment.BackupAndRestore"
+        android:label="BackupAndRestore" />
 </navigation>

@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="@string/setting"
+        android:text="Backup And Restore"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_16sp"
         app:layout_constraintBottom_toBottomOf="@+id/viewBack"
@@ -56,18 +56,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/viewBack" />
 
+    <TextView
+        android:id="@+id/textView63"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_16dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Most recent backup"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+    <TextView
+        android:id="@+id/tvBackUpTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_24dp"
+        android:text="Backup time"
+        app:layout_constraintStart_toStartOf="@+id/textView63"
+        app:layout_constraintTop_toBottomOf="@+id/textView63" />
+
+    <TextView
+        android:id="@+id/tvBackUpDevice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_24dp"
+        android:text="Device"
+        app:layout_constraintStart_toStartOf="@+id/textView63"
+        app:layout_constraintTop_toBottomOf="@+id/tvBackUpTime" />
+
     <View
-        android:id="@+id/viewPersonData"
+        android:id="@+id/viewAutoBackup"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="@dimen/size_16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="@dimen/size_16dp"
         android:background="@drawable/bg_view_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
-    
+        app:layout_constraintTop_toBottomOf="@+id/tvBackUpDevice" />
+
     <TextView
         android:id="@+id/textView37"
         android:layout_width="wrap_content"
@@ -75,12 +106,12 @@
         android:layout_marginLeft="@dimen/size_16dp"
         android:fontFamily="@font/poppins"
         android:gravity="center"
-        android:text="@string/change_themes"
+        android:text="Automatic backup"
         android:textColor="@color/gray1"
         android:textSize="@dimen/text_size_14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewPersonData"
-        app:layout_constraintStart_toStartOf="@id/viewPersonData"
-        app:layout_constraintTop_toTopOf="@+id/viewPersonData" />
+        app:layout_constraintBottom_toBottomOf="@+id/viewAutoBackup"
+        app:layout_constraintStart_toStartOf="@id/viewAutoBackup"
+        app:layout_constraintTop_toTopOf="@+id/viewAutoBackup" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch1"
@@ -88,12 +119,12 @@
         android:layout_height="50dp"
         android:layout_marginRight="@dimen/size_16dp"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewPersonData"
-        app:layout_constraintEnd_toEndOf="@+id/viewPersonData"
-        app:layout_constraintTop_toTopOf="@+id/viewPersonData" />
+        app:layout_constraintBottom_toBottomOf="@+id/viewAutoBackup"
+        app:layout_constraintEnd_toEndOf="@+id/viewAutoBackup"
+        app:layout_constraintTop_toTopOf="@+id/viewAutoBackup" />
 
     <View
-        android:id="@+id/viewChangePassword"
+        android:id="@+id/viewCreateBackUp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="16dp"
@@ -101,7 +132,7 @@
         android:background="@drawable/bg_view_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewPersonData" />
+        app:layout_constraintTop_toBottomOf="@+id/viewAutoBackup" />
 
     <TextView
         android:id="@+id/textView38"
@@ -110,22 +141,22 @@
         android:layout_marginLeft="@dimen/size_16dp"
         android:fontFamily="@font/poppins"
         android:gravity="center"
-        android:text="Change password"
+        android:text="Create a backup"
         android:textColor="@color/gray1"
         android:textSize="@dimen/text_size_14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewChangePassword"
-        app:layout_constraintStart_toStartOf="@id/viewChangePassword"
-        app:layout_constraintTop_toTopOf="@+id/viewChangePassword" />
+        app:layout_constraintBottom_toBottomOf="@+id/viewCreateBackUp"
+        app:layout_constraintStart_toStartOf="@id/viewCreateBackUp"
+        app:layout_constraintTop_toTopOf="@+id/viewCreateBackUp" />
 
     <View
-        android:id="@+id/viewUploadHistory"
+        android:id="@+id/viewDeleteBackUp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="16dp"
         android:background="@drawable/bg_view_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewChangePassword" />
+        app:layout_constraintTop_toBottomOf="@+id/viewCreateBackUp" />
 
     <TextView
         android:id="@+id/textView39"
@@ -134,10 +165,34 @@
         android:layout_marginLeft="@dimen/size_16dp"
         android:fontFamily="@font/poppins"
         android:gravity="center"
-        android:text="Back Up And Restore History"
+        android:text="Delete data in backup"
         android:textColor="@color/gray1"
         android:textSize="@dimen/text_size_14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewUploadHistory"
-        app:layout_constraintStart_toStartOf="@id/viewUploadHistory"
-        app:layout_constraintTop_toTopOf="@+id/viewUploadHistory" />
+        app:layout_constraintBottom_toBottomOf="@+id/viewDeleteBackUp"
+        app:layout_constraintStart_toStartOf="@id/viewDeleteBackUp"
+        app:layout_constraintTop_toTopOf="@+id/viewDeleteBackUp" />
+
+    <View
+        android:id="@+id/viewBackUp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_view_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewDeleteBackUp" />
+
+    <TextView
+        android:id="@+id/textView49"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_24dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Download data from the cloud to this device"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewBackUp"
+        app:layout_constraintStart_toStartOf="@id/viewBackUp"
+        app:layout_constraintTop_toTopOf="@+id/viewBackUp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

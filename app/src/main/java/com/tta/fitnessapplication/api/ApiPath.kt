@@ -31,6 +31,7 @@ object ApiPath {
     const val HISTORY_DOWNLOAD = "/history/getAllData.php"
     const val HISTORY_UPLOAD = "/history/insertHistory.php"
     const val INSERT_HISTORY = "/history/insertHistory.php"
+    const val DELETE_HISTORY = "/history/deleteHistory.php"
     const val CATEGORY_FOOD = "/meal/category/getAllCategory.php"
     const val SUGGEST_FOOD = "/meal/food/getSuggestFood.php"
     const val FOOD_BY_TYPE = "/meal/food/getFoodByType.php"
@@ -38,5 +39,7 @@ object ApiPath {
     const val FOOD_BY_ID = "/meal/food/getFoodById.php"
     const val MAP_API = "/location/getValueMapApi.php"
     const val LOCATION = "/location/getLocationById.php"
+    const val BACK_UP = "/user/getLastBackUpFile.php"
+    const val USER_BACK_UP = "/user/update_back_up.php"
     //https://v1.nocodeapi.com/trantheanh/fit/XDjAzlDHSSsEEyxi/aggregatesDatasets?dataTypeName=steps_count
 }

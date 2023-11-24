@@ -36,6 +36,9 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     val listFoodSuggest = MutableLiveData<MutableList<Food>>()
     val mapList = MutableLiveData<Response<ResponseMap>>()
     val location = MutableLiveData<Response<ModelMap>>()
+    val backUpFile = MutableLiveData<Response<BaseResponse<MutableList<String>>>>()
+    val deleteHistory = MutableLiveData<Response<BaseResponse<String>>>()
+    val userBackUpFile = MutableLiveData<Response<BaseResponse<String>>>()
 
     fun getUserData(email: String) {
         viewModelScope.launch {
@@ -238,6 +241,54 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
             }
                 .onSuccess {
                     location.value = it
+                }
+                .onFailure {
+                    error.value = it.toString()
+                }
+        }
+    }
+
+    fun getBackUpFile(email: String) {
+        viewModelScope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    repositoryApi.getBackUpFile(email)
+                }
+            }
+                .onSuccess {
+                    backUpFile.value = it
+                }
+                .onFailure {
+                    error.value = it.toString()
+                }
+        }
+    }
+
+    fun deleteHistory(idUser: Int) {
+        viewModelScope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    repositoryApi.deleteHistory(idUser)
+                }
+            }
+                .onSuccess {
+                    deleteHistory.value = it
+                }
+                .onFailure {
+                    error.value = it.toString()
+                }
+        }
+    }
+
+    fun updateUserBackUp(email: String, backuptime: String) {
+        viewModelScope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    repositoryApi.updateUserBackUp(email, backuptime)
+                }
+            }
+                .onSuccess {
+                    userBackUpFile.value = it
                 }
                 .onFailure {
                     error.value = it.toString()

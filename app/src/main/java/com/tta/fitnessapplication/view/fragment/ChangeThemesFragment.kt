@@ -91,12 +91,9 @@ class ChangeThemesFragment : BaseFragment<FragmentChangeThemesBinding>() {
             }
 
             viewUploadHistory.setOnClickListener {
-                uploadHistory()
+                findNavController().navigate(R.id.action_changeThemesFragment_to_backupAndRestore)
             }
 
-            viewDownloadHistory.setOnClickListener {
-                downloadHistory()
-            }
         }
 
     }
