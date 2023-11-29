@@ -121,7 +121,7 @@ class RepositoryApi {
         return ApiClient.API.getLocationInfo(id)
     }
 
-    suspend fun getBackUpFile(email: String): Response<BaseResponse<MutableList<String>>> {
+    suspend fun getBackUpFile(email: String): Response<BaseResponse<String>> {
         return ApiClient.API.getBackUpFile(email)
     }
 

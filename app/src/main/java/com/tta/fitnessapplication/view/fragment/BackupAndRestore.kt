@@ -35,13 +35,25 @@ class BackupAndRestore : BaseFragment<FragmentBackupAndRestoreBinding>() {
         super.addObservers()
         mainViewModel.backUpFile.observe(viewLifecycleOwner){
             if (it.isSuccessful){
-                if (it.body()?.data?.get(0).toString().trim().isNotEmpty()){
+                if (it.body()?.message=="1"){
                     setView(true)
-                    binding.tvBackUpTime.text = it.body()?.data?.get(0).toString()
+                    binding.tvBackUpTime.text = it.body()?.data
+                    binding.viewCreateBackUp.visibility = View.GONE
+                    binding.textView38.visibility = View.GONE
+
+                    binding.viewDeleteBackUp.visibility = View.VISIBLE
+                    binding.textView39.visibility = View.VISIBLE
+
                     binding.viewBackUp.visibility = View.VISIBLE
                     binding.textView49.visibility = View.VISIBLE
-                } else if (it.body()?.data?.get(0).toString().trim().isEmpty()) {
+                } else {
                     setView(false)
+                    binding.viewCreateBackUp.visibility = View.VISIBLE
+                    binding.textView38.visibility = View.VISIBLE
+
+                    binding.viewDeleteBackUp.visibility = View.GONE
+                    binding.textView39.visibility = View.GONE
+
                     binding.viewBackUp.visibility = View.GONE
                     binding.textView49.visibility = View.GONE
                 }
@@ -74,14 +86,14 @@ class BackupAndRestore : BaseFragment<FragmentBackupAndRestoreBinding>() {
         mainViewModel.userBackUpFile.observe(viewLifecycleOwner){
             if (it.isSuccessful){
                 if (it.body()?.response==1){
-                    Toast.makeText(requireContext(),"Delete Success",Toast.LENGTH_SHORT).show()
+
                 }
             }
         }
     }
 
     private fun setView(b: Boolean) {
-        if (b){
+        if (!b){
             // không có dữ liệu sao lưu
             binding.viewDeleteBackUp.setOnClickListener {
                 Toast.makeText(requireContext(),"You don't have any backed up data at all",Toast.LENGTH_SHORT).show()
@@ -95,23 +107,29 @@ class BackupAndRestore : BaseFragment<FragmentBackupAndRestoreBinding>() {
                     .onPositive("Yes") {
                         showLoading()
                         viewModel.readAllData.observe(viewLifecycleOwner) {
-                            var i = 0
-                            for (item in it) {
-                                mainViewModel.uploadHistoryUser(
-                                    item.id_user.toString(),
-                                    item.date.toString(),
-                                    item.time.toString(),
-                                    item.activity.toString(),
-                                    item.type.toString(),
-                                    item.value.toString()
-                                )
-                                i++
+                            if (it.size>0){
+                                var i = 0
+                                for (item in it) {
+                                    mainViewModel.uploadHistoryUser(
+                                        item.id_user.toString(),
+                                        item.date.toString(),
+                                        item.time.toString(),
+                                        item.activity.toString(),
+                                        item.type.toString(),
+                                        item.value.toString()
+                                    )
+                                    i++
+                                }
+                                mainViewModel.updateUserBackUp(emailUser,"$deviceName - $date")
+                                if (i>=it.size){
+                                    hideLoading()
+                                    Toast.makeText(requireContext(),"Upload Success",Toast.LENGTH_SHORT).show()
+                                    mainViewModel.getBackUpFile(emailUser)
+                                }
                             }
-                            mainViewModel.updateUserBackUp(emailUser,"$deviceName - $date")
-                            if (i>=it.size){
+                            else {
                                 hideLoading()
-                                Toast.makeText(requireContext(),"Upload Success",Toast.LENGTH_SHORT).show()
-                                mainViewModel.getBackUpFile(emailUser)
+                                Toast.makeText(requireContext(),"No History",Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
@@ -157,6 +175,7 @@ class BackupAndRestore : BaseFragment<FragmentBackupAndRestoreBinding>() {
             }
 
             viewBackUp.setOnClickListener {
+                showLoading()
                 mainViewModel.getHistoryById(idUser)
             }
         }

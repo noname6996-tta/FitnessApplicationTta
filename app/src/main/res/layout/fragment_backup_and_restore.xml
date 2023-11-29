@@ -71,10 +71,12 @@
 
     <TextView
         android:id="@+id/tvBackUpTime"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_24dp"
+        android:layout_marginEnd="16dp"
         android:text="Backup time"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView63"
         app:layout_constraintTop_toBottomOf="@+id/textView63" />
 
@@ -95,6 +97,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginRight="@dimen/size_16dp"
         android:background="@drawable/bg_view_gray"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBackUpDevice" />
@@ -109,6 +112,7 @@
         android:text="Automatic backup"
         android:textColor="@color/gray1"
         android:textSize="@dimen/text_size_14sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/viewAutoBackup"
         app:layout_constraintStart_toStartOf="@id/viewAutoBackup"
         app:layout_constraintTop_toTopOf="@+id/viewAutoBackup" />
@@ -119,6 +123,7 @@
         android:layout_height="50dp"
         android:layout_marginRight="@dimen/size_16dp"
         android:textSize="24sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/viewAutoBackup"
         app:layout_constraintEnd_toEndOf="@+id/viewAutoBackup"
         app:layout_constraintTop_toTopOf="@+id/viewAutoBackup" />

@@ -165,7 +165,7 @@ interface ApiService {
     @POST(ApiPath.BACK_UP)
     suspend fun getBackUpFile(
         @Query("email") email: String,
-    ): Response<BaseResponse<MutableList<String>>>
+    ): Response<BaseResponse<String>>
 
     @POST(ApiPath.DELETE_HISTORY)
     suspend fun deleteHistory(

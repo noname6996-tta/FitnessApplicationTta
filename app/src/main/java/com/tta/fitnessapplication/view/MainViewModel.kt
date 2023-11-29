@@ -36,7 +36,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     val listFoodSuggest = MutableLiveData<MutableList<Food>>()
     val mapList = MutableLiveData<Response<ResponseMap>>()
     val location = MutableLiveData<Response<ModelMap>>()
-    val backUpFile = MutableLiveData<Response<BaseResponse<MutableList<String>>>>()
+    val backUpFile = MutableLiveData<Response<BaseResponse<String>>>()
     val deleteHistory = MutableLiveData<Response<BaseResponse<String>>>()
     val userBackUpFile = MutableLiveData<Response<BaseResponse<String>>>()
 
