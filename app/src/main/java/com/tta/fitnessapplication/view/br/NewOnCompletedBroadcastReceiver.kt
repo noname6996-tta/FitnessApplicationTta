@@ -14,6 +14,7 @@ import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.formatDateToString
 import com.tta.fitnessapplication.data.utils.formatDateToTimeString
 import com.tta.fitnessapplication.data.utils.getCurrentTime
+import com.tta.fitnessapplication.data.utils.getIdUser
 import com.tta.fitnessapplication.view.activity.history.db.HistoryDatabase
 import com.tta.fitnessapplication.view.activity.tracker.SleepTracker.db.SleepDatabase
 import com.tta.fitnessapplication.view.activity.tracker.calortracker.db.MealDatabase
@@ -32,7 +33,7 @@ class NewOnCompletedBroadcastReceiver : BroadcastReceiver() {
                     1 -> {
                         val history = History(
                             null,
-                            null,
+                            getIdUser(p0),
                             Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
                             getCurrentTime(),
                             "Drink water",
@@ -40,17 +41,17 @@ class NewOnCompletedBroadcastReceiver : BroadcastReceiver() {
                             noti.value.toString()
                         )
                         historyDao.addHistory(history)
-                        val waterDao = WaterDatabase.getDatabase(p0!!).waterDao()
-                        waterDao.addWater(
-                            Water(
-                                0,
-                                Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
-                                getCurrentTime(),
-                                "Drink water",
-                                noti.type.toString(),
-                                noti.value.toString()
-                            )
-                        )
+//                        val waterDao = WaterDatabase.getDatabase(p0!!).waterDao()
+//                        waterDao.addWater(
+//                            Water(
+//                                0,
+//                                Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
+//                                getCurrentTime(),
+//                                "Drink water",
+//                                noti.type.toString(),
+//                                noti.value.toString()
+//                            )
+//                        )
                     }
 
                     2 -> {
@@ -68,7 +69,7 @@ class NewOnCompletedBroadcastReceiver : BroadcastReceiver() {
                             )
                             val history1 = History(
                                 null,
-                                null,
+                                getIdUser(p0),
                                 Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
                                 getCurrentTime(),
                                 noti.text.toString(),
@@ -89,7 +90,7 @@ class NewOnCompletedBroadcastReceiver : BroadcastReceiver() {
                             )
                             val history1 = History(
                                 null,
-                                null,
+                                getIdUser(p0),
                                 Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
                                 getCurrentTime(),
                                 noti.text.toString(),
@@ -103,7 +104,7 @@ class NewOnCompletedBroadcastReceiver : BroadcastReceiver() {
                     4-> {
                         val history1 = History(
                             null,
-                            null,
+                            getIdUser(p0),
                             Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
                             getCurrentTime(),
                             noti.text.toString(),

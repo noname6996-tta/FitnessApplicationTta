@@ -62,6 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/size_16dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/tvNameNotification"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvNameNotification"
@@ -76,7 +77,6 @@
                 android:src="@drawable/baseline_edit_notifications_24"
                 app:layout_constraintBottom_toTopOf="@+id/switchNoti"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/switchNoti"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

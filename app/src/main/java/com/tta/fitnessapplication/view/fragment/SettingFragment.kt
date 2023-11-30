@@ -69,9 +69,9 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         with(binding) {
             viewLogout.setOnClickListener {
                 AlertDialog.Builder(requireContext())
-                    .setTitle("Thông báo")
-                    .setMessage("Bạn có muốn đăng xuất không ?")
-                    .setPositiveButton("Có",
+                    .setTitle("Notification")
+                    .setMessage("Do you want logout ?")
+                    .setPositiveButton("Yes",
                         DialogInterface.OnClickListener { _, _ ->
                             loginPrefsEditor.remove(SAVE_USER)
                             loginPrefsEditor.remove(Constant.PREF.IDUSER)
@@ -82,7 +82,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
                             startActivity(intent)
                             requireActivity().finish()
                         })
-                    .setNegativeButton("Không", null)
+                    .setNegativeButton("No", null)
                     .show()
             }
 

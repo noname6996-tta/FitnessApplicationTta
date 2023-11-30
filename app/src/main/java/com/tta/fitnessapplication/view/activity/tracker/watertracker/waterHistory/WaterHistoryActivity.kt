@@ -30,6 +30,7 @@ import com.tta.fitnessapplication.databinding.ActivityWaterHistoryBinding
 import com.tta.fitnessapplication.databinding.Example3CalendarDayBinding
 import com.tta.fitnessapplication.databinding.Example3CalendarHeaderBinding
 import com.tta.fitnessapplication.view.activity.history.HistoryAdapter
+import com.tta.fitnessapplication.view.activity.history.HistoryViewModel
 import com.tta.fitnessapplication.view.activity.tracker.watertracker.WaterViewModel
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.time.DayOfWeek
@@ -38,6 +39,7 @@ import java.time.YearMonth
 
 class WaterHistoryActivity : BaseFragment<ActivityWaterHistoryBinding>() {
     private lateinit var waterViewModel: WaterViewModel
+    private lateinit var historyViewModel: HistoryViewModel
     private val eventsAdapter = HistoryAdapter()
     private var selectedDate: LocalDate? = null
     private val events = mutableMapOf<LocalDate, List<History>>()
@@ -49,23 +51,26 @@ class WaterHistoryActivity : BaseFragment<ActivityWaterHistoryBinding>() {
         super.initViewModel()
         idUser = loginPreferences.getString(Constant.PREF.IDUSER, "").toString()
         waterViewModel = ViewModelProvider(this)[WaterViewModel::class.java]
+        historyViewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
     }
 
     override fun addObservers() {
         super.addObservers()
-        waterViewModel._waterList.observe(viewLifecycleOwner) {
+        historyViewModel.readAllData.observe(viewLifecycleOwner) {
             val list = ArrayList<History>()
             for (item in it) {
-                val history = History(
-                    null,
-                    idUser.toInt(),
-                    item.date,
-                    item.time,
-                    item.activity,
-                    item.type.toInt(),
-                    item.value
-                )
-                list.add(history)
+                if (item.type==1){
+                    val history = History(
+                        null,
+                        idUser.toInt(),
+                        item.date,
+                        item.time,
+                        item.activity,
+                        item.type!!.toInt(),
+                        item.value
+                    )
+                    list.add(history)
+                }
             }
             if (list != null) {
                 eventsAdapter.events.clear()

@@ -2,6 +2,7 @@ package com.tta.fitnessapplication.view.noti
 
 import android.Manifest
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -75,6 +76,29 @@ class ManagerNotification : BaseFragment<FragmentManagerNotificationBinding>() {
                 val action =
                     ManagerNotificationDirections.actionManagerNotificationToNewNotificationFragment()
                 findNavController().navigate(action)
+            }
+            adapter.deleteNotification {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Notification")
+                    .setMessage("Do you want delete this notification ?")
+                    .setPositiveButton("Yes",
+                        DialogInterface.OnClickListener { _, _ ->
+                            viewModel.deleteNotification(it)
+                        })
+                    .setNegativeButton("No", null)
+                    .show()
+            }
+            adapter.editNotification { notification, isChecked ->
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Notification")
+                    .setMessage("Do you want change status this notification ?")
+                    .setPositiveButton("Yes",
+                        DialogInterface.OnClickListener { _, _ ->
+                            notification.enable = isChecked
+                            viewModel.updateNotification(notification)
+                        })
+                    .setNegativeButton("No", null)
+                    .show()
             }
         }
     }

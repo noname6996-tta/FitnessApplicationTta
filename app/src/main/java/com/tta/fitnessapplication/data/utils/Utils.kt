@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.TypedValue
@@ -16,6 +17,7 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.kizitonwose.calendar.core.Week
@@ -219,4 +221,9 @@ fun getTimeValue(): Int {
         currentHour in 12..17 -> 2 // Afternoon (12 pm to 5 pm)
         else -> 3 // Night (6 pm to 5:59 am)
     }
+}
+
+fun getIdUser(context: Context): Int {
+    val loginPreferences: SharedPreferences = context.getSharedPreferences(Constant.LOGIN_PREFS, AppCompatActivity.MODE_PRIVATE)
+    return loginPreferences.getString(Constant.PREF.IDUSER, "").toString().toInt()
 }

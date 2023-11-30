@@ -10,6 +10,7 @@ import com.tta.fitnessapplication.data.model.noti.TaskInfo
 import com.tta.fitnessapplication.data.repository.TaskCategoryRepositoryImpl
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.getCurrentTime
+import com.tta.fitnessapplication.data.utils.getIdUser
 import com.tta.fitnessapplication.view.activity.history.db.HistoryDatabase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -35,7 +36,7 @@ class OnCompletedBroadcastReceiver : BroadcastReceiver() {
             val historyDao = HistoryDatabase.getDatabase(p0!!).historyDao()
             val history = History(
                 null,
-                null,
+                getIdUser(p0),
                 Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
                 getCurrentTime(),
                 taskInfo?.description,

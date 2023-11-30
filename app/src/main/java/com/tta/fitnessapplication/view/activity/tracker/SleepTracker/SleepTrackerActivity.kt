@@ -1,6 +1,5 @@
 package com.tta.fitnessapplication.view.activity.tracker.SleepTracker
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -12,7 +11,6 @@ import com.skydoves.balloon.showAlignTop
 import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.Hour
-import com.tta.fitnessapplication.data.model.SleepPair
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.getYesterdayDate
 import com.tta.fitnessapplication.data.utils.convertToDecimalTime
@@ -27,7 +25,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {

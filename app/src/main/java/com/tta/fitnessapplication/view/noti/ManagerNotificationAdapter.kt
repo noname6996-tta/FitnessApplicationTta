@@ -20,9 +20,14 @@ class ManagerNotificationAdapter :
         notifyDataSetChanged()
     }
 
-    private var onClickSendData: ((i: Int) -> Unit)? = null
-    fun editNoti(position: ((i: Int) -> Unit)) {
+    private var onClickSendData: ((position: Notification, isChecked: Boolean) -> Unit)? = null
+    fun editNotification(position: ((position: Notification, isChecked: Boolean) -> Unit)) {
         onClickSendData = position
+    }
+
+    private var onClickDeleteData: ((position: Notification) -> Unit)? = null
+    fun deleteNotification(position: ((position: Notification) -> Unit)) {
+        onClickDeleteData = position
     }
 
     override fun onCreateViewHolder(
@@ -42,13 +47,17 @@ class ManagerNotificationAdapter :
             .into(holder.binding.imgNoti)
         holder.binding.tvNameNotification.text = "${notification.hour}:${notification.min}"
         holder.binding.textView78.text = notification.text
-        holder.binding.layoutNoti.setOnClickListener {
+        holder.binding.switchNoti.isChecked = notification.enable
+        holder.binding.switchNoti.setOnCheckedChangeListener { buttonView, isChecked ->
             onClickSendData?.let {
-                it(position)
+                it(notification, isChecked)
             }
         }
-        holder.binding.switchNoti.isChecked = notification.enable
-
+//        holder.binding.imgEditNoti.setOnClickListener {
+//            onClickDeleteData?.let {
+//                it(notification)
+//            }
+//        }
     }
 
     override fun getItemCount(): Int {
