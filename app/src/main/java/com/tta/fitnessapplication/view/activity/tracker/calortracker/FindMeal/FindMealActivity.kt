@@ -4,6 +4,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tta.fitnessapplication.data.model.CategoryFood
+import com.tta.fitnessapplication.data.model.Food
 import com.tta.fitnessapplication.data.model.Meal
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.databinding.ActivityMealTrackerBinding
@@ -19,7 +20,7 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
     val categoryAdapter = CategoryMealAdapter()
     val recommendMealAdapter = ItemRecommendFoodAdapter()
     val mealPopular = ItemPopularFoodAdapter()
-    val listRecommentMeal = ArrayList<Meal>()
+    val listFood = ArrayList<Food>()
     override fun getDataBinding(): ActivityMealTrackerBinding {
         return ActivityMealTrackerBinding.inflate(layoutInflater)
     }
@@ -93,8 +94,10 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
         }
 
         mainViewModel.listFoodSuggest.observe(viewLifecycleOwner) {
-            recommendMealAdapter.setListExercise(it.take(5), requireContext())
-            mealPopular.setListMeal(it.takeLast(5), requireContext())
+            listFood.clear()
+            listFood.addAll(it)
+            recommendMealAdapter.setListExercise(listFood.take(5), requireContext())
+            mealPopular.setListMeal(listFood.takeLast(5), requireContext())
         }
     }
 }

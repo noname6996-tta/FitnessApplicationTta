@@ -64,14 +64,15 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
         gpsStatusListener.observe(this) { isGpsOn ->
 
             if (isGpsStatusChanged == null) {
-
+                Log.e("fuckkkk","1111")
                 if (!isGpsOn) {
                     //turn on the gps
                     turnOnGps.startGps(resultLauncher)
                 }
                 isGpsStatusChanged = isGpsOn
-
+                addMarker()
             } else {
+                Log.e("fuckkkk","2222")
                 if (isGpsStatusChanged != isGpsOn) {
                     if (!isGpsOn) {
                         //turn on gps
@@ -146,10 +147,12 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
                             .title("${item.id}-${item.name}")
                             .snippet(item.address)
                     )
-                    pinList.include(location)
+                    pinList.let { list ->
+                        list.include(location)
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(list.build(), 50))
+                    }
                 }
             }
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(pinList.build(), 50))
         }
         mainViewModel.error.observe(this) {
             hideLoading()
@@ -201,35 +204,35 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
 
         if (activityResult.resultCode == RESULT_OK) {
             Toast.makeText(this, "Gps is on", Toast.LENGTH_SHORT).show()
+            Log.e("fuckkkk","$lat - $lng")
             // Kiểm tra quyền truy cập vị trí
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                // Lấy vị trí hiện tại
-                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                        // Xử lý vị trí hiện tại ở đây
-                        if (location != null) {
-                            val latitude = location.latitude
-                            val longitude = location.longitude
-                            // Sử dụng latitude và longitude theo ý của bạn
-                            lat = location.latitude
-                            lng = location.longitude
-                            hideLoading()
-                            // Sử dụng currentLatitude và currentLongitude cho mục đích của bạn
-                            pinList.include(LatLng(lat, lng))
-                            googleMap.animateCamera(
-                                CameraUpdateFactory.newLatLngZoom(
-                                    LatLng(lat, lng),
-                                    15f
-                                )
-                            )
-                        }
-                    }
-            }
-
-            setMapMarkers()
-
+            addMarker()
         } else if (activityResult.resultCode == RESULT_CANCELED) {
             Toast.makeText(this, "Request is Canceled", Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    private fun addMarker(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            // Lấy vị trí hiện tại
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                // Xử lý vị trí hiện tại ở đây
+                if (location != null) {
+                    val latitude = location.latitude
+                    val longitude = location.longitude
+                    // Sử dụng latitude và longitude theo ý của bạn
+                    lat = location.latitude
+                    lng = location.longitude
+                    Log.e("fuckkkk","$lat - $lng")
+                    hideLoading()
+                    // Sử dụng currentLatitude và currentLongitude cho mục đích của bạn
+                    pinList.include(LatLng(lat, lng))
+                    mainViewModel.getDataMap(lat, lng, "$raduis")
+                }
+            }
+        }
+
+        setMapMarkers()
     }
 }

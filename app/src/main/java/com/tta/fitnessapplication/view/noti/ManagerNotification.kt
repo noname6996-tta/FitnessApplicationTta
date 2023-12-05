@@ -10,6 +10,7 @@ import android.os.Build
 import android.provider.Settings
 import android.view.View
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -37,6 +38,16 @@ class ManagerNotification : BaseFragment<FragmentManagerNotificationBinding>() {
             val linearLayoutManager = LinearLayoutManager(requireContext())
             linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
             recManagerNoti.layoutManager = linearLayoutManager
+        }
+        val notificationManager = NotificationManagerCompat.from(requireContext())
+        val areNotificationsEnabled = notificationManager.areNotificationsEnabled()
+
+        if (!areNotificationsEnabled){
+            val settingsIntent = Intent()
+            settingsIntent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
+            settingsIntent.putExtra("app_package", requireContext().packageName)
+            settingsIntent.putExtra("app_uid", requireContext().applicationInfo.uid)
+            requireContext().startActivity(settingsIntent)
         }
     }
 
