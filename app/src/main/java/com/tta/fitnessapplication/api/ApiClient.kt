@@ -1,6 +1,7 @@
 package com.tta.fitnessapplication.api
 
 import com.tta.fitnessapplication.data.utils.Constant.Companion.BASE_URL
+import com.tta.fitnessapplication.data.utils.Constant.Companion.BASE_URL_XMAPP
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
