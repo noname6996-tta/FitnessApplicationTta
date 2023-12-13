@@ -168,7 +168,7 @@
             android:textSize="@dimen/text_size_14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <View
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/viewChooseCalender"
         android:layout_width="match_parent"
         android:layout_height="60dp"

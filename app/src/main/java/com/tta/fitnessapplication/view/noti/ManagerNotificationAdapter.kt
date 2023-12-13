@@ -53,11 +53,11 @@ class ManagerNotificationAdapter :
                 it(notification, isChecked)
             }
         }
-//        holder.binding.imgEditNoti.setOnClickListener {
-//            onClickDeleteData?.let {
-//                it(notification)
-//            }
-//        }
+        holder.binding.imgEditNoti.setOnClickListener {
+            onClickDeleteData?.let {
+                it(notification)
+            }
+        }
     }
 
     override fun getItemCount(): Int {

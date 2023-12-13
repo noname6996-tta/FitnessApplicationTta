@@ -2,20 +2,14 @@ package com.tta.fitnessapplication.view.activity.map
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationManager
-import android.net.Uri
-import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -30,7 +24,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.utils.GpsStatusListener
 import com.tta.fitnessapplication.data.utils.TurnOnGps
-import com.tta.fitnessapplication.data.utils.hideKeyboard
 import com.tta.fitnessapplication.databinding.ActivityMapsBinding
 import com.tta.fitnessapplication.view.base.BaseActivity
 
@@ -42,7 +35,7 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
     private var raduis = 1
     private var location = "gym"
     private var locationType = 0
-    private val pinList = LatLngBounds.builder()
+    private var pinList = LatLngBounds.builder()
 
     override fun getDataBinding(): ActivityMapsBinding {
         return ActivityMapsBinding.inflate(layoutInflater)
@@ -62,9 +55,7 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
         val turnOnGps = TurnOnGps(this)
         var isGpsStatusChanged: Boolean? = null
         gpsStatusListener.observe(this) { isGpsOn ->
-
             if (isGpsStatusChanged == null) {
-                Log.e("fuckkkk","1111")
                 if (!isGpsOn) {
                     //turn on the gps
                     turnOnGps.startGps(resultLauncher)
@@ -72,7 +63,6 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
                 isGpsStatusChanged = isGpsOn
                 addMarker()
             } else {
-                Log.e("fuckkkk","2222")
                 if (isGpsStatusChanged != isGpsOn) {
                     if (!isGpsOn) {
                         //turn on gps
@@ -131,6 +121,28 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
 
             }
         }
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED ||
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ),
+                1
+            )
+        } else {
+            // Permission granted, request location updates
+            requestLocationUpdates()
+        }
     }
 
     override fun addObservers() {
@@ -138,7 +150,7 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
         mainViewModel.mapList.observe(this) {
             hideLoading()
             googleMap.clear()
-            for (item in it.body()!!.data) {
+            for (item in it) {
                 if (locationType == item.type) {
                     val location = LatLng(item.lat, item.lng)
                     googleMap.addMarker(
@@ -149,14 +161,18 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
                     )
                     pinList.let { list ->
                         list.include(location)
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(list.build(), 50))
+                        googleMap.animateCamera(
+                            CameraUpdateFactory.newLatLngBounds(
+                                list.build(),
+                                50
+                            )
+                        )
                     }
                 }
             }
         }
         mainViewModel.error.observe(this) {
             hideLoading()
-            Log.e("ssss", it.toString())
         }
     }
 
@@ -181,6 +197,10 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
             )
         } else {
             googleMap.isMyLocationEnabled = true
+            googleMap.setOnMyLocationButtonClickListener {
+                requestLocationUpdates()
+                false
+            }
         }
     }
 
@@ -204,7 +224,6 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
 
         if (activityResult.resultCode == RESULT_OK) {
             Toast.makeText(this, "Gps is on", Toast.LENGTH_SHORT).show()
-            Log.e("fuckkkk","$lat - $lng")
             // Kiểm tra quyền truy cập vị trí
             addMarker()
         } else if (activityResult.resultCode == RESULT_CANCELED) {
@@ -213,8 +232,12 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
 
     }
 
-    private fun addMarker(){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+    private fun addMarker() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             // Lấy vị trí hiện tại
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                 // Xử lý vị trí hiện tại ở đây
@@ -224,9 +247,9 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
                     // Sử dụng latitude và longitude theo ý của bạn
                     lat = location.latitude
                     lng = location.longitude
-                    Log.e("fuckkkk","$lat - $lng")
                     hideLoading()
                     // Sử dụng currentLatitude và currentLongitude cho mục đích của bạn
+                    pinList = LatLngBounds.builder()
                     pinList.include(LatLng(lat, lng))
                     mainViewModel.getDataMap(lat, lng, "$raduis")
                 }
@@ -234,5 +257,32 @@ class MapsActivity : BaseActivity<ActivityMapsBinding>(), OnMapReadyCallback {
         }
 
         setMapMarkers()
+    }
+
+    private fun requestLocationUpdates() {
+        // Check for location permission again before requesting location updates
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            // Request location updates
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    // Update the current location
+                    handleNewLocation(location)
+                }
+            }
+        }
+    }
+
+    private fun handleNewLocation(location: Location) {
+        // Process the obtained location here
+        lat = location.latitude
+        lng = location.longitude
+        // Now you have the updated latitude and longitude
+        // Proceed with performing actions that require the current location
+        // For example, update the map with the new location
+        addMarker()
     }
 }

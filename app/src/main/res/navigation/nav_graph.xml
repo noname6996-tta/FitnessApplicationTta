@@ -219,7 +219,11 @@
         android:id="@+id/updateNotification"
         android:name="com.tta.fitnessapplication.view.noti.UpdateNotification"
         android:label="UpdateNotification"
-        tools:layout="@layout/fragment_update_noti" />
+        tools:layout="@layout/fragment_update_noti" >
+        <argument
+            android:name="noti"
+            app:argType="com.tta.fitnessapplication.data.model.noti.Notification" />
+    </fragment>
     <fragment
         android:id="@+id/findMealActivity"
         android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.FindMeal.FindMealActivity"
@@ -276,6 +280,9 @@
         <argument
             android:name="noti_type"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_managerNotification_to_updateNotification"
+            app:destination="@id/updateNotification" />
     </fragment>
     <fragment
         android:id="@+id/personDataActivity"

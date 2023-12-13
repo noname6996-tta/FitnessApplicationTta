@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class NewNotificationViewModel(application: Application) : AndroidViewModel(application) {
+    val updateStatus = MutableLiveData<Boolean>()
     val readAllData: LiveData<List<Notification>>
     private val repository: NotiRespository
 
@@ -33,6 +34,7 @@ class NewNotificationViewModel(application: Application) : AndroidViewModel(appl
     fun updateNotification(notification: Notification){
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateNoti(notification)
+            updateStatus.postValue(true) // Set the status to true after the update is done
         }
     }
 

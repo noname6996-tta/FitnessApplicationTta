@@ -52,13 +52,18 @@ class MealInfoActivity : BaseFragment<ActivityMealInfoBinding>() {
         super.initViewModel()
         idMeal = args.id
         mainViewModel.getFoodById(idMeal.toString())
+        showLoading()
         viewModelNotificationViewModel = (activity as MainActivity).viewModelNoti
     }
 
     override fun addObservers() {
         super.addObservers()
         mainViewModel.listFoodById.observe(viewLifecycleOwner){
+            hideLoading()
             setData(it[0])
+        }
+        mainViewModel.error.observe(viewLifecycleOwner){
+            hideLoading()
         }
     }
 

@@ -13,7 +13,6 @@ import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.UserLoginResponse
 import com.tta.fitnessapplication.data.model.Video
 import com.tta.fitnessapplication.data.model.map.ModelMap
-import com.tta.fitnessapplication.data.model.map.ResponseMap
 import com.tta.fitnessapplication.data.repository.RepositoryApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +33,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     val listCategory = MutableLiveData<MutableList<CategoryFood>>()
     val listFoodById = MutableLiveData<MutableList<Food>>()
     val listFoodSuggest = MutableLiveData<MutableList<Food>>()
-    val mapList = MutableLiveData<Response<ResponseMap>>()
+    val mapList = MutableLiveData<MutableList<ModelMap>>()
     val location = MutableLiveData<Response<ModelMap>>()
     val backUpFile = MutableLiveData<Response<BaseResponse<String>>>()
     val deleteHistory = MutableLiveData<Response<BaseResponse<String>>>()
@@ -212,7 +211,9 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
 
     fun getFoodByIdCategory(id: Int) {
         viewModelScope.launch {
-            listFoodById.value = repositoryApi.getFoodByIdCategory(id).body()?.data
+            if (repositoryApi.getFoodByIdCategory(id).body()?.response == 1) {
+                listFoodById.value = repositoryApi.getFoodByIdCategory(id).body()?.data
+            } else listFoodById.value = mutableListOf()
         }
     }
 
@@ -224,7 +225,9 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
                 }
             }
                 .onSuccess {
-                    mapList.value = it
+                    if (!it.body()?.data.isNullOrEmpty()) mapList.value =
+                        it.body()?.data?.toMutableList()
+                    else mapList.value = mutableListOf()
                 }
                 .onFailure {
                     error.value = it.toString()

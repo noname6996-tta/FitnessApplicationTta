@@ -17,6 +17,7 @@ import com.tta.fitnessapplication.data.utils.convertToDecimalTime
 import com.tta.fitnessapplication.data.utils.getWeekDates
 import com.tta.fitnessapplication.databinding.ActivitySleepTrackerBinding
 import com.tta.fitnessapplication.view.activity.tracker.SleepTracker.db.SleepDatabase
+import com.tta.fitnessapplication.view.activity.tracker.watertracker.WaterTrackerActivityDirections
 import com.tta.fitnessapplication.view.base.BaseFragment
 import com.tta.fitnessapplication.view.noti.NewNotificationViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -107,7 +108,12 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
                 if (timeSleep.isNotEmpty() and timeWake.isNotEmpty()) {
                     val sleepTime = calculateSleepTime(timeSleep, timeWake)
                     binding.tvTimeSleep.text = "${sleepTime.hours}h ${sleepTime.minutes}m"
+                    loginPrefsEditor.putString(Constant.PREF.SLEEP_TIME, "${sleepTime.hours}h ${sleepTime.minutes}m")
+                    loginPrefsEditor.commit()
                     binding.tvTimeSleep.isEnabled = false
+                } else {
+                    loginPrefsEditor.putString(Constant.PREF.SLEEP_TIME, "No data")
+                    loginPrefsEditor.commit()
                 }
             }
         }
@@ -236,6 +242,19 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
             btnSetScheduleWake.setOnClickListener {
                 findNavController().navigate(SleepTrackerActivityDirections.actionSleepTrackerActivityToAddTimeWakeFragment())
             }
+            clSettingNoti.setOnClickListener {
+                // go to noti activity
+                // 0 type all, 1 water, 2 sleep, 3 eat
+                val action = WaterTrackerActivityDirections.actionWaterTrackerActivityToManagerNotification(2)
+                findNavController().navigate(action)
+            }
+        }
+    }
+
+    override fun initView() {
+        super.initView()
+        binding.apply {
+            layoutSetting.tvWaterCaculateTitle.text = "Set up notifications to remind you to sleep and wake"
         }
     }
 }

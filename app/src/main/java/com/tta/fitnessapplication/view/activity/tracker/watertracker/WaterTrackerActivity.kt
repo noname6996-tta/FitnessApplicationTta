@@ -52,8 +52,8 @@ class WaterTrackerActivity : BaseFragment<ActivityWaterTrackerBinding>() {
                         valueWater += item.value!!.trim().toInt()
                     }
                 }
-                for (i in 0 until getWeekDates().size) {
-                    if (getWeekDates()[i].toString() == item.date) {
+                for (i in 0 until getWeekDates().size ) {
+                    if (getWeekDates()[i].toString() == item.date && item.type == 1) {
                         listDataChart[i] = item.value!!.toInt() + listDataChart[i]
                         listDataChart[i] = listDataChart[i]
                     }

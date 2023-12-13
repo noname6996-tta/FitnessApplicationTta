@@ -29,6 +29,7 @@ class FindMealByCategory : BaseFragment<FragmentMealBycategoryBinding>() {
         val id = args.id
         if (id != null) {
             mainViewModel.getFoodByIdCategory(id)
+            showLoading()
         }
     }
 
@@ -49,6 +50,7 @@ class FindMealByCategory : BaseFragment<FragmentMealBycategoryBinding>() {
     override fun addObservers() {
         super.addObservers()
         mainViewModel.listFoodById.observe(viewLifecycleOwner) {
+            hideLoading()
             mealPopular.setListMeal(it, requireContext())
         }
     }

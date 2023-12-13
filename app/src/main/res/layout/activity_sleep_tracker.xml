@@ -377,7 +377,6 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 app:cornerRadius="@dimen/size_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView79" />
@@ -426,6 +425,19 @@
                 app:layout_constraintEnd_toEndOf="@+id/view22"
                 app:layout_constraintStart_toStartOf="@+id/view22"
                 app:layout_constraintTop_toTopOf="@+id/view22" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clSettingNoti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="@dimen/size_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnAddNotification">
+                <include android:id="@+id/layoutSetting" layout="@layout/item_setting_notification" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

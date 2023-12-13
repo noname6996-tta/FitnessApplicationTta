@@ -57,6 +57,30 @@ class ManagerNotification : BaseFragment<FragmentManagerNotificationBinding>() {
         viewModel = ViewModelProvider(this)[NewNotificationViewModel::class.java]
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.readAllData.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                val list = ArrayList<Notification>()
+                if (type == 0) {
+                    list.addAll(it)
+                } else {
+                    for (item in it) {
+                        if (item.type == type) {
+                            list.add(item)
+                        }
+                    }
+                }
+                binding.tvNodata.visibility = View.GONE
+                adapter.setListNotification(list, requireContext())
+            } else {
+                binding.tvNodata.visibility = View.VISIBLE
+                binding.recManagerNoti.visibility = View.GONE
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
+
     override fun addObservers() {
         super.addObservers()
         viewModel.readAllData.observe(viewLifecycleOwner) {
@@ -89,15 +113,17 @@ class ManagerNotification : BaseFragment<FragmentManagerNotificationBinding>() {
                 findNavController().navigate(action)
             }
             adapter.deleteNotification {
-                AlertDialog.Builder(requireContext())
-                    .setTitle("Notification")
-                    .setMessage("Do you want delete this notification ?")
-                    .setPositiveButton("Yes",
-                        DialogInterface.OnClickListener { _, _ ->
-                            viewModel.deleteNotification(it)
-                        })
-                    .setNegativeButton("No", null)
-                    .show()
+//                AlertDialog.Builder(requireContext())
+//                    .setTitle("Notification")
+//                    .setMessage("Do you want delete this notification ?")
+//                    .setPositiveButton("Yes",
+//                        DialogInterface.OnClickListener { _, _ ->
+//                            viewModel.deleteNotification(it)
+//                        })
+//                    .setNegativeButton("No", null)
+//                    .show()
+                val action = ManagerNotificationDirections.actionManagerNotificationToUpdateNotification(it)
+                findNavController().navigate(action)
             }
             adapter.editNotification { notification, isChecked ->
                 AlertDialog.Builder(requireContext())

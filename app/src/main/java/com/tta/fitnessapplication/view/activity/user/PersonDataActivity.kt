@@ -135,6 +135,7 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>() {
             binding.edtYourWeight.isEnabled = false
             binding.spinnerGender.isEnabled = false
             binding.edtEmail.isEnabled = false
+            binding.viewChooseCalender.isEnabled = false
             binding.view2Update.visibility = View.GONE
             binding.textView12.visibility = View.GONE
             binding.view.visibility = View.VISIBLE
@@ -179,6 +180,7 @@ class PersonDataActivity : BaseFragment<ActivityPersonDataBinding>() {
             binding.edtYourWeight.isEnabled = true
             binding.edtEmail.isEnabled = false
             binding.spinnerGender.isEnabled = true
+            binding.viewChooseCalender.isEnabled = true
             binding.view2Update.visibility = View.VISIBLE
             binding.textView12.visibility = View.VISIBLE
             binding.view.visibility = View.GONE
