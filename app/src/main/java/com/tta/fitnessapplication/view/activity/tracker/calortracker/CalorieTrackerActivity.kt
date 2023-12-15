@@ -65,17 +65,21 @@ class CalorieTrackerActivity : BaseFragment<ActivityCalorTrackerBinding>() {
         viewModelNotificationViewModel.getCompletedTask()
             .observe(viewLifecycleOwner) { listCompletedTask ->
                 listMeal.clear()
-                for (item in listCompletedTask) { listMeal.add(
-                    Meal(item.taskInfo.priority,
-                            item.taskInfo.foodName,
-                            item.taskInfo.category,
-                            item.taskInfo.detail,
-                            item.taskInfo.time,
-                            item.taskInfo.image,
-                            item.taskInfo.status,
-                            item.taskInfo.id
+                for (item in listCompletedTask) {
+                    if (formatDateToString(item.taskInfo.date) == getCurrentDate()) {
+                        listMeal.add(
+                            Meal(
+                                item.taskInfo.priority,
+                                item.taskInfo.foodName,
+                                item.taskInfo.category,
+                                item.taskInfo.detail,
+                                item.taskInfo.time,
+                                item.taskInfo.image,
+                                item.taskInfo.status,
+                                item.taskInfo.id
+                            )
                         )
-                    )
+                    }
                 }
                 viewModelNotificationViewModel.getUncompletedTask().observe(viewLifecycleOwner) {
                     for (item in it) {

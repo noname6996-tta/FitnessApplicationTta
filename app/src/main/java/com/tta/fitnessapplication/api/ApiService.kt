@@ -176,4 +176,8 @@ interface ApiService {
         @Query("email") email: String,
         @Query("backuptime") backuptime: String,
     ): Response<BaseResponse<String>>
+    @POST(ApiPath.SEARCH_FOOD)
+    suspend fun searchFood(
+        @Query("name") name: String,
+    ): Response<ResponseFood>
 }

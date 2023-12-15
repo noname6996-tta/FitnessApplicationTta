@@ -61,5 +61,6 @@ object ApiPath {
     const val LOCATION = "/location/getLocationById.php"
     const val BACK_UP = "/user/getLastBackUpFile.php"
     const val USER_BACK_UP = "/user/update_back_up.php"
+    const val SEARCH_FOOD = "/meal/food/searchFood.php"
     //https://v1.nocodeapi.com/trantheanh/fit/XDjAzlDHSSsEEyxi/aggregatesDatasets?dataTypeName=steps_count
 }

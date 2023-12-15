@@ -135,4 +135,8 @@ class RepositoryApi {
     ): Response<BaseResponse<String>> {
         return ApiClient.API.updateUserBackUp(email, backuptime)
     }
+
+    suspend fun searchFood(name: String): Response<ResponseFood> {
+        return ApiClient.API.searchFood(name)
+    }
 }

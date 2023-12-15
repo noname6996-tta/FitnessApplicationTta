@@ -239,6 +239,9 @@
             android:name="time"
             app:argType="integer"
             />
+        <action
+            android:id="@+id/action_findMealActivity_to_searchFood"
+            app:destination="@id/searchFood" />
     </fragment>
     <fragment
         android:id="@+id/newNotificationFragment"
@@ -268,6 +271,9 @@
         <argument
             android:name="id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_findMealByCategory_to_searchFood"
+            app:destination="@id/searchFood" />
     </fragment>
     <fragment
         android:id="@+id/managerNotification"
@@ -348,4 +354,8 @@
         android:id="@+id/backupAndRestore"
         android:name="com.tta.fitnessapplication.view.fragment.BackupAndRestore"
         android:label="BackupAndRestore" />
+    <fragment
+        android:id="@+id/searchFood"
+        android:name="com.tta.fitnessapplication.view.activity.tracker.calortracker.FindMeal.SearchFood"
+        android:label="SearchFood" />
 </navigation>

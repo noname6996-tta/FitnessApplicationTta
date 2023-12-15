@@ -8,6 +8,7 @@ import com.tta.fitnessapplication.data.model.BaseResponse
 import com.tta.fitnessapplication.data.model.CategoryFood
 import com.tta.fitnessapplication.data.model.Food
 import com.tta.fitnessapplication.data.model.History
+import com.tta.fitnessapplication.data.model.ResponseFood
 import com.tta.fitnessapplication.data.model.ResponseProfile
 import com.tta.fitnessapplication.data.model.ResponseRegister
 import com.tta.fitnessapplication.data.model.UserLoginResponse
@@ -38,6 +39,7 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
     val backUpFile = MutableLiveData<Response<BaseResponse<String>>>()
     val deleteHistory = MutableLiveData<Response<BaseResponse<String>>>()
     val userBackUpFile = MutableLiveData<Response<BaseResponse<String>>>()
+    val listSearchFood = MutableLiveData<Response<ResponseFood>>()
 
     fun getUserData(email: String) {
         viewModelScope.launch {
@@ -292,6 +294,22 @@ class MainViewModel(private val repositoryApi: RepositoryApi) : ViewModel() {
             }
                 .onSuccess {
                     userBackUpFile.value = it
+                }
+                .onFailure {
+                    error.value = it.toString()
+                }
+        }
+    }
+
+    fun searchFood(name: String) {
+        viewModelScope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    repositoryApi.searchFood(name)
+                }
+            }
+                .onSuccess {
+                    listSearchFood.value = it
                 }
                 .onFailure {
                     error.value = it.toString()

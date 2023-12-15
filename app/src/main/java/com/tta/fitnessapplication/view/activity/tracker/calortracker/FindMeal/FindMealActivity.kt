@@ -3,6 +3,7 @@ package com.tta.fitnessapplication.view.activity.tracker.calortracker.FindMeal
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tta.fitnessapplication.R
 import com.tta.fitnessapplication.data.model.CategoryFood
 import com.tta.fitnessapplication.data.model.Food
 import com.tta.fitnessapplication.data.model.Meal
@@ -44,6 +45,10 @@ class FindMealActivity : BaseFragment<ActivityMealTrackerBinding>() {
         categoryAdapter.findSomethingToEat {
             val action = FindMealActivityDirections.actionFindMealActivityToFindMealByCategory(it)
             findNavController().navigate(action)
+        }
+
+        binding.searchFood.setOnClickListener {
+            findNavController().navigate(R.id.action_findMealActivity_to_searchFood)
         }
     }
 
