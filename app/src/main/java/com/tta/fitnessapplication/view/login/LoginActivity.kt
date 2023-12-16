@@ -76,7 +76,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         loginPrefsEditor.putBoolean(SAVE_USER, true)
         loginPrefsEditor.putString(WATER_INNEED, "2000")
         loginPrefsEditor.putString(CALO_INNEED, "2000")
-        loginPrefsEditor.putString(SLEEP_TIME, "10:00:00")
+        loginPrefsEditor.putString(SLEEP_TIME, "8:00:00")
         loginPrefsEditor.putString(WAKEUP_TIME, "06:00:00")
         loginPrefsEditor.putBoolean(AUTO_BACKUP, false)
         loginPrefsEditor.commit()

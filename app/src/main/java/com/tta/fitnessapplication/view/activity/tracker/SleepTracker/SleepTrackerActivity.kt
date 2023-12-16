@@ -245,7 +245,7 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
             clSettingNoti.setOnClickListener {
                 // go to noti activity
                 // 0 type all, 1 water, 2 sleep, 3 eat
-                val action = WaterTrackerActivityDirections.actionWaterTrackerActivityToManagerNotification(2)
+                val action = SleepTrackerActivityDirections.actionSleepTrackerActivityToManagerNotification(2)
                 findNavController().navigate(action)
             }
         }
