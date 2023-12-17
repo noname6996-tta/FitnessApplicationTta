@@ -63,12 +63,16 @@ class HistoryActivity : BaseFragment<ActivityHistoryBinding>() {
     override fun addObservers() {
         super.addObservers()
         historyViewModel.historyList.observe(viewLifecycleOwner) {
-            val list = ArrayList<History>()
-            list.addAll(it)
-            if (list != null) {
-                eventsAdapter.events.clear()
-                eventsAdapter.events.addAll(list)
-                eventsAdapter.notifyDataSetChanged()
+            if (!it.isNullOrEmpty()) {
+                val listIdUser = ArrayList<History>()
+                for (item in it){
+                    if (item.id_user == idUser.toInt()) listIdUser.add(item)
+                }
+                if (listIdUser.isNotEmpty()){
+                    eventsAdapter.events.clear()
+                    eventsAdapter.events.addAll(listIdUser.take(5))
+                    eventsAdapter.notifyDataSetChanged()
+                }
             }
         }
     }

@@ -41,17 +41,6 @@ class NewOnCompletedBroadcastReceiver : BroadcastReceiver() {
                             noti.value.toString()
                         )
                         historyDao.addHistory(history)
-//                        val waterDao = WaterDatabase.getDatabase(p0!!).waterDao()
-//                        waterDao.addWater(
-//                            Water(
-//                                0,
-//                                Constant.DATE.fullDateFormatter.format(Constant.DATE.today),
-//                                getCurrentTime(),
-//                                "Drink water",
-//                                noti.type.toString(),
-//                                noti.value.toString()
-//                            )
-//                        )
                     }
 
                     2 -> {

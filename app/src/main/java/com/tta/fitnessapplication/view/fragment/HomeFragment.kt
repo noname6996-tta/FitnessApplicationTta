@@ -23,6 +23,7 @@ import com.google.android.gms.fitness.data.DataType
 import com.google.android.gms.fitness.data.Field
 import com.google.android.gms.fitness.request.DataReadRequest
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.today
 import com.tta.fitnessapplication.data.utils.getWeekDates
@@ -237,10 +238,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         historyViewModel.historyList.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
-                binding.tvNoDataRecycle.visibility = View.GONE
-                eventsAdapter.events.clear()
-                eventsAdapter.events.addAll(it.take(5))
-                eventsAdapter.notifyDataSetChanged()
+                val listIdUser = ArrayList<History>()
+                for (item in it){
+                    if (item.id_user == idUser.toInt()) listIdUser.add(item)
+                }
+                if (listIdUser.isNotEmpty()){
+                    binding.tvNoDataRecycle.visibility = View.GONE
+                    eventsAdapter.events.clear()
+                    eventsAdapter.events.addAll(listIdUser.take(5))
+                    eventsAdapter.notifyDataSetChanged()
+                }
             }
         }
 

@@ -65,7 +65,7 @@ class MealScheduleActivity : BaseFragment<ActivityHistoryBinding>() {
         historyViewModel.historyList.observe(viewLifecycleOwner) {
             val list = ArrayList<History>()
             for (item in it){
-                if (item.type == 4){
+                if (item.type == 4 && item.id_user == idUser.toInt()){
                     list.add(item)
                 }
             }

@@ -28,6 +28,7 @@ import com.tta.fitnessapplication.databinding.Example3CalendarDayBinding
 import com.tta.fitnessapplication.databinding.Example3CalendarHeaderBinding
 import com.tta.fitnessapplication.view.activity.WebViewActivity
 import com.tta.fitnessapplication.view.activity.history.HistoryAdapter
+import com.tta.fitnessapplication.view.activity.history.HistoryViewModel
 import com.tta.fitnessapplication.view.base.BaseActivity
 import com.tta.fitnessapplication.view.base.BaseFragment
 import java.time.DayOfWeek
@@ -37,6 +38,7 @@ import java.time.YearMonth
 class SleepScheduleActivity : BaseFragment<ActivitySleepScheduleBinding>() {
     private val eventsAdapter = HistoryAdapter()
     private lateinit var viewModel : SleepViewModel
+    private lateinit var viewModelHistory : HistoryViewModel
     private var selectedDate: LocalDate? = null
     private val events = mutableMapOf<LocalDate, List<History>>()
 
@@ -46,23 +48,34 @@ class SleepScheduleActivity : BaseFragment<ActivitySleepScheduleBinding>() {
 
     override fun addObservers() {
         super.addObservers()
-        viewModel.sleepList.observe(viewLifecycleOwner) {
-            val list = ArrayList<History>()
-            for (item in it) {
-                val history = History(
-                    null,
-                    null,
-                    item.date,
-                    item.time,
-                    item.activity,
-                    item.type.toInt(),
-                    item.value
-                )
-                list.add(history)
+//        viewModel.sleepList.observe(viewLifecycleOwner) {
+//            val list = ArrayList<History>()
+//            for (item in it) {
+//                val history = History(
+//                    null,
+//                    null,
+//                    item.date,
+//                    item.time,
+//                    item.activity,
+//                    item.type.toInt(),
+//                    item.value
+//                )
+//                list.add(history)
+//            }
+//            if (list != null) {
+//                eventsAdapter.events.clear()
+//                eventsAdapter.events.addAll(list)
+//                eventsAdapter.notifyDataSetChanged()
+//            }
+//        }
+        viewModelHistory.historyList.observe(viewLifecycleOwner) {
+            val listIdUser = ArrayList<History>()
+            for (item in it){
+                if (item.id_user == idUser.toInt() && item.type == 2) listIdUser.add(item)
             }
-            if (list != null) {
+            if (listIdUser != null) {
                 eventsAdapter.events.clear()
-                eventsAdapter.events.addAll(list)
+                eventsAdapter.events.addAll(listIdUser)
                 eventsAdapter.notifyDataSetChanged()
             }
         }
@@ -71,6 +84,7 @@ class SleepScheduleActivity : BaseFragment<ActivitySleepScheduleBinding>() {
     override fun initViewModel() {
         super.initViewModel()
         viewModel = ViewModelProvider(this)[SleepViewModel::class.java]
+        viewModelHistory = ViewModelProvider(this)[HistoryViewModel::class.java]
     }
 
     override fun initView() {
@@ -130,7 +144,7 @@ class SleepScheduleActivity : BaseFragment<ActivitySleepScheduleBinding>() {
         }
         binding.exThreeSelectedDateText.text =
             "Day: " + Constant.DATE.fullDateFormatter.format(date)
-        viewModel.getWaterListByDate(Constant.DATE.fullDateFormatter.format(date))
+        viewModelHistory.getWaterListByDate(Constant.DATE.fullDateFormatter.format(date))
     }
 
     private fun configureBinders(daysOfWeek: List<DayOfWeek>) {

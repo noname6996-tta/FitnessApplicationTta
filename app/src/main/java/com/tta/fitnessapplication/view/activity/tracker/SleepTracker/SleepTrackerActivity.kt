@@ -10,12 +10,14 @@ import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.showAlignTop
 import com.skydoves.balloon.showAsDropDown
 import com.tta.fitnessapplication.R
+import com.tta.fitnessapplication.data.model.History
 import com.tta.fitnessapplication.data.model.Hour
 import com.tta.fitnessapplication.data.utils.Constant
 import com.tta.fitnessapplication.data.utils.Constant.DATE.getYesterdayDate
 import com.tta.fitnessapplication.data.utils.convertToDecimalTime
 import com.tta.fitnessapplication.data.utils.getWeekDates
 import com.tta.fitnessapplication.databinding.ActivitySleepTrackerBinding
+import com.tta.fitnessapplication.view.activity.history.HistoryViewModel
 import com.tta.fitnessapplication.view.activity.tracker.SleepTracker.db.SleepDatabase
 import com.tta.fitnessapplication.view.activity.tracker.watertracker.WaterTrackerActivityDirections
 import com.tta.fitnessapplication.view.base.BaseFragment
@@ -32,6 +34,7 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
     private lateinit var viewModelNoti: NewNotificationViewModel
     private lateinit var viewModel: SleepViewModel
     private lateinit var viewModelHour: HourViewModel
+    private lateinit var viewModelHistory: HistoryViewModel
 
     override fun getDataBinding(): ActivitySleepTrackerBinding {
         return ActivitySleepTrackerBinding.inflate(layoutInflater)
@@ -42,6 +45,7 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
         viewModelNoti = ViewModelProvider(this)[NewNotificationViewModel::class.java]
         viewModel = ViewModelProvider(this)[SleepViewModel::class.java]
         viewModelHour = ViewModelProvider(this)[HourViewModel::class.java]
+        viewModelHistory = ViewModelProvider(this)[HistoryViewModel::class.java]
     }
 
     override fun addObservers() {
@@ -91,13 +95,17 @@ class SleepTrackerActivity : BaseFragment<ActivitySleepTrackerBinding>() {
             }
         }
 
-        viewModel.readAllData.observe(viewLifecycleOwner) {
+        viewModelHistory.readAllData.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
+                val listIdUser = ArrayList<History>()
+                for (item in it){
+                    if (item.id_user == idUser.toInt()) listIdUser.add(item)
+                }
                 var date = Constant.DATE.fullDateFormatter.format(Constant.DATE.today)
                 val yesterday = Constant.DATE.fullDateFormatter.format(getYesterdayDate())
                 var timeWake = ""
                 var timeSleep = ""
-                for (item in it) {
+                for (item in listIdUser) {
                     if (item.date == date && item.value == "Wake") {
                         timeWake = "${item.date} ${item.time}"
                     }
