@@ -44,7 +44,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA_69rHqhDSdTlmkWIjFoV3FvD7mefp3fA" />
+            android:value="YOUR_API_KEY" />
 
         <activity
             android:name=".view.login.ForgotPasswordActivity"
